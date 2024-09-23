@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/LoginStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="650.0">
+      <AnchorPane prefHeight="410.0" prefWidth="325.0" styleClass="cover_image">
+         <ImageView fx:id="cover_imageview" fitHeight="410.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
+            <viewport>
+               <Rectangle2D height="2870.0" minX="1400.0" width="2275.0" />
+            </viewport>
+            <clip>
+               <Rectangle arcHeight="10" arcWidth="10" height="410" width="325" />
+            </clip>
+            <Image url="@../Images/Covers/cover1.jpg" />
+         </ImageView>
+         <Button layoutX="210.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0">
+            <styleClass>
+               <String fx:value="exit-button" />
+               <String fx:value="opacity03" />
+            </styleClass>
+         </Button>
+      </AnchorPane>
+      <AnchorPane prefHeight="410.0" prefWidth="325.0" />
+   </HBox>
+</AnchorPane>

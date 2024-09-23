@@ -1,0 +1,11 @@
+.login-background {
+    -fx-background-color: #2a2739;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+.exit-button {
+    -fx-background-color: #fdfcfc;
+    -fx-background-radius: 10;
+    -fx-opacity: 0.4;
+}
