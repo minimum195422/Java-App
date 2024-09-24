@@ -2,6 +2,7 @@ module project.englishapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires de.jensd.fx.glyphs.fontawesome;
+    requires java.desktop;
 
     opens project.englishapp to javafx.fxml;
     opens project.englishapp.Controllers to javafx.fxml;
