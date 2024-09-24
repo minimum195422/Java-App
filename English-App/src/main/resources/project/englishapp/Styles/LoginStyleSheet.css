@@ -1,9 +1,11 @@
+// background
 .login-background {
-    -fx-background-color: #2a2739;
+    -fx-background-color: #2b2738;
     -fx-background-radius: 10;
     -fx-padding: 10;
 }
 
+// button
 .exit-button {
     -fx-background-color: rgba(255, 255, 255, 0.2);
     -fx-border-color: transparent;
@@ -15,36 +17,78 @@
     -fx-border-color: transparent;
     -fx-background-radius: 5;
     -fx-text-fill: #FFFFFF;
-    -fx-font-family: "roboto-bold.ttf";
 }
 
-.exit-label {
-    -fx-text-fill: #FFFFFF;
+.google-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #635f6e;
+    -fx-border-radius: 5;
 }
 
-.login-text {
-    -fx-fill: #FFFFFF;
-    -fx-font-family: "roboto-bold.ttf";
+.apple-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #635f6e;
+    -fx-border-radius: 5;
 }
 
-.question-text {
-    -fx-fill: #FFFFFF;
-    -fx-font-family: "roboto-light.ttf";
-}
-
-.login-text-field {
+// text field
+.text-field-1 {
     -fx-background-color: #3a364d;
     -fx-opacity: 0.4;
     -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #FFFFFF;
 }
 
-.line {
+.text-field-2 {
+    -fx-background-color: #3a364d;
+    -fx-opacity: 0.4;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #FFFFFF;
+}
+
+// geometry
+.line-style-1 {
+    -fx-fill: transparent;
+    -fx-stroke: #635f6e;
+    -fx-stroke-width: 1;
+}
+
+.line-style-2 {
     -fx-fill: transparent;
     -fx-stroke: #FFFFFF;
     -fx-stroke-width: 1;
 }
 
-.create_text {
+// text size
+.text-size-10 {
+    -fx-font-size: 10;
+}
+
+.text-size-16 {
+    -fx-font-size: 16px;
+}
+
+.text-size-26 {
+    -fx-font-size: 26px;
+}
+
+// text color
+.text-color-1 {
+    -fx-fill: #635f6e;
+}
+
+.text-color-2 {
+    -fx-fill: #FFFFFF;
+}
+
+.text-color-3 {
     -fx-fill: #6f55b5;
-    -fx-font-family: "roboto-light.ttf";
+}
+
+.text-color-4 {
+    -fx-fill: #8e8e98;
 }
