@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/LoginStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.englishapp.Controllers.LoginController">
+<AnchorPane fx:id="Login_MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/LoginStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.englishapp.Controllers.LoginController">
    <HBox layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="650.0">
       <AnchorPane prefHeight="410.0" prefWidth="325.0" styleClass="cover_image">
          <ImageView fitHeight="410.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
@@ -27,7 +27,7 @@
             </clip>
             <Image url="@../Images/Covers/cover1.jpg" />
          </ImageView>
-         <Button fx:id="exit_button" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ExitButtonAction" onMouseEntered="#ExitButtonMouseEntered" onMouseExited="#ExitButtonMouseExited" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
+         <Button fx:id="Login_ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_ExitButton_Action" onMouseEntered="#Login_ExitButton_MouseEntered" onMouseExited="#Login_ExitButton_MouseExited" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
             <graphic>
                <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="90.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exit this app">
@@ -100,7 +100,7 @@
                      <String fx:value="text-color-4" />
                      <String fx:value="text-size-10" />
                   </styleClass></Text>
-               <Text fx:id="create_account_text" onMouseEntered="#CreateAccountTextMouseEntered" onMouseExited="#CreateAccountTextMouseExited" strokeType="OUTSIDE" strokeWidth="0.0" text="Create" underline="true">
+               <Text fx:id="Login_CreateLink" onMouseClicked="#Login_CreateLink_MouseClicked" onMouseEntered="#Login_CreateLink_MouseEntered" onMouseExited="#Login_CreateLink_MouseExited" strokeType="OUTSIDE" strokeWidth="0.0" text="Create" underline="true">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>
@@ -110,17 +110,17 @@
                   </styleClass>
                </Text>
             </HBox>
-            <TextField id="input1" fx:id="textfield1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Textfield1MouseEntered" onMouseExited="#Textfield1MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="User name or email" styleClass="text-field-1">
+            <TextField id="input1" fx:id="Login_GetEmailField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Login_GetEmailField_MouseEntered" onMouseExited="#Login_GetEmailField_MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="Email" styleClass="text-field-style-1">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="textfield2" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Textfield2MouseEntered" onMouseExited="#Textfield2MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="Enter your password" styleClass="text-field-2">
+            <TextField fx:id="Login_GetPasswordField" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Login_GetPasswordField_MouseEntered" onMouseExited="#Login_GetPasswordField_MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="Enter your password" styleClass="text-field-style-1">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="login_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#LoginButtonMouseClicked" onMouseEntered="#LoginButtonMouseEntered" onMouseExited="#LoginButtonMouseExited" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
+            <Button fx:id="Login_LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_LoginButton_MouseClicked" onMouseEntered="#Login_LoginButton_MouseEntered" onMouseExited="#Login_LoginButton_MouseExited" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
@@ -156,7 +156,7 @@
                <padding>
                   <Insets top="10.0" />
                </padding>
-               <Button fx:id="google_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#GoogleButtonMouseEntered" onMouseExited="#GoogleButtonMouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+               <Button fx:id="Login_GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_GoogleButton_MouseClicked" onMouseEntered="#Login_GoogleButton_MouseEntered" onMouseExited="#Login_GoogleButton_MouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -170,7 +170,7 @@
                         </Text>
                      </HBox>
                   </graphic></Button>
-               <Button fx:id="apple_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#AppleButtonMouseEntered" onMouseExited="#AppleButtonMouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+               <Button fx:id="Login_AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_AppleButton_MouseClicked" onMouseEntered="#Login_AppleButton_MouseEntered" onMouseExited="#Login_AppleButton_MouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

@@ -1,153 +1,135 @@
 package project.englishapp.Controllers;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import project.englishapp.App;
+import project.englishapp.Consts.SceneData;
+import project.englishapp.Models.SceneHandler;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private Stage stage;
+    @FXML
+    public AnchorPane Login_MainPane;
 
     @FXML
-    private Button login_button;
+    private Button Login_LoginButton;
 
     @FXML
-    private Text create_account_text;
+    private Text Login_CreateLink;
 
     @FXML
-    private Button exit_button;
+    private Button Login_ExitButton;
 
     @FXML
-    private Button google_button;
+    private Button Login_GoogleButton;
 
     @FXML
-    private Button apple_button;
+    private Button Login_AppleButton;
 
     @FXML
-    private TextField textfield1;
+    private TextField Login_GetEmailField;
 
     @FXML
-    private TextField textfield2;
+    private TextField Login_GetPasswordField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
 
-//  Stage
-    public void setStage(Stage stage) {
-        this.stage = stage;
+//  //----// Handling UI //----//  //
+    // Exit button
+    public void Login_ExitButton_MouseEntered() {
+        Login_ExitButton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.4);");
     }
 
-//  Login button
-    // Important : changing scene
-    // Using for all scene remaining
-    public void LoginButtonMouseClicked(MouseEvent event) throws IOException {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FXML/Home.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-
-            if (stage != null) {
-                stage.setScene(scene);
-            }
-        }
-        catch (IOException e) {
-            System.out.println("Fail to load FXML file");
-            e.printStackTrace();
-        }
+    public void Login_ExitButton_MouseExited() {
+        Login_ExitButton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
     }
 
+    //  Login button
+    public void Login_LoginButton_MouseEntered() {
+        Login_LoginButton.setStyle("-fx-background-color: #6643c7;");
+    }
+
+    public void Login_LoginButton_MouseExited() {
+        Login_LoginButton.setStyle("-fx-background-color: #6f55b5;");
+    }
+
+    // Create New Account Link
+    public void Login_CreateLink_MouseEntered() {
+        Login_CreateLink.setStyle("-fx-fill: #6643c7;");
+    }
+
+    public void Login_CreateLink_MouseExited() {
+        Login_CreateLink.setStyle("-fx-fill: #6f55b5;");
+    }
+
+    // Textfield
+    public void Login_GetEmailField_MouseEntered() {
+        Login_GetEmailField.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2; -fx-border-radius: 5;");
+    }
+
+    public void Login_GetEmailField_MouseExited() {
+        Login_GetEmailField.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
+    }
+
+    public void Login_GetPasswordField_MouseEntered() {
+        Login_GetPasswordField.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2; -fx-border-radius: 5;");
+    }
+
+    public void Login_GetPasswordField_MouseExited() {
+        Login_GetPasswordField.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
+    }
+
+    //  Google button
+    public void Login_GoogleButton_MouseEntered() {
+        Login_GoogleButton.setStyle("-fx-border-color: #6f55b5;");
+    }
+
+    public void Login_GoogleButton_MouseExited() {
+        Login_GoogleButton.setStyle("-fx-border-color: #635f6e;");
+    }
+
+    //  Apple button
+    public void Login_AppleButton_MouseEntered() {
+        Login_AppleButton.setStyle("-fx-border-color: #6f55b5;");
+    }
+
+    public void Login_AppleButton_MouseExited() {
+        Login_AppleButton.setStyle("-fx-border-color: #635f6e;");
+    }
+
+//  //----// Handling Function //----//  //
+    //  Exit button
+    public void Login_ExitButton_Action() {
+        Platform.exit(); // close program
+    }
+
+    //  Login button
+    public void Login_LoginButton_MouseClicked() {
+        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
+    }
+
+    //  Create New Account Link
+    public void Login_CreateLink_MouseClicked() {
+        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_REGISTER_PAGE); // change to register page
+    }
+
+    //  Apple button
     @SuppressWarnings("unused")
-    public void LoginButtonMouseEntered(MouseEvent event) {
-        login_button.setStyle("-fx-background-color: #6643c7;");
+    public void Login_AppleButton_MouseClicked() {
+        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
     }
 
-    @SuppressWarnings("unused")
-    public void LoginButtonMouseExited(MouseEvent event) {
-        login_button.setStyle("-fx-background-color: #6f55b5;");
+    //  Google button
+    public void Login_GoogleButton_MouseClicked() {
+        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
     }
-
-//  Exit button
-    // close program when click on exit_button
-    @SuppressWarnings("unused")
-    public void ExitButtonAction(ActionEvent event) {
-        Platform.exit();
-    }
-
-    @SuppressWarnings("unused")
-    public void ExitButtonMouseEntered(MouseEvent event) {
-        exit_button.setStyle("-fx-background-color: rgba(255, 255, 255, 0.4);");
-    }
-
-    @SuppressWarnings("unused")
-    public void ExitButtonMouseExited(MouseEvent event) {
-        exit_button.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
-    }
-
-//  Textfield
-    @SuppressWarnings("unused")
-    public void Textfield1MouseEntered(MouseEvent event) {
-        textfield1.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2;");
-    }
-
-    @SuppressWarnings("unused")
-    public void Textfield1MouseExited(MouseEvent event) {
-        textfield1.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
-    }
-
-    @SuppressWarnings("unused")
-    public void Textfield2MouseEntered(MouseEvent event) {
-        textfield2.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2;");
-    }
-
-    @SuppressWarnings("unused")
-    public void Textfield2MouseExited(MouseEvent event) {
-        textfield2.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
-    }
-
-//   setup for another type login button
-    // apple
-    @SuppressWarnings("unused")
-    public void AppleButtonMouseEntered(MouseEvent event) {
-        apple_button.setStyle("-fx-border-color: #6f55b5;");
-    }
-
-    @SuppressWarnings("unused")
-    public void AppleButtonMouseExited(MouseEvent event) {
-        apple_button.setStyle("-fx-border-color: #635f6e;");
-    }
-
-    // google
-    @SuppressWarnings("unused")
-    public void GoogleButtonMouseEntered(MouseEvent event) {
-        google_button.setStyle("-fx-border-color: #6f55b5;");
-    }
-
-    @SuppressWarnings("unused")
-    public void GoogleButtonMouseExited(MouseEvent event) {
-        google_button.setStyle("-fx-border-color: #635f6e;");
-    }
-
-//  Setup for create account text
-    @SuppressWarnings("unused")
-    public void CreateAccountTextMouseEntered(MouseEvent event) {
-        create_account_text.setStyle("-fx-fill: #6643c7;");
-    }
-
-    @SuppressWarnings("unused")
-    public void CreateAccountTextMouseExited(MouseEvent event) {
-        create_account_text.setStyle("-fx-fill: #6f55b5;");
-    }
-
 }
