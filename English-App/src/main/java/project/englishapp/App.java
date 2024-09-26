@@ -10,18 +10,26 @@ import project.englishapp.Models.SceneHandler;
 import java.io.IOException;
 
 public class App extends Application {
+    // Define main SceneHandler
     SceneHandler sceneHandler;
-    Scene LoginPage, RegisterPage, BeingDev, HomePage;
+
+    // List of scene
+    Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
     @Override
     public void start(Stage stage) throws IOException {
+        // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
+
+        // Load single scene to SceneHandler
         LoginPage = sceneHandler.AddScene(SceneData.SCENE_LOGIN_PAGE, "FXML/Login.fxml");
         RegisterPage = sceneHandler.AddScene(SceneData.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
         BeingDev = sceneHandler.AddScene(SceneData.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
         HomePage = sceneHandler.AddScene(SceneData.SCENE_HOME_PAGE, "FXML/Home.fxml");
-
-        sceneHandler.SetScene(SceneData.SCENE_LOGIN_PAGE);
+        VerifyPage = sceneHandler.AddScene(SceneData.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
+        
+        // Set popup scene when open app
+        sceneHandler.SetScene(SceneData.SCENE_HOME_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

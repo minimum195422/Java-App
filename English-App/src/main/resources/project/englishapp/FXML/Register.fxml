@@ -28,7 +28,7 @@
                 </clip>
                 <Image url="@../Images/Covers/cover1.jpg" />
             </ImageView>
-            <Button fx:id="Register_ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Register_ExitButton_Action" onMouseEntered="#Register_ExitButton_MouseEntered" onMouseExited="#Register_ExitButton_MouseExited" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
+            <Button fx:id="Register_ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Register_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="90.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exit this app">
@@ -101,13 +101,14 @@
                             <String fx:value="text-color-4" />
                             <String fx:value="text-size-10" />
                         </styleClass></Text>
-                    <Text fx:id="Register_LoginLink" onMouseClicked="#Register_LoginLink_MouseClicked" onMouseEntered="#Register_LoginLink_MouseEntered" onMouseExited="#Register_LoginLink_MouseExited" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
+                    <Text fx:id="Register_LoginLink" onMouseClicked="#Register_LoginLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin>
                         <styleClass>
                             <String fx:value="text-color-3" />
                             <String fx:value="text-size-10" />
+                     <String fx:value="return-login-page" />
                         </styleClass>
                     </Text>
                 </HBox>
@@ -115,19 +116,19 @@
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
-                    <TextField fx:id="Register_GetFirstNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Register_GetFirstNameField_MouseEntered" onMouseExited="#Register_GetFirstNameField_MouseExited" prefHeight="30.0" prefWidth="115.0" promptText="First name" styleClass="text-field-style-1">
+                    <TextField fx:id="Register_GetFirstNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="115.0" promptText="First name" styleClass="text-field-style-1">
                         <HBox.margin>
                             <Insets right="10.0" />
                         </HBox.margin>
                     </TextField>
-                    <TextField fx:id="Register_GetLastNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Register_GetLastNameField_MouseEntered" onMouseExited="#Register_GetLastNameField_MouseExited" prefHeight="30.0" prefWidth="115.0" promptText="Last name" styleClass="text-field-style-1" />
+                    <TextField fx:id="Register_GetLastNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="115.0" promptText="Last name" styleClass="text-field-style-1" />
                 </HBox>
-                <TextField id="input1" fx:id="Register_GetEmailField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Register_GetEmailField_MouseEntered" onMouseExited="#Register_GetEmailField_MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="Email" styleClass="text-field-style-1">
+                <TextField id="input1" fx:id="Register_GetEmailField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Email" styleClass="text-field-style-1">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
                 </TextField>
-                <TextField fx:id="Register_GetPasswordField" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#Register_GetPasswordField_MouseEntered" onMouseExited="#Register_GetPasswordField_MouseExited" prefHeight="30.0" prefWidth="240.0" promptText="Enter your password" styleClass="text-field-style-1">
+                <TextField fx:id="Register_GetPasswordField" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="240.0" promptText="Enter your password" styleClass="text-field-style-1">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -160,7 +161,7 @@
                         </styleClass>
                     </Text>
                 </HBox>
-                <Button fx:id="Register_RegisterButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_RegisterButton_MouseClicked" onMouseEntered="#Register_RegisterButton_MouseEntered" onMouseExited="#Register_RegisterButton_MouseExited" prefHeight="30.0" prefWidth="240.0" text="Create account" textAlignment="CENTER">
+                <Button fx:id="Register_RegisterButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_RegisterButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Create account" textAlignment="CENTER">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
@@ -196,7 +197,7 @@
                     <padding>
                         <Insets top="10.0" />
                     </padding>
-                    <Button fx:id="Register_GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_GoogleButton_MouseClicked" onMouseEntered="#Register_GoogleButton_MouseEntered" onMouseExited="#Register_GoogleButton_MouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+                    <Button fx:id="Register_GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -210,7 +211,7 @@
                                 </Text>
                             </HBox>
                         </graphic></Button>
-                    <Button fx:id="Register_AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_AppleButton_MouseClicked" onMouseEntered="#Register_AppleButton_MouseEntered" onMouseExited="#Register_AppleButton_MouseExited" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+                    <Button fx:id="Register_AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

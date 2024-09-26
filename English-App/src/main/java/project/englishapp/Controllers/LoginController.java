@@ -16,95 +16,40 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+    @SuppressWarnings("unused")
     @FXML
     public AnchorPane Login_MainPane;
 
+    @SuppressWarnings("unused")
     @FXML
     private Button Login_LoginButton;
 
+    @SuppressWarnings("unused")
     @FXML
     private Text Login_CreateLink;
 
+    @SuppressWarnings("unused")
     @FXML
     private Button Login_ExitButton;
 
+    @SuppressWarnings("unused")
     @FXML
     private Button Login_GoogleButton;
 
+    @SuppressWarnings("unused")
     @FXML
     private Button Login_AppleButton;
 
+    @SuppressWarnings("unused")
     @FXML
     private TextField Login_GetEmailField;
 
+    @SuppressWarnings("unused")
     @FXML
     private TextField Login_GetPasswordField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
-
-//  //----// Handling UI //----//  //
-    // Exit button
-    public void Login_ExitButton_MouseEntered() {
-        Login_ExitButton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.4);");
-    }
-
-    public void Login_ExitButton_MouseExited() {
-        Login_ExitButton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
-    }
-
-    //  Login button
-    public void Login_LoginButton_MouseEntered() {
-        Login_LoginButton.setStyle("-fx-background-color: #6643c7;");
-    }
-
-    public void Login_LoginButton_MouseExited() {
-        Login_LoginButton.setStyle("-fx-background-color: #6f55b5;");
-    }
-
-    // Create New Account Link
-    public void Login_CreateLink_MouseEntered() {
-        Login_CreateLink.setStyle("-fx-fill: #6643c7;");
-    }
-
-    public void Login_CreateLink_MouseExited() {
-        Login_CreateLink.setStyle("-fx-fill: #6f55b5;");
-    }
-
-    // Textfield
-    public void Login_GetEmailField_MouseEntered() {
-        Login_GetEmailField.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2; -fx-border-radius: 5;");
-    }
-
-    public void Login_GetEmailField_MouseExited() {
-        Login_GetEmailField.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
-    }
-
-    public void Login_GetPasswordField_MouseEntered() {
-        Login_GetPasswordField.setStyle("-fx-border-color: #6f55b5; -fx-border-width: 2; -fx-border-radius: 5;");
-    }
-
-    public void Login_GetPasswordField_MouseExited() {
-        Login_GetPasswordField.setStyle("-fx-border-color: transparent; -fx-border-width: 0;");
-    }
-
-    //  Google button
-    public void Login_GoogleButton_MouseEntered() {
-        Login_GoogleButton.setStyle("-fx-border-color: #6f55b5;");
-    }
-
-    public void Login_GoogleButton_MouseExited() {
-        Login_GoogleButton.setStyle("-fx-border-color: #635f6e;");
-    }
-
-    //  Apple button
-    public void Login_AppleButton_MouseEntered() {
-        Login_AppleButton.setStyle("-fx-border-color: #6f55b5;");
-    }
-
-    public void Login_AppleButton_MouseExited() {
-        Login_AppleButton.setStyle("-fx-border-color: #635f6e;");
-    }
 
 //  //----// Handling Function //----//  //
     //  Exit button

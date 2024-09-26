@@ -1,0 +1,18 @@
+// #EFF1F3
+// #000000
+// #5CF64A
+
+
+.home-background {
+    -fx-background-color: #EFF1F3;
+    -fx-background-radius: 20;
+}
+
+.sidebar {
+    -fx-background-color: #000000;
+    -fx-background-radius: 20;
+}
+
+.expand {
+    -fx-background-color: #000000;
+}

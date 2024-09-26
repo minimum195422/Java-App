@@ -12,11 +12,19 @@
     -fx-background-radius: 10;
 }
 
+.exit-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
+
 .login-button {
     -fx-background-color: #6f55b5;
     -fx-border-color: transparent;
     -fx-background-radius: 5;
     -fx-text-fill: #FFFFFF;
+}
+
+.login-button:hover {
+    -fx-background-color: #6643c7;
 }
 
 .google-button {
@@ -31,6 +39,10 @@
     -fx-border-radius: 5;
 }
 
+.google-button:hover, .apple-button:hover {
+    -fx-border-color: #6f55b5;
+}
+
 // text field
 .text-field-style-1 {
     -fx-background-color: #3a364d;
@@ -39,6 +51,22 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-text-fill: #FFFFFF;
+}
+
+.text-field-style-1:hover {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.text-field-style-1:focused {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.create-link-text:hover {
+    -fx-fill: #6643c7;
 }
 
 // geometry

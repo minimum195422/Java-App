@@ -5,4 +5,5 @@ public class SceneData {
     public static String SCENE_REGISTER_PAGE = "RegisterController";
     public static String SCENE_BEING_DEVELOPMENT = "BeingDevelopment";
     public static String SCENE_HOME_PAGE = "HomeController";
+    public static String SCENE_VERIFY_PAGE = "VerifyController";
 }
