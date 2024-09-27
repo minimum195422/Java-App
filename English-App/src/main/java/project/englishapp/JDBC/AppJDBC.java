@@ -1,29 +1,35 @@
 package project.englishapp.JDBC;
 
+import project.englishapp.Consts.JDBCData;
+
 import java.sql.*;
 
 public class AppJDBC {
-    public Connection connection;
 
-    public static void main(String[] args) {
-        try {
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/englishappdatabase",
-                    "minimum195422",
-                    "Humhayha12#");
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from user");
+    private static AppJDBC appJDBC;
 
-            while(resultSet.next()) {
-                System.out.print(resultSet.getString("id") + " ");
-                System.out.print(resultSet.getString("firstname") + " ");
-                System.out.print(resultSet.getString("lastname") + " ");
-                System.out.print(resultSet.getString("mail") + " ");
-                System.out.println(resultSet.getString("accounttype") + " ");
-            }
+    private static Connection connection;
+
+    private AppJDBC() throws SQLException {
+        connection = DriverManager.getConnection(JDBCData.getUrl(), JDBCData.getUser(), JDBCData.getPassword());
+    }
+
+    public static AppJDBC getInstance() throws SQLException {
+        if (appJDBC == null) {
+            appJDBC = new AppJDBC();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return appJDBC;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public ResultSet QueryLoginUserMail(String InputMail, String PassWord) throws SQLException {
+        String query = "select count(*) from user u join password p on u.id = p.id where u.mail = ? and p.password = ?;";
+        PreparedStatement preparedStatement = AppJDBC.getInstance().getConnection().prepareStatement(query);
+        preparedStatement.setString(1, InputMail);
+        preparedStatement.setString(2, PassWord);
+        return preparedStatement.executeQuery();
     }
 }

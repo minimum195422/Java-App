@@ -5,6 +5,7 @@ module project.englishapp {
     requires java.desktop;
     requires jdk.compiler;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens project.englishapp to javafx.fxml;
     opens project.englishapp.Controllers to javafx.fxml;

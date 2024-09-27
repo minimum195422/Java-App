@@ -5,9 +5,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import project.englishapp.Consts.SceneData;
+import project.englishapp.JDBC.AppJDBC;
 import project.englishapp.Models.SceneHandler;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class App extends Application {
     // Define main SceneHandler
@@ -16,8 +18,11 @@ public class App extends Application {
     // List of scene
     Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
+    // Database connection
+    AppJDBC appJDBC;
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, SQLException {
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
@@ -30,6 +35,9 @@ public class App extends Application {
 
         // Set popup scene when open app
         sceneHandler.SetScene(SceneData.SCENE_LOGIN_PAGE);
+
+        // Connect database
+        appJDBC = AppJDBC.getInstance();
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

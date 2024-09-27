@@ -9,9 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import project.englishapp.App;
 import project.englishapp.Consts.SceneData;
+import project.englishapp.JDBC.AppJDBC;
 import project.englishapp.Models.SceneHandler;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -19,10 +22,6 @@ public class LoginController implements Initializable {
     @SuppressWarnings("unused")
     @FXML
     public AnchorPane Login_MainPane;
-
-    @SuppressWarnings("unused")
-    @FXML
-    public Text Login_WarningText;
 
     @SuppressWarnings("unused")
     @FXML
@@ -44,13 +43,14 @@ public class LoginController implements Initializable {
     @FXML
     private Button Login_AppleButton;
 
-    @SuppressWarnings("unused")
     @FXML
     private TextField Login_GetEmailField;
 
-    @SuppressWarnings("unused")
     @FXML
     private TextField Login_GetPasswordField;
+
+    @FXML
+    public Text Login_WarningText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
@@ -62,8 +62,29 @@ public class LoginController implements Initializable {
     }
 
     //  Login button
-    public void Login_LoginButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
+    public void Login_LoginButton_MouseClicked() throws SQLException {
+
+        if (Login_GetEmailField.getText().isBlank()) {
+            Login_WarningText.setText("Enter your email");
+            return;
+        }
+        if (Login_GetPasswordField.getText().isBlank()) {
+            Login_WarningText.setText("Enter your password");
+            return;
+        }
+        ValidateLogin();
+    }
+
+    public void ValidateLogin() throws SQLException {
+        ResultSet resultSet = AppJDBC.getInstance().QueryLoginUserMail(Login_GetEmailField.getText(), Login_GetPasswordField.getText());
+        while (resultSet.next()) {
+            if (resultSet.getInt(1) == 0) {
+                Login_WarningText.setText("Invalid mail or password");
+            }
+            else {
+                SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_HOME_PAGE);
+            }
+        }
     }
 
     //  Create New Account Link
