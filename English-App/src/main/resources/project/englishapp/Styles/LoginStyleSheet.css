@@ -43,6 +43,11 @@
     -fx-border-color: #6f55b5;
 }
 
+// warning text
+.warning-text {
+    -fx-fill: #e71d24;
+}
+
 // text field
 .text-field-style-1 {
     -fx-background-color: #3a364d;

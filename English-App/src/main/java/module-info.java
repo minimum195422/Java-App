@@ -4,6 +4,7 @@ module project.englishapp {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.desktop;
     requires jdk.compiler;
+    requires java.sql;
 
     opens project.englishapp to javafx.fxml;
     opens project.englishapp.Controllers to javafx.fxml;

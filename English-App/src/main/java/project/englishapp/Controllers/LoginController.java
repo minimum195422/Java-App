@@ -22,6 +22,10 @@ public class LoginController implements Initializable {
 
     @SuppressWarnings("unused")
     @FXML
+    public Text Login_WarningText;
+
+    @SuppressWarnings("unused")
+    @FXML
     private Button Login_LoginButton;
 
     @SuppressWarnings("unused")

@@ -27,9 +27,9 @@ public class App extends Application {
         BeingDev = sceneHandler.AddScene(SceneData.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
         HomePage = sceneHandler.AddScene(SceneData.SCENE_HOME_PAGE, "FXML/Home.fxml");
         VerifyPage = sceneHandler.AddScene(SceneData.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
-        
+
         // Set popup scene when open app
-        sceneHandler.SetScene(SceneData.SCENE_HOME_PAGE);
+        sceneHandler.SetScene(SceneData.SCENE_LOGIN_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

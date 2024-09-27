@@ -121,9 +121,18 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
+            <Text fx:id="Login_WarningText" strokeType="OUTSIDE" strokeWidth="0.0">
+               <styleClass>
+                  <String fx:value="warning-text" />
+                  <String fx:value="text-size-10" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Text>
             <Button fx:id="Login_LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_LoginButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </VBox.margin>
                <styleClass>
                   <String fx:value="login-button" />

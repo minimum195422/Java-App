@@ -14,8 +14,9 @@ public class SceneHandler {
 
     private static Class<?> MainApp;
 
-    private HashMap<String, Object> controller = new HashMap<>();
-    private HashMap<String, Scene> scenes = new HashMap<>();
+    private final HashMap<String, Object> controller = new HashMap<>();
+
+    private final HashMap<String, Scene> scenes = new HashMap<>();
 
     public SceneHandler(Class<?> app, Stage stage) {
         MainStage = stage;
