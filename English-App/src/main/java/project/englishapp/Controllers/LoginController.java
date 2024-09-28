@@ -29,10 +29,6 @@ public class LoginController implements Initializable {
 
     @SuppressWarnings("unused")
     @FXML
-    private Text Login_CreateLink;
-
-    @SuppressWarnings("unused")
-    @FXML
     private Button Login_ExitButton;
 
     @SuppressWarnings("unused")
@@ -56,6 +52,7 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {}
 
 //  //----// Handling Function //----//  //
+
     //  Exit button
     public void Login_ExitButton_Action() {
         Platform.exit(); // close program

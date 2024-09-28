@@ -25,6 +25,11 @@
     -fx-border-color: #EFF1F3;
 }
 
+.avatar-background {
+    -fx-fill: #000000;
+    -fx-stroke-width: 0;
+}
+
 // button style
 .button-shape {
     -fx-background-radius: 50%;
@@ -33,4 +38,8 @@
 
 .button-color-1 {
     -fx-background-color: #cdfb47;
+}
+
+.button-color-2 {
+    -fx-background-color: transparent;
 }
