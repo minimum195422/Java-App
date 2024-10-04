@@ -30,11 +30,11 @@ public class App extends Application {
         LoginPage = sceneHandler.AddScene(SceneData.SCENE_LOGIN_PAGE, "FXML/Login.fxml");
         RegisterPage = sceneHandler.AddScene(SceneData.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
         BeingDev = sceneHandler.AddScene(SceneData.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
-        HomePage = sceneHandler.AddScene(SceneData.SCENE_HOME_PAGE, "FXML/Home.fxml");
+        HomePage = sceneHandler.AddScene(SceneData.SCENE_DASHBOARD_PAGE, "FXML/DashBoard.fxml");
         VerifyPage = sceneHandler.AddScene(SceneData.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(SceneData.SCENE_HOME_PAGE);
+        sceneHandler.SetScene(SceneData.SCENE_DASHBOARD_PAGE);
 
         // Connect database
         appJDBC = AppJDBC.getInstance();

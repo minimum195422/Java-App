@@ -79,7 +79,7 @@ public class LoginController implements Initializable {
                 Login_WarningText.setText("Invalid mail or password");
             }
             else {
-                SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_HOME_PAGE);
+                SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_DASHBOARD_PAGE);
             }
         }
     }

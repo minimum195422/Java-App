@@ -9,6 +9,8 @@ module project.englishapp {
 
     opens project.englishapp to javafx.fxml;
     opens project.englishapp.Controllers to javafx.fxml;
+
     exports project.englishapp;
     exports project.englishapp.Controllers;
+    exports project.englishapp.Controllers.ContentPage;
 }
