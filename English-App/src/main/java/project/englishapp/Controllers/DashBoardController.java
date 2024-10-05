@@ -23,25 +23,5 @@ public class DashBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadCenter();
-        loadRight();
-    }
-
-    public void loadCenter() {
-        try {
-            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DashBoardData.DASHBOARD_HOME_LINK)));
-            DashBoard_BorderPane.setCenter(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadRight() {
-        try {
-            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DashBoardData.DASHBOARD_RIGHTBAR_LINK)));
-            DashBoard_BorderPane.setRight(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

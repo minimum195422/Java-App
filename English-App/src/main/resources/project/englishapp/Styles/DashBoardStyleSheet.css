@@ -1,34 +1,19 @@
 .outer-pane {
-   -fx-background-radius: 20;
+   -fx-background-radius: 10;
 }
 
-.function-button {
-    -fx-border-radius: 25%;
-    -fx-border-width: 0;
-    -fx-border-color: transparent;
-    -fx-background-radius: 25%;
-    -fx-background-color: transparent;
+.text-color {
+    -fx-fill: #838494;
 }
 
-.function-button:hover {
-    -fx-background-color: #e7e7e8;
+.font-size-12 {
+    -fx-font-size: 12px;
 }
 
-.function-button:focused {
-    -fx-background-color: #e7e7e8;
+.font-size-20 {
+    -fx-font-size: 20px;
 }
 
-
-
-
-
-
-
-.set-background-black {
-    -fx-background-color: #000000;
-}
-
-.set-border {
-    -fx-border-color: #000000;
-    -fx-border-width: 1;
+.font-bold {
+    -fx-font-weight: bold;
 }
