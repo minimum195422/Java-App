@@ -1,0 +1,139 @@
+// background
+.login-background {
+    -fx-background-color: #2b2738;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+// button
+.exit-button {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+}
+
+.exit-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
+
+.login-button {
+    -fx-background-color: #6f55b5;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5;
+    -fx-text-fill: #FFFFFF;
+}
+
+.login-button:hover {
+    -fx-background-color: #6643c7;
+}
+
+.google-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #635f6e;
+    -fx-border-radius: 5;
+}
+
+.apple-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #635f6e;
+    -fx-border-radius: 5;
+}
+
+.google-button:hover, .apple-button:hover {
+    -fx-border-color: #6f55b5;
+}
+
+// warning text
+.warning-text {
+    -fx-fill: #e71d24;
+}
+
+// text field
+.text-field-style-1 {
+    -fx-background-color: #3a364d;
+    -fx-opacity: 0.4;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-field-style-1:hover {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.text-field-style-1:focused {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.password-field {
+    -fx-background-color: #3a364d;
+    -fx-opacity: 0.4;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: #FFFFFF;
+}
+
+.password-field:hover {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.password-field:focused {
+    -fx-border-color: #6f55b5;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.create-link-text:hover {
+    -fx-fill: #6643c7;
+}
+
+// geometry
+.line-style-1 {
+    -fx-fill: transparent;
+    -fx-stroke: #635f6e;
+    -fx-stroke-width: 1;
+}
+
+.line-style-2 {
+    -fx-fill: transparent;
+    -fx-stroke: #FFFFFF;
+    -fx-stroke-width: 1;
+}
+
+// text size
+.text-size-10 {
+    -fx-font-size: 10;
+}
+
+.text-size-16 {
+    -fx-font-size: 16px;
+}
+
+.text-size-26 {
+    -fx-font-size: 26px;
+}
+
+// text color
+.text-color-1 {
+    -fx-fill: #635f6e;
+}
+
+.text-color-2 {
+    -fx-fill: #FFFFFF;
+}
+
+.text-color-3 {
+    -fx-fill: #6f55b5;
+}
+
+.text-color-4 {
+    -fx-fill: #8e8e98;
+}

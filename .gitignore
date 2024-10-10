@@ -1,2 +1,5 @@
 
-/English-App/.idea
+/Library-Client/.idea
+/Library-Server/.idea
+*.xml
+Library-Client/.idea/misc.xml

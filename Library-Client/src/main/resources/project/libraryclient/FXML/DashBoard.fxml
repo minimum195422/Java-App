@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="960.0" styleClass="outer-pane" stylesheets="@../Styles/DashBoardStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoardController">
+   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="940.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="160.0" styleClass="side-bar">
+         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="160.0" spacing="5.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="app-name" text="LIBRARY">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Lobster Regular" size="27.0" />
+               </font>
+            </Text>
+            <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="160.0">
+               <Button fx:id="HomeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#HomeButtonClicked"
+                       prefHeight="40.0" prefWidth="140.0" styleClass="menu-item" text="Button">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                           minWidth="-Infinity" prefHeight="40.0" prefWidth="140.0" spacing="10.0">
+                        <ImageView fx:id="HomeButtonIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                           <Image url="@../Images/Icons/homewhite.png"/>
+                        </ImageView>
+                        <Text fx:id="HomeButtonText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu-text"
+                              text="Home">
+                           <font>
+                              <Font name="Nunito Bold" size="14.0"/>
+                           </font>
+                        </Text>
+                        <padding>
+                           <Insets left="7.0"/>
+                        </padding>
+                     </HBox>
+                  </graphic>
+               </Button>
+               <Button fx:id="FavoriteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#FavoriteButtonClicked"
+                       prefHeight="40.0" prefWidth="140.0" styleClass="menu-item" text="Button">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                           minWidth="-Infinity" prefHeight="40.0" prefWidth="140.0" spacing="10.0">
+                        <padding>
+                           <Insets left="7.0"/>
+                        </padding>
+                        <ImageView fx:id="FavoriteButtonIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                           <Image url="@../Images/Icons/heartwhite.png"/>
+                        </ImageView>
+                        <Text fx:id="FavoriteButtonText" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="menu-text" text="Favorite">
+                           <font>
+                              <Font name="Nunito Bold" size="14.0"/>
+                           </font>
+                        </Text>
+                     </HBox>
+                  </graphic>
+               </Button>
+            </VBox>
+         </VBox>
+      </AnchorPane>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="760.0">
+         <top>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                  prefHeight="40.0" prefWidth="760.0" BorderPane.alignment="CENTER">
+               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                           prefHeight="40.0" prefWidth="110.0" styleClass="top-bar">
+                  <HBox.margin>
+                     <Insets right="10.0"/>
+                  </HBox.margin>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0" spacing="5.0">
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="date" text="October">
+                        <font>
+                           <Font name="Nunito Light" size="12.0"/>
+                        </font>
+                     </Text>
+                     <Line endY="13.0" styleClass="line"/>
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="date" text="2024">
+                        <font>
+                           <Font name="Nunito Medium" size="12.0"/>
+                        </font>
+                     </Text>
+                  </HBox>
+               </AnchorPane>
+               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                           prefHeight="40.0" prefWidth="470.0" styleClass="top-bar">
+                  <HBox.margin>
+                     <Insets right="10.0"/>
+                  </HBox.margin>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="40.0" prefWidth="470.0">
+                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                             mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0"
+                             styleClass="function-button">
+                        <graphic>
+                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../Images/Icons/search_white.png"/>
+                           </ImageView>
+                        </graphic>
+                        <HBox.margin>
+                           <Insets left="10.0"/>
+                        </HBox.margin>
+                     </Button>
+                     <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                minWidth="-Infinity" prefHeight="30.0" prefWidth="400.0"
+                                promptText="Find your favorite things" styleClass="search-box">
+                        <font>
+                           <Font name="Nunito Light" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                           <Insets left="5.0"/>
+                        </HBox.margin>
+                     </TextField>
+                     <Line endY="13.0" styleClass="line"/>
+                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                             mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0"
+                             styleClass="function-button">
+                        <graphic>
+                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../Images/Icons/bell_white.png"/>
+                           </ImageView>
+                        </graphic>
+                        <HBox.margin>
+                           <Insets left="5.0"/>
+                        </HBox.margin>
+                     </Button>
+                  </HBox>
+               </AnchorPane>
+               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                           prefHeight="40.0" prefWidth="170.0" styleClass="top-bar">
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0">
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"
+                                scaleX="0.7" scaleY="0.7">
+                        <clip>
+                           <Circle centerX="20" centerY="20" radius="20"/>
+                        </clip>
+                        <HBox.margin>
+                           <Insets left="5.0"/>
+                        </HBox.margin>
+                        <Image url="@../Images/Avatars/avatar2.jpg"/>
+                     </ImageView>
+                     <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="20.0" prefWidth="100.0" styleClass="user-name" text="USER NAME">
+                        <font>
+                           <Font name="Nunito Medium" size="12.0"/>
+                        </font>
+                     </Label>
+                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                             mnemonicParsing="false" prefHeight="10.0" prefWidth="10.0" styleClass="user-expand">
+                        <HBox.margin>
+                           <Insets/>
+                        </HBox.margin>
+                        <graphic>
+                           <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                              <Image url="@../Images/Icons/expand-button.png"/>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </HBox>
+               </AnchorPane>
+            </HBox>
+         </top>
+      </BorderPane>
+   </HBox>
+</AnchorPane>
