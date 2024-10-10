@@ -1,0 +1,7 @@
+.outer_pane {
+    -fx-background-radius: 20;
+}
+
+.black {
+    -fx-background-color: #000000;
+}
