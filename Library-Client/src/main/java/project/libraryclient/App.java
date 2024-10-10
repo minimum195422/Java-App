@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import project.libraryclient.Consts.SceneData;
-//import project.libraryclient.JDBC.AppJDBC;
+import project.libraryclient.JDBC.AppJDBC;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class App extends Application {
     Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
     // Database connection
-//    AppJDBC appJDBC;
+    AppJDBC appJDBC;
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
@@ -34,10 +34,10 @@ public class App extends Application {
         VerifyPage = sceneHandler.AddScene(SceneData.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(SceneData.SCENE_DASHBOARD_PAGE);
+        sceneHandler.SetScene(SceneData.SCENE_LOGIN_PAGE);
 
         // Connect database
-//        appJDBC = AppJDBC.getInstance();
+        appJDBC = AppJDBC.getInstance();
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
