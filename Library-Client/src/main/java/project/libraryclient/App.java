@@ -39,6 +39,7 @@ public class App extends Application {
         // Connect database
 //        appJDBC = AppJDBC.getInstance();
 
+        // hehhehehehehehhehee
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
