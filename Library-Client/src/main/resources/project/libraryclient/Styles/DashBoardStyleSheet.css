@@ -3,6 +3,12 @@
    -fx-background-color: #0a0d14;
 }
 
+.border-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
 .side-bar {
     -fx-background-color: #23252a;
     -fx-background-radius: 15;
