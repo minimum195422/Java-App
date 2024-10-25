@@ -1,4 +1,4 @@
-package com.example.demo.backend;
+package Backend;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

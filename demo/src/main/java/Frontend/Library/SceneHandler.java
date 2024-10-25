@@ -1,4 +1,4 @@
-package com.example.demo.library;
+package Frontend.Library;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,13 +10,9 @@ import java.util.HashMap;
 
 public class SceneHandler {
     private static SceneHandler sceneHandler;
-
     private static Stage MainStage;
-
     private static Class<?> MainApp;
-
     private final HashMap<String, Object> controller = new HashMap<>();
-
     private final HashMap<String, Scene> scenes = new HashMap<>();
 
     public SceneHandler(Class<?> app, Stage stage) {
@@ -50,6 +46,7 @@ public class SceneHandler {
             MainStage.setY(Screen.getPrimary().getBounds().getMinY());
             MainStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
             MainStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+            //
         }
     }
 }
