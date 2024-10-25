@@ -1,7 +1,7 @@
-package com.example.demo;
+package Frontend.Controller;
 
-import com.example.demo.backend.MySQLConnection;
-import com.example.demo.library.SceneHandler;
+import Frontend.Main;
+import Frontend.Library.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,19 +23,23 @@ public class RegisterController {
     private Hyperlink SigninLink;
     @FXML
     private Button Continue;
+
     @FXML
     private void resetPassword() {
         password.clear();
         confirmPassword.clear();
     }
+
     @FXML
     private void resetUsername() {
         username.clear();
     }
+
     @FXML
     private void resetEmail() {
         email.clear();
     }
+
     @FXML
     private void resetAll() {
         errorText.setVisible(false);
@@ -45,6 +48,7 @@ public class RegisterController {
         password.clear();
         confirmPassword.clear();
     }
+
     @FXML
     private void handleContinue() throws SQLException {
         errorText.setVisible(true);
@@ -73,9 +77,8 @@ public class RegisterController {
             resetPassword();
             return;
         }
-        Connection connection = MySQLConnection.connectToDB();
         String SQL = "SELECT COUNT(*) FROM accounts WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
+        PreparedStatement stmt = Main.connection.prepareStatement(SQL);
         stmt.setString(1, emailText);
         ResultSet rs = stmt.executeQuery();
         boolean existed = false;
@@ -90,7 +93,7 @@ public class RegisterController {
             return;
         }
         SQL = "SELECT COUNT(*) FROM accounts WHERE username = ?";
-        stmt = connection.prepareStatement(SQL);
+        stmt = Main.connection.prepareStatement(SQL);
         stmt.setString(1, usernameText);
         rs = stmt.executeQuery();
         while (rs.next()) {
@@ -104,7 +107,7 @@ public class RegisterController {
             return;
         }
         SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-        stmt = connection.prepareStatement(SQL);
+        stmt = Main.connection.prepareStatement(SQL);
         stmt.setString(1, emailText);
         stmt.setString(2, usernameText);
         stmt.setString(3, passwordText);
@@ -113,7 +116,6 @@ public class RegisterController {
         errorText.setStyle("-fx-fill: green;");
         resetAll();
 //        System.out.println(status);
-        connection.close();
     }
 
     public void handleSigninLink(ActionEvent event) throws IOException {
