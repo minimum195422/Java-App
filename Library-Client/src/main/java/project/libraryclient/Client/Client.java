@@ -1,16 +1,12 @@
 package project.libraryclient.Client;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-
 public class Client {
-
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     public String userName;
-
     public Client(Socket socket, String userName) {
         try {
             this.socket = socket;
@@ -21,13 +17,11 @@ public class Client {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
-
     public void sendMessage() {
         try {
             bufferedWriter.write(userName);
             bufferedWriter.newLine();
             bufferedWriter.flush();
-
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
                 String messageToSend = scanner.nextLine();
@@ -39,13 +33,11 @@ public class Client {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
-
     public void listenForMessage() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String messageFromServer;
-
                 while (socket.isConnected()) {
                     try {
                         messageFromServer = bufferedReader.readLine();
@@ -57,17 +49,14 @@ public class Client {
             }
         }).start();
     }
-
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
             }
-
             if (bufferedWriter != null) {
                 bufferedWriter.close();
             }
-
             if (socket != null) {
                 socket.close();
             }
@@ -75,7 +64,6 @@ public class Client {
             e.printStackTrace(System.out);
         }
     }
-
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter name: ");

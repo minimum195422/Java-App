@@ -1,8 +1,5 @@
 package project.libraryclient.Consts;
 
-import java.awt.*;
-import java.util.Objects;
-
 public class SceneData {
     public final static String SCENE_LOGIN_PAGE = "LoginController";
     public final static String SCENE_REGISTER_PAGE = "RegisterController";

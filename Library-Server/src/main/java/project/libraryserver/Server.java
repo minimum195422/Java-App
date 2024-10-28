@@ -1,16 +1,12 @@
 package project.libraryserver;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 public class Server {
     private final ServerSocket serverSocket;
-
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
-
     public void startServer() {
         try {
             while (!serverSocket.isClosed()) {
@@ -24,7 +20,6 @@ public class Server {
             e.printStackTrace(System.out);
         }
     }
-
     public void closeServerSocket() {
         try {
             if (serverSocket != null) {
@@ -34,5 +29,4 @@ public class Server {
             e.printStackTrace(System.out);
         }
     }
-
 }

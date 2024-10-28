@@ -14,8 +14,6 @@ import project.libraryclient.Consts.SceneData;
 import project.libraryclient.Models.SceneHandler;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -59,34 +57,13 @@ public class LoginController implements Initializable {
     }
 
     //  Login button
-    public void Login_LoginButton_MouseClicked() throws SQLException {
-//        if (Login_GetEmailField.getText().isBlank()) {
-//            Login_WarningText.setText("Enter your email");
-//            return;
-//        }
-//        if (Login_GetPasswordField.getText().isBlank()) {
-//            Login_WarningText.setText("Enter your password");
-//            return;
-//        }
-//        ValidateLogin();
+    public void Login_LoginButton_MouseClicked() {
+        if (Login_GetEmailField.getText().isBlank()) {
+            Login_WarningText.setText("Enter your email");
+        } else if (Login_GetPasswordField.getText().isBlank()) {
+            Login_WarningText.setText("Enter your password");
+        }
     }
-
-
-    // hàm validateLogin đang trực tiếp thao tác với database
-    // công việc này là của bên server hàm này chỉ có tác dụng test
-//    // khi phát triển bên server xoá hàm này
-//    public void ValidateLogin() throws SQLException {
-//        ResultSet resultSet = AppJDBC.getInstance().QueryLoginUserMail(Login_GetEmailField.getText(), Login_GetPasswordField.getText());
-//        System.out.println(Login_GetPasswordField.getText());
-//        while (resultSet.next()) {
-//            if (resultSet.getInt(1) == 0) {
-//                Login_WarningText.setText("Invalid mail or password");
-//            }
-//            else {
-//                SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_DASHBOARD_PAGE);
-//            }
-//        }
-//    }
 
     //  Create New Account Link
     public void Login_CreateLink_MouseClicked() {

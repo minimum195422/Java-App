@@ -2,6 +2,7 @@ package project.libraryclient.Models;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class SceneHandler {
         MainApp = app;
     }
 
-    public static SceneHandler getInstance(Class<?> app, Stage stage){
+    public static SceneHandler getInstance(Class<?> app, Stage stage) {
         if (sceneHandler == null) {
             sceneHandler = new SceneHandler(app, stage);
         }
@@ -44,6 +45,17 @@ public class SceneHandler {
     public void SetScene(String SceneKey) {
         if (scenes.get(SceneKey) != null) {
             MainStage.setScene(scenes.get(SceneKey));
+
         }
+    }
+
+    public void setFullScreen() {
+//            full screen setting
+//        (1280 x 680) - my screen
+
+        MainStage.setX(Screen.getPrimary().getVisualBounds().getMinX());
+        MainStage.setY(Screen.getPrimary().getVisualBounds().getMinY());
+        MainStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+        MainStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
     }
 }

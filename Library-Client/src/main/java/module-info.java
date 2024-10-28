@@ -4,8 +4,7 @@ module project.libraryclient {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.desktop;
     requires jdk.compiler;
-    requires java.sql;
-//    requires mysql.connector.j;
+    requires java.xml.crypto;
 
     opens project.libraryclient to javafx.fxml;
     opens project.libraryclient.Controllers to javafx.fxml;

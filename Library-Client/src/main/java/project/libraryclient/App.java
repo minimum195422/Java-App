@@ -5,24 +5,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import project.libraryclient.Consts.SceneData;
-//import project.libraryclient.JDBC.AppJDBC;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class App extends Application {
+
     // Define main SceneHandler
     SceneHandler sceneHandler;
 
     // List of scene
     Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
-    // Database connection
-//    AppJDBC appJDBC;
-
     @Override
-    public void start(Stage stage) throws IOException, SQLException {
+    public void start(Stage stage) throws IOException {
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
@@ -36,10 +32,9 @@ public class App extends Application {
         // Set popup scene when open app
         sceneHandler.SetScene(SceneData.SCENE_DASHBOARD_PAGE);
 
-        // Connect database
-//        appJDBC = AppJDBC.getInstance();
+        // Full screen
+        sceneHandler.setFullScreen();
 
-        // hehe
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }

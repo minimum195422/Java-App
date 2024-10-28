@@ -1,72 +1,56 @@
-.outer-pane {
-   -fx-background-radius: 15;
-   -fx-background-color: #0a0d14;
-}
+/* button out focused text color #adb5bd */
+/* button focused text color #ffffff */
 
-.border-pane {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
+/* button focused background color -fx-background-color: #57d9f4; */
+/* button focused shadow color -fx-effect: dropshadow(gaussian, #88e3f5, 15, 0, 0, 5); */
+
+
+.display-content-area {
+    -fx-background-color: #f8f9fa;
 }
 
 .side-bar {
-    -fx-background-color: #23252a;
-    -fx-background-radius: 15;
+    -fx-background-color: #e9ecef;
 }
 
-.top-bar {
-    -fx-background-color: #23252a;
-    -fx-background-radius: 15;
+.user-area {
+    -fx-background-radius: 8;
+    -fx-background-color: #f8f9fa;
 }
 
 .function-button {
     -fx-background-color: transparent;
+    -fx-background-radius: 10;
 }
 
-.user-name {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: transparent;
+.function-button:hover {
+    -fx-background-color: #57d9f4;
+    -fx-background-radius: 10;
 }
 
-.user-expand {
-    -fx-background-color: transparent;
+.function-button:selected {
+    -fx-background-color: #57d9f4;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, #88e3f5, 10, 0, 0, 5);
+    -fx-border-radius: 2px;
 }
 
 .search-box {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-radius: 0;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1;
+    -fx-border-radius: 7px;
 }
 
-.line {
-    -fx-stroke: #ffffff;
-    -fx-stroke-width: 1px;
-}
-
-.date {
-    -fx-fill: #ffffff;
-}
-
-.app-name {
-    -fx-fill: #ffffff;
-}
-
-.menu-item {
+.search-area {
     -fx-background-color: transparent;
 }
 
-.menu-item:hover {
-    -fx-background-color: #253632;
-    -fx-background-radius: 18;
-    -fx-border-radius: 18;
-}
 
-.menu-item:focused {
-    -fx-background-color: #253632;
-    -fx-background-radius: 18;
-    -fx-border-radius: 18;
-}
-
-.menu-text {
+.function-button-text {
     -fx-fill: #ffffff;
+}
+
+.test-font {
+    -fx-fill: #adb5bd;
 }
