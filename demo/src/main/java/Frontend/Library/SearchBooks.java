@@ -200,7 +200,6 @@ public class SearchBooks implements SearchBar {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Book book = new Book(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
-            System.out.println(book.getAuthor());
             searchResult.getItems().add(book);
         }
     }

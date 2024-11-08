@@ -33,5 +33,5 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Text>
-   <ListView fx:id="searchResult" layoutX="690.0" layoutY="56.0" prefWidth="600.0" visible="false" />
+   <ListView fx:id="searchResult" layoutX="690.0" layoutY="56.0" maxHeight="700.0" minHeight="220.0" prefHeight="220.0" prefWidth="600.0" visible="false" />
 </AnchorPane>
