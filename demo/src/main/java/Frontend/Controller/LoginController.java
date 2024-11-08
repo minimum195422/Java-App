@@ -1,5 +1,6 @@
 package Frontend.Controller;
 
+import Backend.QueryHandler;
 import Frontend.Main;
 import Frontend.Library.SceneHandler;
 import javafx.event.ActionEvent;
@@ -41,16 +42,8 @@ public class LoginController {
     private void handleContinue() throws SQLException {
         String usernameText = username.getText();
         String passwordText = password.getText();
-        String SQL = "SELECT COUNT(*) FROM accounts WHERE username = ? AND password = ?";
-        PreparedStatement stmt = Main.connection.prepareStatement(SQL);
-        stmt.setString(1, usernameText);
-        stmt.setString(2, passwordText);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-            existed = rs.getBoolean(1);
-        }
-        if (!existed) {
+        String password = QueryHandler.getPasswordByUsername(usernameText);
+        if (!password.equals(passwordText)) {
             errorText.setVisible(true);
             errorText.setText("Username or password is incorrect");
             resetPassword();
