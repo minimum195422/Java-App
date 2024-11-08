@@ -164,7 +164,7 @@
                      </HBox.margin>
                      <Image url="@../Images/Icons/search.png" />
                   </ImageView>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Search for your favorite book" styleClass="search-area" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="890.0" promptText="Search for your favorite book" styleClass="search-area" />
                   <padding>
                      <Insets left="10.0" />
                   </padding>
