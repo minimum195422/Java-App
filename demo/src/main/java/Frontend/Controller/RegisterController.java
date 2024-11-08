@@ -1,5 +1,6 @@
 package Frontend.Controller;
 
+import Backend.QueryHandler;
 import Frontend.Main;
 import Frontend.Library.SceneHandler;
 import javafx.event.ActionEvent;
@@ -77,45 +78,24 @@ public class RegisterController {
             resetPassword();
             return;
         }
-        String SQL = "SELECT COUNT(*) FROM accounts WHERE email = ?";
-        PreparedStatement stmt = Main.connection.prepareStatement(SQL);
-        stmt.setString(1, emailText);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-//            System.out.println(rs.getInt(1));
-            existed = rs.getBoolean(1);
-        }
+        boolean existed = QueryHandler.checkAccountByEmail(emailText);
         if (existed) {
             System.out.println("Email already exists");
             errorText.setText("Email already exists");
             resetEmail();
             return;
         }
-        SQL = "SELECT COUNT(*) FROM accounts WHERE username = ?";
-        stmt = Main.connection.prepareStatement(SQL);
-        stmt.setString(1, usernameText);
-        rs = stmt.executeQuery();
-        while (rs.next()) {
-//            System.out.println(rs.getInt(1));
-            existed = rs.getBoolean(1);
-        }
+        existed = QueryHandler.checkAccountByUsername(usernameText);
         if (existed) {
             System.out.println("Username already exists");
             errorText.setText("Username already exists");
             resetUsername();
             return;
         }
-        SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-        stmt = Main.connection.prepareStatement(SQL);
-        stmt.setString(1, emailText);
-        stmt.setString(2, usernameText);
-        stmt.setString(3, passwordText);
-        int status = stmt.executeUpdate();
+        QueryHandler.addNewAccount(emailText, usernameText, passwordText);
         errorText.setText("Registered successfully");
         errorText.setStyle("-fx-fill: green;");
         resetAll();
-//        System.out.println(status);
     }
 
     public void handleSigninLink(ActionEvent event) throws IOException {
