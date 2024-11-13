@@ -3,6 +3,7 @@ module Frontend {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires mysql.connector.j;
 
 
     opens Frontend to javafx.fxml;

@@ -1,0 +1,83 @@
+.button-1 {
+  -fx-background-color: #EA4C89;
+  -fx-border-radius: 8px;
+  -fx-border-style: none;
+  -fx-box-sizing: border-box;
+  -fx-text-fill: #FFFFFF;
+  -fx-cursor: hand;
+  -fx-display: inline-block;
+  -fx-font-family: "Verdana", sans-serif;
+  -fx-font-size: 18px;
+  -fx-font-weight: 500;
+  -fx-height: 40px;
+  -fx-line-height: 20px;
+  -fx-list-style: none;
+  -fx-margin: 0;
+  -fx-outline: none;
+  -fx-padding: 10px 16px;
+  -fx-position: relative;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+  -fx-transition: color 100ms;
+  -fx-vertical-align: baseline;
+  -fx-user-select: none;
+  -fx-webkit-user-select: none;
+  -fx-touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+  -fx-background-color: #F082AC;
+}
+
+.github-button {
+  -fx-appearance: none;
+  -fx-background-color: #2ea44f;
+  -fx-border: 1px;
+  -fx-border-color: rgba(27, 31, 35, 0.15);
+  -fx-border-radius: 6px;
+  -fx-box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  -fx-box-sizing: border-box;
+  -fx-text-fill: #fff;
+  -fx-cursor: pointer;
+  -fx-display: inline-block;
+  -fx-font-family: "Verdana", sans-serif;
+  -fx-font-size: 14px;
+  -fx-font-weight: 600;
+  -fx-line-height: 20px;
+  -fx-padding: 6px 16px;
+  -fx-position: relative;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+  -fx-user-select: none;
+  -fx-webkit-user-select: none;
+  -fx-touch-action: manipulation;
+  -fx-vertical-align: middle;
+  -fx-white-space: nowrap;
+}
+
+.github-button:focus:not(:focus-visible):not(.focus-visible) {
+  -fx-box-shadow: none;
+  -fx-outline: none;
+}
+
+.github-button:hover {
+  -fx-background-color: #2c974b;
+}
+
+.github-button:focus {
+  -fx-box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  -fx-outline: none;
+}
+
+.github-button:disabled {
+  -fx-background-color: #94d3a2;
+  -fx-border-color: rgba(27, 31, 35, .1);
+  -fx-color: rgba(255, 255, 255, .8);
+  -fx-cursor: default;
+}
+
+.github-button:active {
+  -fx-background-color: #298e46;
+  -fx-box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}

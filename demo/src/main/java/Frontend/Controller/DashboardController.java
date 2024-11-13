@@ -1,10 +1,13 @@
 package Frontend.Controller;
 
 import Frontend.Class.Book;
-import Frontend.Library.SearchBar;
+import Frontend.Library.SceneHandler;
 import Frontend.Library.SearchBooks;
+import Frontend.Main;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 public class DashboardController {
+    @FXML
+    private Button addButton;
     @FXML
     private TextField searchBarText;
     @FXML
@@ -26,26 +31,37 @@ public class DashboardController {
 
     SearchBooks searchBar = new SearchBooks();
 
-    void updateData() {
+    private void resetAll() {
+        searchBarText.clear();
+        searchList.getItems().clear();
+        searchResult.getItems().clear();
+        searchResult.setVisible(false);
+        resultText.setVisible(false);
+    }
+
+    public void initialize() {
         searchBar = new SearchBooks(searchBarText, searchIcon, searchList, resultText, searchResult);
     }
 
     @FXML
     private void handleSearchBar(KeyEvent keyEvent) {
 //        System.out.println("\ud835\udc82");
-        updateData();
         searchBar.handleSearchBar(keyEvent);
     }
 
     @FXML
     private void handleSearchIcon(MouseEvent mouseEvent) {
-        updateData();
         searchBar.handleSearchIcon(mouseEvent);
     }
 
     @FXML
     private void handleMouse(MouseEvent mouseEvent) {
-        updateData();
         searchBar.handleMouse(mouseEvent);
+    }
+
+    @FXML
+    private void redirectToAddBooks(ActionEvent actionEvent) {
+        SceneHandler.getInstance(Main.class, null).setScene("AddBooksPage");
+        resetAll();
     }
 }

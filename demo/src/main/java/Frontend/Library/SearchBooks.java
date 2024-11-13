@@ -88,8 +88,7 @@ public class SearchBooks implements SearchBar {
             searchList.setVisible(true);
             resultText.setVisible(false);
             searchResult.setVisible(false);
-        }
-        else {
+        } else {
             searchList.setVisible(false);
             resultText.setVisible(true);
             searchResult.setVisible(true);
@@ -124,6 +123,7 @@ public class SearchBooks implements SearchBar {
             try {
                 newText = true;
                 updateSearchBar(searchBarText.getText());
+                searchList.setPrefHeight(30 * searchList.getItems().size());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -202,5 +202,11 @@ public class SearchBooks implements SearchBar {
             Book book = new Book(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
             searchResult.getItems().add(book);
         }
+        if (searchResult.getItems().isEmpty()) {
+            resultText.setText("No results found");
+        } else {
+            resultText.setText("Results");
+        }
+        searchResult.setPrefHeight((BookCellController.HEIGHT + 1) * searchResult.getItems().size());
     }
 }
