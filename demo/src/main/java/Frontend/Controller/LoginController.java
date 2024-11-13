@@ -42,6 +42,16 @@ public class LoginController {
     private void handleContinue() throws SQLException {
         String usernameText = username.getText();
         String passwordText = password.getText();
+        if (usernameText.isEmpty()) {
+            errorText.setVisible(true);
+            errorText.setText("Username is empty");
+            return;
+        }
+        if (passwordText.isEmpty()) {
+            errorText.setVisible(true);
+            errorText.setText("Password is empty");
+            return;
+        }
         String password = QueryHandler.getPasswordByUsername(usernameText);
         if (!password.equals(passwordText)) {
             errorText.setVisible(true);
@@ -52,7 +62,8 @@ public class LoginController {
         SceneHandler.getInstance(Main.class, null).setScene("DashboardPage");
     }
 
-    public void handleSignupLink(ActionEvent event) throws IOException {
+    @FXML
+    private void handleSignupLink(ActionEvent event) throws IOException {
         SceneHandler.getInstance(Main.class, null).setScene("RegisterPage");
         resetAll();
         // If you want to change the URL name (RegisterPage) then change in Main.java

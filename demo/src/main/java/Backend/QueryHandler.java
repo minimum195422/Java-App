@@ -52,4 +52,17 @@ public class QueryHandler {
         int status = stmt.executeUpdate();
 //        System.out.println(status);
     }
+
+    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String ISBN_13, int price) throws SQLException {
+        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, ISBN_13, price) VALUES(?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = Main.connection.prepareStatement(SQL);
+        stmt.setString(1, imageURL);
+        stmt.setString(2, title);
+        stmt.setString(3, author);
+        stmt.setString(4, publishedDate);
+        stmt.setString(5, ISBN_13);
+        stmt.setInt(6, price);
+        int status = stmt.executeUpdate();
+//        System.out.println(status);
+    }
 }

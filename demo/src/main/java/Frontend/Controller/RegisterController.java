@@ -44,6 +44,7 @@ public class RegisterController {
     @FXML
     private void resetAll() {
         errorText.setVisible(false);
+        errorText.setStyle("-fx-fill: red;");
         email.clear();
         username.clear();
         password.clear();
@@ -75,30 +76,31 @@ public class RegisterController {
         if (!passwordText.equals(confirmPasswordText)) {
             System.out.println("Passwords does not match");
             errorText.setText("Passwords does not match");
-            resetPassword();
+//            resetPassword();
             return;
         }
         boolean existed = QueryHandler.checkAccountByEmail(emailText);
         if (existed) {
             System.out.println("Email already exists");
             errorText.setText("Email already exists");
-            resetEmail();
+//            resetEmail();
             return;
         }
         existed = QueryHandler.checkAccountByUsername(usernameText);
         if (existed) {
             System.out.println("Username already exists");
             errorText.setText("Username already exists");
-            resetUsername();
+//            resetUsername();
             return;
         }
         QueryHandler.addNewAccount(emailText, usernameText, passwordText);
-        errorText.setText("Registered successfully");
-        errorText.setStyle("-fx-fill: green;");
         resetAll();
+        errorText.setText("Registered successfully");
+        errorText.setVisible(true);
+        errorText.setStyle("-fx-fill: green;");
     }
 
-    public void handleSigninLink(ActionEvent event) throws IOException {
+    public void handleSigninLink(ActionEvent event) {
         SceneHandler.getInstance(Main.class, null).setScene("LoginPage");
         resetAll();
         // If you want to change the URL name (LoginPage) then change in Main.java
