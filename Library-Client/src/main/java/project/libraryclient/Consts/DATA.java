@@ -87,4 +87,5 @@ public class DATA {
     public static String getClientSecret() { return CLIENT_SECRET;}
     public static String getRedirectLink() { return REDIRECT_LINK;}
     public static String getGoogleAPIScope() { return SCOPE;}
+    
 }
