@@ -7,9 +7,11 @@ import javafx.stage.StageStyle;
 import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Database.MySQLConnection;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class App extends Application {
 
@@ -22,9 +24,12 @@ public class App extends Application {
     // List of scene in app
     Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
+    // Create a connection to database
+    public static Connection connection;
     @Override
     public void start(Stage stage) throws IOException {
-
+        // Connect to database
+        connection = MySQLConnection.connectToDB();
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
@@ -36,7 +41,7 @@ public class App extends Application {
         VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(DATA.SCENE_DASHBOARD_PAGE);
+        sceneHandler.SetScene(DATA.SCENE_LOGIN_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

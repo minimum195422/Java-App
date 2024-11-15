@@ -15,6 +15,7 @@ module project.libraryclient {
     requires com.google.gson;
     requires org.apache.httpcomponents.httpcore;
     requires org.apache.httpcomponents.httpclient;
+    requires java.sql;
 
     opens project.libraryclient to javafx.fxml;
     opens project.libraryclient.Controllers to javafx.fxml;
