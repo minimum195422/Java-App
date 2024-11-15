@@ -1,4 +1,4 @@
-package project.libraryclient.Consts;
+package project.libraryserver.Consts;
 
 import javafx.scene.image.Image;
 
@@ -33,27 +33,21 @@ public class DATA {
     public static final Image SETTING_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/settingwhite.png");;
     public static final Image SETTING_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/settinggray.png");;
 
-    // Exit button items
-    public static final Image EXIT_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/x-button_white.png");
-    public static final Image EXIT_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/x-button.png");
-
     // Home page link
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
 
-// ---------------------------------------------------------------- //
-// ------------------------- Card ui link ------------------------- //
-// ---------------------------------------------------------------- //
     // Book card size 235 x 450
     public static final String CARD_235_450 = "/project/libraryclient/FXML/Card/BookCard_180_450.fxml";
 
 // ---------------------------------------------------------------- //
 // -------------------------- Scene name -------------------------- //
 // ---------------------------------------------------------------- //
-    public static final String SCENE_LOGIN_PAGE = "LoginController";
-    public static final String SCENE_REGISTER_PAGE = "RegisterController";
-    public static final String SCENE_BEING_DEVELOPMENT = "BeingDevelopment";
-    public static final String SCENE_DASHBOARD_PAGE = "DashBoardController";
-    public static final String SCENE_VERIFY_PAGE = "VerifyController";
+    public final static String SCENE_LOGIN_PAGE = "Login Controller";
+    public final static String SCENE_REGISTER_PAGE = "Register Controller";
+    public final static String SCENE_BEING_DEVELOPMENT = "Being Development";
+    public final static String SCENE_DASHBOARD_PAGE = "DashBoard Controller";
+    public final static String SCENE_VERIFY_PAGE = "Verify Controller";
+
 
 // ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
@@ -65,26 +59,13 @@ public class DATA {
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
 // ---------------------------------------------------------------- //
-    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/englishappdatabase";
-    private static final String JDBC_USER = "minimum195422";
-    private static final String JDBC_PASSWORD = "Humhayha12#";
+    private final static String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/englishappdatabase";
+    private final static String JDBC_USER = "minimum195422";
+    private final static String JDBC_PASSWORD = "Humhayha12#";
 
     public static String getUrl() { return JDBC_URL; }
 
     public static String getUser() { return JDBC_USER; }
 
     public static String getPassword() { return JDBC_PASSWORD; }
-
-// ---------------------------------------------------------------- //
-// ---------------------- Google API data ------------------------- //
-// ---------------------------------------------------------------- //
-    private static final String CLIENT_ID = "884269234343-jmlvf2n1d25frljrd2cd09tpria7pe84.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_LINK = "https://localhost:8888";
-    private static final String SCOPE = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
-
-    public static String getClientId() { return CLIENT_ID;}
-    public static String getClientSecret() { return CLIENT_SECRET;}
-    public static String getRedirectLink() { return REDIRECT_LINK;}
-    public static String getGoogleAPIScope() { return SCOPE;}
 }

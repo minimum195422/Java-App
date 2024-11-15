@@ -1,15 +1,21 @@
 package project.libraryserver;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import java.net.ServerSocket;
+import project.libraryserver.Models.SceneHandler;
+
 public class App extends Application {
-    public static void main(String[] args) {
-        launch();
-    }
+    // Main scene handler
+    SceneHandler sceneHandler;
+
+    // List of scene in app
+
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        ServerSocket serverSocket = new ServerSocket(2910);
-        Server server = new Server(serverSocket);
-        server.startServer();
+    public void start(Stage stage) throws Exception {
+        // SceneHandler initialize
+        sceneHandler = SceneHandler.getInstance(App.class, stage);
+
+
     }
 }

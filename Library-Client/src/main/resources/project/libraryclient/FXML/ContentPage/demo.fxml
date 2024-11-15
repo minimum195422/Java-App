@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="235.0" style="-fx-background-color: #000000;">
+         <children>
+            <ImageView fitHeight="350.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../Downloads/jump1.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="510.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="490.0" style="-fx-background-color: #000000;" />
+      <Label layoutY="361.0" maxHeight="60.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="235.0" text="A Century of Continental History, 1780-1880 đa ádad ád" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutY="424.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="235.0" text="ada d áda đá ad ád ad ad ád da da d d ads a" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

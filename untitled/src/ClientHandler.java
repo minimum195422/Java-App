@@ -43,11 +43,13 @@ public class ClientHandler implements Runnable {
                 // làm try catch ở đây cho login
                 // dùng jsonobject để gửi request
                 if (line.equals("1")) {
-                    JSONObject jsonObject = new JSONObject().put("name", "alex");
-                    jsonObject.put("pass", "pass");
-                    out.println(jsonObject); // jsonobject change to default string
+//                    JSONObject jsonObject = new JSONObject().put("name", "alex");
+//                    jsonObject.put("pass", "pass");
+//                    out.println(jsonObject); // jsonobject change to default string
+//                    out.flush();
+//                    jsonObject.clear();
+                    out.println("one");
                     out.flush();
-                    jsonObject.clear();
                 } else if (line.equals("2")) {
                     out.println("type 2");
                 } else {

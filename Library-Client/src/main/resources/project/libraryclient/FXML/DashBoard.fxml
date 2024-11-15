@@ -8,47 +8,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="680.0" prefWidth="1280.0" stylesheets="@../Styles/DashBoardStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoardController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="680.0" prefWidth="1280.0" stylesheets="@../Styles/DashBoardDarkMode.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.DashBoardController">
    <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0">
       <AnchorPane prefHeight="680.0" prefWidth="260.0" styleClass="side-bar">
          <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="260.0">
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="220.0" styleClass="user-area">
+            <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="220.0">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
-               <HBox prefHeight="50.0" prefWidth="220.0">
-                  <padding>
-                     <Insets top="5.0" />
-                  </padding>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <clip>
-                        <Circle centerX="20" centerY="20" radius="20" />
-                     </clip>
-                     <HBox.margin>
-                        <Insets left="10.0" right="5.0" />
-                     </HBox.margin>
-                     <Image url="@../Images/Avatars/avatar.jpg" />
-                  </ImageView>
-                  <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0">
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
-                        <font>
-                           <Font name="Poppins SemiBold" size="10.0" />
-                        </font>
-                     </Text>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User mail">
-                        <font>
-                           <Font name="Poppins Light" size="8.0" />
-                        </font>
-                     </Text>
-                  </VBox>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-               </HBox>
-            </AnchorPane>
+               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="220.0" styleClass="user-area">
+                  <HBox prefHeight="50.0" prefWidth="220.0">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <clip>
+                           <Circle centerX="20" centerY="20" radius="20" />
+                        </clip>
+                        <HBox.margin>
+                           <Insets left="10.0" right="5.0" />
+                        </HBox.margin>
+                        <Image url="@../Images/Avatars/avatar.jpg" />
+                     </ImageView>
+                     <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+                           <font>
+                              <Font name="Poppins SemiBold" size="10.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="User mail">
+                           <font>
+                              <Font name="Poppins Light" size="8.0" />
+                           </font>
+                        </Text>
+                     </VBox>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                  </HBox>
+               </AnchorPane>
+            </StackPane>
             <ToggleButton fx:id="HomeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#HomeButtonMouseClicked" onMouseEntered="#HomeButtonMouseEntered" onMouseExited="#HomeButtonMouseExited" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
                <VBox.margin>
                   <Insets top="20.0" />
@@ -151,32 +154,35 @@
             </ToggleButton>
          </VBox>
       </AnchorPane>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" styleClass="display-content-area">
+      <BorderPane fx:id="ContentDisplay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" styleClass="display-content-area">
          <top>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1020.0" spacing="5.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="940.0" spacing="8.0" styleClass="search-box">
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1020.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="930.0" spacing="8.0" styleClass="search-box">
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <Image url="@../Images/Icons/search.png" />
+                     <Image url="@../Images/Icons/search_white.png" />
                   </ImageView>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="890.0" promptText="Search for your favorite book" styleClass="search-area" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="880.0" promptText="Search for your favorite book" styleClass="search-area" />
                   <padding>
                      <Insets left="10.0" />
                   </padding>
                </HBox>
-               <ImageView fx:id="NotificationTopLeftIcon" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#NotificationTopLeftIconMouseClicked" onMouseEntered="#NotificationTopLeftIconMouseEntered" onMouseExited="#NotificationTopLeftIconMouseExited" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../Images/Icons/notification-bell-gray.png" />
-               </ImageView>
                <ImageView fx:id="VersionInformationIcon" fitHeight="25.0" fitWidth="25.0" onMouseEntered="#VersionInformationIconMouseEntered" onMouseExited="#VersionInformationIconMouseExited" pickOnBounds="true" preserveRatio="true" scaleX="0.85" scaleY="0.85">
                   <Image url="@../Images/Icons/information_gray.png" />
                </ImageView>
+               <ImageView fx:id="ExitButton" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#ExitButtonMouseClicked" onMouseEntered="#ExitButtonMouseEntered" onMouseExited="#ExitButtonMouseExited" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                  <Image url="@../Images/Icons/x-button.png" />
+               </ImageView>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </HBox>
          </top>
+         <center>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </HBox>
 </AnchorPane>

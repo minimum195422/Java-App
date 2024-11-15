@@ -1,4 +1,4 @@
-package project.libraryclient.Controllers;
+package project.libraryclient.Controllers.Register;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import project.libraryclient.App;
-import project.libraryclient.Consts.SceneData;
+import project.libraryclient.Consts.DATA;
 import project.libraryclient.Models.SceneHandler;
 
 public class RegisterController {
@@ -65,21 +65,21 @@ public class RegisterController {
 
     //  Register button
     public void Register_RegisterButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT);
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
     }
 
     //  Return to login page link
     public void Register_LoginLink_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_LOGIN_PAGE);
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_LOGIN_PAGE);
     }
 
     // Google button
     public void Register_GoogleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT);
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
     }
 
     // Apple button
     public void Register_AppleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT);
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
     }
 }

@@ -39,7 +39,7 @@ class client {
                 // // receive
                 System.out.println("Server replied "
                         + tmp);
-                JSONObject jsonObject = new JSONObject(tmp);
+//                JSONObject jsonObject = new JSONObject(tmp);
 //                System.out.println(jsonObject.get("name"));
             }
 
