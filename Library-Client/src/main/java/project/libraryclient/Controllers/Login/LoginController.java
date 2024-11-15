@@ -1,4 +1,4 @@
-package project.libraryclient.Controllers;
+package project.libraryclient.Controllers.Login;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,9 +8,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.App;
-import project.libraryclient.Consts.SceneData;
-//import project.libraryclient.JDBC.AppJDBC;
+import project.libraryclient.Consts.DATA;
 import project.libraryclient.Models.SceneHandler;
 
 import java.net.URL;
@@ -23,19 +23,19 @@ public class LoginController implements Initializable {
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Login_LoginButton;
+    private Button LoginButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Login_ExitButton;
+    private Button ExitButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Login_GoogleButton;
+    private Button GoogleButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Login_AppleButton;
+    private Button AppleButton;
 
     @FXML
     private TextField Login_GetEmailField;
@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
     }
 
     //  Login button
-    public void Login_LoginButton_MouseClicked() {
+    public void LoginButton_MouseClicked() {
         if (Login_GetEmailField.getText().isBlank()) {
             Login_WarningText.setText("Enter your email");
         } else if (Login_GetPasswordField.getText().isBlank()) {
@@ -67,16 +67,17 @@ public class LoginController implements Initializable {
 
     //  Create New Account Link
     public void Login_CreateLink_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_REGISTER_PAGE); // change to register page
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_REGISTER_PAGE); // change to register page
     }
 
     //  Apple button
     public void Login_AppleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT); // not development yet
     }
 
     //  Google button
     public void Login_GoogleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(SceneData.SCENE_BEING_DEVELOPMENT); // not development yet
+        GoogleAuthenticator authenticator = new GoogleAuthenticator();
+        authenticator.start();
     }
 }

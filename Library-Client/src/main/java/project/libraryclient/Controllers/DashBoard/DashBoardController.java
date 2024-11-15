@@ -1,24 +1,48 @@
-package project.libraryclient.Controllers;
+package project.libraryclient.Controllers.DashBoard;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import project.libraryclient.App;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Models.SceneHandler;
 
+import java.io.IOException;
 import java.net.URL;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
 public class DashBoardController implements Initializable {
 
 
+    // ---------- Content display pane ---------- //
+    public BorderPane ContentDisplay;
+    
+    // Exit button
+    public ImageView ExitButton;
+    public void ExitButtonMouseClicked(MouseEvent event) {
+        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_LOGIN_PAGE);
+    }
+
+    public void ExitButtonMouseEntered(MouseEvent event) {
+        ExitButton.setImage(DATA.EXIT_WHITE_ICON);
+    }
+
+    public void ExitButtonMouseExited(MouseEvent event) {
+        ExitButton.setImage(DATA.EXIT_GRAY_ICON);
+    }
+    
     // ---------- Toggle Button Group ---------- //
     ToggleGroup function_button_toggle_group = new ToggleGroup();
 
@@ -39,7 +63,6 @@ public class DashBoardController implements Initializable {
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
         NotificationButtonText.setStyle("-fx-fill: #adb5bd;");
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_GRAY_ICON);
@@ -86,7 +109,6 @@ public class DashBoardController implements Initializable {
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_WHITE_ICON);
         NotificationButtonText.setStyle("-fx-fill: #ffffff;");
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_BLUE_ICON);
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_GRAY_ICON);
@@ -117,27 +139,6 @@ public class DashBoardController implements Initializable {
     }
 
 
-    @FXML
-    public ImageView NotificationTopLeftIcon;
-
-    public void NotificationTopLeftIconMouseClicked() {
-        NotificationButtonMouseClicked();
-        NotificationButton.setSelected(true);
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_BLUE_ICON);
-    }
-
-    public void NotificationTopLeftIconMouseEntered() {
-        if (!NotificationButton.isSelected()) {
-            NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_BLUE_ICON);
-        }
-    }
-
-    public void NotificationTopLeftIconMouseExited() {
-        if (!NotificationButton.isSelected()) {
-            NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
-        }
-    }
-
 
     // ---------- Discover Button ---------- //
     @FXML
@@ -156,7 +157,6 @@ public class DashBoardController implements Initializable {
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
         NotificationButtonText.setStyle("-fx-fill: #adb5bd;");
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_WHITE_ICON);
@@ -203,7 +203,6 @@ public class DashBoardController implements Initializable {
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
         NotificationButtonText.setStyle("-fx-fill: #adb5bd;");
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_GRAY_ICON);
@@ -250,7 +249,6 @@ public class DashBoardController implements Initializable {
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
         NotificationButtonText.setStyle("-fx-fill: #adb5bd;");
-        NotificationTopLeftIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_GRAY_ICON);
@@ -316,19 +314,19 @@ public class DashBoardController implements Initializable {
         HomeButton.setSelected(true);
         HomeButtonMouseClicked();
 
+        // Set content
+        LoadHomePage();
     }
 
 
+    private void LoadHomePage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
 
-
-//
-//    private void LoadHomePage() {
-//        try {
-//            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DashBoardData.DASHBOARD_HOMEPAGE_LINK)));
-//            MainBorderPane.setCenter(pane);
-//        } catch (IOException e) {
-//            e.printStackTrace(System.out);
-//        }
-//    }
 
 }
