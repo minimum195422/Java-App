@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Login_MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/LoginStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.LoginController">
+<AnchorPane fx:id="Login_MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/LoginStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Login.LoginController">
    <HBox layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="650.0">
       <AnchorPane prefHeight="410.0" prefWidth="325.0" styleClass="cover_image">
          <ImageView fitHeight="410.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
@@ -28,7 +28,7 @@
             </clip>
             <Image url="@../Images/Covers/cover1.jpg" />
          </ImageView>
-         <Button fx:id="Login_ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
+         <Button fx:id="ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
             <graphic>
                <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="90.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exit this app">
@@ -131,7 +131,7 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <Button fx:id="Login_LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_LoginButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
+            <Button fx:id="LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#LoginButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -167,7 +167,7 @@
                <padding>
                   <Insets top="10.0" />
                </padding>
-               <Button fx:id="Login_GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+               <Button fx:id="GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -181,7 +181,7 @@
                         </Text>
                      </HBox>
                   </graphic></Button>
-               <Button fx:id="Login_AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+               <Button fx:id="AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

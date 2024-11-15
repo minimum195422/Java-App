@@ -4,44 +4,60 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import project.libraryclient.Consts.SceneData;
-//import project.libraryclient.JDBC.AppJDBC;
+import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
+import project.libraryclient.Client.Client;
+import project.libraryclient.Consts.DATA;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class App extends Application {
-    // Define main SceneHandler
+
+    // Client
+    Client client;
+
+    // Main scenehandler
     SceneHandler sceneHandler;
 
-    // List of scene
+    // List of scene in app
     Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
 
-    // Database connection
-//    AppJDBC appJDBC;
-
     @Override
-    public void start(Stage stage) throws IOException, SQLException {
+    public void start(Stage stage) throws IOException {
+
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
         // Load single scene to SceneHandler
-        LoginPage = sceneHandler.AddScene(SceneData.SCENE_LOGIN_PAGE, "FXML/Login.fxml");
-        RegisterPage = sceneHandler.AddScene(SceneData.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
-        BeingDev = sceneHandler.AddScene(SceneData.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
-        HomePage = sceneHandler.AddScene(SceneData.SCENE_DASHBOARD_PAGE, "FXML/DashBoard.fxml");
-        VerifyPage = sceneHandler.AddScene(SceneData.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
+        LoginPage = sceneHandler.AddScene(DATA.SCENE_LOGIN_PAGE, "FXML/Login.fxml");
+        RegisterPage = sceneHandler.AddScene(DATA.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
+        BeingDev = sceneHandler.AddScene(DATA.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
+        HomePage = sceneHandler.AddScene(DATA.SCENE_DASHBOARD_PAGE, "FXML/DashBoard.fxml");
+        VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(SceneData.SCENE_DASHBOARD_PAGE);
+        sceneHandler.SetScene(DATA.SCENE_DASHBOARD_PAGE);
 
-        // Connect database
-//        appJDBC = AppJDBC.getInstance();
-
-        // hehe
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
+//        new Thread(this::startClient).start();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        if (client != null) {
+            client.close();
+        }
+        super.stop();
+    }
+
+    private void startClient() {
+        try {
+            client = new Client("localhost", 1234);
+            client.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(String[] args) {

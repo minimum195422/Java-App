@@ -1,0 +1,56 @@
+/* button out focused text color #adb5bd */
+/* button focused text color #ffffff */
+
+/* button focused background color -fx-background-color: #57d9f4; */
+/* button focused shadow color -fx-effect: dropshadow(gaussian, #88e3f5, 15, 0, 0, 5); */
+
+
+.display-content-area {
+    -fx-background-color: #f8f9fa;
+}
+
+.side-bar {
+    -fx-background-color: #e9ecef;
+}
+
+.user-area {
+    -fx-background-radius: 8;
+    -fx-background-color: #f8f9fa;
+}
+
+.function-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+}
+
+.function-button:hover {
+    -fx-background-color: #57d9f4;
+    -fx-background-radius: 10;
+}
+
+.function-button:selected {
+    -fx-background-color: #57d9f4;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, #88e3f5, 10, 0, 0, 5);
+    -fx-border-radius: 2px;
+}
+
+.search-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1;
+    -fx-border-radius: 7px;
+}
+
+.search-area {
+    -fx-background-color: transparent;
+}
+
+
+.function-button-text {
+    -fx-fill: #ffffff;
+}
+
+.test-font {
+    -fx-fill: #adb5bd;
+}

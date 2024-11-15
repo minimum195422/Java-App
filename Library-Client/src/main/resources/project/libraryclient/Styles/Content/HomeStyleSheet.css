@@ -1,0 +1,7 @@
+.dark-mode-background-color {
+    -fx-background-color: #ffffff;
+}
+
+.scroll-pane {
+    -fx-border-width: 0;
+}

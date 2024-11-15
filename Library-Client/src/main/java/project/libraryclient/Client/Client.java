@@ -1,73 +1,39 @@
 package project.libraryclient.Client;
 
+import org.json.JSONObject;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
 
-    private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
-    public String userName;
+    private final Socket socket;
+    private final PrintWriter out;
+    private final BufferedReader in;
+    private final Scanner sc;
 
-    public Client(Socket socket, String userName) {
-        try {
-            this.socket = socket;
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.userName = userName;
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
-        }
+    public Client(String host, int port) throws IOException {
+        this.socket = new Socket(host, port);
+        this.out = new PrintWriter(this.socket.getOutputStream(), true);
+        this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        this.sc = new Scanner(System.in);
     }
 
-    public void sendMessage() {
-        try {
-            bufferedWriter.write(userName);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-
-            Scanner scanner = new Scanner(System.in);
-            while (socket.isConnected()) {
-                String messageToSend = scanner.nextLine();
-                bufferedWriter.write(userName + ": " + messageToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-        } catch (IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
-        }
+    public void sendMessage(String message) {
+        out.println(message);
+        out.flush();
     }
 
-    public void listenForMessage() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String messageFromServer;
 
-                while (socket.isConnected()) {
-                    try {
-                        messageFromServer = bufferedReader.readLine();
-                        System.out.println(messageFromServer);
-                    } catch (IOException e) {
-                        closeEverything(socket, bufferedReader, bufferedWriter);
-                    }
-                }
-            }
-        }).start();
-    }
-
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void close() {
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
+            if (in != null) {
+                in.close();
             }
-
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
+            if (out != null) {
+                out.close();
             }
-
             if (socket != null) {
                 socket.close();
             }
@@ -76,13 +42,40 @@ public class Client {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter name: ");
-        String name = scanner.nextLine();
-        Socket s = new Socket("localhost", 2910);
-        Client client = new Client(s, name);
-        client.listenForMessage();
-        client.sendMessage();
+    public void start() {
+        String line = null;
+        while (!"exit".equalsIgnoreCase(line)) {
+            try {
+                line = sc.nextLine();
+                sendMessage(line);
+
+                String tmp = in.readLine();
+                System.out.println(tmp);
+            } catch (IOException e) {
+                e.printStackTrace(System.out);
+            }
+        }
     }
+
+//    // driver code
+//    public static void main(String[] args)
+//    {
+//            while (!"exit".equalsIgnoreCase(line)) {
+//
+//                // reading from user
+//                line = sc.nextLine();
+//
+//                // // send
+//                out.println(line);
+//                out.flush();
+//
+//                String tmp = in.readLine();
+//                JSONObject jsonObject = new JSONObject(tmp);
+//
+//                // // receive
+//                System.out.println("Server replied " + jsonObject.get("name"));
+//
+////                System.out.println(jsonObject.get("name"));
+//            }
+//    }
 }
