@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySQLConnection;
@@ -26,10 +25,11 @@ public class App extends Application {
 
     // Create a connection to database
     public static Connection connection;
+
     @Override
     public void start(Stage stage) throws IOException {
         // Connect to database
-        connection = MySQLConnection.connectToDB();
+//        connection = MySQLConnection.connectToDB();
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
@@ -41,7 +41,7 @@ public class App extends Application {
         VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(DATA.SCENE_LOGIN_PAGE);
+        sceneHandler.SetScene(DATA.SCENE_DASHBOARD_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

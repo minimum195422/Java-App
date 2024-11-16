@@ -37,7 +37,7 @@ public class DATA {
     public static final Image EXIT_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/x-button_white.png");
     public static final Image EXIT_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/x-button.png");
 
-    // Home page link
+    // Home page link 
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
 
 // ---------------------------------------------------------------- //
