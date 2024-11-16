@@ -21,10 +21,12 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         for (int i = 0; i < 3; ++i) {
             HBox list = new HBox();
             list.setSpacing(25);
             for (int j = 0; j < 5; ++j) {
+
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
                     AnchorPane card = loader.load();

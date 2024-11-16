@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Register_MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/RegisterStyleSheet.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Register.RegisterController">
+<AnchorPane fx:id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/RegisterStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Register.RegisterController">
     <HBox layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="650.0">
         <AnchorPane prefHeight="410.0" prefWidth="325.0" styleClass="cover_image">
             <ImageView fitHeight="410.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
@@ -28,7 +28,7 @@
                 </clip>
                 <Image url="@../Images/Covers/cover1.jpg" />
             </ImageView>
-            <Button fx:id="Register_ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Register_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button">
+            <Button fx:id="ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Register_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button">
                 <graphic>
                     <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="90.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exit this app">
@@ -95,14 +95,14 @@
             <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" textAlignment="CENTER" visible="false" />
                 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="240.0">
                     <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="5.0" />
                     </VBox.margin>
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account?">
                         <styleClass>
                             <String fx:value="text-color-4" />
                             <String fx:value="text-size-10" />
                         </styleClass></Text>
-                    <Text fx:id="Register_LoginLink" onMouseClicked="#Register_LoginLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
+                    <Text fx:id="ReturnToLogin" onMouseClicked="#Register_LoginLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin>
@@ -167,9 +167,9 @@
                         </styleClass>
                     </Text>
                 </HBox>
-                <Button fx:id="Register_RegisterButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinue" onMouseClicked="#Register_RegisterButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Create account" textAlignment="CENTER">
+                <Button fx:id="RegisterButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#RegisterButtonOnclick" onMouseClicked="#Register_RegisterButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Create account" textAlignment="CENTER">
                     <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="10.0" />
                     </VBox.margin>
                     <styleClass>
                         <String fx:value="register-button" />
@@ -203,7 +203,7 @@
                     <padding>
                         <Insets top="10.0" />
                     </padding>
-                    <Button fx:id="Register_GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+                    <Button fx:id="LoginByGoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -217,7 +217,7 @@
                                 </Text>
                             </HBox>
                         </graphic></Button>
-                    <Button fx:id="Register_AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+                    <Button fx:id="LoginByAppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

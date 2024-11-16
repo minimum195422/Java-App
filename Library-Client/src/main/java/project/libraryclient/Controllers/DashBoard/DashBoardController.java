@@ -1,5 +1,6 @@
 package project.libraryclient.Controllers.DashBoard;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,9 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import project.libraryclient.App;
 import project.libraryclient.Consts.DATA;
-import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,23 +27,26 @@ public class DashBoardController implements Initializable {
 
     // ---------- Content display pane ---------- //
     public BorderPane ContentDisplay;
-    
-    // Exit button
+
+
+    // --------------- Exit button -------------- //
     public ImageView ExitButton;
-    public void ExitButtonMouseClicked(MouseEvent event) {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_LOGIN_PAGE);
+    public void ExitButtonMouseClicked() {
+        Platform.exit(); // close program
     }
 
-    public void ExitButtonMouseEntered(MouseEvent event) {
+    public void ExitButtonMouseEntered() {
         ExitButton.setImage(DATA.EXIT_WHITE_ICON);
     }
 
-    public void ExitButtonMouseExited(MouseEvent event) {
+    public void ExitButtonMouseExited() {
         ExitButton.setImage(DATA.EXIT_GRAY_ICON);
     }
+
     
     // ---------- Toggle Button Group ---------- //
     ToggleGroup function_button_toggle_group = new ToggleGroup();
+
 
     // ---------- Home Button ---------- //
     @FXML
@@ -91,6 +93,7 @@ public class DashBoardController implements Initializable {
             HomeButtonText.setStyle("-fx-fill: #adb5bd;");
         }
     }
+
 
     // ---------- Notification Button ---------- //
     @FXML
@@ -139,7 +142,6 @@ public class DashBoardController implements Initializable {
     }
 
 
-
     // ---------- Discover Button ---------- //
     @FXML
     public ToggleButton DiscoverButton;
@@ -185,6 +187,7 @@ public class DashBoardController implements Initializable {
             DiscoverButtonText.setStyle("-fx-fill: #adb5bd;");
         }
     }
+
 
     // ---------- MyBook Button ---------- //
     @FXML
@@ -283,10 +286,10 @@ public class DashBoardController implements Initializable {
 
     public ImageView VersionInformationIcon;
 
-    public void VersionInformationIconMouseEntered(MouseEvent event) {
+    public void VersionInformationIconMouseEntered() {
     }
 
-    public void VersionInformationIconMouseExited(MouseEvent event) {
+    public void VersionInformationIconMouseExited() {
     }
 
 
@@ -327,6 +330,4 @@ public class DashBoardController implements Initializable {
             e.printStackTrace(System.out);
         }
     }
-
-
 }
