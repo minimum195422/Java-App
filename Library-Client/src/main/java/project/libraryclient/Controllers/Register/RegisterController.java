@@ -1,12 +1,9 @@
 package project.libraryclient.Controllers.Register;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -15,30 +12,28 @@ import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.QueryHandler;
 import project.libraryclient.Models.SceneHandler;
 
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class RegisterController {
     @SuppressWarnings("unused")
     @FXML
-    private AnchorPane Register_MainPane;
+    private AnchorPane MainAnchorPane;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Register_ExitButton;
+    private Button ExitButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Register_GoogleButton;
+    private Button LoginByGoogleButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Button Register_AppleButton;
+    private Button LoginByAppleButton;
 
     @SuppressWarnings("unused")
     @FXML
-    private Text Register_LoginLink;
+    private Text ReturnToLogin;
 
     @SuppressWarnings("unused")
     @FXML
@@ -51,7 +46,7 @@ public class RegisterController {
     public TextField lastName;
 
     @FXML
-    public Button Register_RegisterButton;
+    public Button RegisterButton;
 
     @FXML
     private Text errorText;
@@ -113,9 +108,9 @@ public class RegisterController {
         resetAll();
     }
 
-    // Submit account
+    // Handling create new account
     @FXML
-    private void handleContinue() throws SQLException {
+    private void RegisterButtonOnclick() throws SQLException {
         errorText.setStyle("-fx-fill: red;");
         errorText.setVisible(true);
         String emailText = email.getText();
@@ -123,31 +118,31 @@ public class RegisterController {
         String confirmPasswordText = confirmPassword.getText();
         String username = firstName.getText() + " " + lastName.getText();
         if (emailText.isEmpty()) {
-            System.out.println("Email is empty");
+            // System.out.println("Email is empty");
             errorText.setText("Email is empty");
             return;
         }
         if (passwordText.isEmpty()) {
-            System.out.println("Password is empty");
+            // System.out.println("Password is empty");
             errorText.setText("Password is empty");
             return;
         }
         if (!passwordText.equals(confirmPasswordText)) {
-            System.out.println("Passwords does not match");
+            // System.out.println("Passwords does not match");
             errorText.setText("Passwords does not match");
-//            resetPassword();
+            resetPassword();
             return;
         }
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
-            System.out.println("Name can't be empty");
+            // System.out.println("Name can't be empty");
             errorText.setText("Name can't be empty");
             return;
         }
         boolean existed = QueryHandler.checkAccountByEmail(emailText);
         if (existed) {
-            System.out.println("Email already exists");
+            // System.out.println("Email already exists");
             errorText.setText("Email already exists");
-//            resetEmail();
+            // Reset email text field
             return;
         }
         QueryHandler.addNewAccount(emailText, username, passwordText);
