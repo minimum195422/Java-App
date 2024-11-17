@@ -1,28 +1,55 @@
-package project.libraryclient.Database;
+package project.libraryserver.Database;
 
 
-import project.libraryclient.App;
+import project.libraryserver.Consts.DATA;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class QueryHandler {
-    public static String getPasswordByEmail(String email) throws SQLException {
-        String SQL = "SELECT password FROM accounts WHERE email = ?";
-        PreparedStatement stmt = App.connection.prepareStatement(SQL);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        String password = "";
-        while (rs.next()) {
-            password = rs.getString(1);
+public class MySql {
+    private static MySql instance;
+    private static Connection connection;
+
+    private MySql() {
+        try {
+            String url = DATA.getJdbcUrl();
+            String user = DATA.getJdbcUser();
+            String password = DATA.getJdbcPassword();
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+            throw new RuntimeException("Error connecting to the database.", e);
         }
-        return password;
+    }
+
+    public static MySql getInstance() {
+        if (instance == null) {
+            synchronized (MySql.class) {
+                if (instance == null) {
+                    instance = new MySql();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public static boolean QueryCheckLogIn(String email, String password) throws SQLException {
+        String query = "SELECT count(*) FROM accounts WHERE email = ? and password = ?;";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            if (rs.getInt(1) == 1) return true;
+        }
+        return false;
     }
 
     public static boolean checkAccountByEmail(String email) throws SQLException {
         String SQL = "SELECT COUNT(*) FROM accounts WHERE email = ?";
-        PreparedStatement stmt = App.connection.prepareStatement(SQL);
+        PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, email);
         ResultSet rs = stmt.executeQuery();
         boolean existed = false;
@@ -34,7 +61,7 @@ public class QueryHandler {
 
     public static boolean checkAccountByUsername(String username) throws SQLException {
         String SQL = "SELECT COUNT(*) FROM accounts WHERE username = ?";
-        PreparedStatement stmt = App.connection.prepareStatement(SQL);
+        PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, username);
         ResultSet rs = stmt.executeQuery();
         boolean existed = false;
@@ -46,7 +73,7 @@ public class QueryHandler {
 
     public static void addNewAccount(String email, String username, String password) throws SQLException {
         String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-        PreparedStatement stmt = App.connection.prepareStatement(SQL);
+        PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, email);
         stmt.setString(2, username);
         stmt.setString(3, password);
@@ -56,7 +83,7 @@ public class QueryHandler {
 
     public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
         String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = App.connection.prepareStatement(SQL);
+        PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, imageURL);
         stmt.setString(2, title);
         stmt.setString(3, author);

@@ -65,15 +65,15 @@ public class DATA {
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
 // ---------------------------------------------------------------- //
-    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/englishappdatabase";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/library";
     private static final String JDBC_USER = "minimum195422";
     private static final String JDBC_PASSWORD = "Humhayha12#";
 
-    public static String getUrl() { return JDBC_URL; }
+    public static String GetJdbcUrl() { return JDBC_URL; }
 
-    public static String getUser() { return JDBC_USER; }
+    public static String GetJdbcUser() { return JDBC_USER; }
 
-    public static String getPassword() { return JDBC_PASSWORD; }
+    public static String GetJdbcPassword() { return JDBC_PASSWORD; }
 
 // ---------------------------------------------------------------- //
 // ---------------------- Google API data ------------------------- //

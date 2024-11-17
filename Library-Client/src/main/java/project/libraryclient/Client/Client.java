@@ -1,26 +1,38 @@
 package project.libraryclient.Client;
 
+import com.google.api.client.json.Json;
 import org.json.JSONObject;
+import project.libraryclient.Consts.JsonType;
+import project.libraryclient.Consts.UserStatus;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client {
 
+    private static Client client;
     private final Socket socket;
     private final PrintWriter out;
     private final BufferedReader in;
-    private final Scanner sc;
+    private UserStatus status;
 
-    public Client(String host, int port) throws IOException {
+    private Client(String host, int port) throws IOException {
         this.socket = new Socket(host, port);
         this.out = new PrintWriter(this.socket.getOutputStream(), true);
         this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-        this.sc = new Scanner(System.in);
+        status = UserStatus.START;
+
+        start();
     }
 
-    public void sendMessage(String message) {
+    public static Client getInstance() throws IOException {
+        if (client == null) {
+            client = new Client("localhost", 1234);
+        }
+        return client;
+    }
+
+    public void sendMessage(JSONObject message) {
         out.println(message);
         out.flush();
     }
@@ -43,39 +55,34 @@ public class Client {
     }
 
     public void start() {
-        String line = null;
-        while (!"exit".equalsIgnoreCase(line)) {
+        new Thread(() -> {
             try {
-                line = sc.nextLine();
-                sendMessage(line);
-
-                String tmp = in.readLine();
-                System.out.println(tmp);
+                String response;
+                while ((response = in.readLine()) != null) {
+                    // handle response from server when user send request
+                    handleServerResponse(response);
+                }
             } catch (IOException e) {
-                e.printStackTrace(System.out);
+                System.err.println("Error while reading server response: " + e.getMessage());
             }
+        }).start();
+    }
+
+    private void handleServerResponse(String response) {
+        JSONObject json = new JSONObject(response);
+        JsonType type = JsonType.valueOf(json.getString("type"));
+        switch (type) {
+            case LOGIN_SUCCESS -> {
+                status = UserStatus.LOGGED_IN;
+            }
+            case LOGIN_FAILED -> {
+                status = UserStatus.LOGGING_IN_FAILED;
+            }
+            default -> throw new RuntimeException("Invalid json file");
         }
     }
 
-//    // driver code
-//    public static void main(String[] args)
-//    {
-//            while (!"exit".equalsIgnoreCase(line)) {
-//
-//                // reading from user
-//                line = sc.nextLine();
-//
-//                // // send
-//                out.println(line);
-//                out.flush();
-//
-//                String tmp = in.readLine();
-//                JSONObject jsonObject = new JSONObject(tmp);
-//
-//                // // receive
-//                System.out.println("Server replied " + jsonObject.get("name"));
-//
-////                System.out.println(jsonObject.get("name"));
-//            }
-//    }
+    public UserStatus GetUserStatus() {
+        return status;
+    }
 }

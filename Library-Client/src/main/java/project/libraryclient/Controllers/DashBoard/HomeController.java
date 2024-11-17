@@ -26,7 +26,6 @@ public class HomeController implements Initializable {
             HBox list = new HBox();
             list.setSpacing(25);
             for (int j = 0; j < 5; ++j) {
-
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
                     AnchorPane card = loader.load();
