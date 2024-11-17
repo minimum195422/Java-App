@@ -6,33 +6,25 @@ import project.libraryserver.Consts.DATA;
 import java.sql.*;
 
 public class MySql {
-    private static MySql instance;
     private static Connection connection;
 
     private MySql() {
         try {
-            String url = DATA.getJdbcUrl();
-            String user = DATA.getJdbcUser();
-            String password = DATA.getJdbcPassword();
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(
+                    DATA.getJdbcUrl(),
+                    DATA.getJdbcUser(),
+                    DATA.getJdbcPassword());
         } catch (Exception e) {
             throw new RuntimeException("Error connecting to the database.", e);
         }
     }
 
-    public static MySql getInstance() {
-        if (instance == null) {
-            synchronized (MySql.class) {
-                if (instance == null) {
-                    instance = new MySql();
-                }
-            }
-        }
-        return instance;
+    private static final class InstanceHolder {
+        private static final MySql instance = new MySql();
     }
 
-    public Connection getConnection() {
-        return connection;
+    public static MySql getInstance() {
+        return InstanceHolder.instance;
     }
 
     public static boolean QueryCheckLogIn(String email, String password) throws SQLException {

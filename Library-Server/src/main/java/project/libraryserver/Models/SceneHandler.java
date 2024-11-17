@@ -44,18 +44,8 @@ public class SceneHandler {
 
     public void SetScene(String SceneKey) {
         if (scenes.get(SceneKey) != null) {
+
             MainStage.setScene(scenes.get(SceneKey));
-
         }
-    }
-
-    public void setFullScreen() {
-//            full screen setting
-//        (1280 x 680) - my screen
-
-        MainStage.setX(Screen.getPrimary().getVisualBounds().getMinX());
-        MainStage.setY(Screen.getPrimary().getVisualBounds().getMinY());
-        MainStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-        MainStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
     }
 }
