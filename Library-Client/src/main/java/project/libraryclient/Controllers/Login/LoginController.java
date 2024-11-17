@@ -1,6 +1,5 @@
 package project.libraryclient.Controllers.Login;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,12 +9,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.App;
+import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
-import project.libraryclient.Database.QueryHandler;
+import project.libraryclient.Consts.UserStatus;
+import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -60,36 +61,45 @@ public class LoginController implements Initializable {
 
     //  Exit button
     public void Login_ExitButton_Action() {
-        Platform.exit(); // close program
+        System.exit(0);
     }
 
     //  Login button
-    public void LoginButton_MouseClicked() {
-        String emailText = email.getText();
-        String passwordText = password.getText();
-        if (emailText.isEmpty()) {
+    public void LoginButton_MouseClicked() throws IOException {
+        if (email.getText().isEmpty()) {
             errorText.setVisible(true);
             errorText.setText("Email is empty");
-            return;
         }
-        if (passwordText.isEmpty()) {
+        if (password.getText().isEmpty()) {
             errorText.setVisible(true);
             errorText.setText("Password is empty");
-            return;
         }
-        try {
-            String password = QueryHandler.getPasswordByEmail(emailText);
-            if (!password.equals(passwordText)) {
-                errorText.setVisible(true);
-                errorText.setText("Username or password is incorrect");
-                resetPassword();
-                return;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
+        Client.getInstance().sendMessage(
+                GenerateJson.createNormalLoginRequest(
+                        email.getText(), password.getText()
+                )
+        );
+
+        if (Client.getInstance().GetUserStatus() == UserStatus.LOGGED_IN) {
+            System.out.println("logged in");
         }
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD_PAGE);
-        resetAll();
+
+
+//        try {
+//            String password = QueryHandler.getPasswordByEmail(emailText);
+//            if (!password.equals(passwordText)) {
+//                errorText.setVisible(true);
+//                errorText.setText("Username or password is incorrect");
+//                resetPassword();
+//                return;
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD_PAGE);
+//        resetAll();
+
+
     }
 
     //  Create New Account Link

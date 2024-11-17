@@ -1,6 +1,8 @@
 module project.libraryserver {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
+    requires org.json;
 
     opens project.libraryserver to javafx.fxml;
     opens project.libraryserver.Controllers.DashBoard to javafx.fxml;

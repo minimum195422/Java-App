@@ -63,9 +63,9 @@ public class DATA {
     private final static String JDBC_USER = "minimum195422";
     private final static String JDBC_PASSWORD = "Humhayha12#";
 
-    public static String getUrl() { return JDBC_URL; }
+    public static String getJdbcUrl() { return JDBC_URL; }
 
-    public static String getUser() { return JDBC_USER; }
+    public static String getJdbcUser() { return JDBC_USER; }
 
-    public static String getPassword() { return JDBC_PASSWORD; }
+    public static String getJdbcPassword() { return JDBC_PASSWORD; }
 }

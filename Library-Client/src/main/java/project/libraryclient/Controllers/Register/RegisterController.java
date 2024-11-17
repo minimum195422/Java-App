@@ -1,6 +1,5 @@
 package project.libraryclient.Controllers.Register;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -9,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import project.libraryclient.App;
 import project.libraryclient.Consts.DATA;
-import project.libraryclient.Database.QueryHandler;
 import project.libraryclient.Models.SceneHandler;
 
 import java.sql.SQLException;
@@ -81,7 +79,7 @@ public class RegisterController {
 
     //  Exit button
     public void Register_ExitButton_Action() {
-        Platform.exit(); // close program
+        System.exit(0);
     }
 
     //  Register button
@@ -138,14 +136,14 @@ public class RegisterController {
             errorText.setText("Name can't be empty");
             return;
         }
-        boolean existed = QueryHandler.checkAccountByEmail(emailText);
-        if (existed) {
-            // System.out.println("Email already exists");
-            errorText.setText("Email already exists");
-            // Reset email text field
-            return;
-        }
-        QueryHandler.addNewAccount(emailText, username, passwordText);
+//        boolean existed = QueryHandler.checkAccountByEmail(emailText);
+//        if (existed) {
+//            // System.out.println("Email already exists");
+//            errorText.setText("Email already exists");
+//            // Reset email text field
+//            return;
+//        }
+//        QueryHandler.addNewAccount(emailText, username, passwordText);
         resetAll();
         errorText.setText("Registered successfully! Return to login page");
         errorText.setVisible(true);

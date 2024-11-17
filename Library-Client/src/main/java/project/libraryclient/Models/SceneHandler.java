@@ -1,5 +1,6 @@
 package project.libraryclient.Models;
 
+import com.sun.tools.javac.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -46,27 +47,15 @@ public class SceneHandler {
 
     public void SetScene(String SceneKey) {
         if (scenes.get(SceneKey) != null) {
-//            if (SceneKey.equals(DATA.SCENE_LOGIN_PAGE) ||
-//                    SceneKey.equals(DATA.SCENE_REGISTER_PAGE)) {
-//                MainStage.sizeToScene();
-//                Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-//
-////                // Tính toán vị trí trung tâm
-////                double centerX = (screenBounds.getWidth() - MainStage.getWidth()) / 2;
-////                double centerY = (screenBounds.getHeight() - MainStage.getHeight()) / 2;
-////
-////                // Đặt vị trí của Stage vào trung tâm màn hình
-////                MainStage.setX(centerX);
-////                MainStage.setY(centerY);
-//            } else {
-////                // Đặt vị trí vào góc màn hình
-////                MainStage.setX(Screen.getPrimary().getVisualBounds().getMinX());
-////                MainStage.setY(Screen.getPrimary().getVisualBounds().getMinY());
-////
-////                // Cài kích thước hiển thị bằng với màn hình
-////                MainStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-////                MainStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-//            }
+            if (SceneKey.equals(DATA.SCENE_LOGIN_PAGE)
+                    || SceneKey.equals(DATA.SCENE_REGISTER_PAGE)) {
+                MainStage.setFullScreen(false);
+                MainStage.sizeToScene();
+                MainStage.centerOnScreen();
+            } else {
+                MainStage.setFullScreen(true);
+                MainStage.centerOnScreen();
+            }
             MainStage.setScene(scenes.get(SceneKey));
         }
     }
