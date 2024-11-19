@@ -10,7 +10,7 @@ public class Server {
     private ServerSocket server;      // ServerSocket để lắng nghe kết nối từ client
     private boolean running;          // Trạng thái server
 
-    // Khởi tạo server và lắng nghe kết nối
+
     private Server() {
         this.running = true;
     }
@@ -19,7 +19,7 @@ public class Server {
     public static synchronized Server getInstance() throws IOException {
         if (instance == null) {
             instance = new Server();
-            instance.startServer();  // Bắt đầu server khi lấy instance
+            instance.startServer();
         }
         return instance;
     }
@@ -55,7 +55,7 @@ public class Server {
         }
     }
 
-    // Phương thức để dừng server
+
     public void stopServer() {
         this.running = false;
         try {
@@ -67,7 +67,6 @@ public class Server {
         }
     }
 
-    // Phương thức để kiểm tra trạng thái của server
     public boolean isRunning() {
         return running;
     }

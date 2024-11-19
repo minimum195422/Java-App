@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.json.JSONObject;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
+import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException{
         // start client
-//        client = Client.getInstance();
+        client = Client.getInstance();
 
         // Connect to database
 //        mysql = MySql.getInstance();
