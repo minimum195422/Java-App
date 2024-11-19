@@ -4,11 +4,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.json.JSONObject;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
-import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class App extends Application {
         client = Client.getInstance();
 
         // Connect to database
-//        mysql = MySql.getInstance();
+        mysql = MySql.getInstance();
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
@@ -42,7 +40,7 @@ public class App extends Application {
         LoginPage = sceneHandler.AddScene(DATA.SCENE_LOGIN_PAGE, "FXML/Login.fxml");
         RegisterPage = sceneHandler.AddScene(DATA.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
         BeingDev = sceneHandler.AddScene(DATA.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
-        HomePage = sceneHandler.AddScene(DATA.SCENE_DASHBOARD_PAGE, "FXML/DashBoard.fxml");
+        HomePage = sceneHandler.AddScene(DATA.SCENE_DASHBOARD, "FXML/DashBoard.fxml");
         VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app

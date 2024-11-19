@@ -52,7 +52,7 @@ public class DATA {
     public static final String SCENE_LOGIN_PAGE = "LoginController";
     public static final String SCENE_REGISTER_PAGE = "RegisterController";
     public static final String SCENE_BEING_DEVELOPMENT = "BeingDevelopment";
-    public static final String SCENE_DASHBOARD_PAGE = "DashBoardController";
+    public static final String SCENE_DASHBOARD = "DashBoardController";
     public static final String SCENE_VERIFY_PAGE = "VerifyController";
 
 // ---------------------------------------------------------------- //
@@ -83,9 +83,9 @@ public class DATA {
     private static final String REDIRECT_LINK = "https://localhost:8888";
     private static final String SCOPE = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
 
-    public static String getClientId() { return CLIENT_ID;}
-    public static String getClientSecret() { return CLIENT_SECRET;}
-    public static String getRedirectLink() { return REDIRECT_LINK;}
-    public static String getGoogleAPIScope() { return SCOPE;}
+    public static String GetGoogleClientId() { return CLIENT_ID;}
+    public static String GetGoogleClientSecret() { return CLIENT_SECRET;}
+    public static String GetGoogleRedirectLink() { return REDIRECT_LINK;}
+    public static String GetGoogleAPIScope() { return SCOPE;}
     
 }

@@ -1,7 +1,5 @@
 package project.libraryserver.Database;
 
-
-import org.mindrot.jbcrypt.BCrypt;
 import project.libraryserver.Consts.DATA;
 
 import java.sql.*;
@@ -29,19 +27,21 @@ public class MySql {
     }
 
     public boolean QueryCheckNormalLogin(String email, String password) throws SQLException {
+        // Return false if email or password is empty
         if (email.isEmpty() || password.isEmpty()) {
             return false;
         }
 
+        // Set prepared statement structure
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT p.password " +
                             "FROM user u join passwords p on u.id = p.user_id " +
                             "WHERE u.email = ?;"
                 );
-
         preparedStatement.setString(1, email);
 
+        // query action
         ResultSet rs = preparedStatement.executeQuery();
 
         if (rs.next()) {
@@ -56,8 +56,31 @@ public class MySql {
         }
     }
 
-    public boolean QueryCheckGoogleLogin(String google_id, String email) {
-        return false;
+    public boolean QueryCheckGoogleLogin(String google_id, String email) throws SQLException {
+        // Return false if id or email is empty
+        if (google_id.isEmpty() || email.isEmpty()) {
+            return false;
+        }
+
+        // Set prepared statement structure
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "SELECT count(*) " +
+                            "FROM google " +
+                            "WHERE id = ? and email = ?"
+                );
+        preparedStatement.setString(1, google_id);
+        preparedStatement.setString(2, email);
+
+        // query action
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1) == 1;
+        } else {
+            System.out.println("Server can not find login information");
+            return false;
+        }
     }
 
     public void CreateNewUser() {

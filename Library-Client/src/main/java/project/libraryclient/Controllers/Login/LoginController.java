@@ -1,5 +1,6 @@
 package project.libraryclient.Controllers.Login;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import org.json.JSONObject;
 import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.App;
 import project.libraryclient.Client.Client;
@@ -65,7 +67,7 @@ public class LoginController implements Initializable {
     }
 
     //  Login button
-    public void LoginButton_MouseClicked() throws IOException {
+    public void LoginButton_MouseClicked() throws IOException, InterruptedException {
         if (email.getText().isEmpty()) {
             errorText.setVisible(true);
             errorText.setText("Email is empty");
@@ -74,28 +76,28 @@ public class LoginController implements Initializable {
             errorText.setVisible(true);
             errorText.setText("Password is empty");
         }
-        Client.getInstance().sendMessage(
+
+        // Reset trạng thái của client
+        Client.getInstance().ResetStatus();
+
+        // Gửi json yêu cầu đăng nhập
+        Client.getInstance().SendMessage(
                 GenerateJson.CreateNormalLoginRequest(
                         email.getText(), password.getText()
                 )
         );
 
+        // Chờ cập nhật trạng thái
+        UserStatus status = Client.getInstance().WaitForStatusUpdate();
 
-
-//        try {
-//            String password = QueryHandler.getPasswordByEmail(emailText);
-//            if (!password.equals(passwordText)) {
-//                errorText.setVisible(true);
-//                errorText.setText("Username or password is incorrect");
-//                resetPassword();
-//                return;
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD_PAGE);
-//        resetAll();
-
+        // Kiểm tra trạng thái và thực hiện chức năng
+        if (status == UserStatus.LOGGED_IN) {
+            SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
+        } else if (status == UserStatus.LOGIN_FAILED) {
+            errorText.setVisible(true);
+            errorText.setText("Incorrect login information");
+            resetPassword();
+        }
 
     }
 
@@ -112,9 +114,44 @@ public class LoginController implements Initializable {
     }
 
     //  Google button
-    public void Login_GoogleButton_MouseClicked() {
+    public void Login_GoogleButton_MouseClicked() throws IOException, InterruptedException {
+        // Bắt đầu đăng nhập tài khoản google
         GoogleAuthenticator authenticator = new GoogleAuthenticator();
         authenticator.start();
+
+        // chờ cho tới khi đăng nhập hoàn tất
+        authenticator.waitForCompletion();
+
+        // Lấy json trả về từ google
+        JSONObject json = authenticator.GetUserInformation();
+        System.out.println("from login" + json);
+        if (json != null) {
+            // Reset trạng thái của client
+            Client.getInstance().ResetStatus();
+
+            // Gửi json yêu cầu đăng nhập
+            Client.getInstance().SendMessage(
+                    GenerateJson.CreateGoogleLoginRequest(
+                            json.getString("id"), json.getString("email")
+                    )
+            );
+
+            // Chờ cập nhật trạng thái
+            UserStatus status = Client.getInstance().WaitForStatusUpdate();
+
+            // Kiểm tra trạng thái và thực hiện chức năng
+
+            if (status == UserStatus.LOGGED_IN) {
+                SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
+            } else if (status == UserStatus.LOGIN_FAILED) {
+                errorText.setVisible(true);
+                errorText.setText("Incorrect login information");
+                resetPassword();
+            }
+        } else {
+            errorText.setVisible(true);
+            errorText.setText("Failed to retrieve user information. Please try again.");
+        }
         resetAll();
     }
 }

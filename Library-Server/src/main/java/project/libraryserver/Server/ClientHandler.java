@@ -88,7 +88,7 @@ public class ClientHandler implements Runnable{
 
         switch (type) {
             case NORMAL_LOGIN -> ServerResponseNormalLogin(json);
-            case GOOGLE_LOGIN -> System.out.println("google login");
+            case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
             default -> throw new IllegalArgumentException("Unsupported JSON type");
         }
     }
@@ -96,6 +96,20 @@ public class ClientHandler implements Runnable{
     private void ServerResponseNormalLogin(JSONObject json) throws SQLException {
         boolean check = MySql.getInstance().QueryCheckNormalLogin(
                 json.getString("email"), json.getString("password"));
+        JSONObject response;
+        if (check) {
+            response = GenerateJson.CreateResponseLoginRequest(
+                    JsonType.LOGIN_RESPONSE, Message.SUCCESS);
+        } else {
+            response = GenerateJson.CreateResponseLoginRequest(
+                    JsonType.LOGIN_RESPONSE, Message.FAILED);
+        }
+        SendMessage(response);
+    }
+
+    private void ServerResponseGoogleLogin(JSONObject json) throws SQLException {
+        boolean check = MySql.getInstance().QueryCheckGoogleLogin(
+                json.getString("id"), json.getString("email"));
         JSONObject response;
         if (check) {
             response = GenerateJson.CreateResponseLoginRequest(

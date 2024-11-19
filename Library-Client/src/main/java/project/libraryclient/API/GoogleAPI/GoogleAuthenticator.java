@@ -1,35 +1,32 @@
 package project.libraryclient.API.GoogleAPI;
 
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import project.libraryclient.App;
+import org.json.JSONObject;
 import project.libraryclient.Consts.DATA;
-import project.libraryclient.Models.SceneHandler;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
-// cái này có thể làm demo open web view không được xoá
-public class GoogleAuthenticator extends OAuthAuthenticator implements Initializable {
+public class GoogleAuthenticator extends OAuthAuthenticator {
 
-    // Google API Scope
-    private String API_SCOPE;
+    private final CountDownLatch latch = new CountDownLatch(1);
 
-
-    // Private constructor
     public GoogleAuthenticator() {
-        super(DATA.getClientId(), DATA.getClientSecret(), DATA.getRedirectLink());
-        this.API_SCOPE = DATA.getGoogleAPIScope();
+        super();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void start() {
         Stage stage = new Stage();
+
+        // chặn luồng chính cho tới khi luồng này đóng
+        stage.initModality(Modality.APPLICATION_MODAL);
         BorderPane root = new BorderPane();
 
         // Đặt vị trí vào góc màn hình
@@ -45,39 +42,42 @@ public class GoogleAuthenticator extends OAuthAuthenticator implements Initializ
         WebEngine webEngine = webView.getEngine();
 
         // URL đăng nhập OAuth2 của Google
-        String webURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=" + API_SCOPE +
-                "&access_type=offline&redirect_uri=" + getREDIRECT_URI() +
-                "&response_type=code&client_id=" + getCLIENT_ID();
+        String webURL = "https://accounts.google.com/o/oauth2/v2/auth?scope=" + DATA.GetGoogleAPIScope() +
+                "&access_type=offline&redirect_uri=" + DATA.GetGoogleRedirectLink() +
+                "&response_type=code&client_id=" + DATA.GetGoogleClientId();
 
         webEngine.load(webURL);
 
         webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.startsWith(getREDIRECT_URI())) {
+            System.out.println("Navigated to: " + newValue);
+            if (newValue.startsWith(DATA.GetGoogleRedirectLink())) {
                 // Trích xuất mã ủy quyền từ URL
                 String authorizationCode = extractAuthorizationCode(newValue);
                 if (authorizationCode != null) {
                     // System.out.println("Authorization Code: " + authorizationCode);
                     // Lưu authorization code
-                    setAUTHORIZATION_CODE(authorizationCode);
+                    SetAUTHORIZATION_CODE(authorizationCode);
 
                     // Thực hiện các thao tác tiếp theo, chẳng hạn như lấy token từ mã ủy quyền
                     exchangeCodeForToken();
 
-                    fetchUserInfo();
-                    // Điều hướng đến màn hình Dashboard
-                    SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD_PAGE);
+                    JSONObject tmp = fetchUserInfo();
+
+                    SetUserInformation(tmp);
+
+                    // tín hiệu hoàn thành đăng nhập
+                    latch.countDown();
+                    stage.close();
                 }
             }
         });
 
         root.setCenter(webView);
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void waitForCompletion() throws InterruptedException {
+        latch.await(); // Chờ cho đến khi latch được giải phóng
     }
 }

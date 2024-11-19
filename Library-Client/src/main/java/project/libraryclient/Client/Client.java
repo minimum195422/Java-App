@@ -1,6 +1,5 @@
 package project.libraryclient.Client;
 
-import com.google.api.client.json.Json;
 import org.json.JSONObject;
 import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Consts.Message;
@@ -33,7 +32,7 @@ public class Client {
         return client;
     }
 
-    public void sendMessage(JSONObject message) {
+    public void SendMessage(JSONObject message) {
         out.println(message);
         out.flush();
     }
@@ -73,20 +72,38 @@ public class Client {
     private void handleServerResponse(String response) {
         JSONObject json = new JSONObject(response);
         JsonType type = JsonType.valueOf(json.getString("type"));
+
         switch (type) {
             case LOGIN_RESPONSE -> {
                 if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
-                    System.out.println("login success");
+                    SetStatus(UserStatus.LOGGED_IN);
                 }
-                else if (Message.valueOf(json.getString("message")) == Message.FAILED) {
-                    System.out.println("failed to login");
+                if (Message.valueOf(json.getString("message")) == Message.FAILED) {
+                    SetStatus(UserStatus.LOGIN_FAILED);
                 }
+            }
+            case GOOGLE_LOGIN -> {
+                System.out.println("none");
             }
             default -> throw new RuntimeException("Invalid json file");
         }
+
     }
 
-    public UserStatus GetUserStatus() {
+    public synchronized void ResetStatus() {
+        this.status = UserStatus.START;
+    }
+
+    public synchronized void SetStatus(UserStatus s) {
+        this.status = s;
+        notify(); // Thông báo cho luồng đang chờ
+    }
+
+    public synchronized UserStatus WaitForStatusUpdate() throws InterruptedException {
+        while (status == UserStatus.START) { // Kiểm tra trạng thái hiện tại
+            wait(); // Chờ đến khi có thông báo
+        }
         return status;
     }
+
 }

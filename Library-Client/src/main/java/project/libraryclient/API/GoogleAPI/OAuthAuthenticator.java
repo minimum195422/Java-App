@@ -1,36 +1,34 @@
 package project.libraryclient.API.GoogleAPI;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import org.json.JSONObject;
+import project.libraryclient.Consts.DATA;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 
 public abstract class OAuthAuthenticator {
-    private String CLIENT_ID;
-    private String CLIENT_SECRET;
-    private String REDIRECT_URI;
 
+    private JSONObject UserInformation;
     private String AUTHORIZATION_CODE;
     private String ACCESS_TOKEN;
 
 
-    OAuthAuthenticator (String client_id, String client_secret, String redirec_uri) {
-        this.CLIENT_ID = client_id;
-        this.CLIENT_SECRET = client_secret;
-        this.REDIRECT_URI = redirec_uri;
+    OAuthAuthenticator () {
+        this.AUTHORIZATION_CODE = "";
+        this.ACCESS_TOKEN = "";
+    }
+
+    public JSONObject GetUserInformation() {
+        return UserInformation;
+    }
+
+    public void SetUserInformation(JSONObject json) {
+        this.UserInformation = json;
     }
 
     public abstract void start();
@@ -42,9 +40,9 @@ public abstract class OAuthAuthenticator {
 
             // Cấu trúc các tham số yêu cầu POST
             String params = "code=" + AUTHORIZATION_CODE +
-                    "&client_id=" + CLIENT_ID +
-                    "&client_secret=" + CLIENT_SECRET +
-                    "&redirect_uri=" + REDIRECT_URI +
+                    "&client_id=" + DATA.GetGoogleClientId() +
+                    "&client_secret=" + DATA.GetGoogleClientSecret()+
+                    "&redirect_uri=" + DATA.GetGoogleRedirectLink() +
                     "&grant_type=authorization_code";
 
             // Gửi yêu cầu POST để lấy access token
@@ -112,33 +110,14 @@ public abstract class OAuthAuthenticator {
                 System.out.println("Error fetching user info. Response code: " + responseCode);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
+        System.out.println(response);
         return new JSONObject(response);
     }
 
-    public void setAUTHORIZATION_CODE(String AUTHORIZATION_CODE) {
+    public void SetAUTHORIZATION_CODE(String AUTHORIZATION_CODE) {
         this.AUTHORIZATION_CODE = AUTHORIZATION_CODE;
-    }
-
-    public void setACCESS_TOKEN(String ACCESS_TOKEN) {
-        this.ACCESS_TOKEN = ACCESS_TOKEN;
-    }
-
-    public String getCLIENT_ID() {
-        return CLIENT_ID;
-    }
-
-    public String getCLIENT_SECRET() {
-        return CLIENT_SECRET;
-    }
-
-    public String getREDIRECT_URI() {
-        return REDIRECT_URI;
-    }
-
-    public String getAUTHORIZATION_CODE() {
-        return AUTHORIZATION_CODE;
     }
 
     public String getACCESS_TOKEN() {
