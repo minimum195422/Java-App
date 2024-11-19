@@ -75,14 +75,11 @@ public class LoginController implements Initializable {
             errorText.setText("Password is empty");
         }
         Client.getInstance().sendMessage(
-                GenerateJson.createNormalLoginRequest(
+                GenerateJson.CreateNormalLoginRequest(
                         email.getText(), password.getText()
                 )
         );
 
-        if (Client.getInstance().GetUserStatus() == UserStatus.LOGGED_IN) {
-            System.out.println("logged in");
-        }
 
 
 //        try {

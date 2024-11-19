@@ -1,6 +1,7 @@
 package project.libraryserver.Database;
 
 
+import org.mindrot.jbcrypt.BCrypt;
 import project.libraryserver.Consts.DATA;
 
 import java.sql.*;
@@ -11,10 +12,10 @@ public class MySql {
 
     private MySql() {
         try {
-            String url = DATA.getJdbcUrl();
-            String user = DATA.getJdbcUser();
-            String password = DATA.getJdbcPassword();
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(
+                    DATA.getJdbcUrl(),
+                    DATA.getJdbcUser(),
+                    DATA.getJdbcPassword());
         } catch (Exception e) {
             throw new RuntimeException("Error connecting to the database.", e);
         }
@@ -22,77 +23,68 @@ public class MySql {
 
     public static MySql getInstance() {
         if (instance == null) {
-            synchronized (MySql.class) {
-                if (instance == null) {
-                    instance = new MySql();
-                }
-            }
+            instance = new MySql();
         }
         return instance;
     }
 
-    public Connection getConnection() {
-        return connection;
+    public boolean QueryCheckNormalLogin(String email, String password) throws SQLException {
+        if (email.isEmpty() || password.isEmpty()) {
+            return false;
+        }
+
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "SELECT p.password " +
+                            "FROM user u join passwords p on u.id = p.user_id " +
+                            "WHERE u.email = ?;"
+                );
+
+        preparedStatement.setString(1, email);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (rs.next()) {
+//            update using BCrypt to hash or check password
+//            BCrypt.checkpw(password, rs.getString("password"))
+
+            // compare user given password and password in database
+            return password.equals(rs.getString("password"));
+        } else {
+            System.out.println("Server can not find login information");
+            return false;
+        }
     }
 
-    public static boolean QueryCheckLogIn(String email, String password) throws SQLException {
-        String query = "SELECT count(*) FROM accounts WHERE email = ? and password = ?;";
-        PreparedStatement stmt = connection.prepareStatement(query);
-        stmt.setString(1, email);
-        stmt.setString(2, password);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            if (rs.getInt(1) == 1) return true;
-        }
+    public boolean QueryCheckGoogleLogin(String google_id, String email) {
         return false;
     }
 
-    public static boolean checkAccountByEmail(String email) throws SQLException {
-        String SQL = "SELECT COUNT(*) FROM accounts WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-            existed = rs.getBoolean(1);
-        }
-        return existed;
-    }
+    public void CreateNewUser() {
 
-    public static boolean checkAccountByUsername(String username) throws SQLException {
-        String SQL = "SELECT COUNT(*) FROM accounts WHERE username = ?";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, username);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-            existed = rs.getBoolean(1);
-        }
-        return existed;
     }
-
-    public static void addNewAccount(String email, String username, String password) throws SQLException {
-        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, email);
-        stmt.setString(2, username);
-        stmt.setString(3, password);
-        int status = stmt.executeUpdate();
-//        System.out.println(status);
-    }
-
-    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
-        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, imageURL);
-        stmt.setString(2, title);
-        stmt.setString(3, author);
-        stmt.setString(4, publishedDate);
-        stmt.setString(5, categories);
-        stmt.setString(6, ISBN_13);
-        stmt.setInt(7, price);
-        stmt.setString(8, description);
-        int status = stmt.executeUpdate();
-//        System.out.println(status);
-    }
+//    public static void addNewAccount(String email, String username, String password) throws SQLException {
+//        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
+//        PreparedStatement stmt = connection.prepareStatement(SQL);
+//        stmt.setString(1, email);
+//        stmt.setString(2, username);
+//        stmt.setString(3, password);
+//        int status = stmt.executeUpdate();
+////        System.out.println(status);
+//    }
+//
+//    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
+//        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+//        PreparedStatement stmt = connection.prepareStatement(SQL);
+//        stmt.setString(1, imageURL);
+//        stmt.setString(2, title);
+//        stmt.setString(3, author);
+//        stmt.setString(4, publishedDate);
+//        stmt.setString(5, categories);
+//        stmt.setString(6, ISBN_13);
+//        stmt.setInt(7, price);
+//        stmt.setString(8, description);
+//        int status = stmt.executeUpdate();
+////        System.out.println(status);
+//    }
 }

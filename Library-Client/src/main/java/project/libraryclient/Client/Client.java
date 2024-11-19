@@ -3,6 +3,7 @@ package project.libraryclient.Client;
 import com.google.api.client.json.Json;
 import org.json.JSONObject;
 import project.libraryclient.Consts.JsonType;
+import project.libraryclient.Consts.Message;
 import project.libraryclient.Consts.UserStatus;
 
 import java.io.*;
@@ -61,6 +62,7 @@ public class Client {
                 while ((response = in.readLine()) != null) {
                     // handle response from server when user send request
                     handleServerResponse(response);
+                    System.out.println(response);
                 }
             } catch (IOException e) {
                 System.err.println("Error while reading server response: " + e.getMessage());
@@ -72,11 +74,13 @@ public class Client {
         JSONObject json = new JSONObject(response);
         JsonType type = JsonType.valueOf(json.getString("type"));
         switch (type) {
-            case LOGIN_SUCCESS -> {
-                status = UserStatus.LOGGED_IN;
-            }
-            case LOGIN_FAILED -> {
-                status = UserStatus.LOGGING_IN_FAILED;
+            case LOGIN_RESPONSE -> {
+                if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
+                    System.out.println("login success");
+                }
+                else if (Message.valueOf(json.getString("message")) == Message.FAILED) {
+                    System.out.println("failed to login");
+                }
             }
             default -> throw new RuntimeException("Invalid json file");
         }

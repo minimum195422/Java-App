@@ -3,6 +3,7 @@ module project.libraryserver {
     requires javafx.fxml;
     requires java.sql;
     requires org.json;
+    requires jbcrypt;
 
     opens project.libraryserver to javafx.fxml;
     opens project.libraryserver.Controllers.DashBoard to javafx.fxml;
