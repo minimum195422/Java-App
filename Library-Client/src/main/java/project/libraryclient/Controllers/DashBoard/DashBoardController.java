@@ -5,17 +5,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import project.libraryclient.Class.Book;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Controllers.Card.Card_235_450_Controller;
+import project.libraryclient.Database.MySql;
 
 import java.io.IOException;
 import java.net.URL;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -292,7 +301,6 @@ public class DashBoardController implements Initializable {
     public void VersionInformationIconMouseExited() {
     }
 
-
     // -------------------- initialize -------------------- //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -319,6 +327,9 @@ public class DashBoardController implements Initializable {
 
         // Set content
         LoadHomePage();
+
+        bookList = new ArrayList<>();
+        searchResults.getItems().clear();
     }
 
 
@@ -331,8 +342,45 @@ public class DashBoardController implements Initializable {
         }
     }
 
+    // detect if a key is valid
+    private boolean detectKeys(KeyEvent event) {
+        return event.getCode().isKeypadKey() || event.getCode().isLetterKey() || event.getCode().isDigitKey() ||
+                event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE;
+    }
+
+    ArrayList<String> bookList = new ArrayList<>();
+    public ListView<Book> searchResults = new ListView<>();
     @FXML
-    private void handleSearchBox(KeyEvent keyEvent) {
-        
+    private void handleSearchBox(KeyEvent keyEvent) throws SQLException {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            try {
+                bookList = MySql.getBookBySubstring(searchBox.getText());
+                searchResults.getItems().clear();
+                for (int i = 0; i < bookList.size(); i++) {
+                    Book book = MySql.getBasicInfoOfBook(bookList.get(i));
+                    searchResults.getItems().add(book);
+                }
+            } catch (SQLException _) {
+
+            }
+            searchResults.setCellFactory((unusedVariable) -> {
+                return new ListCell<Book>() {
+                    @Override
+                    protected void updateItem(Book item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            Card_235_450_Controller controller = new Card_235_450_Controller();
+                            controller.setBookInfo(item);
+                            AnchorPane cell = controller.getBookInfo();
+                            setGraphic(cell);
+                        }
+                    }
+                };
+            });
+            return;
+        }
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
@@ -164,7 +165,7 @@
                      </HBox.margin>
                      <Image url="@../Images/Icons/search_white.png" />
                   </ImageView>
-                  <TextField fx:id="searchBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleSearchBox" onKeyReleased="#handleSearchBox" prefHeight="30.0" prefWidth="880.0" promptText="Search for your favorite book" styleClass="search-area" />
+                  <TextField fx:id="searchBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleSearchBox" prefHeight="30.0" prefWidth="880.0" promptText="Search for your favorite book" styleClass="search-area" />
                   <padding>
                      <Insets left="10.0" />
                   </padding>
@@ -181,7 +182,7 @@
             </HBox>
          </top>
          <center>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
+            <ListView fx:id="searchResults" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </HBox>
