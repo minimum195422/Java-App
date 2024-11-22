@@ -89,6 +89,7 @@ public class ClientHandler implements Runnable{
         switch (type) {
             case NORMAL_LOGIN -> ServerResponseNormalLogin(json);
             case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
+            case NORMAL_REGISTER -> ServerResponseNormalRegister(json);
             default -> throw new IllegalArgumentException("Unsupported JSON type");
         }
     }
@@ -118,6 +119,15 @@ public class ClientHandler implements Runnable{
             response = GenerateJson.CreateResponseLoginRequest(
                     JsonType.LOGIN_RESPONSE, Message.FAILED);
         }
+        SendMessage(response);
+    }
+
+    private void ServerResponseNormalRegister(JSONObject json) throws SQLException {
+        MySql.getInstance().CreateNewUser(
+                json.getString("first_name"), json.getString("last_name"),
+                json.getString("email"), json.getString("password"));
+        JSONObject response = GenerateJson.CreateResponseLoginRequest(
+                JsonType.NORMAL_REGISTER, Message.SUCCESS);
         SendMessage(response);
     }
 }

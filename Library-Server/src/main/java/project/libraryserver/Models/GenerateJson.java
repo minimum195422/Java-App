@@ -13,4 +13,11 @@ public class GenerateJson {
         json.put("message", message);
         return json;
     }
+
+    public static JSONObject CreateResponseRegisterRequest(JsonType type, Message message) {
+        JSONObject json = new JSONObject();
+        json.put("type", type);
+        json.put("message", message);
+        return json;
+    }
 }

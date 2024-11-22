@@ -85,6 +85,9 @@ public class Client {
             case GOOGLE_LOGIN -> {
                 System.out.println("none");
             }
+            case NORMAL_REGISTER -> {
+                SetStatus(UserStatus.REGISTERED_COMPLETED);
+            }
             default -> throw new RuntimeException("Invalid json file");
         }
 

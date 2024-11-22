@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/RegisterStyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Register.RegisterController">
+<AnchorPane fx:id="MainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="670.0" styleClass="login-background" stylesheets="@../Styles/RegisterStyleSheet.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Register.RegisterController">
     <HBox layoutX="10.0" layoutY="10.0" prefHeight="410.0" prefWidth="650.0">
         <AnchorPane prefHeight="410.0" prefWidth="325.0" styleClass="cover_image">
             <ImageView fitHeight="410.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">

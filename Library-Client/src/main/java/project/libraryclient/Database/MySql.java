@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class MySql {
     private static MySql instance;
-    private final Connection connection;
+    private static Connection connection;
     private boolean accessable;
 
 
@@ -45,17 +45,17 @@ public class MySql {
 //        return password;
 //    }
 
-//    public boolean checkAccountByEmail(String email) throws SQLException {
-//        String SQL = "SELECT COUNT(*) FROM accounts WHERE email = ?";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, email);
-//        ResultSet rs = stmt.executeQuery();
-//        boolean existed = false;
-//        while (rs.next()) {
-//            existed = rs.getBoolean(1);
-//        }
-//        return existed;
-//    }
+    public static boolean checkAccountByEmail(String email) throws SQLException {
+        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(SQL);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        boolean existed = false;
+        while (rs.next()) {
+            existed = rs.getBoolean(1);
+        }
+        return existed;
+    }
 //
 //    public boolean checkAccountByUsername(String username) throws SQLException {
 //        String SQL = "SELECT COUNT(*) FROM accounts WHERE username = ?";

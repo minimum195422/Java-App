@@ -4,11 +4,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -31,6 +29,8 @@ public class DashBoardController implements Initializable {
 
     // --------------- Exit button -------------- //
     public ImageView ExitButton;
+    public TextField searchBox;
+
     public void ExitButtonMouseClicked() {
         Platform.exit(); // close program
     }
@@ -329,5 +329,10 @@ public class DashBoardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
+    }
+
+    @FXML
+    private void handleSearchBox(KeyEvent keyEvent) {
+        
     }
 }

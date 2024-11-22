@@ -31,7 +31,7 @@ public class HomeController implements Initializable {
                     AnchorPane card = loader.load();
                     Card_235_450_Controller controller = loader.getController();
 
-                    controller.setBookCover(loadImage("/project/libraryclient/Images/Icons/settinggray.png"));
+                    controller.setBookCover(loadImage("/project/libraryclient/Images/Icons/no-image.png"));
                     controller.setAuthorName("author name");
                     controller.setBookName("book name");
                     list.getChildren().add(card);

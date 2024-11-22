@@ -33,9 +33,9 @@ public class DATA {
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
 // ---------------------------------------------------------------- //
-    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/library";
-    private static final String JDBC_USER = "minimum195422";
-    private static final String JDBC_PASSWORD = "Humhayha12#";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/library_database";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "amogus69420";
 
     public static String getJdbcUrl() { return JDBC_URL; }
 

@@ -83,8 +83,33 @@ public class MySql {
         }
     }
 
-    public void CreateNewUser() {
+    public void CreateNewUser(String firstName, String lastName, String email, String password) throws SQLException {
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "INSERT INTO user(first_name, last_name, email) " + "VALUES(?, ?, ?)"
+                );
 
+        preparedStatement.setString(1, firstName);
+        preparedStatement.setString(2, lastName);
+        preparedStatement.setString(3, email);
+        int status = preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement(
+                "SELECT id " +
+                        "FROM user " +
+                        "WHERE email = ?"
+        );
+        preparedStatement.setString(1, email);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            int user_id = rs.getInt(1);
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO passwords(user_id, password) " +
+                            "VALUES(?, ?)"
+            );
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setString(2, password);
+            status = preparedStatement.executeUpdate();
+        }
     }
 //    public static void addNewAccount(String email, String username, String password) throws SQLException {
 //        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";

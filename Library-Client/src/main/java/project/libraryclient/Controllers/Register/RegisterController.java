@@ -6,10 +6,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import org.json.JSONObject;
 import project.libraryclient.App;
+import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Consts.UserStatus;
+import project.libraryclient.Database.MySql;
+import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class RegisterController {
@@ -108,13 +114,14 @@ public class RegisterController {
 
     // Handling create new account
     @FXML
-    private void RegisterButtonOnclick() throws SQLException {
+    private void RegisterButtonOnclick() throws SQLException, IOException, InterruptedException {
         errorText.setStyle("-fx-fill: red;");
         errorText.setVisible(true);
         String emailText = email.getText();
         String passwordText = password.getText();
         String confirmPasswordText = confirmPassword.getText();
         String username = firstName.getText() + " " + lastName.getText();
+        System.out.println(emailText);
         if (emailText.isEmpty()) {
             // System.out.println("Email is empty");
             errorText.setText("Email is empty");
@@ -136,18 +143,26 @@ public class RegisterController {
             errorText.setText("Name can't be empty");
             return;
         }
-//        boolean existed = QueryHandler.checkAccountByEmail(emailText);
-//        if (existed) {
-//            // System.out.println("Email already exists");
-//            errorText.setText("Email already exists");
-//            // Reset email text field
-//            return;
-//        }
+        boolean existed = MySql.checkAccountByEmail(emailText);
+        if (existed) {
+            // System.out.println("Email already exists");
+            errorText.setText("Email already exists");
+            // Reset email text field
+            return;
+        }
 //        QueryHandler.addNewAccount(emailText, username, passwordText);
-        resetAll();
-        errorText.setText("Registered successfully! Return to login page");
-        errorText.setVisible(true);
-        errorText.setStyle("-fx-fill: green;");
+        Client.getInstance().SendMessage(
+                GenerateJson.CreateNormalRegisterRequest(
+                        firstName.getText(), lastName.getText(), email.getText(), password.getText()
+                )
+        );
+        UserStatus status = Client.getInstance().WaitForStatusUpdate();
+        if (status == UserStatus.REGISTERED_COMPLETED) {
+            resetAll();
+            errorText.setText("Registered successfully! Return to login page");
+            errorText.setVisible(true);
+            errorText.setStyle("-fx-fill: green;");
+        }
     }
 }
 

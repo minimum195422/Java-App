@@ -21,4 +21,14 @@ public class GenerateJson {
         return json;
     }
 
+    public static JSONObject CreateNormalRegisterRequest(String firstName, String lastName, String email, String password) {
+        JSONObject json = new JSONObject();
+        json.put("type", JsonType.NORMAL_REGISTER);
+        json.put("first_name", firstName);
+        json.put("last_name", lastName);
+        json.put("email", email);
+        json.put("password", password);
+        return json;
+    }
+
 }
