@@ -1,6 +1,5 @@
 package project.libraryclient.Controllers.DashBoard;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +8,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -32,7 +30,7 @@ public class DashBoardController implements Initializable {
     // --------------- Exit button -------------- //
     public ImageView ExitButton;
     public void ExitButtonMouseClicked() {
-        Platform.exit(); // close program
+        System.exit(0); // close program
     }
 
     public void ExitButtonMouseEntered() {
@@ -324,7 +322,53 @@ public class DashBoardController implements Initializable {
 
     private void LoadHomePage() {
         try {
-            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadNotificationPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.NOTIFICATION_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadDiscoverPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.DISCOVER_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadSettingPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.SETTING_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadMyBookPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.MYBOOK_PAGE_LINK)));
             ContentDisplay.setCenter(pane);
         } catch (IOException e) {
             e.printStackTrace(System.out);

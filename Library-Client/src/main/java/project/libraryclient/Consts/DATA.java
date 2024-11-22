@@ -40,6 +40,18 @@ public class DATA {
     // Home page link 
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
 
+    // Discover page link
+    public static final String DISCOVER_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Discover.fxml";
+
+    // Setting page link
+    public static final String SETTING_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Setting.fxml";
+
+    // Notification page link
+    public static final String NOTIFICATION_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Notification.fxml";
+
+    // My Book page link
+    public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";
+
 // ---------------------------------------------------------------- //
 // ------------------------- Card ui link ------------------------- //
 // ---------------------------------------------------------------- //
@@ -61,6 +73,7 @@ public class DATA {
     private static Image loadImage(String path) {
         return new Image(Objects.requireNonNull(DATA.class.getResourceAsStream(path)));
     }
+
 
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
