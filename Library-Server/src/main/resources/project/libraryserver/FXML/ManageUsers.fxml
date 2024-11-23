@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane hbarPolicy="NEVER" prefHeight="400.0" prefWidth="600.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.ManageUsersController">
+    <VBox fx:id="ListLog" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" />
+</ScrollPane>
