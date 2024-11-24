@@ -10,19 +10,21 @@ import java.util.ResourceBundle;
 
 public class ManageUsersController implements Initializable {
     @FXML
-    VBox ListLog;
+    public VBox UserList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadfromlogfile();
+        SetDefault();
     }
 
-    public void loadfromlogfile() {
+    public void SetDefault() {
+        for (int i = 0; i < 30; ++i) {
             Label label = new Label();
-            label.setText("manage user page");
+            label.setText("User: " + i);
             label.setPrefSize(1000, 30);
             label.setMinSize(1000, 30);
             label.setMaxSize(1000, 30);
-            ListLog.getChildren().add(label);
+            UserList.getChildren().add(label);
+        }
     }
 }

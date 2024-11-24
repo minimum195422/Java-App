@@ -53,7 +53,6 @@ public class DATA {
     public static final String MANAGE_USERS_LINK = "/project/libraryserver/FXML/ManageUsers.fxml";
     public static final String MANAGE_DOCUMENT_LINK = "/project/libraryserver/FXML/ManageDocument.fxml";
     public static final String ADD_NEW_BOOK_LINK = "/project/libraryserver/FXML/AddNewBook.fxml";
-    public static final String LOGIN_LOGOUT_LINK = "/project/libraryserver/FXML/LoginLogout.fxml";
 
 
 

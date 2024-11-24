@@ -1,0 +1,10 @@
+.search-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 7px;
+}
+
+.search-area {
+    -fx-background-color: transparent;
+}

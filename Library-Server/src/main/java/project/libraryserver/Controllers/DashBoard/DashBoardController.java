@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import project.libraryserver.Consts.DATA;
@@ -27,9 +28,6 @@ public class DashBoardController implements Initializable {
     public ToggleButton ServerlLog;
     public ToggleButton ManageUsersButton;
     public ToggleButton BorrowReturnDocumentButton;
-    public ToggleButton LoginLogoutButton;
-    public ImageView ExitButton;
-    public ImageView VersionInformationIcon;
     public BorderPane ContentDisplay;
 
 
@@ -37,7 +35,15 @@ public class DashBoardController implements Initializable {
 
 
     public void ManageUsersOnClicked(MouseEvent mouseEvent) {
-        LoadPage(DATA.MANAGE_USERS_LINK);
+        try {
+            AnchorPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.MANAGE_USERS_LINK))
+            );
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
     }
 
 
@@ -70,10 +76,6 @@ public class DashBoardController implements Initializable {
     // ServerLog button handler
     public void ServerLogOnClicked(MouseEvent mouseEvent) {
         LoadPage(DATA.SERVER_LOG_LINK);
-    }
-
-    public void LoginLogoutOnClicked(MouseEvent mouseEvent) {
-        LoadPage(DATA.LOGIN_LOGOUT_LINK);
     }
 
     public void AddNewBookOnClicked(MouseEvent mouseEvent) {
