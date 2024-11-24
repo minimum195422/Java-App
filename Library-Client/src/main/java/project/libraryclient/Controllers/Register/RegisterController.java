@@ -71,7 +71,7 @@ public class RegisterController {
 
     @FXML
     private void resetAll() {
-        errorText.setVisible(false);
+//        errorText.setVisible(false);
         errorText.setStyle("-fx-fill: red;");
         email.clear();
         password.clear();
@@ -143,25 +143,19 @@ public class RegisterController {
             errorText.setText("Name can't be empty");
             return;
         }
-        boolean existed = MySql.checkAccountByEmail(emailText);
-        if (existed) {
-            // System.out.println("Email already exists");
-            errorText.setText("Email already exists");
-            // Reset email text field
-            return;
-        }
-//        QueryHandler.addNewAccount(emailText, username, passwordText);
         Client.getInstance().SendMessage(
                 GenerateJson.CreateNormalRegisterRequest(
                         firstName.getText(), lastName.getText(), email.getText(), password.getText()
                 )
         );
         UserStatus status = Client.getInstance().WaitForStatusUpdate();
+        System.out.println(status);
         if (status == UserStatus.REGISTERED_COMPLETED) {
-            resetAll();
             errorText.setText("Registered successfully! Return to login page");
             errorText.setVisible(true);
             errorText.setStyle("-fx-fill: green;");
+        } else {
+            errorText.setText("Email already exists");
         }
     }
 }

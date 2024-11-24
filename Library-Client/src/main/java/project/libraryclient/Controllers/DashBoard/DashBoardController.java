@@ -25,6 +25,7 @@ import java.net.URL;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class DashBoardController implements Initializable {
     public TextField searchBox;
 
     public void ExitButtonMouseClicked() {
-        Platform.exit(); // close program
+        System.exit(0); // close program
     }
 
     public void ExitButtonMouseEntered() {
@@ -329,13 +330,24 @@ public class DashBoardController implements Initializable {
         LoadHomePage();
 
         bookList = new ArrayList<>();
-        searchResults.getItems().clear();
     }
 
 
     private void LoadHomePage() {
         try {
             ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadSearchPage(List<AnchorPane> list) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
+            ScrollPane pane = loader.load();
+            SearchController searchController = loader.getController();
+            searchController.setContent(list);
             ContentDisplay.setCenter(pane);
         } catch (IOException e) {
             e.printStackTrace(System.out);
@@ -349,38 +361,28 @@ public class DashBoardController implements Initializable {
     }
 
     ArrayList<String> bookList = new ArrayList<>();
-    public ListView<Book> searchResults = new ListView<>();
     @FXML
     private void handleSearchBox(KeyEvent keyEvent) throws SQLException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
                 bookList = MySql.getBookBySubstring(searchBox.getText());
-                searchResults.getItems().clear();
-                for (int i = 0; i < bookList.size(); i++) {
-                    Book book = MySql.getBasicInfoOfBook(bookList.get(i));
-                    searchResults.getItems().add(book);
+                List<AnchorPane> list = new ArrayList<>();
+                for (String s : bookList) {
+                    Book book = MySql.getBasicInfoOfBook(s);
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
+                        AnchorPane card = loader.load();
+                        Card_235_450_Controller controller = loader.getController();
+                        controller.setBookInfo(book);
+                        list.add(card);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
+                LoadSearchPage(list);
             } catch (SQLException _) {
 
             }
-            searchResults.setCellFactory((unusedVariable) -> {
-                return new ListCell<Book>() {
-                    @Override
-                    protected void updateItem(Book item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            Card_235_450_Controller controller = new Card_235_450_Controller();
-                            controller.setBookInfo(item);
-                            AnchorPane cell = controller.getBookInfo();
-                            setGraphic(cell);
-                        }
-                    }
-                };
-            });
-            return;
         }
     }
 }

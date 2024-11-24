@@ -47,17 +47,17 @@ public class MySql {
 //        return password;
 //    }
 
-    public static boolean checkAccountByEmail(String email) throws SQLException {
-        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-            existed = rs.getBoolean(1);
-        }
-        return existed;
-    }
+//    public static boolean checkAccountByEmail(String email) throws SQLException {
+//        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+//        PreparedStatement stmt = connection.prepareStatement(SQL);
+//        stmt.setString(1, email);
+//        ResultSet rs = stmt.executeQuery();
+//        boolean existed = false;
+//        while (rs.next()) {
+//            existed = rs.getBoolean(1);
+//        }
+//        return existed;
+//    }
 
     public static ArrayList<String> getBookBySubstring(String substr) throws SQLException {
         ArrayList<String> bookList = new ArrayList<>();

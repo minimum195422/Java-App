@@ -83,15 +83,33 @@ public class MySql {
         }
     }
 
-    public void CreateNewUser(String firstName, String lastName, String email, String password) throws SQLException {
+    public static boolean checkAccountByEmail(String email) throws SQLException {
+        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(SQL);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        boolean existed = false;
+        while (rs.next()) {
+            existed = rs.getBoolean(1);
+        }
+        return existed;
+    }
+
+    public boolean CreateNewUser(String firstName, String lastName, String email, String password) throws SQLException {
+        boolean existed = MySql.checkAccountByEmail(email);
+        if (existed) {
+            System.out.println("Email already exists");
+            return false;
+        }
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
-                        "INSERT INTO user(first_name, last_name, email) " + "VALUES(?, ?, ?)"
+                        "INSERT INTO user(first_name, last_name, email, status) " + "VALUES(?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, firstName);
         preparedStatement.setString(2, lastName);
         preparedStatement.setString(3, email);
+        preparedStatement.setString(4, "ON");
         int status = preparedStatement.executeUpdate();
         preparedStatement = connection.prepareStatement(
                 "SELECT id " +
@@ -110,6 +128,7 @@ public class MySql {
             preparedStatement.setString(2, password);
             status = preparedStatement.executeUpdate();
         }
+        return true;
     }
 //    public static void addNewAccount(String email, String username, String password) throws SQLException {
 //        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";

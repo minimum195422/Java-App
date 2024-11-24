@@ -53,8 +53,11 @@ public class SceneHandler {
                 MainStage.sizeToScene();
                 MainStage.centerOnScreen();
             } else {
-                MainStage.setFullScreen(true);
-                MainStage.centerOnScreen();
+                MainStage.setFullScreen(false);
+                MainStage.setX(scenes.get(SceneKey).getHeight());
+                MainStage.setY(scenes.get(SceneKey).getWidth());
+                System.out.println(scenes.get(SceneKey).getHeight());
+                System.out.println(scenes.get(SceneKey).getWidth());
             }
             MainStage.setScene(scenes.get(SceneKey));
         }

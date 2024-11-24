@@ -123,11 +123,17 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerResponseNormalRegister(JSONObject json) throws SQLException {
-        MySql.getInstance().CreateNewUser(
+        boolean check = MySql.getInstance().CreateNewUser(
                 json.getString("first_name"), json.getString("last_name"),
                 json.getString("email"), json.getString("password"));
-        JSONObject response = GenerateJson.CreateResponseLoginRequest(
-                JsonType.NORMAL_REGISTER, Message.SUCCESS);
+        JSONObject response;
+        if (check) {
+            response = GenerateJson.CreateResponseRegisterRequest(
+                    JsonType.NORMAL_REGISTER, Message.SUCCESS);
+        } else {
+            response = GenerateJson.CreateResponseRegisterRequest(
+                    JsonType.NORMAL_REGISTER, Message.FAILED);
+        }
         SendMessage(response);
     }
 }
