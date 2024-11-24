@@ -83,6 +83,14 @@ public class DashBoardController implements Initializable {
     }
 
     public void ManageDocumentOnClicked(MouseEvent mouseEvent) {
-        LoadPage(DATA.MANAGE_DOCUMENT_LINK);
+        try {
+            AnchorPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.MANAGE_DOCUMENT_LINK))
+            );
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
     }
 }
