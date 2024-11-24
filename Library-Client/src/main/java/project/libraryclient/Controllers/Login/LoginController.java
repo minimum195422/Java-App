@@ -108,8 +108,7 @@ public class LoginController implements Initializable {
 
     //  Apple button
     public void Apple_Login_Button_Clicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT); // not development yet
-        resetAll();
+        SetErrorMessage("Please try another method");
     }
 
     //  Google button

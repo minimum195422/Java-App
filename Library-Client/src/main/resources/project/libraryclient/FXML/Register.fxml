@@ -206,7 +206,7 @@
                     <padding>
                         <Insets top="10.0" />
                     </padding>
-                    <Button fx:id="LoginByGoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Google_Login_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+                    <Button fx:id="LoginByGoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Google_Register_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

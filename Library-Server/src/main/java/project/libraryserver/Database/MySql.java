@@ -83,14 +83,20 @@ public class MySql {
         }
     }
 
-    public boolean CreateNewNormalUser(String firstName, String lastName, String email, String password) throws SQLException {
-        if (MySql.CheckExistEmail(email)) {
+    public boolean CreateNewNormalUser(
+            String firstName,
+            String lastName,
+            String email,
+            String password) throws SQLException {
+
+        if (CheckExistEmailOnNormalUser(email)) {
             System.out.println("Email already exists");
             return false;
         }
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
-                        "INSERT INTO user(first_name, last_name, email, status) " + "VALUES(?, ?, ?, ?)"
+                        "INSERT INTO user(first_name, last_name, email, status) "
+                            + "VALUES(?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, firstName);
@@ -98,6 +104,7 @@ public class MySql {
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, "ON");
         int status = preparedStatement.executeUpdate();
+
         preparedStatement = connection.prepareStatement(
                 "SELECT id " +
                         "FROM user " +
@@ -118,7 +125,7 @@ public class MySql {
         return true;
     }
 
-    public static boolean CheckExistEmail(String email) throws SQLException {
+    public static boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
         String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
         PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, email);
@@ -129,15 +136,63 @@ public class MySql {
         }
         return existed;
     }
-//    public static void addNewAccount(String email, String username, String password) throws SQLException {
-//        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, email);
-//        stmt.setString(2, username);
-//        stmt.setString(3, password);
-//        int status = stmt.executeUpdate();
-////        System.out.println(status);
-//    }
+
+    public boolean CreateNewGoogleUser(
+            String google_id,
+            String given_name,
+            String family_name,
+            String email,
+            String picture) throws SQLException {
+        if (CheckExistEmailOnGoogleUser(
+                google_id, given_name, family_name, email, picture
+        )) {
+            System.out.println("Email already exists");
+            return false;
+        }
+
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "INSERT INTO google (id, given_name, family_name, email, picture_link) "
+                            + "VALUES(?, ?, ?, ?, ?)"
+                );
+
+        preparedStatement.setString(1, google_id);
+        preparedStatement.setString(2, given_name);
+        preparedStatement.setString(3, family_name);
+        preparedStatement.setString(4, email);
+        preparedStatement.setString(5, picture);
+
+        int status = preparedStatement.executeUpdate();
+        return status != 0;
+    }
+
+    public static boolean CheckExistEmailOnGoogleUser(
+            String google_id,
+          String given_name,
+          String family_name,
+          String email,
+          String picture) throws SQLException {
+
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "SELECT COUNT(*) FROM google "
+                            + "WHERE id = ? AND given_name = ? "
+                            + "AND family_name = ? AND email = ? and picture_link = ?"
+                );
+        preparedStatement.setString(1, google_id);
+        preparedStatement.setString(2, given_name);
+        preparedStatement.setString(3, family_name);
+        preparedStatement.setString(4, email);
+        preparedStatement.setString(5, picture);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        boolean existed = false;
+        while (rs.next()) {
+            if (rs.getInt(1) == 1) existed = true;
+        }
+        return existed;
+    }
+
 //
 //    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
 //        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";

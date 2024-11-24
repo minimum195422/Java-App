@@ -2,7 +2,6 @@ package project.libraryclient.Controllers.Register;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -21,11 +20,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class RegisterController {
     @SuppressWarnings("unused")
@@ -106,7 +102,7 @@ public class RegisterController {
     }
 
     // Google button
-    public void Google_Login_Button_Clicked() throws InterruptedException, IOException {
+    public void Google_Register_Button_Clicked() throws InterruptedException, IOException {
         // Bắt đầu đăng nhập tài khoản google
         GoogleAuthenticator authenticator = new GoogleAuthenticator();
         authenticator.start();
@@ -139,20 +135,19 @@ public class RegisterController {
             if (status == UserStatus.REGISTER_SUCCESS) {
                 SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
                 Client.getInstance().SetStatus(UserStatus.LOGGED_IN);
+                SetErrorMessage("Registered successfully! Return to login page");
             } else if (status == UserStatus.REGISTER_FAILED) {
-                errorText.setVisible(true);
-                errorText.setText("Something wrong! Please try again");
+                SetErrorMessage("Email already exists");
             }
         } else {
-            errorText.setVisible(true);
-            errorText.setText("Failed to retrieve user information. Please try again.");
+            SetErrorMessage("Failed to retrieve user information. Please try again.");
         }
     }
 
     // Apple button
     public void Apple_Login_Button_Clicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
-        resetAll();
+//        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
+        SetErrorMessage("Please try another method");
     }
 
     // Handling create new account

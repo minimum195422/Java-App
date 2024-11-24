@@ -132,9 +132,21 @@ public class ClientHandler implements Runnable{
         SendMessage(response);
     }
 
-    private void ServerResponseGoogleRegister(JSONObject json) {
+    private void ServerResponseGoogleRegister(JSONObject json) throws SQLException {
+        boolean check = MySql.getInstance().CreateNewGoogleUser(
+                json.getString("id"),
+                json.getString("given_name"),
+                json.getString("family_name"),
+                json.getString("email"),
+                json.getString("picture_link")
+        );
+
         JSONObject response;
-        response = GenerateJson.ResponseRegisterSuccess();
+        if (check) {
+            response = GenerateJson.ResponseRegisterSuccess();
+        } else {
+            response = GenerateJson.ResponseRegisterFailed();
+        }
         SendMessage(response);
     }
 }
