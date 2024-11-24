@@ -83,8 +83,51 @@ public class MySql {
         }
     }
 
-    public void CreateNewUser() {
+    public boolean CreateNewNormalUser(String firstName, String lastName, String email, String password) throws SQLException {
+        if (MySql.CheckExistEmail(email)) {
+            System.out.println("Email already exists");
+            return false;
+        }
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "INSERT INTO user(first_name, last_name, email, status) " + "VALUES(?, ?, ?, ?)"
+                );
 
+        preparedStatement.setString(1, firstName);
+        preparedStatement.setString(2, lastName);
+        preparedStatement.setString(3, email);
+        preparedStatement.setString(4, "ON");
+        int status = preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement(
+                "SELECT id " +
+                        "FROM user " +
+                        "WHERE email = ?"
+        );
+        preparedStatement.setString(1, email);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            int user_id = rs.getInt(1);
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO passwords(user_id, password) " +
+                            "VALUES(?, ?)"
+            );
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setString(2, password);
+            status = preparedStatement.executeUpdate();
+        }
+        return true;
+    }
+
+    public static boolean CheckExistEmail(String email) throws SQLException {
+        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(SQL);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        boolean existed = false;
+        while (rs.next()) {
+            if (rs.getInt(1) == 1) existed = true;
+        }
+        return existed;
     }
 //    public static void addNewAccount(String email, String username, String password) throws SQLException {
 //        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";

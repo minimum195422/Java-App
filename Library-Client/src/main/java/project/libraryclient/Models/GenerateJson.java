@@ -21,4 +21,24 @@ public class GenerateJson {
         return json;
     }
 
+    public static JSONObject CreateNormalRegisterRequest(String firstName, String lastName, String email, String password) {
+        JSONObject json = new JSONObject();
+        json.put("type",JsonType.NORMAL_REGISTER);
+        json.put("first_name", firstName);
+        json.put("last_name", lastName);
+        json.put("email", email);
+        json.put("password", password);
+        return json;
+    }
+
+    public static JSONObject CreateGoogleRegisterRequest(String google_id, String given_name, String family_name, String email, String picture_link) {
+        JSONObject json = new JSONObject();
+        json.put("type",JsonType.GOOGLE_REGISTER);
+        json.put("id", google_id);
+        json.put("given_name", given_name);
+        json.put("family_name", family_name);
+        json.put("email", email);
+        json.put("picture_link", picture_link);
+        return json;
+    }
 }

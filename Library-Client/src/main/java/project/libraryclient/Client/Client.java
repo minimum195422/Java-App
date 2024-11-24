@@ -59,7 +59,7 @@ public class Client {
             try {
                 String response;
                 while ((response = in.readLine()) != null) {
-                    // handle response from server when user send request
+                    // xử lý response từ server gửi về
                     handleServerResponse(response);
                     System.out.println(response);
                 }
@@ -82,8 +82,13 @@ public class Client {
                     SetStatus(UserStatus.LOGIN_FAILED);
                 }
             }
-            case GOOGLE_LOGIN -> {
-                System.out.println("none");
+            case REGISTER_RESPONSE -> {
+                if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
+                    SetStatus(UserStatus.REGISTER_SUCCESS);
+                }
+                if (Message.valueOf(json.getString("message")) == Message.FAILED) {
+                    SetStatus(UserStatus.REGISTER_FAILED);
+                }
             }
             default -> throw new RuntimeException("Invalid json file");
         }
@@ -105,5 +110,4 @@ public class Client {
         }
         return status;
     }
-
 }

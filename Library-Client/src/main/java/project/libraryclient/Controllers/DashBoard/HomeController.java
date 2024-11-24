@@ -19,10 +19,10 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String videoUri = getClass().getResource("/project/libraryclient/Videos/Benefits_Of_Reading.mp4").toExternalForm();
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(videoUri));
-        MediaContent1.setMediaPlayer(mediaPlayer);
-        mediaPlayer.setAutoPlay(true);
+//        String videoUri = getClass().getResource("/project/libraryclient/Videos/Benefits_Of_Reading.mp4").toExternalForm();
+//        MediaPlayer mediaPlayer = new MediaPlayer(new Media(videoUri));
+//        MediaContent1.setMediaPlayer(mediaPlayer);
+//        mediaPlayer.setAutoPlay(true);
 
 //        for (int i = 0; i < 3; ++i) {
 //            HBox list = new HBox();

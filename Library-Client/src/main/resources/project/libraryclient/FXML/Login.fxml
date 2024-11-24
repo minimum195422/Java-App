@@ -29,7 +29,7 @@
             </clip>
             <Image url="@../Images/Covers/cover1.jpg" />
          </ImageView>
-         <Button fx:id="ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_ExitButton_Action" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
+         <Button fx:id="ExitButton" layoutX="220.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Exit_Button_Clicked" prefHeight="15.0" prefWidth="90.0" styleClass="exit-button" stylesheets="@../Styles/LoginStyleSheet.css">
             <graphic>
                <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="90.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exit this app">
@@ -93,16 +93,28 @@
                   <String fx:value="text-size-26" />
                </styleClass>
             </Text>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="240.0">
+            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0">
+               <styleClass>
+                  <String fx:value="warning-text" />
+                  <String fx:value="text-size-10" />
+               </styleClass>
                <VBox.margin>
                   <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="240.0">
+               <VBox.margin>
+                  <Insets top="5.0" />
                </VBox.margin>
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?">
                   <styleClass>
                      <String fx:value="text-color-4" />
                      <String fx:value="text-size-10" />
                   </styleClass></Text>
-               <Text fx:id="Login_CreateLink" onMouseClicked="#Login_CreateLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Create" underline="true">
+               <Text fx:id="Login_CreateLink" onMouseClicked="#Link_To_Create_Account_Clicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Create" underline="true">
                   <HBox.margin>
                      <Insets left="10.0" />
                   </HBox.margin>
@@ -123,21 +135,9 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0">
-               <styleClass>
-                  <String fx:value="warning-text" />
-                  <String fx:value="text-size-10" />
-               </styleClass>
+            <Button fx:id="LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_Button_Clicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Button fx:id="LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#LoginButton_MouseClicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets />
+                  <Insets top="10.0" />
                </VBox.margin>
                <styleClass>
                   <String fx:value="login-button" />
@@ -171,7 +171,7 @@
                <padding>
                   <Insets top="10.0" />
                </padding>
-               <Button fx:id="GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+               <Button fx:id="GoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Google_Login_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -185,7 +185,7 @@
                         </Text>
                      </HBox>
                   </graphic></Button>
-               <Button fx:id="AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Login_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+               <Button fx:id="AppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Apple_Login_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                   <graphic>
                      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                         <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">

@@ -17,6 +17,7 @@ module project.libraryclient {
     requires org.apache.httpcomponents.httpclient;
     requires java.sql;
     requires javafx.media;
+    requires java.desktop;
 
     opens project.libraryclient to javafx.fxml;
     opens project.libraryclient.Controllers to javafx.fxml;

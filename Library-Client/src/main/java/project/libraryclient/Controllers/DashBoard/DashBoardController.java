@@ -76,6 +76,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadHomePage();
     }
 
     public void HomeButtonMouseEntered() {
@@ -123,6 +124,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadNotificationPage();
     }
 
     public void NotificationButtonMouseEntered() {
@@ -170,6 +172,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadDiscoverPage();
     }
 
     public void DiscoverButtonMouseEntered() {
@@ -217,6 +220,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadMyBookPage();
     }
 
     public void MyBookButtonMouseEntered() {
@@ -263,6 +267,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_WHITE_ICON);
         SettingButtonText.setStyle("-fx-fill: #ffffff;");
 
+        LoadSettingPage();
     }
 
     public void SettingButtonMouseEntered() {

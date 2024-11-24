@@ -49,13 +49,6 @@ public class SceneHandler {
         if (scenes.get(SceneKey) != null) {
             MainStage.setScene(scenes.get(SceneKey));
             MainStage.centerOnScreen();
-//            if (SceneKey.equals(DATA.SCENE_LOGIN_PAGE)
-//                    || SceneKey.equals(DATA.SCENE_REGISTER_PAGE)) {
-//                MainStage.setMaximized(false);
-//                MainStage.sizeToScene();
-//            } else {
-//                MainStage.setMaximized(true);
-//            }
         }
     }
 

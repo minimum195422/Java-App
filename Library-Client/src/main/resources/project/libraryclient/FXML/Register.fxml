@@ -92,7 +92,10 @@
                         <String fx:value="text-size-26" />
                     </styleClass>
                 </Text>
-            <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" textAlignment="CENTER" visible="false" />
+            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" visible="false">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Text>
                 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="14.0" prefWidth="240.0">
                     <VBox.margin>
                         <Insets top="5.0" />
@@ -102,7 +105,7 @@
                             <String fx:value="text-color-4" />
                             <String fx:value="text-size-10" />
                         </styleClass></Text>
-                    <Text fx:id="ReturnToLogin" onMouseClicked="#Register_LoginLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
+                    <Text fx:id="ReturnToLogin" onMouseClicked="#LoginLink_MouseClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" underline="true">
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin>
@@ -203,7 +206,7 @@
                     <padding>
                         <Insets top="10.0" />
                     </padding>
-                    <Button fx:id="LoginByGoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_GoogleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
+                    <Button fx:id="LoginByGoogleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Google_Login_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="google-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
@@ -217,7 +220,7 @@
                                 </Text>
                             </HBox>
                         </graphic></Button>
-                    <Button fx:id="LoginByAppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Register_AppleButton_MouseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
+                    <Button fx:id="LoginByAppleButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#Apple_Login_Button_Clicked" prefHeight="30.0" prefWidth="100.0" styleClass="apple-button">
                         <graphic>
                             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" spacing="10.0">
                                 <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
