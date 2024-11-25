@@ -106,8 +106,9 @@ public class MySql {
         preparedStatement.setString(2, lastName);
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, "ON");
-        int status = preparedStatement.executeUpdate();
+        if (!preparedStatement.execute()) return false;
 
+        preparedStatement.clearBatch();
         preparedStatement = connection.prepareStatement(
                 "SELECT id " +
                         "FROM user " +
@@ -123,7 +124,7 @@ public class MySql {
             );
             preparedStatement.setInt(1, user_id);
             preparedStatement.setString(2, password);
-            status = preparedStatement.executeUpdate();
+            return preparedStatement.execute();
         }
         return true;
     }
@@ -141,11 +142,12 @@ public class MySql {
     }
 
     public boolean CreateNewGoogleUser(
-            String google_id,
-            String given_name,
-            String family_name,
-            String email,
-            String picture) throws SQLException {
+        String google_id,
+        String given_name,
+        String family_name,
+        String email,
+        String picture) throws SQLException {
+
         if (CheckExistEmailOnGoogleUser(
                 google_id, given_name, family_name, email, picture
         )) {
@@ -165,16 +167,15 @@ public class MySql {
         preparedStatement.setString(4, email);
         preparedStatement.setString(5, picture);
 
-        int status = preparedStatement.executeUpdate();
-        return status != 0;
+        return preparedStatement.execute();
     }
 
     public static boolean CheckExistEmailOnGoogleUser(
-            String google_id,
-          String given_name,
-          String family_name,
-          String email,
-          String picture) throws SQLException {
+        String google_id,
+        String given_name,
+        String family_name,
+        String email,
+        String picture) throws SQLException {
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
@@ -189,11 +190,10 @@ public class MySql {
         preparedStatement.setString(5, picture);
         ResultSet rs = preparedStatement.executeQuery();
 
-        boolean existed = false;
         while (rs.next()) {
-            if (rs.getInt(1) == 1) existed = true;
+            if (rs.getInt(1) == 1) return true;
         }
-        return existed;
+        return false;
     }
 
     public List<User> GetUserList() throws SQLException {
@@ -227,19 +227,24 @@ public class MySql {
         return list;
     }
 
-//
-//    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
-//        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, imageURL);
-//        stmt.setString(2, title);
-//        stmt.setString(3, author);
-//        stmt.setString(4, publishedDate);
-//        stmt.setString(5, categories);
-//        stmt.setString(6, ISBN_13);
-//        stmt.setInt(7, price);
-//        stmt.setString(8, description);
-//        int status = stmt.executeUpdate();
-////        System.out.println(status);
-//    }
+    public void UpdateUser() throws SQLException{
+
+    }
+
+    public void DeleteUser(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM passwords WHERE user_id = ?;"
+        );
+        preparedStatement.setInt(1, id);
+        if (preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Can not delete from table password");
+
+        preparedStatement.clearBatch();
+        preparedStatement = connection.prepareStatement(
+                "DELETE FROM user WHERE id = ?;"
+        );
+        preparedStatement.setInt(1, id);
+        if (preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Can not delete from table user");
+    }
 }

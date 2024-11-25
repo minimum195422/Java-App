@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
@@ -36,19 +37,26 @@ public class ManageUsersController implements Initializable {
 
     @FXML
     public ToggleButton InactiveButton;
+    @FXML
+    public TextField DisplayPassword;
 
     public ToggleGroup DisplayStatus = new ToggleGroup();
+    public ToggleButton DeleteAccountButton;
+    public ToggleButton ChangeButton;
+
 
     private List<User> UserList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ActiveButton.setToggleGroup(DisplayStatus);
+        InactiveButton.setToggleGroup(DisplayStatus);
         LoadUserList();
     }
 
     private void LoadUserList() {
-        ActiveButton.setToggleGroup(DisplayStatus);
-        InactiveButton.setToggleGroup(DisplayStatus);
+        if (!UserList.isEmpty()) UserList.clear();
+        if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
 
         try {
             UserList = MySql.getInstance().GetUserList();
@@ -66,6 +74,7 @@ public class ManageUsersController implements Initializable {
                             DisplayFirstName.setText(u.getFirst_name());
                             DisplayLastName.setText(u.getLast_name());
                             DisplayEmail.setText(u.getEmail());
+                            DisplayPassword.setText(u.getPassword());
                             if (u.getStatus().equals("active")) {
                                 ActiveButton.setSelected(true);
                             } else {
@@ -80,4 +89,27 @@ public class ManageUsersController implements Initializable {
         }
 
     }
+
+    public void DeleteButtonClicked() throws SQLException {
+        try {
+            MySql.getInstance().DeleteUser(
+                    Integer.parseInt(DisplayUserId.getText())
+            );
+            LoadUserList();
+        } catch (NumberFormatException e) {
+            System.err.println("ID không hợp lệ: " + e.getMessage());
+        }
+    }
+
+    public void ChangeButtonClicked() {
+        try {
+            MySql.getInstance().UpdateUser(
+
+            );
+            LoadUserList();
+        } catch (SQLException e) {
+            System.out.println("Thông tin không hợp lệ");
+        }
+    }
+
 }

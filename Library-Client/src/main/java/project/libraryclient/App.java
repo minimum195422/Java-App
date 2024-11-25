@@ -28,10 +28,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException{
         // start client - trong client đã chạy trên thread riêng
-//        client = Client.getInstance();
+        client = Client.getInstance();
 
         // Kết nối database trên một thread riêng
-//        new Thread(() -> mysql = MySql.getInstance()).start();
+        new Thread(() -> mysql = MySql.getInstance()).start();
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
@@ -44,7 +44,7 @@ public class App extends Application {
         VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(DATA.SCENE_DASHBOARD);
+        sceneHandler.SetScene(DATA.SCENE_LOGIN_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
