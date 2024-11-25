@@ -89,7 +89,8 @@ public class Book {
 
     }
 
-    public Book(String title, String author, String imagePreview) {
+    public Book(int id, String title, String author, String imagePreview) {
+        setBookId(id);
         setTitle(title);
         setAuthor(author);
         setImagePreview(imagePreview);

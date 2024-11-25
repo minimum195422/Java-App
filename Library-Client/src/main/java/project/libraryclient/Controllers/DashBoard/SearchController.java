@@ -22,9 +22,6 @@ public class SearchController {
             for (int j = 0; j < 5; ++j) {
                 if (i * 5 + j >= list.size()) break;
                 AnchorPane card = list.get(i * 5 + j);
-                card.setOnMouseClicked(event -> {
-//                    System.out.println(card.get);
-                });
                 vbox.getChildren().add(card);
             }
             MainVBox.getChildren().add(vbox);

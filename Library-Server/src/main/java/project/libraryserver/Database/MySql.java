@@ -3,6 +3,7 @@ package project.libraryserver.Database;
 import project.libraryserver.Consts.DATA;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MySql {
     private static MySql instance;
@@ -130,28 +131,8 @@ public class MySql {
         }
         return true;
     }
-//    public static void addNewAccount(String email, String username, String password) throws SQLException {
-//        String SQL = "INSERT INTO accounts(email, username, password) VALUES(?, ?, ?)";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, email);
-//        stmt.setString(2, username);
-//        stmt.setString(3, password);
-//        int status = stmt.executeUpdate();
-////        System.out.println(status);
-//    }
-//
-//    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
-//        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, imageURL);
-//        stmt.setString(2, title);
-//        stmt.setString(3, author);
-//        stmt.setString(4, publishedDate);
-//        stmt.setString(5, categories);
-//        stmt.setString(6, ISBN_13);
-//        stmt.setInt(7, price);
-//        stmt.setString(8, description);
-//        int status = stmt.executeUpdate();
-////        System.out.println(status);
-//    }
+
+    public static void addNewBook(String title, String author, String ISBN, double price, String publishedDate, ArrayList<String> categories, String imagePreview, String description) throws SQLException {
+
+    }
 }

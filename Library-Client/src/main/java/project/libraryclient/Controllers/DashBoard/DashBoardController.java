@@ -342,7 +342,7 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    private void LoadSearchPage(List<AnchorPane> list) {
+    private void LoadSearchResults(List<AnchorPane> list) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
             ScrollPane pane = loader.load();
@@ -367,19 +367,24 @@ public class DashBoardController implements Initializable {
             try {
                 bookList = MySql.getBookBySubstring(searchBox.getText());
                 List<AnchorPane> list = new ArrayList<>();
-                for (String s : bookList) {
-                    Book book = MySql.getBasicInfoOfBook(s);
+                for (String name : bookList) {
+                    Book book = MySql.getBasicInfoOfBook(name);
+                    System.out.println(book);
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
                         AnchorPane card = loader.load();
                         Card_235_450_Controller controller = loader.getController();
                         controller.setBookInfo(book);
                         list.add(card);
+
+                        card.setOnMouseClicked(event -> {
+                            System.out.println(book.getBookId());
+                        });
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }
-                LoadSearchPage(list);
+                LoadSearchResults(list);
             } catch (SQLException _) {
 
             }
