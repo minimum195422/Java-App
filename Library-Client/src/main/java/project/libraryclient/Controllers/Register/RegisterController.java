@@ -198,6 +198,7 @@ public class RegisterController {
         // kiểm tra trạng thái của status
         if (status == UserStatus.REGISTER_SUCCESS) {
             SetErrorMessage("Registered successfully! Return to login page");
+            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
         } else if (status == UserStatus.REGISTER_FAILED) {
             SetErrorMessage("Email already exists");
         }
