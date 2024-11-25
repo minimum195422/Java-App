@@ -2,7 +2,6 @@ package project.libraryserver.Server;
 
 import org.json.JSONObject;
 import project.libraryserver.Consts.JsonType;
-import project.libraryserver.Consts.Message;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Models.GenerateJson;
 
@@ -34,7 +33,6 @@ public class ClientHandler implements Runnable{
         try {
             String line;
             while ((line = in.readLine()) != null) {
-//                line = line.trim(); // Xóa ký tự thừa \n \r
                 if (line.isEmpty()) {
                     continue; // Bỏ qua dòng trống
                 }
@@ -83,6 +81,7 @@ public class ClientHandler implements Runnable{
         out.flush();
     }
 
+    // bắt json request từ client
     private void HandlerUserRequest(JSONObject json) throws SQLException {
         JsonType type = JsonType.valueOf(json.getString("type"));
 
@@ -90,6 +89,7 @@ public class ClientHandler implements Runnable{
             case NORMAL_LOGIN -> ServerResponseNormalLogin(json);
             case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
             case NORMAL_REGISTER -> ServerResponseNormalRegister(json);
+            case GOOGLE_REGISTER -> ServerResponseGoogleRegister(json);
             default -> throw new IllegalArgumentException("Unsupported JSON type");
         }
     }
@@ -99,11 +99,9 @@ public class ClientHandler implements Runnable{
                 json.getString("email"), json.getString("password"));
         JSONObject response;
         if (check) {
-            response = GenerateJson.CreateResponseLoginRequest(
-                    JsonType.LOGIN_RESPONSE, Message.SUCCESS);
+            response = GenerateJson.ResponseLoginSuccess();
         } else {
-            response = GenerateJson.CreateResponseLoginRequest(
-                    JsonType.LOGIN_RESPONSE, Message.FAILED);
+            response = GenerateJson.ResponseLoginFailed();
         }
         SendMessage(response);
     }
@@ -113,26 +111,41 @@ public class ClientHandler implements Runnable{
                 json.getString("id"), json.getString("email"));
         JSONObject response;
         if (check) {
-            response = GenerateJson.CreateResponseLoginRequest(
-                    JsonType.LOGIN_RESPONSE, Message.SUCCESS);
+            response = GenerateJson.ResponseLoginSuccess();
         } else {
-            response = GenerateJson.CreateResponseLoginRequest(
-                    JsonType.LOGIN_RESPONSE, Message.FAILED);
+            response = GenerateJson.ResponseLoginFailed();
         }
         SendMessage(response);
     }
 
     private void ServerResponseNormalRegister(JSONObject json) throws SQLException {
-        boolean check = MySql.getInstance().CreateNewUser(
+        boolean check = MySql.getInstance().CreateNewNormalUser(
                 json.getString("first_name"), json.getString("last_name"),
                 json.getString("email"), json.getString("password"));
         JSONObject response;
         if (check) {
-            response = GenerateJson.CreateResponseRegisterRequest(
-                    JsonType.NORMAL_REGISTER, Message.SUCCESS);
+            response = GenerateJson.ResponseRegisterSuccess();
         } else {
-            response = GenerateJson.CreateResponseRegisterRequest(
-                    JsonType.NORMAL_REGISTER, Message.FAILED);
+            response = GenerateJson.ResponseRegisterFailed();
+        }
+
+        SendMessage(response);
+    }
+
+    private void ServerResponseGoogleRegister(JSONObject json) throws SQLException {
+        boolean check = MySql.getInstance().CreateNewGoogleUser(
+                json.getString("id"),
+                json.getString("given_name"),
+                json.getString("family_name"),
+                json.getString("email"),
+                json.getString("picture_link")
+        );
+
+        JSONObject response;
+        if (check) {
+            response = GenerateJson.ResponseRegisterSuccess();
+        } else {
+            response = GenerateJson.ResponseRegisterFailed();
         }
         SendMessage(response);
     }

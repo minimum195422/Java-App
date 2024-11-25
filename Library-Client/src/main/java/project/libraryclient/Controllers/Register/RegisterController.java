@@ -1,5 +1,6 @@
 package project.libraryclient.Controllers.Register;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -7,15 +8,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
+import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
 import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Consts.UserStatus;
-import project.libraryclient.Database.MySql;
 import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 
 public class RegisterController {
@@ -65,13 +70,9 @@ public class RegisterController {
     }
 
     @FXML
-    private void resetEmail() {
-        email.clear();
-    }
-
-    @FXML
     private void resetAll() {
-//        errorText.setVisible(false);
+        errorText.setVisible(false);
+        errorText.setStyle("");
         errorText.setStyle("-fx-fill: red;");
         email.clear();
         password.clear();
@@ -95,69 +96,153 @@ public class RegisterController {
     }
 
     //  Return to login page link
-    public void Register_LoginLink_MouseClicked() {
+    public void LoginLink_MouseClicked() {
         SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_LOGIN_PAGE);
         resetAll();
     }
 
     // Google button
-    public void Register_GoogleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
-        resetAll();
+    public void Google_Register_Button_Clicked() throws InterruptedException, IOException {
+        // Bắt đầu đăng nhập tài khoản google
+        GoogleAuthenticator authenticator = new GoogleAuthenticator();
+        authenticator.start();
+
+        // chờ cho tới khi đăng nhập hoàn tất
+        authenticator.waitForCompletion();
+
+        // Lấy json trả về từ google
+        JSONObject json = authenticator.GetUserInformation();
+        System.out.println("from login" + json);
+        if (json != null) {
+            // Reset trạng thái của client
+            Client.getInstance().ResetStatus();
+
+            // Gửi json yêu cầu đăng kí tài khoản mới
+            Client.getInstance().SendMessage(
+                    GenerateJson.CreateGoogleRegisterRequest(
+                            json.getString("id"),
+                            json.getString("given_name"),
+                            json.getString("family_name"),
+                            json.getString("email"),
+                            json.getString("picture")
+                    )
+            );
+
+            // Chờ cập nhật trạng thái
+            UserStatus status = Client.getInstance().WaitForStatusUpdate();
+
+            // Kiểm tra trạng thái và thực hiện chức năng
+            if (status == UserStatus.REGISTER_SUCCESS) {
+                SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
+                Client.getInstance().SetStatus(UserStatus.LOGGED_IN);
+                SetErrorMessage("Registered successfully! Return to login page");
+            } else if (status == UserStatus.REGISTER_FAILED) {
+                SetErrorMessage("Email already exists");
+            }
+        } else {
+            SetErrorMessage("Failed to retrieve user information. Please try again.");
+        }
     }
 
     // Apple button
-    public void Register_AppleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
-        resetAll();
+    public void Apple_Login_Button_Clicked() {
+//        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT);
+        SetErrorMessage("Please try another method");
     }
 
     // Handling create new account
     @FXML
     private void RegisterButtonOnclick() throws SQLException, IOException, InterruptedException {
-        errorText.setStyle("-fx-fill: red;");
-        errorText.setVisible(true);
-        String emailText = email.getText();
-        String passwordText = password.getText();
-        String confirmPasswordText = confirmPassword.getText();
-        String username = firstName.getText() + " " + lastName.getText();
-        System.out.println(emailText);
-        if (emailText.isEmpty()) {
+        if (email.getText().isEmpty()) {
             // System.out.println("Email is empty");
-            errorText.setText("Email is empty");
+            SetErrorMessage("Email is empty");
             return;
         }
-        if (passwordText.isEmpty()) {
-            // System.out.println("Password is empty");
-            errorText.setText("Password is empty");
-            return;
-        }
-        if (!passwordText.equals(confirmPasswordText)) {
-            // System.out.println("Passwords does not match");
-            errorText.setText("Passwords does not match");
-            resetPassword();
-            return;
-        }
+
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
             // System.out.println("Name can't be empty");
-            errorText.setText("Name can't be empty");
+            SetErrorMessage("Name can't be empty");
             return;
         }
+
+        if (password.getText().isEmpty()) {
+            // System.out.println("Password is empty");
+            SetErrorMessage("Password is empty");
+            return;
+        }
+
+        if (!password.getText().equals(confirmPassword.getText())) {
+            // System.out.println("Passwords does not match");
+            SetErrorMessage("Passwords does not match");
+            return;
+        }
+
+        if (!ValidateEmail(email.getText())) {
+            SetErrorMessage("Invalid email");
+            return;
+        }
+
+        // Reset trạng thái của client
+        Client.getInstance().ResetStatus();
+
+        // Gửi message từ client tới server
         Client.getInstance().SendMessage(
                 GenerateJson.CreateNormalRegisterRequest(
                         firstName.getText(), lastName.getText(), email.getText(), password.getText()
                 )
         );
+
+        // chờ tới khi update status mới chuyển tới bước tiếp theo
         UserStatus status = Client.getInstance().WaitForStatusUpdate();
-        System.out.println(status);
-        if (status == UserStatus.REGISTERED_COMPLETED) {
-            errorText.setText("Registered successfully! Return to login page");
-            errorText.setVisible(true);
-            errorText.setStyle("-fx-fill: green;");
-        } else {
-            errorText.setText("Email already exists");
+
+        // kiểm tra trạng thái của status
+        if (status == UserStatus.REGISTER_SUCCESS) {
+            SetErrorMessage("Registered successfully! Return to login page");
+        } else if (status == UserStatus.REGISTER_FAILED) {
+            SetErrorMessage("Email already exists");
         }
     }
-}
 
-// Check lai email
+    private boolean ValidateEmail(String email) throws IOException {
+        // url dẫn tới api kiểm tra sự tồn tại của mail
+        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=9f45f093bc3a4e5fbacb69d6d7a5bd1a&email=%s", email);
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        int responseCode = con.getResponseCode();
+        System.out.println("Response code: " + responseCode);
+
+        if (responseCode == 200) {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            con.disconnect();
+
+            JSONObject myResponse = new JSONObject(response.toString());
+            System.out.println(myResponse);
+            // deliverability nghĩa là mail còn hoạt động và có thể sử dụng bình thường
+            if (myResponse.getString("deliverability").equals("DELIVERABLE")) {
+                return true;
+            } else if (myResponse.getString("deliverability").equals("UNDELIVERABLE")) {
+                return false;
+            }
+        }
+        con.disconnect();
+        return false;
+    }
+
+    private void SetErrorMessage(String message) {
+        Platform.runLater(() -> {
+            errorText.setManaged(true);
+            errorText.setVisible(true);
+            errorText.setText(message);
+            errorText.setStyle("");
+            errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
+        });
+    }
+}

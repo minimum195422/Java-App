@@ -62,19 +62,20 @@ public class LoginController implements Initializable {
 //  //----// Handling Function //----//  //
 
     //  Exit button
-    public void Login_ExitButton_Action() {
+    public void Exit_Button_Clicked() {
         System.exit(0);
     }
 
     //  Login button
-    public void LoginButton_MouseClicked() throws IOException, InterruptedException {
+    public void Login_Button_Clicked() throws IOException, InterruptedException {
         if (email.getText().isEmpty()) {
-            errorText.setVisible(true);
-            errorText.setText("Email is empty");
+            SetErrorMessage("Email is empty");
+            return;
         }
+
         if (password.getText().isEmpty()) {
-            errorText.setVisible(true);
-            errorText.setText("Password is empty");
+            SetErrorMessage("Password is empty");
+            return;
         }
 
         // Reset trạng thái của client
@@ -94,27 +95,24 @@ public class LoginController implements Initializable {
         if (status == UserStatus.LOGGED_IN) {
             SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
         } else if (status == UserStatus.LOGIN_FAILED) {
-            errorText.setVisible(true);
-            errorText.setText("Incorrect login information");
-            resetPassword();
+            SetErrorMessage("Incorrect login information");
         }
 
     }
 
     //  Create New Account Link
-    public void Login_CreateLink_MouseClicked() {
+    public void Link_To_Create_Account_Clicked() {
         SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_REGISTER_PAGE); // change to register page
         resetAll();
     }
 
     //  Apple button
-    public void Login_AppleButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_BEING_DEVELOPMENT); // not development yet
-        resetAll();
+    public void Apple_Login_Button_Clicked() {
+        SetErrorMessage("Please try another method");
     }
 
     //  Google button
-    public void Login_GoogleButton_MouseClicked() throws IOException, InterruptedException {
+    public void Google_Login_Button_Clicked() throws IOException, InterruptedException {
         // Bắt đầu đăng nhập tài khoản google
         GoogleAuthenticator authenticator = new GoogleAuthenticator();
         authenticator.start();
@@ -144,14 +142,20 @@ public class LoginController implements Initializable {
             if (status == UserStatus.LOGGED_IN) {
                 SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
             } else if (status == UserStatus.LOGIN_FAILED) {
-                errorText.setVisible(true);
-                errorText.setText("Incorrect login information");
-                resetPassword();
+                SetErrorMessage("Incorrect login information");
             }
         } else {
-            errorText.setVisible(true);
-            errorText.setText("Failed to retrieve user information. Please try again.");
+            SetErrorMessage("Failed to retrieve user information. Please try again.");
         }
-        resetAll();
+    }
+
+    private void SetErrorMessage(String message) {
+        Platform.runLater(() -> {
+            errorText.setManaged(true);
+            errorText.setVisible(true);
+            errorText.setText(message);
+            errorText.setStyle("");
+            errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
+        });
     }
 }

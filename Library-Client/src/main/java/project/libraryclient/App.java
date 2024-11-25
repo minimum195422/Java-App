@@ -19,7 +19,7 @@ public class App extends Application {
     // Connect to database
     MySql mysql;
 
-    // Main scenehandler
+    // Main scene handler
     SceneHandler sceneHandler;
 
     // List of scene in app

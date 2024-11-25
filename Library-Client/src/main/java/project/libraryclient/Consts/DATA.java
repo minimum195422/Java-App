@@ -40,9 +40,19 @@ public class DATA {
     // Home page link 
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
     public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
+    // Discover page link
+    public static final String DISCOVER_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Discover.fxml";
 
+    // Setting page link
+    public static final String SETTING_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Setting.fxml";
 
-    // ---------------------------------------------------------------- //
+    // Notification page link
+    public static final String NOTIFICATION_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Notification.fxml";
+
+    // My Book page link
+    public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";
+
+// ---------------------------------------------------------------- //
 // ------------------------- Card ui link ------------------------- //
 // ---------------------------------------------------------------- //
     // Book card size 235 x 450
@@ -67,9 +77,9 @@ public class DATA {
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
 // ---------------------------------------------------------------- //
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/library_database";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "amogus69420";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/library";
+    private static final String JDBC_USER = "minimum195422";
+    private static final String JDBC_PASSWORD = "Humhayha12#";
 
     public static String GetJdbcUrl() { return JDBC_URL; }
 

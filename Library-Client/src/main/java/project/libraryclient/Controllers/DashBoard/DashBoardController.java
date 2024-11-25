@@ -40,7 +40,6 @@ public class DashBoardController implements Initializable {
     // --------------- Exit button -------------- //
     public ImageView ExitButton;
     public TextField searchBox;
-
     public void ExitButtonMouseClicked() {
         System.exit(0); // close program
     }
@@ -88,6 +87,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadHomePage();
     }
 
     public void HomeButtonMouseEntered() {
@@ -135,6 +135,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadNotificationPage();
     }
 
     public void NotificationButtonMouseEntered() {
@@ -182,6 +183,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadDiscoverPage();
     }
 
     public void DiscoverButtonMouseEntered() {
@@ -229,6 +231,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
         SettingButtonText.setStyle("-fx-fill: #adb5bd;");
 
+        LoadMyBookPage();
     }
 
     public void MyBookButtonMouseEntered() {
@@ -275,6 +278,7 @@ public class DashBoardController implements Initializable {
         SettingButtonIcon.setImage(DATA.SETTING_WHITE_ICON);
         SettingButtonText.setStyle("-fx-fill: #ffffff;");
 
+        LoadSettingPage();
     }
 
     public void SettingButtonMouseEntered() {
@@ -301,6 +305,7 @@ public class DashBoardController implements Initializable {
 
     public void VersionInformationIconMouseExited() {
     }
+
 
     // -------------------- initialize -------------------- //
     @Override
@@ -335,7 +340,53 @@ public class DashBoardController implements Initializable {
 
     private void LoadHomePage() {
         try {
-            ScrollPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.HOMEPAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadNotificationPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.NOTIFICATION_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadDiscoverPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.DISCOVER_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadSettingPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.SETTING_PAGE_LINK)));
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void LoadMyBookPage() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.MYBOOK_PAGE_LINK)));
             ContentDisplay.setCenter(pane);
         } catch (IOException e) {
             e.printStackTrace(System.out);

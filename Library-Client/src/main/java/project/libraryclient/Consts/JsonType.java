@@ -3,7 +3,8 @@ package project.libraryclient.Consts;
 public enum JsonType {
     NORMAL_LOGIN,
     GOOGLE_LOGIN,
+    REGISTER_RESPONSE,
+    LOGIN_RESPONSE,
     NORMAL_REGISTER,
-    LOGIN_RESPONSE
+    GOOGLE_REGISTER
 }
-

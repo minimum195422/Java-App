@@ -47,19 +47,8 @@ public class SceneHandler {
 
     public void SetScene(String SceneKey) {
         if (scenes.get(SceneKey) != null) {
-            if (SceneKey.equals(DATA.SCENE_LOGIN_PAGE)
-                    || SceneKey.equals(DATA.SCENE_REGISTER_PAGE)) {
-                MainStage.setFullScreen(false);
-                MainStage.sizeToScene();
-                MainStage.centerOnScreen();
-            } else {
-                MainStage.setFullScreen(false);
-                MainStage.setX(scenes.get(SceneKey).getHeight());
-                MainStage.setY(scenes.get(SceneKey).getWidth());
-                System.out.println(scenes.get(SceneKey).getHeight());
-                System.out.println(scenes.get(SceneKey).getWidth());
-            }
             MainStage.setScene(scenes.get(SceneKey));
+            MainStage.centerOnScreen();
         }
     }
 
