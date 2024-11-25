@@ -74,6 +74,11 @@
                             <Font size="16.0" />
                         </font>
                     </Text>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Text>
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
                         <font>
                             <Font size="16.0" />
@@ -100,6 +105,10 @@
                         <TextField fx:id="DisplayEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
                         <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
                     </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
+                        <TextField fx:id="DisplayPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
+                    </VBox>
                     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="300.0" spacing="30.0">
                         <ToggleButton fx:id="ActiveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="status" text="Active" />
                         <ToggleButton fx:id="InactiveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="status" text="Inactive" />
@@ -113,8 +122,8 @@
                 <VBox.margin>
                     <Insets top="10.0" />
                 </VBox.margin>
-                <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Delete" />
-                <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Change" />
+                <ToggleButton fx:id="DeleteAccountButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#DeleteButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Delete" />
+                <ToggleButton fx:id="ChangeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ChangeButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Change" />
             </HBox>
         </VBox>
     </AnchorPane>
