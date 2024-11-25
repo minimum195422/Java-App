@@ -91,8 +91,7 @@ public class RegisterController {
 
     //  Register button
     public void Register_RegisterButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_REGISTER_PAGE);
-        resetAll();
+
     }
 
     //  Return to login page link
@@ -154,31 +153,36 @@ public class RegisterController {
     @FXML
     private void RegisterButtonOnclick() throws SQLException, IOException, InterruptedException {
         if (email.getText().isEmpty()) {
-            // System.out.println("Email is empty");
+//             System.out.println("Email is empty");
             SetErrorMessage("Email is empty");
+            resetPassword();
             return;
         }
 
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
             // System.out.println("Name can't be empty");
             SetErrorMessage("Name can't be empty");
+            resetPassword();
             return;
         }
 
         if (password.getText().isEmpty()) {
             // System.out.println("Password is empty");
             SetErrorMessage("Password is empty");
+            resetPassword();
             return;
         }
 
         if (!password.getText().equals(confirmPassword.getText())) {
             // System.out.println("Passwords does not match");
             SetErrorMessage("Passwords does not match");
+            resetPassword();
             return;
         }
 
         if (!ValidateEmail(email.getText())) {
             SetErrorMessage("Invalid email");
+            resetPassword();
             return;
         }
 
@@ -197,10 +201,11 @@ public class RegisterController {
 
         // kiểm tra trạng thái của status
         if (status == UserStatus.REGISTER_SUCCESS) {
-            SetErrorMessage("Registered successfully! Return to login page");
-            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
+            resetAll();
+            SetSuccessMessage("Registered successfully! Return to login page");
         } else if (status == UserStatus.REGISTER_FAILED) {
             SetErrorMessage("Email already exists");
+            resetPassword();
         }
     }
 
@@ -244,6 +249,16 @@ public class RegisterController {
             errorText.setText(message);
             errorText.setStyle("");
             errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
+        });
+    }
+
+    private void SetSuccessMessage(String message) {
+        Platform.runLater(() -> {
+            errorText.setManaged(true);
+            errorText.setVisible(true);
+            errorText.setText(message);
+            errorText.setStyle("");
+            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
         });
     }
 }

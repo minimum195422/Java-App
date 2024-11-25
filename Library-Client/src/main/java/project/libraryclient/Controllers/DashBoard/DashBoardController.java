@@ -1,18 +1,14 @@
 package project.libraryclient.Controllers.DashBoard;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import project.libraryclient.Class.Book;
@@ -337,6 +333,43 @@ public class DashBoardController implements Initializable {
         bookList = new ArrayList<>();
     }
 
+    // Detect if a key is valid
+    private boolean detectKeys(KeyEvent event) {
+        return event.getCode().isKeypadKey() || event.getCode().isLetterKey() || event.getCode().isDigitKey() ||
+                event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE;
+    }
+
+    ArrayList<String> bookList = new ArrayList<>();
+    @FXML
+    private void handleSearchBox(KeyEvent keyEvent) throws SQLException {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            try {
+                bookList = MySql.getBookBySubstring(searchBox.getText());
+                List<AnchorPane> list = new ArrayList<>();
+                for (String name : bookList) {
+                    Book book = MySql.getBasicInfoOfBook(name);
+                    System.out.println(book);
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
+                        AnchorPane card = loader.load();
+                        Card_235_450_Controller controller = loader.getController();
+                        controller.setBookInfo(book);
+                        list.add(card);
+
+                        // Add listener to a book
+                        card.setOnMouseClicked(event -> {
+                            System.out.println(book.getBookId());
+                        });
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                LoadSearchResults(list);
+            } catch (SQLException _) {
+
+            }
+        }
+    }
 
     private void LoadHomePage() {
         try {
@@ -405,40 +438,5 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    // detect if a key is valid
-    private boolean detectKeys(KeyEvent event) {
-        return event.getCode().isKeypadKey() || event.getCode().isLetterKey() || event.getCode().isDigitKey() ||
-                event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE;
-    }
 
-    ArrayList<String> bookList = new ArrayList<>();
-    @FXML
-    private void handleSearchBox(KeyEvent keyEvent) throws SQLException {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            try {
-                bookList = MySql.getBookBySubstring(searchBox.getText());
-                List<AnchorPane> list = new ArrayList<>();
-                for (String name : bookList) {
-                    Book book = MySql.getBasicInfoOfBook(name);
-                    System.out.println(book);
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-                        AnchorPane card = loader.load();
-                        Card_235_450_Controller controller = loader.getController();
-                        controller.setBookInfo(book);
-                        list.add(card);
-
-                        card.setOnMouseClicked(event -> {
-                            System.out.println(book.getBookId());
-                        });
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                LoadSearchResults(list);
-            } catch (SQLException _) {
-
-            }
-        }
-    }
 }

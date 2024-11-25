@@ -1,14 +1,8 @@
 package project.libraryclient.Controllers.DashBoard;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.libraryclient.Class.Book;
-import project.libraryclient.Consts.DATA;
-import project.libraryclient.Controllers.Card.Card_235_450_Controller;
-
-import java.io.IOException;
 import java.util.List;
 
 public class SearchController {
