@@ -90,7 +90,7 @@
                         <Insets top="10.0" />
                     </padding>
                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
-                        <TextField fx:id="DisplayUserId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <TextField fx:id="DisplayUserId" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
                         <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
                     </VBox>
                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">

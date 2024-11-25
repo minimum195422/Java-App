@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
@@ -104,11 +103,19 @@ public class ManageUsersController implements Initializable {
     public void ChangeButtonClicked() {
         try {
             MySql.getInstance().UpdateUser(
-
+                Integer.parseInt(DisplayUserId.getText()),
+                DisplayFirstName.getText(),
+                DisplayLastName.getText(),
+                DisplayEmail.getText(),
+                DisplayPassword.getText(),
+                (ActiveButton.isSelected() && !InactiveButton.isSelected()) ?
+                        "active" : "inactive"
             );
             LoadUserList();
+        } catch (NumberFormatException e) {
+            System.err.println("ID không hợp lệ: " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println("Thông tin không hợp lệ");
+            System.out.println("Lỗi mysql: " + e.getMessage());
         }
     }
 

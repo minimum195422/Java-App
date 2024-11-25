@@ -129,24 +129,12 @@ public class MySql {
         return true;
     }
 
-    public static boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
-        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(SQL);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        boolean existed = false;
-        while (rs.next()) {
-            if (rs.getInt(1) == 1) existed = true;
-        }
-        return existed;
-    }
-
     public boolean CreateNewGoogleUser(
-        String google_id,
-        String given_name,
-        String family_name,
-        String email,
-        String picture) throws SQLException {
+            String google_id,
+            String given_name,
+            String family_name,
+            String email,
+            String picture) throws SQLException {
 
         if (CheckExistEmailOnGoogleUser(
                 google_id, given_name, family_name, email, picture
@@ -158,7 +146,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO google (id, given_name, family_name, email, picture_link) "
-                            + "VALUES(?, ?, ?, ?, ?)"
+                                + "VALUES(?, ?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, google_id);
@@ -168,6 +156,18 @@ public class MySql {
         preparedStatement.setString(5, picture);
 
         return preparedStatement.execute();
+    }
+
+    public static boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
+        String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(SQL);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        boolean existed = false;
+        while (rs.next()) {
+            if (rs.getInt(1) == 1) existed = true;
+        }
+        return existed;
     }
 
     public static boolean CheckExistEmailOnGoogleUser(
@@ -227,8 +227,42 @@ public class MySql {
         return list;
     }
 
-    public void UpdateUser() throws SQLException{
+    public void UpdateUser(
+            int user_id,
+            String new_firstName,
+            String new_lastName,
+            String new_email,
+            String new_password,
+            String new_status
+    ) throws SQLException{
 
+        // update bảng passwords trước
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "UPDATE passwords SET password = ? WHERE user_id = ?;"
+                );
+        preparedStatement.setString(1, new_password);
+        preparedStatement.setInt(2, user_id);
+
+        if(preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Fail to update password table");
+
+        // sau khi update trên passwords
+        // tiến hành update trên user
+        preparedStatement.clearBatch();
+        preparedStatement = connection.prepareStatement(
+                "UPDATE user "
+                + "SET first_name = ?, last_name = ?, email = ?, status = ? "
+                + "WHERE id = ?;"
+        );
+        preparedStatement.setString(1, new_firstName);
+        preparedStatement.setString(2, new_lastName);
+        preparedStatement.setString(3, new_email);
+        preparedStatement.setString(4, new_status);
+        preparedStatement.setInt(5, user_id);
+
+        if (preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Fail to update user table");
     }
 
     public void DeleteUser(int id) throws SQLException {
