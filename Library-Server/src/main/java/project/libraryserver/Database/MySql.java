@@ -1,8 +1,11 @@
 package project.libraryserver.Database;
 
 import project.libraryserver.Consts.DATA;
+import project.libraryserver.User.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySql {
     private static MySql instance;
@@ -191,6 +194,37 @@ public class MySql {
             if (rs.getInt(1) == 1) existed = true;
         }
         return existed;
+    }
+
+    public List<User> GetUserList() throws SQLException {
+        List<User> list = new ArrayList<>();
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "SELECT " +
+                                "u.id, " +
+                                "u.first_name, " +
+                                "u.last_name, " +
+                                "u.email, " +
+                                "u.status, " +
+                                "p.password " +
+                            "FROM " +
+                                "user u " +
+                                "JOIN passwords p ON u.id = p.user_id;"
+                );
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+            list.add(new User(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6)
+            ));
+        }
+
+        return list;
     }
 
 //

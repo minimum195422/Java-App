@@ -14,6 +14,7 @@ import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Consts.UserStatus;
+import project.libraryclient.Database.MySql;
 import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 
@@ -94,6 +95,7 @@ public class LoginController implements Initializable {
         // Kiểm tra trạng thái và thực hiện chức năng
         if (status == UserStatus.LOGGED_IN) {
             SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
+            MySql.getInstance().SetAccessable(true);
         } else if (status == UserStatus.LOGIN_FAILED) {
             SetErrorMessage("Incorrect login information");
         }
@@ -141,6 +143,7 @@ public class LoginController implements Initializable {
 
             if (status == UserStatus.LOGGED_IN) {
                 SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
+                MySql.getInstance().SetAccessable(true);
             } else if (status == UserStatus.LOGIN_FAILED) {
                 SetErrorMessage("Incorrect login information");
             }

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" stylesheets="@../../Styles/ManageUsers.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.ManageUsersController">
+    <AnchorPane prefHeight="50.0" prefWidth="600.0" styleClass="back-color">
+        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="600.0" spacing="10.0" styleClass="search-box" AnchorPane.topAnchor="10.0">
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../Images/Icons/search.png" />
+            </ImageView>
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="540.0" styleClass="search-area" />
+        </HBox>
+    </AnchorPane>
+    <AnchorPane layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" styleClass="back-color">
+        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0" spacing="10.0">
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Text>
+            <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="ToggleButton" />
+        </HBox>
+    </AnchorPane>
+    <ScrollPane hbarPolicy="NEVER" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" styleClass="list-area" vbarPolicy="NEVER">
+        <VBox fx:id="DisplayUserList" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="600.0" styleClass="list-area" />
+    </ScrollPane>
+    <AnchorPane layoutX="600.0" prefHeight="680.0" prefWidth="420.0">
+        <VBox prefHeight="680.0" prefWidth="420.0" spacing="10.0" styleClass="back-color">
+            <HBox prefHeight="100.0" prefWidth="200.0">
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <padding>
+                    <Insets top="10.0" />
+                </padding>
+                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="120.0" spacing="26.0">
+                    <padding>
+                        <Insets left="15.0" top="10.0" />
+                    </padding>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Id:">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Text>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Text>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Text>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Text>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Text>
+                </VBox>
+                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="20.0">
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
+                        <TextField fx:id="DisplayUserId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
+                    </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
+                        <TextField fx:id="DisplayFirstName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
+                    </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
+                        <TextField fx:id="DisplayLastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
+                    </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="300.0">
+                        <TextField fx:id="DisplayEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="280.0" styleClass="get-text-area" />
+                        <Line endX="280.0" fill="#8e8e93" stroke="#8e8e93" />
+                    </VBox>
+                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="300.0" spacing="30.0">
+                        <ToggleButton fx:id="ActiveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="status" text="Active" />
+                        <ToggleButton fx:id="InactiveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="status" text="Inactive" />
+                    </HBox>
+                </VBox>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="420.0" spacing="10.0">
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Delete" />
+                <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Change" />
+            </HBox>
+        </VBox>
+    </AnchorPane>
+</AnchorPane>

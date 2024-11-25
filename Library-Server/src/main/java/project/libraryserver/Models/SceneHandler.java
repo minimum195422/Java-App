@@ -44,7 +44,7 @@ public class SceneHandler {
 
     public void SetScene(String SceneKey) {
         if (scenes.get(SceneKey) != null) {
-
+            MainStage.centerOnScreen();
             MainStage.setScene(scenes.get(SceneKey));
         }
     }
