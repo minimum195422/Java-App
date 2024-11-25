@@ -8,6 +8,8 @@ import project.libraryserver.Database.MySql;
 import project.libraryserver.Models.SceneHandler;
 import project.libraryserver.Server.Server;
 
+import java.util.ArrayList;
+
 public class App extends Application {
 
     // Server
@@ -23,12 +25,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         // Start server
         server = Server.getInstance();
 
         // start database connection
         mysql = MySql.getInstance();
-
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);

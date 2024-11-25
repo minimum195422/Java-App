@@ -36,7 +36,7 @@ public class MySql {
 
     public static ArrayList<String> getBookBySubstring(String substr) throws SQLException {
         ArrayList<String> bookList = new ArrayList<>();
-        String SQL = "SELECT title FROM book WHERE title LIKE '%" + substr + "%'";
+        String SQL = "SELECT title FROM books WHERE title LIKE '%" + substr + "%'";
         PreparedStatement stmt = connection.prepareStatement(SQL);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -49,9 +49,9 @@ public class MySql {
 
     public static Book getBasicInfoOfBook(String name) throws SQLException {
         Book book = new Book();
-        String SQL = "SELECT book.book_id as id, title, authors.name as author, image_preview "
-                + "FROM book "
-                + "JOIN book_authors ON book.book_id = book_authors.book_id "
+        String SQL = "SELECT books.book_id as id, title, authors.name as author, image_preview "
+                + "FROM books "
+                + "JOIN book_authors ON books.book_id = book_authors.book_id "
                 + "JOIN authors ON authors.author_id = book_authors.author_id "
                 + "WHERE title LIKE '%" + name + "%'";
         PreparedStatement stmt = connection.prepareStatement(SQL);
@@ -62,8 +62,5 @@ public class MySql {
         }
         return book;
     }
-
-    public void addNewBook(String title, String author, String ISBN, double price, String publishedDate, ArrayList<String> categories, String imagePreview, String description) throws SQLException {
-
-    }
+    
 }

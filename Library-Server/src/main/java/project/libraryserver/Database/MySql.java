@@ -3,6 +3,7 @@ package project.libraryserver.Database;
 import project.libraryserver.Consts.DATA;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MySql {
     private static MySql instance;
@@ -193,19 +194,136 @@ public class MySql {
         return existed;
     }
 
-//
-//    public static void addNewBook(String imageURL, String title, String author, String publishedDate, String categories, String ISBN_13, int price, String description) throws SQLException {
-//        String SQL = "INSERT INTO books(imagePreview, title, author, publishedDate, categories, ISBN_13, price, description) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement stmt = connection.prepareStatement(SQL);
-//        stmt.setString(1, imageURL);
-//        stmt.setString(2, title);
-//        stmt.setString(3, author);
-//        stmt.setString(4, publishedDate);
-//        stmt.setString(5, categories);
-//        stmt.setString(6, ISBN_13);
-//        stmt.setInt(7, price);
-//        stmt.setString(8, description);
-//        int status = stmt.executeUpdate();
-////        System.out.println(status);
-//    }
+    public static void addNewBook(String title, String author, String ISBN, double price, String publishedDate, ArrayList<String> categories, String imagePreview, String description) throws SQLException {
+        if (publishedDate.isEmpty()) {
+            publishedDate = "Unknown";
+        }
+        if (description.isEmpty()) {
+            description = "No description";
+        }
+
+        // Check if a book already existed or not
+        PreparedStatement stmt = connection.prepareStatement(
+                "SELECT COUNT(*) FROM books " +
+                        "WHERE ISBN = ?"
+        );
+        stmt.setString(1, ISBN);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            if (rs.getInt(1) == 1) {
+                System.out.println("Book already existed");
+                return;
+            }
+        } else {
+            System.out.println("Error while checking the existence of a book");
+            return;
+        }
+
+        // Add info into books table
+        stmt =
+                connection.prepareStatement(
+                        "INSERT INTO books(title, ISBN, published_date, image_preview, price, description) "
+                                + "VALUES(?, ?, ?, ?, ?, ?)"
+                );
+        stmt.setString(1, title);
+        stmt.setString(2, ISBN);
+        stmt.setString(3, publishedDate);
+        stmt.setString(4, imagePreview);
+        stmt.setDouble(5, price);
+        stmt.setString(6, description);
+        int status = stmt.executeUpdate();
+        if (status > 0) {
+           System.out.println("Books table updated");
+        }
+        else {
+            System.out.println("Can't add into books table");
+        }
+
+        // Add info into authors table
+        stmt = connection.prepareStatement(
+                "INSERT INTO authors(name) "
+                + "VALUES(?)"
+        );
+        stmt.setString(1, author);
+        status = stmt.executeUpdate();
+        if (status > 0) {
+            System.out.println("Authors table updated");
+        }
+        else {
+            System.out.println("Can't add into authors table");
+        }
+
+        // Add info into book_authors table
+        stmt = connection.prepareStatement(
+                "SELECT author_id FROM authors WHERE name = ?"
+        );
+        stmt.setString(1, author);
+        rs = stmt.executeQuery();
+        int authorID = 0;
+        if (rs.next()) {
+            authorID = rs.getInt(1);
+        } else {
+            System.out.println("Error while updating book_authors table");
+        }
+        stmt = connection.prepareStatement(
+                "SELECT book_id FROM books WHERE ISBN = ?"
+        );
+        stmt.setString(1, ISBN);
+        rs = stmt.executeQuery();
+        int bookID = 0;
+        if (rs.next()) {
+            bookID = rs.getInt(1);
+        } else {
+            System.out.println("Error while updating book_authors table");
+        }
+        stmt = connection.prepareStatement(
+                "INSERT INTO book_authors(author_id, book_id) " +
+                        "VALUES(?, ?)"
+        );
+        stmt.setInt(1, authorID);
+        stmt.setInt(2, bookID);
+        status = stmt.executeUpdate();
+        if (status > 0) {
+            System.out.println("Book_authors table updated");
+        } else {
+            System.out.println("Can't add into book_authors table");
+        }
+
+        // Add info into categories table
+        for (String category: categories) {
+            // Add new category
+            stmt = connection.prepareStatement(
+                    "INSERT INTO categories(category) VALUES(?)"
+            );
+            stmt.setString(1, category);
+            status = stmt.executeUpdate();
+            if (status > 0) {
+                System.out.println("Added " + category + " into categories table");
+            }
+
+            // Add info into book_categories table
+            stmt = connection.prepareStatement(
+                    "SELECT category_id FROM categories WHERE category = ?"
+            );
+            stmt.setString(1, category);
+            rs = stmt.executeQuery();
+            int categoryID = 0;
+            if (rs.next()) {
+                categoryID = rs.getInt(1);
+            } else {
+                System.out.println("Error while getting category_id");
+            }
+            stmt = connection.prepareStatement(
+                "INSERT INTO book_categories(book_id, category_id) VALUES(?, ?)"
+            );
+            stmt.setInt(1, bookID);
+            stmt.setInt(2, categoryID);
+            status = stmt.executeUpdate();
+            if (status > 0) {
+                System.out.println("Book_categories table updated");
+            } else {
+                System.out.println("Can't add into book_categories table");
+            }
+        }
+    }
 }
