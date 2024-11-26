@@ -1,9 +1,11 @@
 package project.libraryserver.Database;
 
 import project.libraryserver.Consts.DATA;
+import project.libraryserver.User.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MySql {
     private static MySql instance;
@@ -37,8 +39,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT p.password " +
-                                "FROM user u join passwords p on u.id = p.user_id " +
-                                "WHERE u.email = ?;"
+                            "FROM user u join passwords p on u.id = p.user_id " +
+                            "WHERE u.email = ?;"
                 );
         preparedStatement.setString(1, email);
 
@@ -67,8 +69,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT count(*) " +
-                                "FROM google " +
-                                "WHERE id = ? and email = ?"
+                            "FROM google " +
+                            "WHERE id = ? and email = ?"
                 );
         preparedStatement.setString(1, google_id);
         preparedStatement.setString(2, email);
@@ -97,7 +99,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO user(first_name, last_name, email, status) "
-                                + "VALUES(?, ?, ?, ?)"
+                            + "VALUES(?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, firstName);
@@ -154,7 +156,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO google (id, given_name, family_name, email, picture_link) "
-                                + "VALUES(?, ?, ?, ?, ?)"
+                            + "VALUES(?, ?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, google_id);
@@ -169,16 +171,16 @@ public class MySql {
 
     public static boolean CheckExistEmailOnGoogleUser(
             String google_id,
-            String given_name,
-            String family_name,
-            String email,
-            String picture) throws SQLException {
+          String given_name,
+          String family_name,
+          String email,
+          String picture) throws SQLException {
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT COUNT(*) FROM google "
-                                + "WHERE id = ? AND given_name = ? "
-                                + "AND family_name = ? AND email = ? and picture_link = ?"
+                            + "WHERE id = ? AND given_name = ? "
+                            + "AND family_name = ? AND email = ? and picture_link = ?"
                 );
         preparedStatement.setString(1, google_id);
         preparedStatement.setString(2, given_name);
@@ -194,6 +196,59 @@ public class MySql {
         return existed;
     }
 
+    public List<User> GetUserList() throws SQLException {
+        List<User> list = new ArrayList<>();
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(
+                        "SELECT " +
+                                "u.id, " +
+                                "u.first_name, " +
+                                "u.last_name, " +
+                                "u.email, " +
+                                "u.status, " +
+                                "p.password " +
+                                "FROM " +
+                                "user u " +
+                                "JOIN passwords p ON u.id = p.user_id;"
+                );
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+            list.add(new User(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6)
+            ));
+        }
+
+        return list;
+    }
+
+    public void UpdateUser() throws SQLException{
+
+    }
+
+    public void DeleteUser(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM passwords WHERE user_id = ?;"
+        );
+        preparedStatement.setInt(1, id);
+        if (preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Can not delete from table password");
+
+        preparedStatement.clearBatch();
+        preparedStatement = connection.prepareStatement(
+                "DELETE FROM user WHERE id = ?;"
+        );
+        preparedStatement.setInt(1, id);
+        if (preparedStatement.executeUpdate() == 0)
+            throw new SQLException("Can not delete from table user");
+    }
+
+    // Add new book
     public static void addNewBook(String title, String author, String ISBN, double price, String publishedDate, ArrayList<String> categories, String imagePreview, String description) throws SQLException {
         if (publishedDate.isEmpty()) {
             publishedDate = "Unknown";
@@ -233,7 +288,7 @@ public class MySql {
         stmt.setString(6, description);
         int status = stmt.executeUpdate();
         if (status > 0) {
-           System.out.println("Books table updated");
+            System.out.println("Books table updated");
         }
         else {
             System.out.println("Can't add into books table");
@@ -242,7 +297,7 @@ public class MySql {
         // Add info into authors table
         stmt = connection.prepareStatement(
                 "INSERT INTO authors(name) "
-                + "VALUES(?)"
+                        + "VALUES(?)"
         );
         stmt.setString(1, author);
         status = stmt.executeUpdate();
@@ -314,7 +369,7 @@ public class MySql {
                 System.out.println("Error while getting category_id");
             }
             stmt = connection.prepareStatement(
-                "INSERT INTO book_categories(book_id, category_id) VALUES(?, ?)"
+                    "INSERT INTO book_categories(book_id, category_id) VALUES(?, ?)"
             );
             stmt.setInt(1, bookID);
             stmt.setInt(2, categoryID);

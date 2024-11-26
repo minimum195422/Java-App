@@ -9,8 +9,12 @@ public class DATA {
 // ---------------------------------------------------------------- //
 // -------------------- Dashboard content link -------------------- //
 // ---------------------------------------------------------------- //
-
-
+    public static final String DASHBOAD_LINK = "FXML/DashBoard/DashBoard.fxml";
+    public static final String SERVER_LOG_LINK = "/project/libraryserver/FXML/DashBoard/ServerLog.fxml";
+    public static final String MANAGE_USERS_LINK = "/project/libraryserver/FXML/DashBoard/ManageUsers.fxml";
+    public static final String MANAGE_DOCUMENT_LINK = "/project/libraryserver/FXML/DashBoard/ManageDocument.fxml";
+    public static final String ADD_NEW_BOOK_LINK = "/project/libraryserver/FXML/DashBoard/AddNewBook.fxml";
+    public static final String USER_DISPLAY_CARD_LINK = "/project/libraryserver/FXML/Cards/UserCard.fxml";
 
 
 // ---------------------------------------------------------------- //
@@ -21,6 +25,8 @@ public class DATA {
     public final static String SCENE_BEING_DEVELOPMENT = "Being Development";
     public final static String SCENE_DASHBOARD_PAGE = "DashBoard Controller";
     public final static String SCENE_VERIFY_PAGE = "Verify Controller";
+
+
 
 
 // ---------------------------------------------------------------- //

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" styleClass="main-pane" stylesheets="@../../Styles/UserCard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.UserCardController">
+    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0">
+      <Circle fx:id="status_dot" fill="DODGERBLUE" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="Status" prefWidth="60.0" text="Status" />
+      <Line endY="15.0" />
+        <Label fx:id="UserId" prefWidth="50.0" text="UserId" />
+      <Line endY="15.0" />
+        <Label fx:id="Name" prefWidth="180.0" text="UserName" />
+      <Line endY="15.0" />
+        <Label fx:id="Email" prefWidth="150.0" text="Email" />
+      <padding>
+         <Insets left="10.0" />
+      </padding>
+    </HBox>
+</AnchorPane>

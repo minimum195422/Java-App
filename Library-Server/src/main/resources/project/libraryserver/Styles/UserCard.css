@@ -1,0 +1,19 @@
+.main-pane {
+    -fx-background-color: rgb(242, 242, 247);
+}
+
+.main-pane:selected {
+    -fx-background-color:  rgb(142, 142, 147);
+}
+
+.circle-glow-green {
+    -fx-fill: green;
+    -fx-border-color: green;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 0, 0.8), 5, 0.5, 0, 0);
+}
+
+.circle-glow-red {
+    -fx-fill: red;
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.8), 5, 0.5, 0, 0);
+}

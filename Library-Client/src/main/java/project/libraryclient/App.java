@@ -27,11 +27,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
-        // start client
+        // start client - trong client đã chạy trên thread riêng
         client = Client.getInstance();
 
-        // Connect to database
-        mysql = MySql.getInstance();
+        // Kết nối database trên một thread riêng
+        new Thread(() -> mysql = MySql.getInstance()).start();
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);

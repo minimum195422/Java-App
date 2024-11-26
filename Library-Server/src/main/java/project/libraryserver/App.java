@@ -3,12 +3,13 @@ package project.libraryserver;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Models.SceneHandler;
 import project.libraryserver.Server.Server;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class App extends Application {
 
@@ -25,20 +26,27 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        // Chạy server trên một thread riêng
+        new Thread(() -> {
+            try {
+                server = Server.getInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
 
-        // Start server
-        server = Server.getInstance();
-
-        // start database connection
-        mysql = MySql.getInstance();
+        // Kết nối database trên một thread riêng
+        new Thread(() -> mysql = MySql.getInstance()).start();
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);
 
-        DashBoard = sceneHandler.AddScene(DATA.SCENE_DASHBOARD_PAGE,"FXML/DashBoard.fxml");
+        DashBoard = sceneHandler.AddScene(DATA.SCENE_DASHBOARD_PAGE, DATA.DASHBOAD_LINK);
 
         sceneHandler.SetScene(DATA.SCENE_DASHBOARD_PAGE);
 
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
+
 }
