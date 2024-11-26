@@ -31,6 +31,7 @@ public class UserCardController {
         Name.setText(name);
         Email.setText(email);
         Status.setText(status);
+
         if (status.equals("active")) {
             status_dot.getStyleClass().add("circle-glow-green");
         } else {

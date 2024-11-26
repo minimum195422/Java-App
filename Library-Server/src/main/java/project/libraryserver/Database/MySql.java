@@ -105,7 +105,7 @@ public class MySql {
         preparedStatement.setString(1, firstName);
         preparedStatement.setString(2, lastName);
         preparedStatement.setString(3, email);
-        preparedStatement.setString(4, "ON");
+        preparedStatement.setString(4, "active");
         int status = preparedStatement.executeUpdate();
 
         preparedStatement = connection.prepareStatement(
@@ -227,8 +227,27 @@ public class MySql {
         return list;
     }
 
-    public void UpdateUser() throws SQLException{
-
+    public void UpdateUser(int id, String firstName, String lastName, String email, String password, String status) throws SQLException{
+        PreparedStatement stmt = connection.prepareStatement(
+          "UPDATE user SET first_name = ?, last_name = ?, email = ?, status = ? WHERE (id = ?)"
+        );
+        stmt.setString(1, firstName);
+        stmt.setString(2, lastName);
+        stmt.setString(3, email);
+        stmt.setString(4, status);
+        stmt.setInt(5, id);
+        int update = stmt.executeUpdate();
+        stmt = connection.prepareStatement(
+                "UPDATE passwords SET password = ? WHERE (user_id = ?)"
+        );
+        stmt.setString(1, password);
+        stmt.setInt(2, id);
+        update = stmt.executeUpdate();
+        if (update > 0) {
+            System.out.println("User with id = " + id + " updated");
+        } else {
+            System.out.println("Can't update user with id = " + id);
+        }
     }
 
     public void DeleteUser(int id) throws SQLException {

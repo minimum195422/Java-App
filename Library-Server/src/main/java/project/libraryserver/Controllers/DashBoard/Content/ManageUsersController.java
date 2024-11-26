@@ -61,7 +61,7 @@ public class ManageUsersController implements Initializable {
         try {
             UserList = MySql.getInstance().GetUserList();
             if (UserList.isEmpty()) {
-                System.out.println("fail to load user");
+                System.out.println("Fail to load user");
             }
 
             for (User u : UserList) {
@@ -80,14 +80,23 @@ public class ManageUsersController implements Initializable {
                             } else {
                                 InactiveButton.setSelected(true);
                             }
+                            ActiveButton.setOnMouseClicked(_ -> {
+                                if (!ActiveButton.isSelected() && !InactiveButton.isSelected()) {
+                                    ActiveButton.setSelected(true);
+                                }
+                            });
+                            InactiveButton.setOnMouseClicked(_ -> {
+                                if (!ActiveButton.isSelected() && !InactiveButton.isSelected()) {
+                                    InactiveButton.setSelected(true);
+                                }
+                            });
                         }
                 );
             }
         } catch (SQLException e) {
-            System.out.println("fail at sql");
+            System.out.println("Fail at sql");
             e.printStackTrace(System.out);
         }
-
     }
 
     public void DeleteButtonClicked() throws SQLException {
@@ -103,8 +112,15 @@ public class ManageUsersController implements Initializable {
 
     public void ChangeButtonClicked() {
         try {
+            String status = "";
+            if (ActiveButton.isSelected()) {
+                status = "active";
+            } else {
+                status = "inactive";
+            }
             MySql.getInstance().UpdateUser(
-
+                Integer.parseInt(DisplayUserId.getText()), DisplayFirstName.getText(), DisplayLastName.getText(),
+                    DisplayEmail.getText(), DisplayPassword.getText(), status
             );
             LoadUserList();
         } catch (SQLException e) {
