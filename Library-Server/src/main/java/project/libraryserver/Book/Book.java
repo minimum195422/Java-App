@@ -1,5 +1,12 @@
 package project.libraryserver.Book;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import project.libraryserver.Consts.DATA;
+import project.libraryserver.Controllers.Card.BookCard_600_200;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Book {
@@ -12,24 +19,41 @@ public class Book {
     private ArrayList<String> categories;
     private String ISBN_13;
     private String ISBN_10;
-    private String imagePreview;
+    private Image imagePreview;
     private String webReaderLink;
+    private AnchorPane DisplayCard;
+    private BookCard_600_200 Controller;
+
+//    private int price;
 
 
-    private double price;
+    public Book(String id, String title, ArrayList<String> author,
+                String publisher, String publishedDate, String description,
+                ArrayList<String> categories, String ISBN_13, String ISBN_10,
+                Image imagePreview, String webReaderLink) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.description = description;
+        this.categories = categories;
+        this.ISBN_13 = ISBN_13;
+        this.ISBN_10 = ISBN_10;
+        this.imagePreview = imagePreview;
+        this.webReaderLink = webReaderLink;
+        LoadDisplayCard();
+    }
 
-    public Book() {
-        id = "";
-        title = "";
-        author = new ArrayList<>();
-        publisher = "";
-        publishedDate = "";
-        description = "";
-        ISBN_13 = "Can't found isbn";
-        ISBN_10 = "Can't found isbn";
-        imagePreview = "";
-        webReaderLink = "";
-        price = 0;
+    private void LoadDisplayCard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_LINK));
+            DisplayCard = loader.load();
+            Controller = loader.getController();
+            Controller.setInfor(imagePreview, title, publisher, ISBN_13, ISBN_10, publishedDate, author.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setId(String id) {
@@ -68,7 +92,7 @@ public class Book {
         this.categories = categories;
     }
 
-    public void setImagePreview(String imagePreview) {
+    public void setImagePreview(Image imagePreview) {
         this.imagePreview = imagePreview;
     }
 
@@ -76,26 +100,20 @@ public class Book {
         this.webReaderLink = webReaderLink;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDisplayCard(AnchorPane displayCard) {
+        DisplayCard = displayCard;
     }
+
+    public void setController(BookCard_600_200 controller) {
+        Controller = controller;
+    }
+
     public String getId() {
         return id;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getAuthorInString() {
-        StringBuilder authors = new StringBuilder();
-        for (int i = 0; i < author.size(); i++) {
-            authors.append(author.get(i));
-            if (i != author.size() - 1) {
-                authors.append(", ");
-            }
-        }
-        return authors.toString();
     }
 
     public ArrayList<String> getAuthor() {
@@ -122,7 +140,7 @@ public class Book {
         return ISBN_10;
     }
 
-    public String getImagePreview() {
+    public Image getImagePreview() {
         return imagePreview;
     }
 
@@ -134,9 +152,14 @@ public class Book {
         return categories;
     }
 
-    public double getPrice() {
-        return price;
+    public AnchorPane getDisplayCard() {
+        return DisplayCard;
     }
+
+    public BookCard_600_200 getController() {
+        return Controller;
+    }
+
     public String toString() {
         return "Book{" +
                 "id=<" + id + ">\n" +
@@ -150,7 +173,6 @@ public class Book {
                 "ISBN_10=<" + ISBN_10 + ">\n" +
                 "imagePreview=<" + imagePreview + ">\n" +
                 "webReaderLink=<" + webReaderLink + ">\n" +
-                "price=<" + price + ">\n" +
                 '}';
     }
 }

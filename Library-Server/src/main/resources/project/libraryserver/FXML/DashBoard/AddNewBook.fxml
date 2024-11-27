@@ -24,9 +24,9 @@
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../../Images/Icons/search.png" />
                </ImageView>
-               <TextField maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="460.0" styleClass="search-area" />
+               <TextField fx:id="SearchQuery" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" onAction="#SearchAction" prefHeight="30.0" prefWidth="460.0" styleClass="search-area" />
             </HBox>
-            <Button fx:id="SearchButton" layoutX="530.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#SearchButtonClicked" prefHeight="30.0" prefWidth="70.0" styleClass="search-button" text="Search" />
+            <Button fx:id="SearchButton" layoutX="530.0" layoutY="11.0" mnemonicParsing="false" onAction="#SearchAction" onMouseClicked="#SearchButtonClicked" prefHeight="30.0" prefWidth="70.0" styleClass="search-button" text="Search" />
          </AnchorPane>
          <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10.0" styleClass="back-color">
             <padding>
@@ -37,7 +37,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <ToggleButton fx:id="SearchByTypeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Title" />
+            <ToggleButton fx:id="SearchByTitleButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Title" />
             <ToggleButton fx:id="SearchByAuthorButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Author" />
             <ToggleButton fx:id="SearchByPublisherButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Publisher" />
             <ToggleButton fx:id="SearchBySubjectButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Subject" />
