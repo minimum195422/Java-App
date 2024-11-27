@@ -35,10 +35,4 @@ public class GenerateJson {
         return json;
     }
 
-    public static JSONObject CreateResponseRegisterRequest(JsonType type, Message message) {
-        JSONObject json = new JSONObject();
-        json.put("type", type);
-        json.put("message", message);
-        return json;
-    }
 }

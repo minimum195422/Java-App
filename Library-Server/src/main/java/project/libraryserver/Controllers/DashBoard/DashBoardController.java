@@ -28,8 +28,16 @@ public class DashBoardController implements Initializable {
     @FXML
     public ToggleButton ServerLogButton;
 
-    public void ServerLogOnClicked(MouseEvent mouseEvent) {
-        LoadPage(DATA.SERVER_LOG_LINK);
+    public void ServerLogOnClicked() {
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.SERVER_LOG_LINK))
+            );
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
     }
 
 
@@ -37,7 +45,7 @@ public class DashBoardController implements Initializable {
     @FXML
     public ToggleButton AddNewBookButton;
 
-    public void AddNewBookOnClicked(MouseEvent mouseEvent) {
+    public void AddNewBookOnClicked() {
         try {
             AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
@@ -54,7 +62,7 @@ public class DashBoardController implements Initializable {
     @FXML
     public ToggleButton ManageUsersButton;
 
-    public void ManageUsersOnClicked(MouseEvent mouseEvent) {
+    public void ManageUsersOnClicked() {
         try {
             AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
@@ -83,17 +91,6 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    private void LoadPage(String path) {
-        try {
-            ScrollPane pane = FXMLLoader.load(
-                    Objects.requireNonNull(
-                            getClass().getResource(path))
-            );
-            ContentDisplay.setCenter(pane);
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -102,17 +99,26 @@ public class DashBoardController implements Initializable {
         ManageUsersButton.setToggleGroup(function_button_toggle_group);
         ManageDocumentButton.setToggleGroup(function_button_toggle_group);
 
-        // cai nut duoc hien thi dau tien khi chay
+        function_button_toggle_group.selectedToggleProperty().addListener(
+            (_, oldToggle, newToggle) -> {
+                if (newToggle == null) {
+                    function_button_toggle_group.selectToggle(oldToggle);
+                }
+        });
+
+        // default selected button when load page
         ServerLogButton.setSelected(true);
 
-        // cai content page tuong ung voi nut duoc chon
-        LoadPage(DATA.SERVER_LOG_LINK);
+        // content with selected button
+        try {
+            ScrollPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.SERVER_LOG_LINK))
+            );
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
     }
-
-
-
-
-
-
 
 }

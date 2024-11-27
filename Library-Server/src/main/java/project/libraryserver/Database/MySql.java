@@ -41,8 +41,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT u.status, p.password " +
-                            "FROM user u join passwords p on u.id = p.user_id " +
-                            "WHERE u.email = ?;"
+                                "FROM user u join passwords p on u.id = p.user_id " +
+                                "WHERE u.email = ?;"
                 );
         preparedStatement.setString(1, email);
 
@@ -74,8 +74,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT count(*) " +
-                            "FROM google " +
-                            "WHERE id = ? and email = ?"
+                                "FROM google " +
+                                "WHERE id = ? and email = ?"
                 );
         preparedStatement.setString(1, google_id);
         preparedStatement.setString(2, email);
@@ -104,7 +104,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO user(first_name, last_name, email, status) "
-                            + "VALUES(?, ?, ?, ?)"
+                                + "VALUES(?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, firstName);
@@ -161,7 +161,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO google (id, given_name, family_name, email, picture_link) "
-                            + "VALUES(?, ?, ?, ?, ?)"
+                                + "VALUES(?, ?, ?, ?, ?)"
                 );
 
         preparedStatement.setString(1, google_id);
@@ -176,16 +176,16 @@ public class MySql {
 
     public static boolean CheckExistEmailOnGoogleUser(
             String google_id,
-          String given_name,
-          String family_name,
-          String email,
-          String picture) throws SQLException {
+            String given_name,
+            String family_name,
+            String email,
+            String picture) throws SQLException {
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT COUNT(*) FROM google "
-                            + "WHERE id = ? AND given_name = ? "
-                            + "AND family_name = ? AND email = ? and picture_link = ?"
+                                + "WHERE id = ? AND given_name = ? "
+                                + "AND family_name = ? AND email = ? and picture_link = ?"
                 );
         preparedStatement.setString(1, google_id);
         preparedStatement.setString(2, given_name);
@@ -234,7 +234,7 @@ public class MySql {
 
     public void UpdateUser(int id, String firstName, String lastName, String email, String password, String status) throws SQLException{
         PreparedStatement stmt = connection.prepareStatement(
-          "UPDATE user SET first_name = ?, last_name = ?, email = ?, status = ? WHERE (id = ?)"
+                "UPDATE user SET first_name = ?, last_name = ?, email = ?, status = ? WHERE (id = ?)"
         );
         stmt.setString(1, firstName);
         stmt.setString(2, lastName);

@@ -5,24 +5,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import project.libraryserver.Book.Book;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ManageUsersController implements Initializable {
@@ -60,17 +50,24 @@ public class ManageUsersController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ActiveButton.setToggleGroup(DisplayStatus);
         InactiveButton.setToggleGroup(DisplayStatus);
+
+        DisplayStatus.selectedToggleProperty().addListener(
+                (observable, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        DisplayStatus.selectToggle(oldToggle);
+                    }
+                });
+
         LoadUserList();
     }
 
     private void LoadUserList() {
-        if (!UserList.isEmpty()) UserList.clear();
         if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
 
         try {
             UserList = MySql.getInstance().GetUserList();
             if (UserList.isEmpty()) {
-                System.out.println("Fail to load user");
+                System.out.println("fail to load user");
             }
 
             for (User u : UserList) {
@@ -89,23 +86,14 @@ public class ManageUsersController implements Initializable {
                             } else {
                                 InactiveButton.setSelected(true);
                             }
-                            ActiveButton.setOnMouseClicked(_ -> {
-                                if (!ActiveButton.isSelected() && !InactiveButton.isSelected()) {
-                                    ActiveButton.setSelected(true);
-                                }
-                            });
-                            InactiveButton.setOnMouseClicked(_ -> {
-                                if (!ActiveButton.isSelected() && !InactiveButton.isSelected()) {
-                                    InactiveButton.setSelected(true);
-                                }
-                            });
                         }
                 );
             }
         } catch (SQLException e) {
-            System.out.println("Fail at sql");
+            System.out.println("fail at sql");
             e.printStackTrace(System.out);
         }
+
     }
 
     public void DeleteButtonClicked() throws SQLException {
@@ -121,19 +109,20 @@ public class ManageUsersController implements Initializable {
 
     public void ChangeButtonClicked() {
         try {
-            String status = "";
-            if (ActiveButton.isSelected()) {
-                status = "active";
-            } else {
-                status = "inactive";
-            }
             MySql.getInstance().UpdateUser(
-                Integer.parseInt(DisplayUserId.getText()), DisplayFirstName.getText(), DisplayLastName.getText(),
-                    DisplayEmail.getText(), DisplayPassword.getText(), status
+                    Integer.parseInt(DisplayUserId.getText()),
+                    DisplayFirstName.getText(),
+                    DisplayLastName.getText(),
+                    DisplayEmail.getText(),
+                    DisplayPassword.getText(),
+                    (ActiveButton.isSelected() && !InactiveButton.isSelected()) ?
+                            "active" : "inactive"
             );
             LoadUserList();
+        } catch (NumberFormatException e) {
+            System.err.println("ID không hợp lệ: " + e.getMessage());
         } catch (SQLException e) {
-            System.out.println("Thông tin không hợp lệ");
+            System.out.println("Lỗi mysql: " + e.getMessage());
         }
     }
 
