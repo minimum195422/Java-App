@@ -34,4 +34,5 @@ public class GenerateJson {
         json.put("message", Message.FAILED);
         return json;
     }
+
 }

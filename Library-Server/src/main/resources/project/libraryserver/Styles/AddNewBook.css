@@ -27,3 +27,36 @@
 .list-area {
     -fx-background-color: rgb(242, 242, 247);
 }
+
+
+.search-button {
+    -fx-background-radius: 5;
+    -fx-background-color: rgb(10, 132, 255);
+    -fx-text-fill: #ffffff;
+}
+
+.search-button:hover {
+    -fx-background-radius: 5;
+    -fx-background-color: rgb(0, 122, 255);
+}
+
+.search-button:selected {
+    -fx-background-radius: 5;
+    -fx-background-color: rgb(10, 132, 255);
+    -fx-effect: dropshadow(gaussian, #929292, 5, 0.5, 0, 1);
+}
+
+.search-option {
+    -fx-background-color: rgb(229, 229, 234);
+    -fx-border-radius: 5;
+    -fx-border-color: rgb(174, 174, 178);
+    -fx-text-fill: rgb(174, 174, 178);
+}
+
+.search-option:selected {
+    -fx-background-color: rgb(242, 242, 247);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: rgb(174, 174, 178);
+    -fx-text-fill: rgb(28, 28, 30);
+}

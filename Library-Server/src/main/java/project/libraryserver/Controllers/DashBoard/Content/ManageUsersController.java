@@ -50,11 +50,18 @@ public class ManageUsersController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ActiveButton.setToggleGroup(DisplayStatus);
         InactiveButton.setToggleGroup(DisplayStatus);
+
+        DisplayStatus.selectedToggleProperty().addListener(
+                (observable, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                DisplayStatus.selectToggle(oldToggle);
+            }
+        });
+
         LoadUserList();
     }
 
     private void LoadUserList() {
-        if (!UserList.isEmpty()) UserList.clear();
         if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
 
         try {

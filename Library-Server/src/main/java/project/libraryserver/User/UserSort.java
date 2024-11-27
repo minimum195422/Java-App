@@ -1,6 +1,8 @@
+package project.libraryserver.User;
 
 import java.util.Comparator;
 import java.util.List;
+
 public class UserSort {
     public static void SortByIdAsc(List<User> users) {
         users.sort(Comparator.comparingInt(User::getId));
