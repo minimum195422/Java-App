@@ -5,6 +5,7 @@ import project.libraryclient.Consts.DATA;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MySql {
     private static MySql instance;
@@ -58,19 +59,19 @@ public class MySql {
         PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, name);
         ResultSet rs = stmt.executeQuery();
-        int prevId = 0;
+        String prevId = "";
         String prevTitle = "";
         ArrayList<String> prevAuthor = new ArrayList<>();
         String prevImage = "";
         while (rs.next()) {
             // title, author, image
-            int id = rs.getInt(1);
+            String id = rs.getString(1);
             String title = rs.getString(2);
             String author = rs.getString(3);
             String image = rs.getString(4);
 //            System.out.println(title + " " + author + " " + image);
-            if (prevId != id) {
-                if (prevId > 0) {
+            if (!Objects.equals(prevId, id)) {
+                if (!prevId.isEmpty()) {
                     book = new Book(prevId, prevTitle, prevAuthor, prevImage);
                     bookList.add(book);
                     prevAuthor.clear();
@@ -81,7 +82,7 @@ public class MySql {
             prevAuthor.add(author);
             prevImage = image;
         }
-        if (prevId > 0) {
+        if (!prevId.isEmpty()) {
             book = new Book(prevId, prevTitle, prevAuthor, prevImage);
             bookList.add(book);
         }

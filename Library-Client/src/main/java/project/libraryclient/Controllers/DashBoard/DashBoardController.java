@@ -357,7 +357,7 @@ public class DashBoardController implements Initializable {
                             list.add(card);
                             // Add listener to a book
                             card.setOnMouseClicked(event -> {
-                                System.out.println(book.getBookId());
+                                System.out.println(book.getId());
                             });
                         } catch (IOException e) {
                             throw new RuntimeException(e);

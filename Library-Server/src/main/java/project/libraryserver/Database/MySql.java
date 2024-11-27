@@ -274,9 +274,11 @@ public class MySql {
 
     // Add new book
     public static void addNewBook(Book book) throws SQLException {
+        String bookID = book.getId();
         String title = book.getTitle();
         ArrayList<String> authors = book.getAuthor();
-        String ISBN = book.getISBN();
+        String ISBN_13 = book.getISBN_13();
+        String ISBN_10 = book.getISBN_10();
         double price = book.getPrice();
         String publishedDate = book.getPublishedDate();
         ArrayList<String> categories = book.getCategories();
@@ -292,9 +294,9 @@ public class MySql {
         // Check if a book already existed or not
         PreparedStatement stmt = connection.prepareStatement(
                 "SELECT COUNT(*) FROM books " +
-                        "WHERE ISBN = ?"
+                        "WHERE book_id = ?"
         );
-        stmt.setString(1, ISBN);
+        stmt.setString(1, bookID);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
             if (rs.getInt(1) == 1) {
@@ -310,34 +312,22 @@ public class MySql {
 
         stmt =
                 connection.prepareStatement(
-                        "INSERT INTO books(title, ISBN, published_date, image_preview, price, description) "
-                                + "VALUES(?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO books(title, ISBN_10, ISBN_13, published_date, image_preview, price, description) "
+                                + "VALUES(?, ?, ?, ?, ?, ?, ?)"
                 );
         stmt.setString(1, title);
-        stmt.setString(2, ISBN);
-        stmt.setString(3, publishedDate);
-        stmt.setString(4, imagePreview);
-        stmt.setDouble(5, price);
-        stmt.setString(6, description);
+        stmt.setString(2, ISBN_10);
+        stmt.setString(3, ISBN_13);
+        stmt.setString(4, publishedDate);
+        stmt.setString(5, imagePreview);
+        stmt.setDouble(6, price);
+        stmt.setString(7, description);
         int status = stmt.executeUpdate();
         if (status > 0) {
 //            System.out.println("Books table updated");
         }
         else {
             System.out.println("Can't add into books table");
-        }
-
-        // Getting book's id
-        stmt = connection.prepareStatement(
-                "SELECT book_id FROM books WHERE ISBN = ?"
-        );
-        stmt.setString(1, ISBN);
-        rs = stmt.executeQuery();
-        int bookID = 0;
-        if (rs.next()) {
-            bookID = rs.getInt(1);
-        } else {
-            System.out.println("Error while getting book's id");
         }
 
         for (String author: authors) {
@@ -384,7 +374,7 @@ public class MySql {
                             "VALUES(?, ?)"
             );
             stmt.setInt(1, authorID);
-            stmt.setInt(2, bookID);
+            stmt.setString(2, bookID);
             status = stmt.executeUpdate();
             if (status > 0) {
 //                System.out.println("Book_authors table updated");
@@ -435,7 +425,7 @@ public class MySql {
             stmt = connection.prepareStatement(
                     "INSERT INTO book_categories(book_id, category_id) VALUES(?, ?)"
             );
-            stmt.setInt(1, bookID);
+            stmt.setString(1, bookID);
             stmt.setInt(2, categoryID);
             status = stmt.executeUpdate();
             if (status > 0) {
