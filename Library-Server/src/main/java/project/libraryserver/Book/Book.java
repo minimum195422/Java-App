@@ -1,12 +1,15 @@
 package project.libraryserver.Book;
 
+import java.util.ArrayList;
+
 public class Book {
     private String id;
     private String title;
-    private String author;
+    private ArrayList<String> author;
     private String publisher;
     private String publishedDate;
     private String description;
+    private ArrayList<String> categories;
     private String ISBN_13;
     private String ISBN_10;
     private String imagePreview;
@@ -18,7 +21,7 @@ public class Book {
     public Book() {
         id = "";
         title = "";
-        author = "";
+        author = new ArrayList<>();
         publisher = "";
         publishedDate = "";
         description = "";
@@ -36,7 +39,7 @@ public class Book {
         this.title = title;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(ArrayList<String> author) {
         this.author = author;
     }
 
@@ -60,6 +63,10 @@ public class Book {
         this.ISBN_10 = ISBN_10;
     }
 
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
     public void setImagePreview(String imagePreview) {
         this.imagePreview = imagePreview;
     }
@@ -76,7 +83,7 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
+    public ArrayList<String> getAuthor() {
         return author;
     }
 
@@ -108,18 +115,23 @@ public class Book {
         return webReaderLink;
     }
 
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
     public String toString() {
         return "Book{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", publishedDate='" + publishedDate + '\'' +
-                ", description='" + description + '\'' +
-                ", ISBN_13='" + ISBN_13 + '\'' +
-                ", ISBN_10='" + ISBN_10 + '\'' +
-                ", imagePreview='" + imagePreview + '\'' +
-                ", webReaderLink='" + webReaderLink + '\'' +
+                "id=<" + id + ">\n" +
+                "title=<" + title + ">\n" +
+                "author=<" + author + ">\n" +
+                "publisher=<" + publisher + ">\n" +
+                "publishedDate=<" + publishedDate + ">\n" +
+                "description=<" + description + ">\n" +
+                "categories=<" + categories + ">\n" +
+                "ISBN_13=<" + ISBN_13 + ">\n" +
+                "ISBN_10=<" + ISBN_10 + ">\n" +
+                "imagePreview=<" + imagePreview + ">\n" +
+                "webReaderLink=<" + webReaderLink + ">\n" +
                 '}';
     }
 }

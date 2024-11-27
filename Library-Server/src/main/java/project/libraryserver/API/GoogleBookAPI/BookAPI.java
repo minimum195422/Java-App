@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -73,7 +74,7 @@ public class BookAPI {
         StringBuilder response = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
-            System.out.println(inputLine);
+            // System.out.println(inputLine);
         }
         in.close();
 
@@ -122,11 +123,10 @@ public class BookAPI {
         // author
         try {
             if (volumeInfo.has("authors")) {
-                returnBook.setAuthor(
-                        JsonArrayToString(volumeInfo.getJSONArray("authors"))
-                );
+                String authorList = JsonArrayToString(volumeInfo.getJSONArray("authors"));
+                returnBook.setAuthor(new ArrayList<>(Arrays.asList(authorList.split(","))));
             } else {
-                returnBook.setAuthor("Can't found any author");
+                returnBook.setAuthor(new ArrayList<>());
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
@@ -170,6 +170,19 @@ public class BookAPI {
             System.out.println("fail to load description");
         }
 
+        // Get category
+        try {
+            if (json.getJSONObject("volumeInfo").has("categories")) {
+                String categoryList = JsonArrayToString(volumeInfo.getJSONArray("categories"));
+                returnBook.setCategories(new ArrayList<>(Arrays.asList(categoryList.split(","))));
+            } else {
+                returnBook.setCategories(new ArrayList<>());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace(System.out);
+            System.out.println("fail to load categories");
+        }
+
         // get isbn-13 and isbn-10
         try {
             if (volumeInfo.has("industryIdentifiers")) {
@@ -194,8 +207,7 @@ public class BookAPI {
             e.printStackTrace(System.out);
             System.out.println("fail to load isbn");
         }
-
-
+        
         return returnBook;
     }
 
@@ -203,7 +215,7 @@ public class BookAPI {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < jsonArray.length(); ++i) {
             stringBuilder.append(jsonArray.get(i).toString());
-            if (i < jsonArray.length() - 1) stringBuilder.append(", ");
+            if (i < jsonArray.length() - 1) stringBuilder.append(",");
         }
         return stringBuilder.toString();
     }
