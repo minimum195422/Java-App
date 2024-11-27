@@ -1,5 +1,12 @@
 package project.libraryserver.Book;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import project.libraryserver.Consts.DATA;
+import project.libraryserver.Controllers.Card.BookCard_600_200;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Book {
@@ -12,23 +19,41 @@ public class Book {
     private ArrayList<String> categories;
     private String ISBN_13;
     private String ISBN_10;
-    private String imagePreview;
+    private Image imagePreview;
     private String webReaderLink;
-
+    private AnchorPane DisplayCard;
+    private BookCard_600_200 Controller;
 
 //    private int price;
 
-    public Book() {
-        id = "";
-        title = "";
-        author = new ArrayList<>();
-        publisher = "";
-        publishedDate = "";
-        description = "";
-        ISBN_13 = "Can't found isbn";
-        ISBN_10 = "Can't found isbn";
-        imagePreview = "";
-        webReaderLink = "";
+
+    public Book(String id, String title, ArrayList<String> author,
+                String publisher, String publishedDate, String description,
+                ArrayList<String> categories, String ISBN_13, String ISBN_10,
+                Image imagePreview, String webReaderLink) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.description = description;
+        this.categories = categories;
+        this.ISBN_13 = ISBN_13;
+        this.ISBN_10 = ISBN_10;
+        this.imagePreview = imagePreview;
+        this.webReaderLink = webReaderLink;
+        LoadDisplayCard();
+    }
+
+    private void LoadDisplayCard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_LINK));
+            DisplayCard = loader.load();
+            Controller = loader.getController();
+            Controller.setInfor(imagePreview, title, publisher, ISBN_13, ISBN_10, publishedDate, author.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setId(String id) {
@@ -67,12 +92,20 @@ public class Book {
         this.categories = categories;
     }
 
-    public void setImagePreview(String imagePreview) {
+    public void setImagePreview(Image imagePreview) {
         this.imagePreview = imagePreview;
     }
 
     public void setWebReaderLink(String webReaderLink) {
         this.webReaderLink = webReaderLink;
+    }
+
+    public void setDisplayCard(AnchorPane displayCard) {
+        DisplayCard = displayCard;
+    }
+
+    public void setController(BookCard_600_200 controller) {
+        Controller = controller;
     }
 
     public String getId() {
@@ -107,7 +140,7 @@ public class Book {
         return ISBN_10;
     }
 
-    public String getImagePreview() {
+    public Image getImagePreview() {
         return imagePreview;
     }
 
@@ -117,6 +150,14 @@ public class Book {
 
     public ArrayList<String> getCategories() {
         return categories;
+    }
+
+    public AnchorPane getDisplayCard() {
+        return DisplayCard;
+    }
+
+    public BookCard_600_200 getController() {
+        return Controller;
     }
 
     public String toString() {

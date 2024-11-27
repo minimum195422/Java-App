@@ -9,50 +9,45 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.BookCard_600_200">
-   <children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
-         <children>
-            <ImageView fx:id="BookCover" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox prefHeight="200.0" prefWidth="450.0" spacing="12.0">
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Text fx:id="TitleText" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="PublisherText" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="ISBN13Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="ISBN10Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="PublishedDateText" strokeType="OUTSIDE" strokeWidth="0.0" text="Published date:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="AuthorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></VBox>
-         </children>
-      </HBox>
-   </children>
+   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
+      <ImageView fx:id="BookCover" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" />
+      <VBox prefHeight="200.0" prefWidth="450.0" spacing="12.0">
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <Text fx:id="TitleText" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="PublisherText" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="ISBN13Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="ISBN10Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="PublishedDateText" strokeType="OUTSIDE" strokeWidth="0.0" text="Published date:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="AuthorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+      </VBox>
+   </HBox>
 </AnchorPane>

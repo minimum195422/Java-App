@@ -1,5 +1,6 @@
 package project.libraryserver.API.GoogleBookAPI;
 
+import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,22 +13,8 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 public class BookAPI {
-    public static void main(String[] args) throws URISyntaxException, IOException {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        ArrayList<SearchType> types = new ArrayList<>();
-//        types.add(SearchType.INAUTHOR);
-        List<Book> t = SearchBook(s, types);
-        if (!t.isEmpty()) {
-            for (Book book : t) {
-                System.out.println(book.toString());
-            }
-        }
-    }
 
     public static ArrayList<Book> SearchBook(String query, ArrayList<SearchType> types) throws URISyntaxException, IOException {
 
@@ -96,94 +83,120 @@ public class BookAPI {
     }
 
     private static Book JsonToBook(JSONObject json) {
-        Book returnBook = new Book();
 
-        // book id
-        if (json.has("id")) {
-            returnBook.setId(json.getString("id"));
-        } else {
-            returnBook.setId("null");
-        }
-
-        JSONObject volumeInfo = new JSONObject();
         try {
+            JSONObject volumeInfo = new JSONObject();
             volumeInfo = json.getJSONObject("volumeInfo");
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("can not find volumeInfo");
         }
 
-        // book title
-        if (volumeInfo.has("title")) {
-            returnBook.setTitle(volumeInfo.getString("title"));
-        } else {
-            returnBook.setTitle("Can't found title");
-        }
+        return new Book(
+                getBookId(json),
+                getBookTitle(json.getJSONObject("volumeInfo")),
+                getBookAuthor(json.getJSONObject("volumeInfo")),
+                getBookPublisher(json.getJSONObject("volumeInfo")),
+                getBookPublishedDate(json.getJSONObject("volumeInfo")),
+                getBookDescription(json.getJSONObject("volumeInfo")),
+                getBookCategories(json.getJSONObject("volumeInfo")),
+                getBookISBN(json.getJSONObject("volumeInfo")).get(0),
+                getBookISBN(json.getJSONObject("volumeInfo")).get(1),
+                getBookCover(json.getJSONObject("volumeInfo")),
+                getBookWebReadLink(json.getJSONObject("accessInfo"))
+        );
+    }
 
-        // author
+
+
+    private static String JsonArrayToString(JSONArray jsonArray) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            stringBuilder.append(jsonArray.get(i).toString());
+            if (i < jsonArray.length() - 1) stringBuilder.append(",");
+        }
+        return stringBuilder.toString();
+    }
+
+    private static String getBookId(JSONObject json) {
+        if (json.has("id")) {
+            return json.getString("id");
+        }
+        return "no id";
+    }
+
+    private static String getBookTitle(JSONObject volumeInfo) {
+        if (volumeInfo.has("title")) {
+            return volumeInfo.getString("title");
+        }
+        return "Can't found title";
+    }
+
+    private static ArrayList<String> getBookAuthor(JSONObject volumeInfo) {
         try {
             if (volumeInfo.has("authors")) {
                 String authorList = JsonArrayToString(volumeInfo.getJSONArray("authors"));
-                returnBook.setAuthor(new ArrayList<>(Arrays.asList(authorList.split(","))));
-            } else {
-                returnBook.setAuthor(new ArrayList<>());
+                return new ArrayList<>(Arrays.asList(authorList.split(",")));
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("fail to load author json array");
         }
+        return new ArrayList<>();
+    }
 
-        // Get publisher
+    public static String getBookPublisher(JSONObject volumeInfo) {
         try {
             if (volumeInfo.has("publisher")) {
-                returnBook.setPublisher(volumeInfo.get("publisher").toString());
-            } else {
-                returnBook.setPublisher("Can't found publisher");
+                return volumeInfo.get("publisher").toString();
             }
-
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("fail to load publisher");
         }
+        return "Can't found publisher";
+    }
 
-        // Get publish date
+    public static String getBookPublishedDate(JSONObject volumeInfo) {
         try {
             if (volumeInfo.has("publishedDate")) {
-                returnBook.setPublisher(volumeInfo.get("publishedDate").toString());
-            } else {
-                returnBook.setPublishedDate("Can't found time release");
+                return volumeInfo.get("publishedDate").toString();
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("fail to load publish date");
         }
+        return "Can't found time release";
+    }
 
-        // Get description
+    public static String getBookDescription(JSONObject volumeInfo) {
         try {
-            if (json.getJSONObject("volumeInfo").has("description")) {
-                returnBook.setDescription(volumeInfo.get("description").toString());
-            } else {
-                returnBook.setDescription("Can't found description");
+            if (volumeInfo.has("description")) {
+                return volumeInfo.get("description").toString();
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("fail to load description");
         }
+        return "Can't found description";
+    }
 
-        // Get category
+    public static ArrayList<String> getBookCategories(JSONObject volumeInfo) {
         try {
-            if (json.getJSONObject("volumeInfo").has("categories")) {
+            if (volumeInfo.has("categories")) {
                 String categoryList = JsonArrayToString(volumeInfo.getJSONArray("categories"));
-                returnBook.setCategories(new ArrayList<>(Arrays.asList(categoryList.split(","))));
-            } else {
-                returnBook.setCategories(new ArrayList<>());
+                return new ArrayList<>(Arrays.asList(categoryList.split(",")));
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
             System.out.println("fail to load categories");
         }
+        return new ArrayList<>();
+    }
 
-        // get isbn-13 and isbn-10
+    public static ArrayList<String> getBookISBN(JSONObject volumeInfo) {
+        String isbn13 = "Can't found isbn";
+        String isbn10 = "Can't found isbn";
         try {
             if (volumeInfo.has("industryIdentifiers")) {
                 JSONArray temp = volumeInfo.getJSONArray("industryIdentifiers");
@@ -191,14 +204,10 @@ public class BookAPI {
                     JSONObject isbn = temp.getJSONObject(i);
                     switch (isbn.getString("type")) {
                         case "ISBN_13" -> {
-                            returnBook.setISBN_13(isbn.getString("identifier"));
+                            isbn13 = isbn.getString("identifier");
                         }
                         case "ISBN_10" -> {
-                            returnBook.setISBN_10(isbn.getString("identifier"));
-                        }
-                        default -> {
-                            returnBook.setISBN_13("Can't found isbn");
-                            returnBook.setISBN_10("Can't found isbn");
+                            isbn10 = isbn.getString("identifier");
                         }
                     }
                 }
@@ -207,16 +216,45 @@ public class BookAPI {
             e.printStackTrace(System.out);
             System.out.println("fail to load isbn");
         }
-        
-        return returnBook;
+        ArrayList<String> returnArray = new ArrayList<>();
+        returnArray.add(isbn13);
+        returnArray.add(isbn10);
+        return returnArray;
     }
 
-    public static String JsonArrayToString(JSONArray jsonArray) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < jsonArray.length(); ++i) {
-            stringBuilder.append(jsonArray.get(i).toString());
-            if (i < jsonArray.length() - 1) stringBuilder.append(",");
+    public static Image getBookCover(JSONObject volumeInfo) {
+        Image tempImage = null;
+
+        try {
+            if (volumeInfo.has("imageLinks"))
+                if (volumeInfo.getJSONObject("imageLinks").has("smallThumbnail")) {
+                    try {
+                        URI uri = new URI(
+                                volumeInfo.getJSONObject("imageLinks").get("smallThumbnail").toString()
+                        );
+                        URL url = uri.toURL();
+                        tempImage = new Image(url.toString());
+
+                    } catch (URISyntaxException | MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return tempImage;
+                }
+        } catch (JSONException e) {
+            e.printStackTrace(System.out);
         }
-        return stringBuilder.toString();
+        return null;
+    }
+
+    public static String getBookWebReadLink(JSONObject accessInfo) {
+        try {
+            if (accessInfo.has("webReaderLink")) {
+                return accessInfo.get("webReaderLink").toString();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace(System.out);
+            System.out.println("fail to load description");
+        }
+        return "Can't found reader link";
     }
 }
