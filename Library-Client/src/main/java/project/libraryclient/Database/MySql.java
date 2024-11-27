@@ -47,20 +47,45 @@ public class MySql {
         return bookList;
     }
 
-    public static Book getBasicInfoOfBook(String name) throws SQLException {
-        Book book = new Book();
+    public static ArrayList<Book> getBasicInfoOfBook(String name) throws SQLException {
+        ArrayList<Book> bookList = new ArrayList<>();
+        Book book;
         String SQL = "SELECT books.book_id as id, title, authors.name as author, image_preview "
                 + "FROM books "
                 + "JOIN book_authors ON books.book_id = book_authors.book_id "
                 + "JOIN authors ON authors.author_id = book_authors.author_id "
-                + "WHERE title LIKE '%" + name + "%'";
+                + "WHERE title = ?";
         PreparedStatement stmt = connection.prepareStatement(SQL);
+        stmt.setString(1, name);
         ResultSet rs = stmt.executeQuery();
+        int prevId = 0;
+        String prevTitle = "";
+        ArrayList<String> prevAuthor = new ArrayList<>();
+        String prevImage = "";
         while (rs.next()) {
             // title, author, image
-            book = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            int id = rs.getInt(1);
+            String title = rs.getString(2);
+            String author = rs.getString(3);
+            String image = rs.getString(4);
+//            System.out.println(title + " " + author + " " + image);
+            if (prevId != id) {
+                if (prevId > 0) {
+                    book = new Book(prevId, prevTitle, prevAuthor, prevImage);
+                    bookList.add(book);
+                    prevAuthor.clear();
+                }
+            }
+            prevId = id;
+            prevTitle = title;
+            prevAuthor.add(author);
+            prevImage = image;
         }
-        return book;
+        if (prevId > 0) {
+            book = new Book(prevId, prevTitle, prevAuthor, prevImage);
+            bookList.add(book);
+        }
+        return bookList;
     }
 
 }

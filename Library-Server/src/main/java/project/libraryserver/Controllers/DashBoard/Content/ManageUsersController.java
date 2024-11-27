@@ -7,13 +7,22 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import project.libraryserver.Book.Book;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ManageUsersController implements Initializable {

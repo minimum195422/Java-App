@@ -347,21 +347,21 @@ public class DashBoardController implements Initializable {
                 bookList = MySql.getBookBySubstring(searchBox.getText());
                 List<AnchorPane> list = new ArrayList<>();
                 for (String name : bookList) {
-                    Book book = MySql.getBasicInfoOfBook(name);
-                    System.out.println(book);
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-                        AnchorPane card = loader.load();
-                        Card_235_450_Controller controller = loader.getController();
-                        controller.setBookInfo(book);
-                        list.add(card);
-
-                        // Add listener to a book
-                        card.setOnMouseClicked(event -> {
-                            System.out.println(book.getBookId());
-                        });
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    ArrayList<Book> bookList = MySql.getBasicInfoOfBook(name);
+                    for (Book book : bookList) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
+                            AnchorPane card = loader.load();
+                            Card_235_450_Controller controller = loader.getController();
+                            controller.setBookInfo(book);
+                            list.add(card);
+                            // Add listener to a book
+                            card.setOnMouseClicked(event -> {
+                                System.out.println(book.getBookId());
+                            });
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
                 LoadSearchResults(list);

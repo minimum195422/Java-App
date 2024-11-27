@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Book {
     private int bookId;
     private String title;
-    private String author;
+    private ArrayList<String> author;
     private String ISBN;
     private double price;
     private String publishedDate;
@@ -29,11 +29,22 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public String getAuthorInString() {
+        StringBuilder authors = new StringBuilder();
+        for (int i = 0; i < author.size(); i++) {
+            authors.append(author.get(i));
+            if (i != author.size() - 1) {
+                authors.append(", ");
+            }
+        }
+        return authors.toString();
+    }
+
+    public ArrayList<String> getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(ArrayList<String> author) {
         this.author = author;
     }
 
@@ -82,17 +93,44 @@ public class Book {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description.length() > 300) {
+            this.description = "No description";
+        } else {
+            this.description = description;
+        }
     }
 
     public Book() {
 
     }
 
-    public Book(int id, String title, String author, String imagePreview) {
+    public Book(int id, String title, ArrayList<String> authors, String imagePreview) {
         setBookId(id);
         setTitle(title);
-        setAuthor(author);
+        setAuthor(authors);
         setImagePreview(imagePreview);
+    }
+
+    public Book(String title, ArrayList<String> authors, String ISBN, double price, String publishedDate,
+                ArrayList<String> categories, String imagePreview, String description) {
+        setAuthor(authors);
+        setISBN(ISBN);
+        setPrice(price);
+        setPublishedDate(publishedDate);
+        setCategories(categories);
+        setImagePreview(imagePreview);
+        setDescription(description);
+    }
+
+    public Book(int id, String title, ArrayList<String> authors, String ISBN, double price, String publishedDate,
+                ArrayList<String> categories, String imagePreview, String description) {
+        setBookId(id);
+        setAuthor(authors);
+        setISBN(ISBN);
+        setPrice(price);
+        setPublishedDate(publishedDate);
+        setCategories(categories);
+        setImagePreview(imagePreview);
+        setDescription(description);
     }
 }

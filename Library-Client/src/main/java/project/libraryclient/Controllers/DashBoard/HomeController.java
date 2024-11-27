@@ -31,11 +31,8 @@ public class HomeController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
                     AnchorPane card = loader.load();
                     Card_235_450_Controller controller = loader.getController();
-                    Book item = new Book();
-//                    controller.setBookInfo(item);
-//                    list.getChildren().add(card);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                } catch (IOException _) {
+
                 }
             }
 

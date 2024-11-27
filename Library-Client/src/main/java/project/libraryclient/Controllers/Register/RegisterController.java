@@ -212,6 +212,7 @@ public class RegisterController {
     private boolean ValidateEmail(String email) throws IOException {
         // url dẫn tới api kiểm tra sự tồn tại của mail
         String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=9f45f093bc3a4e5fbacb69d6d7a5bd1a&email=%s", email);
+//        System.out.println(url);
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
