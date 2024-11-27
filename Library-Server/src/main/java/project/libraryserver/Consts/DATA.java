@@ -23,8 +23,7 @@ public class DATA {
     public final static String SCENE_DASHBOARD_PAGE = "DashBoard Controller";
 
 
-
-    // ---------------------------------------------------------------- //
+// ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
     private static Image loadImage(String path) {

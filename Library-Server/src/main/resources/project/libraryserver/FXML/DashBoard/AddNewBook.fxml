@@ -15,20 +15,20 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" stylesheets="@../../Styles/AddNewBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.AddNewBookController">
    <HBox prefHeight="680.0" prefWidth="1020.0">
-      <VBox prefHeight="680.0" prefWidth="600.0">
-         <AnchorPane prefHeight="50.0" prefWidth="600.0" styleClass="back-color">
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="520.0" spacing="10.0" styleClass="search-box" AnchorPane.topAnchor="10.0">
+      <VBox prefHeight="680.0" prefWidth="530.0">
+         <AnchorPane prefHeight="50.0" prefWidth="530.0" styleClass="back-color">
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="450.0" spacing="10.0" styleClass="search-box" AnchorPane.topAnchor="10.0">
                <padding>
                   <Insets left="10.0" />
                </padding>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../../Images/Icons/search.png" />
                </ImageView>
-               <TextField fx:id="SearchQuery" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" onAction="#SearchAction" prefHeight="30.0" prefWidth="460.0" styleClass="search-area" />
+               <TextField fx:id="SearchQuery" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" onAction="#SearchAction" prefHeight="30.0" prefWidth="390.0" styleClass="search-area" />
             </HBox>
-            <Button fx:id="SearchButton" layoutX="530.0" layoutY="11.0" mnemonicParsing="false" onAction="#SearchAction" onMouseClicked="#SearchButtonClicked" prefHeight="30.0" prefWidth="70.0" styleClass="search-button" text="Search" />
+            <Button fx:id="SearchButton" layoutX="460.0" layoutY="11.0" mnemonicParsing="false" onAction="#SearchAction" prefHeight="30.0" prefWidth="70.0" styleClass="search-button" text="Search" />
          </AnchorPane>
-         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10.0" styleClass="back-color">
+         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="530.0" spacing="10.0" styleClass="back-color">
             <padding>
                <Insets left="10.0" />
             </padding>
@@ -43,10 +43,10 @@
             <ToggleButton fx:id="SearchBySubjectButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="Subject" />
             <ToggleButton fx:id="SearchByIsbnButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="search-option" text="ISBN" />
          </HBox>
-         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" styleClass="list-area" vbarPolicy="NEVER">
-            <VBox fx:id="DisplayListBook" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" styleClass="list-area" />
+         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="530.0" styleClass="list-area" vbarPolicy="NEVER">
+            <VBox fx:id="DisplayListBook" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="530.0" styleClass="list-area" />
          </ScrollPane>
       </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="420.0" styleClass="back-color" />
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="490.0" styleClass="back-color" />
    </HBox>
 </AnchorPane>

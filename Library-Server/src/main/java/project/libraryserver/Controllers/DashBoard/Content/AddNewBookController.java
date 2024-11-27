@@ -45,14 +45,9 @@ public class AddNewBookController implements Initializable {
     @FXML
     public ToggleButton SearchByIsbnButton;
 
-
-    public void SearchButtonClicked(MouseEvent event) {
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        DisplayListBook.setSpacing(10);
     }
 
     public void SearchAction() throws URISyntaxException, IOException {
