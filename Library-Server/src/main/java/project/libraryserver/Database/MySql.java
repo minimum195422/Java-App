@@ -277,19 +277,40 @@ public class MySql {
         String bookID = book.getId();
         String title = book.getTitle();
         ArrayList<String> authors = book.getAuthor();
-        String ISBN_13 = book.getISBN_13();
         String ISBN_10 = book.getISBN_10();
+        String ISBN_13 = book.getISBN_13();
         double price = book.getPrice();
         String publishedDate = book.getPublishedDate();
         ArrayList<String> categories = book.getCategories();
-        String imagePreview = book.getImagePreview();
+        String imagePreview = book.getImagePreview().getUrl();
         String description = book.getDescription();
+        String webReaderLink = book.getWebReaderLink();
         if (publishedDate.isEmpty()) {
             publishedDate = "Unknown";
         }
         if (description.isEmpty()) {
             description = "No description";
         }
+        if (imagePreview.isEmpty()) {
+            imagePreview = DATA.noImage;
+        }
+        if (ISBN_10.equals("Can't found isbn")) {
+            ISBN_10 = "Unknown";
+        }
+        if (ISBN_13.equals("Can't found isbn")) {
+            ISBN_13 = "Unknown";
+        }
+        StringBuilder newString = new StringBuilder(title);
+        while (newString.length() > 150) {
+            newString.deleteCharAt(newString.length() - 1);
+        }
+        title = newString.toString();
+
+        newString = new StringBuilder(description);
+        while (newString.length() > 600) {
+            newString.deleteCharAt(newString.length() - 1);
+        }
+        description = newString.toString();
 
         // Check if a book already existed or not
         PreparedStatement stmt = connection.prepareStatement(
@@ -312,16 +333,18 @@ public class MySql {
 
         stmt =
                 connection.prepareStatement(
-                        "INSERT INTO books(title, ISBN_10, ISBN_13, published_date, image_preview, price, description) "
-                                + "VALUES(?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, published_date, image_preview, price, description, web_reader_link) "
+                                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
-        stmt.setString(1, title);
-        stmt.setString(2, ISBN_10);
-        stmt.setString(3, ISBN_13);
-        stmt.setString(4, publishedDate);
-        stmt.setString(5, imagePreview);
-        stmt.setDouble(6, price);
-        stmt.setString(7, description);
+        stmt.setString(1, bookID);
+        stmt.setString(2, title);
+        stmt.setString(3, ISBN_10);
+        stmt.setString(4, ISBN_13);
+        stmt.setString(5, publishedDate);
+        stmt.setString(6, imagePreview);
+        stmt.setDouble(7, price);
+        stmt.setString(8, description);
+        stmt.setString(9, webReaderLink);
         int status = stmt.executeUpdate();
         if (status > 0) {
 //            System.out.println("Books table updated");
@@ -329,13 +352,18 @@ public class MySql {
         else {
             System.out.println("Can't add into books table");
         }
-
         for (String author: authors) {
             // Add info into authors table
             stmt = connection.prepareStatement(
                     "SELECT COUNT(*) FROM authors WHERE name = ?"
             );
             stmt.setString(1, author);
+            title = newString.toString();
+            newString = new StringBuilder(author);
+            while (newString.length() > 100) {
+                newString.deleteCharAt(newString.length() - 1);
+            }
+            author = newString.toString();
             rs = stmt.executeQuery();
             if (!rs.next()) {
                 System.out.println("Can't check if an author already existed or not");

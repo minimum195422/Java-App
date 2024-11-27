@@ -24,7 +24,7 @@ public class Book {
     private AnchorPane DisplayCard;
     private BookCard_600_200 Controller;
 
-//    private int price;
+    private double price;
 
 
     public Book(String id, String title, ArrayList<String> author,
@@ -160,6 +160,10 @@ public class Book {
         return Controller;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public String toString() {
         return "Book{" +
                 "id=<" + id + ">\n" +
@@ -175,4 +179,5 @@ public class Book {
                 "webReaderLink=<" + webReaderLink + ">\n" +
                 '}';
     }
+
 }
