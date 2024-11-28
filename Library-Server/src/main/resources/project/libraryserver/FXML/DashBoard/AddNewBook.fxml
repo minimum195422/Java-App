@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -47,6 +49,177 @@
             <VBox fx:id="DisplayListBook" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="530.0" styleClass="list-area" />
          </ScrollPane>
       </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="490.0" styleClass="back-color" />
+      <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="490.0" vbarPolicy="ALWAYS">
+         <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="475.0" spacing="10.0" styleClass="back-color">
+            <padding>
+               <Insets top="8.0" />
+            </padding>
+            <HBox alignment="CENTER_RIGHT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="475.0" spacing="10.0">
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
+               <Label fx:id="Notification" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <Button fx:id="AddNewBookButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddNewBookButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="search-button" text="Add New">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Button>
+            </HBox>
+            <HBox maxWidth="-Infinity" minHeight="-Infinity" prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookId" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookTitle" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookAuthors" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categories:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookCategories" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookPublisher" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Published date:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookPublishedDate" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descriptions">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookDescription" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookIsbn13" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookIsbn10" minHeight="-Infinity" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefWidth="475.0" spacing="5.0">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reader link:">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+               <Label fx:id="SelectedBookReadLink" minHeight="-Infinity" onMouseClicked="#ReaderLinkClicked" textFill="BLUE" underline="true" wrapText="true">
+                  <font>
+                     <Font size="14.0" />
+                  </font></Label>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <ImageView fx:id="SelectedBookCover" fitHeight="690.0" fitWidth="460.0" pickOnBounds="true">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ImageView>
+         </VBox>
+         <styleClass>
+            <String fx:value="scroll-bar" />
+            <String fx:value="back-color" />
+         </styleClass>
+      </ScrollPane>
    </HBox>
 </AnchorPane>

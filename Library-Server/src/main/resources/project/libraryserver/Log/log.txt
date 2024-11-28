@@ -1,0 +1,12 @@
+==== New Log File Created ====
+2024-11-29 03:09:52 - Server stating on port 1234
+2024-11-29 03:10:02 - Client 127.0.0.1 connected.
+2024-11-29 03:10:07 - Client disconnected: 127.0.0.1
+2024-11-29 03:10:52 - Server stating on port 1234
+2024-11-29 03:11:01 - Client 127.0.0.1 connected.
+2024-11-29 03:11:11 - Client disconnected: 127.0.0.1
+2024-11-29 03:13:20 - Server stating on port 1234
+2024-11-29 03:13:26 - Client 127.0.0.1 connected.
+2024-11-29 03:13:30 - Client disconnected: 127.0.0.1
+2024-11-29 03:15:21 - Server stating on port 1234
+2024-11-29 03:16:08 - Server stating on port 1234

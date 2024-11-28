@@ -31,7 +31,7 @@ public class Server {
             server = new ServerSocket(1234);
             server.setReuseAddress(true);
 
-            System.out.println("Server is listening on port 1234");
+            ServerLog.getInstance().writeLog("Server stating on port 1234");
 
             // Vòng lặp vô hạn để chờ và chấp nhận kết nối client
             while (running) {
@@ -39,8 +39,14 @@ public class Server {
                 Socket client = server.accept();
 
                 // Hiển thị thông báo client kết nối
-                System.out.println("New client connected: "
-                        + client.getInetAddress().getHostAddress());
+                // System.out.println("New client connected: "
+                //        + client.getInetAddress().getHostAddress());
+
+                // Ghi logfile thông báo client đã kết nối
+                ServerLog.getInstance().writeLog(
+                        "Client "
+                        + client.getInetAddress().getHostAddress()
+                        + " connected.");
 
                 // Tạo đối tượng ClientHandler để xử lý kết nối client này
                 ClientHandler clientHandler = new ClientHandler(client);
@@ -51,6 +57,7 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace(System.out);
         } finally {
+            ServerLog.getInstance().writeLog("Server stop.");
             stopServer();  // Dừng server khi có lỗi hoặc khi server dừng
         }
     }

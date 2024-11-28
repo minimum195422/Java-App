@@ -40,7 +40,7 @@ public class MySql {
                 connection.prepareStatement(
                         "SELECT p.password " +
                             "FROM user u join passwords p on u.id = p.user_id " +
-                            "WHERE u.email = ?;"
+                            "WHERE u.email = ? and status = 'active';"
                 );
         preparedStatement.setString(1, email);
 
