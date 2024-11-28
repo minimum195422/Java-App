@@ -40,12 +40,8 @@ public class ClientHandler implements Runnable{
 
                 try {
                     json = new JSONObject(line);
-                    System.out.println("Server: valid json received " + json);
-
-//                    out.println("Valid JSON received"); // Phản hồi client
-//                    out.flush();
                 } catch (Exception e) {
-                    System.out.println("Invalid JSON input: " + line);
+                    ServerLog.getInstance().writeLog("Invalid json received.");
                 }
 
                 if (json != null) {
@@ -57,7 +53,8 @@ public class ClientHandler implements Runnable{
             }
         }
         catch (IOException e) {
-            e.printStackTrace(System.out);
+//            e.printStackTrace(System.out);
+            ServerLog.getInstance().writeLog("Client disconnected: " + clientSocket.getInetAddress().getHostAddress());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -99,8 +96,22 @@ public class ClientHandler implements Runnable{
                 json.getString("email"), json.getString("password"));
         JSONObject response;
         if (check) {
+            // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
+            ServerLog.getInstance().writeLog(
+                    "Server accept user ["
+                    + json.getString("email")
+                    + ",type:normal] to logging in application.");
+
+            // Trả về json chấp nhận yêu cầu đăng nhập
             response = GenerateJson.ResponseLoginSuccess();
         } else {
+            // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
+            ServerLog.getInstance().writeLog(
+                    "Server decline user ["
+                    + json.getString("email")
+                    + ",type:normal] to logging in application.");
+
+            // Trả về json từ chối yêu cầu đăng nhập.
             response = GenerateJson.ResponseLoginFailed();
         }
         SendMessage(response);
@@ -111,8 +122,22 @@ public class ClientHandler implements Runnable{
                 json.getString("id"), json.getString("email"));
         JSONObject response;
         if (check) {
+            // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
+            ServerLog.getInstance().writeLog(
+                    "Server accept user ["
+                    + json.getString("email")
+                    + ",type:google] to logging in application.");
+
+            // Trả về json chấp nhận yêu cầu đăng nhập
             response = GenerateJson.ResponseLoginSuccess();
         } else {
+            // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
+            ServerLog.getInstance().writeLog(
+                    "Server decline user ["
+                    + json.getString("email")
+                    + ",type:google] to logging in application.");
+
+            // Trả về json từ chối yêu cầu đăng nhập.
             response = GenerateJson.ResponseLoginFailed();
         }
         SendMessage(response);
@@ -124,8 +149,18 @@ public class ClientHandler implements Runnable{
                 json.getString("email"), json.getString("password"));
         JSONObject response;
         if (check) {
+            // Ghi log thông báo gửi phản hồi đăng ký thành công tới người dùng
+            ServerLog.getInstance().writeLog("Server successfully create new user. " +
+                    "Sent response to user");
+
+            // Trả về json thông báo đăng ký thành công.
             response = GenerateJson.ResponseRegisterSuccess();
         } else {
+            // Ghi log thông báo gửi phản hồi đăng ký thất bại tới người dùng
+            ServerLog.getInstance().writeLog("Server failed to create new user. " +
+                    "Sent response to user");
+
+            // Trả về json thông báo đăng ký thất bại.
             response = GenerateJson.ResponseRegisterFailed();
         }
 
@@ -143,8 +178,18 @@ public class ClientHandler implements Runnable{
 
         JSONObject response;
         if (check) {
+            // Ghi log thông báo gửi phản hồi đăng ký thành công tới người dùng
+            ServerLog.getInstance().writeLog("Server successfully create new user. " +
+                    "Sent response to user");
+
+            // Trả về json thông báo đăng ký thành công.
             response = GenerateJson.ResponseRegisterSuccess();
         } else {
+            // Ghi log thông báo gửi phản hồi đăng ký thất bại tới người dùng
+            ServerLog.getInstance().writeLog("Server failed to create new user. " +
+                    "Sent response to user");
+
+            // Trả về json thông báo đăng ký thất bại.
             response = GenerateJson.ResponseRegisterFailed();
         }
         SendMessage(response);

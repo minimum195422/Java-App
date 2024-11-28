@@ -23,27 +23,22 @@
                <Font size="14.0" />
             </font>
          </Text>
+         <Text fx:id="AuthorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
+         <Text fx:id="CategoriesText" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories:">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
          <Text fx:id="PublisherText" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:">
             <font>
                <Font size="14.0" />
             </font>
          </Text>
-         <Text fx:id="ISBN13Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13:">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Text>
-         <Text fx:id="ISBN10Text" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10:">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Text>
          <Text fx:id="PublishedDateText" strokeType="OUTSIDE" strokeWidth="0.0" text="Published date:">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Text>
-         <Text fx:id="AuthorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:">
             <font>
                <Font size="14.0" />
             </font>

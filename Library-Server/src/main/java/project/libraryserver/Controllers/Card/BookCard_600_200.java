@@ -12,32 +12,17 @@ public class BookCard_600_200 {
     public ImageView BookCover;
 
     @FXML
-    public Text TitleText;
-
-    @FXML
-    public Text PublisherText;
-
-    @FXML
-    public Text ISBN13Text;
-
-    @FXML
-    public Text ISBN10Text;
-
-    @FXML
-    public Text PublishedDateText;
-
-    @FXML
-    public Text AuthorText;
+    public Text TitleText, PublisherText,
+            PublishedDateText, AuthorText, CategoriesText;
 
     public void setInfor(
             Image bookCover, String titleText, String publisherText,
-            String Isbn13Text, String Isbn10Text, String publishedDateText, String authorText) {
+            String categoriesText, String publishedDateText, String authorText) {
         BookCover.setImage(bookCover);
-        TitleText.setText(titleText);
-        PublisherText.setText(publisherText);
-        ISBN10Text.setText(Isbn10Text);
-        ISBN13Text.setText(Isbn13Text);
-        PublisherText.setText(publishedDateText);
-        AuthorText.setText(authorText);
+        TitleText.setText("Title: " + titleText);
+        PublisherText.setText("Publisher: " + publisherText);
+        CategoriesText.setText("Categories: " + categoriesText);
+        PublishedDateText.setText("Published date: " + publishedDateText);
+        AuthorText.setText("Authors: " + authorText);
     }
 }
