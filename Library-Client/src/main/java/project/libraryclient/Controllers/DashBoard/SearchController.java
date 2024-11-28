@@ -11,6 +11,7 @@ public class SearchController {
     public void setContent(List<AnchorPane> list) {
         int row = (list.size() + 4) / 5;
         for (int i = 0; i < row; ++i) {
+            if (i == 10) break;
             HBox vbox = new HBox();
             vbox.setSpacing(25);
             for (int j = 0; j < 5; ++j) {

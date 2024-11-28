@@ -23,7 +23,7 @@ public class BookAPI {
         JSONObject json;
         StringBuilder SearchByType = new StringBuilder();
         if (types.isEmpty()) {
-            json = requestJson(query, "");
+            json = requestJson(query.trim().replaceAll("\\s+", "+"), "");
         } else {
             for (SearchType type : types) {
                 SearchByType.append("+");

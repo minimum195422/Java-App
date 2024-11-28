@@ -282,7 +282,12 @@ public class MySql {
         double price = book.getPrice();
         String publishedDate = book.getPublishedDate();
         ArrayList<String> categories = book.getCategories();
-        String imagePreview = book.getImagePreview().getUrl();
+        String imagePreview;
+        try {
+            imagePreview = book.getImagePreview().getUrl();
+        } catch (Exception e) {
+            imagePreview = DATA.noImage;
+        }
         String description = book.getDescription();
         String webReaderLink = book.getWebReaderLink();
         if (publishedDate.isEmpty()) {
@@ -290,9 +295,6 @@ public class MySql {
         }
         if (description.isEmpty()) {
             description = "No description";
-        }
-        if (imagePreview.isEmpty()) {
-            imagePreview = DATA.noImage;
         }
         if (ISBN_10.equals("Can't found isbn")) {
             ISBN_10 = "Unknown";
