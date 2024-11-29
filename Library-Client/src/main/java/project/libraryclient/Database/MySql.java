@@ -1,10 +1,12 @@
 package project.libraryclient.Database;
 
+import javafx.scene.image.Image;
 import project.libraryclient.Class.Book;
 import project.libraryclient.Consts.DATA;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MySql {
@@ -51,39 +53,25 @@ public class MySql {
     public static ArrayList<Book> getBasicInfoOfBook(String name) throws SQLException {
         ArrayList<Book> bookList = new ArrayList<>();
         Book book;
-        String SQL = "SELECT books.book_id as id, title, authors.name as author, image_preview "
+        String SQL = "SELECT books.book_id as id, title, group_concat(authors.name) as author, image_preview "
                 + "FROM books "
                 + "JOIN book_authors ON books.book_id = book_authors.book_id "
                 + "JOIN authors ON authors.author_id = book_authors.author_id "
-                + "WHERE title = ?";
+                + "WHERE title = ? "
+                + "GROUP BY books.book_id";
         PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, name);
         ResultSet rs = stmt.executeQuery();
-        String prevId = "";
-        String prevTitle = "";
-        ArrayList<String> prevAuthor = new ArrayList<>();
-        String prevImage = "";
+        Image img;
         while (rs.next()) {
             // title, author, image
             String id = rs.getString(1);
             String title = rs.getString(2);
-            String author = rs.getString(3);
+            String[] authorListInString = rs.getString(3).split(",");
             String image = rs.getString(4);
-//            System.out.println(title + " " + author + " " + image);
-            if (!Objects.equals(prevId, id)) {
-                if (!prevId.isEmpty()) {
-                    book = new Book(prevId, prevTitle, prevAuthor, prevImage);
-                    bookList.add(book);
-                    prevAuthor.clear();
-                }
-            }
-            prevId = id;
-            prevTitle = title;
-            prevAuthor.add(author);
-            prevImage = image;
-        }
-        if (!prevId.isEmpty()) {
-            book = new Book(prevId, prevTitle, prevAuthor, prevImage);
+            ArrayList<String> authors = new ArrayList<>(Arrays.asList(authorListInString));
+            img = new Image(image);
+            book = new Book(id, title, authors, img);
             bookList.add(book);
         }
         return bookList;

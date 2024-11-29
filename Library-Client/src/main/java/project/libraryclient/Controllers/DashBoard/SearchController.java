@@ -1,8 +1,11 @@
 package project.libraryclient.Controllers.DashBoard;
 
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 import java.util.List;
 
 public class SearchController {
@@ -15,8 +18,7 @@ public class SearchController {
             vbox.setSpacing(25);
             for (int j = 0; j < 5; ++j) {
                 if (i * 5 + j >= list.size()) break;
-                AnchorPane card = list.get(i * 5 + j);
-                vbox.getChildren().add(card);
+                vbox.getChildren().add(list.get(i * 5 + j));
             }
             MainVBox.getChildren().add(vbox);
         }

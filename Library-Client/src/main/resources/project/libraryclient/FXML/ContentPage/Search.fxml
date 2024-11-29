@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
     <VBox fx:id="MainVBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000.0"
           styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Results">

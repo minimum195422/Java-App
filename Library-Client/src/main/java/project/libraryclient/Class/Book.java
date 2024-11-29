@@ -1,118 +1,46 @@
 package project.libraryclient.Class;
 
+import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Book {
     private String id;
     private String title;
-    private ArrayList<String> author;
+    private ArrayList<String> authors;
     private String publisher;
     private String publishedDate;
     private String description;
     private ArrayList<String> categories;
     private String ISBN_13;
     private String ISBN_10;
-    private String imagePreview;
+    private Image imagePreview;
     private String webReaderLink;
 
-
-    private double price;
-
-    public Book() {
-        id = "";
-        title = "";
-        author = new ArrayList<>();
-        publisher = "";
-        publishedDate = "";
-        description = "";
-        ISBN_13 = "Can't found isbn";
-        ISBN_10 = "Can't found isbn";
-        imagePreview = "";
-        webReaderLink = "";
-        price = 0;
-    }
-
-    public Book(String id, String title, ArrayList<String> authors, String imagePreview) {
-        setId(id);
-        setTitle(title);
-        setAuthor(authors);
-        setImagePreview(imagePreview);
-    }
-
-    public Book(String title, ArrayList<String> authors, String ISBN_10, String ISBN_13, double price, String publishedDate,
-                ArrayList<String> categories, String imagePreview, String description) {
-        setTitle(title);
-        setAuthor(authors);
-        setISBN_10(ISBN_10);
-        setISBN_13(ISBN_13);
-        setPrice(price);
-        setPublishedDate(publishedDate);
-        setCategories(categories);
-        setImagePreview(imagePreview);
-        setDescription(description);
-    }
-
-    public Book(String id, String title, ArrayList<String> authors, String ISBN_10, String ISBN_13, double price, String publishedDate,
-                ArrayList<String> categories, String imagePreview, String description) {
-        setId(id);
-        setTitle(title);
-        setAuthor(authors);
-        setISBN_10(ISBN_10);
-        setISBN_13(ISBN_13);
-        setPrice(price);
-        setPublishedDate(publishedDate);
-        setCategories(categories);
-        setImagePreview(imagePreview);
-        setDescription(description);
-    }
-
-    public void setId(String id) {
+    public Book(String id, String title, ArrayList<String> authors,
+                String publisher, String published_date, String description,
+                ArrayList<String> categories, String ISBN_13, String ISBN_10,
+                javafx.scene.image.Image image_preview, String web_reader_link) {
         this.id = id;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setAuthor(ArrayList<String> author) {
-        this.author = author;
-    }
-
-    public void setPublisher(String publisher) {
+        this.authors = authors;
         this.publisher = publisher;
-    }
-
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
-    }
-
-    public void setDescription(String description) {
+        this.publishedDate = published_date;
         this.description = description;
-    }
-
-    public void setISBN_13(String ISBN_13) {
-        this.ISBN_13 = ISBN_13;
-    }
-
-    public void setISBN_10(String ISBN_10) {
-        this.ISBN_10 = ISBN_10;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
+        this.ISBN_13 = ISBN_13;
+        this.ISBN_10 = ISBN_10;
+        this.imagePreview = image_preview;
+        this.webReaderLink = web_reader_link;
     }
 
-    public void setImagePreview(String imagePreview) {
-        this.imagePreview = imagePreview;
+    public Book(String prevId, String prevTitle, ArrayList<String> prevAuthor, Image prevImage) {
+        this.id = prevId;
+        this.title = prevTitle;
+        this.authors = prevAuthor;
+        this.imagePreview = prevImage;
     }
 
-    public void setWebReaderLink(String webReaderLink) {
-        this.webReaderLink = webReaderLink;
-    }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
     public String getId() {
         return id;
     }
@@ -121,20 +49,10 @@ public class Book {
         return title;
     }
 
-    public String getAuthorInString() {
-        StringBuilder authors = new StringBuilder();
-        for (int i = 0; i < author.size(); i++) {
-            authors.append(author.get(i));
-            if (i != author.size() - 1) {
-                authors.append(", ");
-            }
-        }
-        return authors.toString();
+    public ArrayList<String> getAuthors() {
+        return authors;
     }
 
-    public ArrayList<String> getAuthor() {
-        return author;
-    }
 
     public String getPublisher() {
         return publisher;
@@ -156,7 +74,7 @@ public class Book {
         return ISBN_10;
     }
 
-    public String getImagePreview() {
+    public Image getImagePreview() {
         return imagePreview;
     }
 
@@ -168,14 +86,11 @@ public class Book {
         return categories;
     }
 
-    public double getPrice() {
-        return price;
-    }
     public String toString() {
         return "Book{" +
                 "id=<" + id + ">\n" +
                 "title=<" + title + ">\n" +
-                "author=<" + author + ">\n" +
+                "author=<" + authors + ">\n" +
                 "publisher=<" + publisher + ">\n" +
                 "publishedDate=<" + publishedDate + ">\n" +
                 "description=<" + description + ">\n" +
@@ -184,7 +99,6 @@ public class Book {
                 "ISBN_10=<" + ISBN_10 + ">\n" +
                 "imagePreview=<" + imagePreview + ">\n" +
                 "webReaderLink=<" + webReaderLink + ">\n" +
-                "price=<" + price + ">\n" +
                 '}';
     }
 }
