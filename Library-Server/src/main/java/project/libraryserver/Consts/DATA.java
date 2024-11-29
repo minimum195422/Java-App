@@ -21,7 +21,7 @@ public class DATA {
 // -------------------------- Scene name -------------------------- //
 // ---------------------------------------------------------------- //
     public final static String SCENE_DASHBOARD_PAGE = "DashBoard Controller";
-
+    public static final String SERVER_LOG_FILE = "src/main/resources/project/libraryserver/Log/log.txt";
 
 
     // ---------------------------------------------------------------- //

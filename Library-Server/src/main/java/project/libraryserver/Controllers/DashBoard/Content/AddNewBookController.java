@@ -1,23 +1,24 @@
 package project.libraryserver.Controllers.DashBoard.Content;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import project.libraryserver.API.GoogleBookAPI.BookAPI;
 import project.libraryserver.Book.Book;
 import project.libraryserver.Consts.SearchType;
-import project.libraryserver.Database.MySql;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -48,9 +49,16 @@ public class AddNewBookController implements Initializable {
     public ToggleButton SearchByIsbnButton;
 
 
-    public void SearchButtonClicked(MouseEvent event) {
+    @FXML
+    public Button AddNewBookButton;
 
-    }
+    @FXML
+    public Label SelectedBookId, SelectedBookTitle, SelectedBookAuthors,
+            SelectedBookPublisher, SelectedBookPublishedDate, SelectedBookDescription,
+            SelectedBookCategories, SelectedBookIsbn13, SelectedBookIsbn10,
+            SelectedBookReadLink, Notification;
+    @FXML
+    public ImageView SelectedBookCover;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -74,7 +82,6 @@ public class AddNewBookController implements Initializable {
         if (!DisplayListBook.getChildren().isEmpty()) DisplayListBook.getChildren().clear();
 
         for (Book book : list) {
-
             DisplayListBook.getChildren().add(book.getDisplayCard());
 //            try {
 //                MySql.addNewBook(book);
@@ -82,6 +89,34 @@ public class AddNewBookController implements Initializable {
 //                System.out.println("Error while adding books");
 //                System.out.println(book.toString());
 //            }
+            book.getDisplayCard().setOnMouseClicked(
+                    _ -> {
+                        SelectedBookId.setText(book.getId());
+                        SelectedBookTitle.setText(book.getTitle());
+                        SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
+                        SelectedBookPublisher.setText(book.getPublisher());
+                        SelectedBookPublishedDate.setText(book.getPublishedDate());
+                        SelectedBookDescription.setText(book.getDescription());
+                        SelectedBookCategories.setText(String.join(", ", book.getCategories()));
+                        SelectedBookIsbn13.setText(book.getISBN_13());
+                        SelectedBookIsbn10.setText(book.getISBN_10());
+                        SelectedBookReadLink.setText(book.getWebReaderLink());
+                        SelectedBookCover.setImage(book.getImagePreview());
+                    });
+        }
+    }
+
+    public void AddNewBookButtonClicked() {
+
+    }
+
+
+    public void ReaderLinkClicked() {
+        if (SelectedBookReadLink.getText().isEmpty()) return;
+        try {
+            Desktop.getDesktop().browse(new URI(SelectedBookReadLink.getText()));
+        } catch (URISyntaxException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

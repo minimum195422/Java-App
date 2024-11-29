@@ -227,10 +227,10 @@ public class BookAPI {
 
         try {
             if (volumeInfo.has("imageLinks"))
-                if (volumeInfo.getJSONObject("imageLinks").has("smallThumbnail")) {
+                if (volumeInfo.getJSONObject("imageLinks").has("thumbnail")) {
                     try {
                         URI uri = new URI(
-                                volumeInfo.getJSONObject("imageLinks").get("smallThumbnail").toString()
+                                volumeInfo.getJSONObject("imageLinks").get("thumbnail").toString()
                         );
                         URL url = uri.toURL();
                         tempImage = new Image(url.toString());

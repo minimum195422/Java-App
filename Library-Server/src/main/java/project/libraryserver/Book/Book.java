@@ -10,38 +10,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Book {
-    private String id;
-    private String title;
-    private ArrayList<String> author;
-    private String publisher;
-    private String publishedDate;
-    private String description;
-    private ArrayList<String> categories;
-    private String ISBN_13;
-    private String ISBN_10;
-    private Image imagePreview;
-    private String webReaderLink;
+    private final String id;
+    private final String title;
+    private final ArrayList<String> authors;
+    private final String publisher;
+    private final String publishedDate;
+    private final String description;
+    private final ArrayList<String> categories;
+    private final String ISBN_13;
+    private final String ISBN_10;
+    private final Image imagePreview;
+    private final String webReaderLink;
     private AnchorPane DisplayCard;
     private BookCard_600_200 Controller;
 
-    private double price;
 
-
-    public Book(String id, String title, ArrayList<String> author,
-                String publisher, String publishedDate, String description,
+    public Book(String id, String title, ArrayList<String> authors,
+                String publisher, String published_date, String description,
                 ArrayList<String> categories, String ISBN_13, String ISBN_10,
-                Image imagePreview, String webReaderLink) {
+                Image image_preview, String web_reader_link) {
         this.id = id;
         this.title = title;
-        this.author = author;
+        this.authors = authors;
         this.publisher = publisher;
-        this.publishedDate = publishedDate;
+        this.publishedDate = published_date;
         this.description = description;
         this.categories = categories;
         this.ISBN_13 = ISBN_13;
         this.ISBN_10 = ISBN_10;
-        this.imagePreview = imagePreview;
-        this.webReaderLink = webReaderLink;
+        this.imagePreview = image_preview;
+        this.webReaderLink = web_reader_link;
         LoadDisplayCard();
     }
 
@@ -50,58 +48,16 @@ public class Book {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_LINK));
             DisplayCard = loader.load();
             Controller = loader.getController();
-            Controller.setInfor(imagePreview, title, publisher, ISBN_13, ISBN_10, publishedDate, author.toString());
+            Controller.setInfor(
+                    imagePreview,
+                    title,
+                    publisher,
+                    String.join(", ", categories),
+                    publishedDate,
+                    String.join(", ", authors));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(ArrayList<String> author) {
-        this.author = author;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setISBN_13(String ISBN_13) {
-        this.ISBN_13 = ISBN_13;
-    }
-
-    public void setISBN_10(String ISBN_10) {
-        this.ISBN_10 = ISBN_10;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-
-    public void setImagePreview(Image imagePreview) {
-        this.imagePreview = imagePreview;
-    }
-
-    public void setWebReaderLink(String webReaderLink) {
-        this.webReaderLink = webReaderLink;
-    }
-
-    public void setDisplayCard(AnchorPane displayCard) {
-        DisplayCard = displayCard;
     }
 
     public void setController(BookCard_600_200 controller) {
@@ -116,9 +72,10 @@ public class Book {
         return title;
     }
 
-    public ArrayList<String> getAuthor() {
-        return author;
+    public ArrayList<String> getAuthors() {
+        return authors;
     }
+
 
     public String getPublisher() {
         return publisher;
@@ -160,15 +117,11 @@ public class Book {
         return Controller;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
     public String toString() {
         return "Book{" +
                 "id=<" + id + ">\n" +
                 "title=<" + title + ">\n" +
-                "author=<" + author + ">\n" +
+                "author=<" + authors + ">\n" +
                 "publisher=<" + publisher + ">\n" +
                 "publishedDate=<" + publishedDate + ">\n" +
                 "description=<" + description + ">\n" +
@@ -179,5 +132,4 @@ public class Book {
                 "webReaderLink=<" + webReaderLink + ">\n" +
                 '}';
     }
-
 }
