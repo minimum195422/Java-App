@@ -109,7 +109,7 @@ public class RegisterController {
         // chờ cho tới khi đăng nhập hoàn tất
         authenticator.waitForCompletion();
 
-        // Lấy json trả về từ google
+        // Lấy json trả về từ googleS
         JSONObject json = authenticator.GetUserInformation();
         System.out.println("from login" + json);
         if (json != null) {

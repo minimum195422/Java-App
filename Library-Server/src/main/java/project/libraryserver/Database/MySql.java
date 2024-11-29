@@ -123,6 +123,7 @@ public class MySql {
         ResultSet rs = preparedStatement.executeQuery();
         if (rs.next()) {
             int user_id = rs.getInt(1);
+            preparedStatement.clearBatch();
             preparedStatement = connection.prepareStatement(
                     "INSERT INTO passwords(user_id, password) " +
                             "VALUES(?, ?)"
@@ -364,6 +365,7 @@ public class MySql {
 
         // Add info into books table
 
+        stmt.clearBatch();
         stmt =
                 connection.prepareStatement(
                         "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, publisher, published_date, image_preview, description, web_reader_link) "
@@ -379,7 +381,6 @@ public class MySql {
         stmt.setString(8, description);
         stmt.setString(9, webReaderLink);
         int status = stmt.executeUpdate();
-        System.out.println("OSU2");
         if (status > 0) {
 //            System.out.println("Books table updated");
         }
@@ -388,6 +389,7 @@ public class MySql {
         }
         for (String author: authors) {
             // Add info into authors table
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "SELECT COUNT(*) FROM authors WHERE name = ?"
             );
@@ -404,6 +406,7 @@ public class MySql {
                 return;
             }
             if (rs.getInt(1) == 0) {
+                stmt.clearBatch();
                 stmt = connection.prepareStatement(
                         "INSERT INTO authors(name) "
                                 + "VALUES(?)"
@@ -420,6 +423,7 @@ public class MySql {
                 System.out.println("Author already existed");
             }
             // Add info into book_authors table
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "SELECT author_id FROM authors WHERE name = ?"
             );
@@ -431,6 +435,7 @@ public class MySql {
             } else {
                 System.out.println("Error while updating book_authors table");
             }
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "INSERT INTO book_authors(author_id, book_id) " +
                             "VALUES(?, ?)"
@@ -448,6 +453,7 @@ public class MySql {
         // Add info into categories table
         for (String category: categories) {
             // Add new category
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "SELECT COUNT(*) FROM categories WHERE category = ?"
             );
@@ -458,6 +464,7 @@ public class MySql {
                 return;
             }
             if (rs.getInt(1) == 0) {
+                stmt.clearBatch();
                 stmt = connection.prepareStatement(
                         "INSERT INTO categories(category) VALUES(?)"
                 );
@@ -473,6 +480,7 @@ public class MySql {
             }
 
             // Add info into book_categories table
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "SELECT category_id FROM categories WHERE category = ?"
             );
@@ -484,6 +492,7 @@ public class MySql {
             } else {
                 System.out.println("Error while getting category_id");
             }
+            stmt.clearBatch();
             stmt = connection.prepareStatement(
                     "INSERT INTO book_categories(book_id, category_id) VALUES(?, ?)"
             );

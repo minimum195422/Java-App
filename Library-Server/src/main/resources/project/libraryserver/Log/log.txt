@@ -315,3 +315,9 @@
 2024-11-29 23:55:55 - Client 127.0.0.1 connected.
 2024-11-29 23:56:17 - Server successfully create new user. Sent response to user
 2024-11-29 23:56:57 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 00:11:14 - Client disconnected: 127.0.0.1
+2024-11-30 00:11:16 - Client 127.0.0.1 connected.
+2024-11-30 00:11:53 - Server successfully create new user. Sent response to user
+2024-11-30 00:12:44 - Server failed to create new user. Sent response to user
+2024-11-30 00:13:35 - Server failed to create new user. Sent response to user
+2024-11-30 00:25:15 - Server stating on port 1234
