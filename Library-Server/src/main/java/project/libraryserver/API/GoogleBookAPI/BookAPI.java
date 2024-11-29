@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import project.libraryserver.Book.Book;
+import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
 
 import java.io.BufferedReader;
@@ -240,14 +241,15 @@ public class BookAPI {
                         tempImage = new Image(url.toString());
 
                     } catch (URISyntaxException | MalformedURLException e) {
-                        throw new RuntimeException(e);
+                        tempImage = new Image(DATA.noImage);
+                        System.out.println("No image found");
                     }
                     return tempImage;
                 }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
         }
-        return null;
+        return new Image(DATA.noImage);
     }
 
     public static String getBookWebReadLink(JSONObject accessInfo) {

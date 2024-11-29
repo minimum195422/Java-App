@@ -283,3 +283,35 @@
 2024-11-29 23:17:03 - Client disconnected: 127.0.0.1
 2024-11-29 23:17:06 - Client 127.0.0.1 connected.
 2024-11-29 23:17:15 - Client disconnected: 127.0.0.1
+2024-11-29 23:19:07 - Client 127.0.0.1 connected.
+2024-11-29 23:21:21 - Server stating on port 1234
+2024-11-29 23:24:28 - Server stating on port 1234
+2024-11-29 23:25:46 - Server stating on port 1234
+2024-11-29 23:27:06 - Server stating on port 1234
+2024-11-29 23:28:10 - Server stating on port 1234
+2024-11-29 23:30:17 - Server stating on port 1234
+2024-11-29 23:39:58 - Server stating on port 1234
+2024-11-29 23:40:01 - Client 127.0.0.1 connected.
+2024-11-29 23:40:19 - Server decline user [vudangducminh@gmail.com,type:normal] to logging in application.
+2024-11-29 23:41:02 - Server failed to create new user. Sent response to user
+2024-11-29 23:42:55 - Client disconnected: 127.0.0.1
+2024-11-29 23:43:01 - Client 127.0.0.1 connected.
+2024-11-29 23:43:27 - Server failed to create new user. Sent response to user
+2024-11-29 23:47:50 - Server stating on port 1234
+2024-11-29 23:48:00 - Client 127.0.0.1 connected.
+2024-11-29 23:48:22 - Server failed to create new user. Sent response to user
+2024-11-29 23:48:55 - Server stating on port 1234
+2024-11-29 23:49:01 - Client 127.0.0.1 connected.
+2024-11-29 23:49:20 - Server failed to create new user. Sent response to user
+2024-11-29 23:49:47 - Server failed to create new user. Sent response to user
+2024-11-29 23:51:17 - Server stating on port 1234
+2024-11-29 23:51:25 - Client 127.0.0.1 connected.
+2024-11-29 23:51:47 - Server failed to create new user. Sent response to user
+2024-11-29 23:53:00 - Server failed to create new user. Sent response to user
+2024-11-29 23:53:29 - Server stating on port 1234
+2024-11-29 23:53:48 - Client 127.0.0.1 connected.
+2024-11-29 23:54:05 - Server failed to create new user. Sent response to user
+2024-11-29 23:55:37 - Server stating on port 1234
+2024-11-29 23:55:55 - Client 127.0.0.1 connected.
+2024-11-29 23:56:17 - Server successfully create new user. Sent response to user
+2024-11-29 23:56:57 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.

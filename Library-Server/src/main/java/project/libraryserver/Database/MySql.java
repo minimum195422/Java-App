@@ -108,8 +108,11 @@ public class MySql {
         preparedStatement.setString(2, lastName);
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, "active");
-        if (!preparedStatement.execute()) return false;
-
+        int status = preparedStatement.executeUpdate();
+        if (status == 0) {
+            System.out.println("Error while inserting user");
+            return false;
+        }
         preparedStatement.clearBatch();
         preparedStatement = connection.prepareStatement(
                 "SELECT id " +
@@ -126,7 +129,11 @@ public class MySql {
             );
             preparedStatement.setInt(1, user_id);
             preparedStatement.setString(2, password);
-            return preparedStatement.execute();
+            status = preparedStatement.executeUpdate();
+            if (status == 0) {
+                System.out.println("Error while inserting password");
+                return false;
+            }
         }
         return true;
     }
