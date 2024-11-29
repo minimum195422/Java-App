@@ -22,7 +22,7 @@
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../../Images/Icons/search.png" />
             </ImageView>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="540.0" styleClass="search-area" />
+            <TextField fx:id="SearchBox" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" onAction="#SearchBoxOnAction" prefHeight="30.0" prefWidth="540.0" styleClass="search-area" />
         </HBox>
     </AnchorPane>
     <AnchorPane layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" styleClass="back-color">
@@ -35,7 +35,10 @@
                     <Font size="14.0" />
                 </font>
             </Text>
-            <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="ToggleButton" />
+            <ToggleButton fx:id="SortByIdButton" mnemonicParsing="false" onAction="#SortUserList" prefHeight="30.0" prefWidth="80.0" styleClass="sort-option" text="User ID" />
+         <ToggleButton fx:id="SortByNameButton" mnemonicParsing="false" onAction="#SortUserList" prefHeight="30.0" prefWidth="80.0" styleClass="sort-option" text="Name" />
+         <ToggleButton fx:id="SortByEmailButton" mnemonicParsing="false" onAction="#SortUserList" prefHeight="30.0" prefWidth="80.0" styleClass="sort-option" text="Email" />
+         <ToggleButton fx:id="SortDirection" mnemonicParsing="false" onAction="#SortUserList" prefHeight="30.0" prefWidth="80.0" styleClass="sort-option" text="ASC" />
         </HBox>
     </AnchorPane>
     <ScrollPane hbarPolicy="NEVER" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" styleClass="list-area" vbarPolicy="NEVER">
@@ -125,6 +128,14 @@
                 <ToggleButton fx:id="DeleteAccountButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#DeleteButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Delete" />
                 <ToggleButton fx:id="ChangeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ChangeButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Change" />
             </HBox>
+         <Text fx:id="WarningText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Text>
         </VBox>
     </AnchorPane>
 </AnchorPane>

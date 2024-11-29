@@ -64,12 +64,6 @@ public class RegisterController {
     private TextField email, password, confirmPassword;
 
     @FXML
-    private void resetPassword() {
-        password.clear();
-        confirmPassword.clear();
-    }
-
-    @FXML
     private void resetAll() {
         errorText.setVisible(false);
         errorText.setStyle("");
@@ -152,7 +146,7 @@ public class RegisterController {
 
     // Handling create new account
     @FXML
-    private void RegisterButtonOnclick() throws SQLException, IOException, InterruptedException {
+    private void RegisterButtonOnclick() throws IOException, InterruptedException {
         if (email.getText().isEmpty()) {
             // System.out.println("Email is empty");
             SetErrorMessage("Email is empty");
@@ -205,7 +199,7 @@ public class RegisterController {
 
     private boolean ValidateEmail(String email) throws IOException {
         // url dẫn tới api kiểm tra sự tồn tại của mail
-        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=9f45f093bc3a4e5fbacb69d6d7a5bd1a&email=%s", email);
+        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=b91a7211b29440e2b46becbc68bb6e27&email=%s", email);
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");

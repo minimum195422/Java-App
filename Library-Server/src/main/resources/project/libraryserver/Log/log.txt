@@ -1,12 +1,56 @@
 ==== New Log File Created ====
-2024-11-29 03:09:52 - Server stating on port 1234
-2024-11-29 03:10:02 - Client 127.0.0.1 connected.
-2024-11-29 03:10:07 - Client disconnected: 127.0.0.1
-2024-11-29 03:10:52 - Server stating on port 1234
-2024-11-29 03:11:01 - Client 127.0.0.1 connected.
-2024-11-29 03:11:11 - Client disconnected: 127.0.0.1
-2024-11-29 03:13:20 - Server stating on port 1234
-2024-11-29 03:13:26 - Client 127.0.0.1 connected.
-2024-11-29 03:13:30 - Client disconnected: 127.0.0.1
-2024-11-29 03:15:21 - Server stating on port 1234
-2024-11-29 03:16:08 - Server stating on port 1234
+2024-11-30 03:43:38 - Server stating on port 1234
+2024-11-30 03:45:16 - Server stating on port 1234
+2024-11-30 03:45:32 - Can't add existed book to database.
+2024-11-30 03:50:12 - Server stating on port 1234
+2024-11-30 03:50:33 - Server update database on books table
+2024-11-30 03:50:33 - Server update database on authors table
+2024-11-30 03:50:33 - Server update database on book_author table
+2024-11-30 03:54:12 - Server stating on port 1234
+2024-11-30 03:54:34 - Server update database on books table
+2024-11-30 03:54:34 - Server update database on authors table
+2024-11-30 03:54:34 - Server update database on book_author table
+2024-11-30 03:54:34 - Server update database on authors table
+2024-11-30 03:54:34 - Server update database on book_author table
+2024-11-30 03:54:34 - Server update database on authors table
+2024-11-30 03:54:34 - Server update database on book_author table
+2024-11-30 03:56:19 - Server stating on port 1234
+2024-11-30 03:56:51 - Server stating on port 1234
+2024-11-30 04:01:54 - Server stating on port 1234
+2024-11-30 04:02:10 - Successfully added book and authors to the database.
+2024-11-30 04:02:12 - Book already exists in the database.
+2024-11-30 04:06:43 - Server stating on port 1234
+2024-11-30 04:07:01 - Successfully added book and authors to the database.
+2024-11-30 04:11:08 - Server stating on port 1234
+2024-11-30 04:13:55 - Server stating on port 1234
+2024-11-30 04:14:11 - Successfully added book and authors to the database.
+2024-11-30 04:20:01 - Server stating on port 1234
+2024-11-30 04:20:34 - Server stating on port 1234
+2024-11-30 04:21:31 - Server stating on port 1234
+2024-11-30 04:23:58 - Server stating on port 1234
+2024-11-30 04:24:15 - Successfully added book and authors to the database.
+2024-11-30 04:24:22 - Book already exists in the database.
+2024-11-30 04:34:25 - Server stating on port 1234
+2024-11-30 04:35:52 - Server stating on port 1234
+2024-11-30 04:36:40 - Server stating on port 1234
+2024-11-30 04:36:58 - Server stating on port 1234
+2024-11-30 04:37:41 - Server stating on port 1234
+2024-11-30 04:39:50 - Server stating on port 1234
+2024-11-30 04:45:30 - Server stating on port 1234
+2024-11-30 04:51:04 - Server stating on port 1234
+2024-11-30 04:54:10 - Server stating on port 1234
+2024-11-30 05:02:15 - Server stating on port 1234
+2024-11-30 05:04:08 - Server stating on port 1234
+2024-11-30 05:05:37 - Server stating on port 1234
+2024-11-30 05:06:22 - Server stating on port 1234
+2024-11-30 05:06:56 - Server stating on port 1234
+2024-11-30 05:08:44 - Server stating on port 1234
+2024-11-30 05:10:49 - Server stating on port 1234
+2024-11-30 05:15:19 - Server stating on port 1234
+2024-11-30 05:17:48 - Server stating on port 1234
+2024-11-30 05:25:02 - Server stating on port 1234
+2024-11-30 05:26:26 - Server stating on port 1234
+2024-11-30 05:28:03 - Server stating on port 1234
+2024-11-30 05:28:55 - Server stating on port 1234
+2024-11-30 05:29:45 - Server stating on port 1234
+2024-11-30 05:33:55 - Server stating on port 1234

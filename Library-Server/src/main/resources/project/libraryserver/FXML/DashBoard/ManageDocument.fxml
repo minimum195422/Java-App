@@ -9,9 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.text.Font?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" stylesheets="@../../Styles/ManageDocument.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.ManageDocumentController">
     <AnchorPane prefHeight="50.0" prefWidth="600.0">
         <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="590.0" spacing="10.0" styleClass="search-box" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
@@ -19,7 +17,7 @@
                 <Insets left="10.0" />
             </padding>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../Images/Icons/search.png"/>
+                <Image url="@../../Images/Icons/search.png" />
             </ImageView>
             <TextField maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="540.0" styleClass="search-area" />
         </HBox>
@@ -29,69 +27,9 @@
     </ScrollPane>
     <AnchorPane layoutX="600.0" prefHeight="680.0" prefWidth="420.0">
         <VBox prefHeight="680.0" prefWidth="420.0">
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID"/>
-                <TextField/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title"/>
-                <TextField/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN"/>
-                <TextField/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Published Date"/>
-                <TextField/>
-            </HBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Text>
-                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
-            </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price"/>
-                <TextField/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author"/>
-                <TextField/>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="420.0" spacing="5.0">
-                <padding>
-                    <Insets left="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category"/>
-                <TextField/>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-                <Button mnemonicParsing="false" text="Delete"/>
-                <Button mnemonicParsing="false" text="Change"/>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+                <Button mnemonicParsing="false" text="Delete" />
+                <Button mnemonicParsing="false" text="Change" />
             </HBox>
         </VBox>
     </AnchorPane>
