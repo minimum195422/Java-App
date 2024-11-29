@@ -399,7 +399,7 @@ public class DashBoardController implements Initializable {
                 try {
                     ArrayList<Book> bookBasicInfos = MySql.getBasicInfoOfBook(name);
                     for (Book book : bookBasicInfos) {
-                        if (returnList.size() >= 20) {
+                        if (returnList.size() >= 16) {
                             break;
                         }
                         try {
