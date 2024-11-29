@@ -41,7 +41,7 @@ public class MySql {
                 connection.prepareStatement(
                         "SELECT p.password " +
                             "FROM user u join passwords p on u.id = p.user_id " +
-                            "WHERE u.email = ?;"
+                            "WHERE u.email = ? and status = 'active';"
                 );
         preparedStatement.setString(1, email);
 
@@ -287,11 +287,32 @@ public class MySql {
     public static void addNewBook(Book book) throws SQLException {
         String bookID = book.getId();
         String title = book.getTitle();
-        ArrayList<String> authors = book.getAuthor();
+        StringBuilder newString = new StringBuilder(title);
+        while (newString.length() > 150) {
+            newString.deleteCharAt(newString.length() - 1);
+        }
+        title = newString.toString();
+        ArrayList<String> authors = book.getAuthors();
         String ISBN_10 = book.getISBN_10();
+        if (ISBN_10.equals("Can't found isbn")) {
+            ISBN_10 = "Unknown";
+        }
         String ISBN_13 = book.getISBN_13();
-        double price = book.getPrice();
+        if (ISBN_13.equals("Can't found isbn")) {
+            ISBN_13 = "Unknown";
+        }
+//        double price = book.getPrice();
+        double price = 0;
+        String publisher = book.getPublisher();
+        newString = new StringBuilder(publisher);
+        while (newString.length() > 100) {
+            newString.deleteCharAt(newString.length() - 1);
+        }
+        publisher = newString.toString();
         String publishedDate = book.getPublishedDate();
+        if (publishedDate.isEmpty()) {
+            publishedDate = "Unknown";
+        }
         ArrayList<String> categories = book.getCategories();
         String imagePreview;
         try {
@@ -300,30 +321,15 @@ public class MySql {
             imagePreview = DATA.noImage;
         }
         String description = book.getDescription();
-        String webReaderLink = book.getWebReaderLink();
-        if (publishedDate.isEmpty()) {
-            publishedDate = "Unknown";
-        }
         if (description.isEmpty()) {
             description = "No description";
         }
-        if (ISBN_10.equals("Can't found isbn")) {
-            ISBN_10 = "Unknown";
-        }
-        if (ISBN_13.equals("Can't found isbn")) {
-            ISBN_13 = "Unknown";
-        }
-        StringBuilder newString = new StringBuilder(title);
-        while (newString.length() > 150) {
-            newString.deleteCharAt(newString.length() - 1);
-        }
-        title = newString.toString();
-
         newString = new StringBuilder(description);
         while (newString.length() > 600) {
             newString.deleteCharAt(newString.length() - 1);
         }
         description = newString.toString();
+        String webReaderLink = book.getWebReaderLink();
 
         // Check if a book already existed or not
         PreparedStatement stmt = connection.prepareStatement(
@@ -346,18 +352,19 @@ public class MySql {
 
         stmt =
                 connection.prepareStatement(
-                        "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, published_date, image_preview, price, description, web_reader_link) "
-                                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, publisher, published_date, image_preview, price, description, web_reader_link) "
+                                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
         stmt.setString(1, bookID);
         stmt.setString(2, title);
         stmt.setString(3, ISBN_10);
         stmt.setString(4, ISBN_13);
-        stmt.setString(5, publishedDate);
-        stmt.setString(6, imagePreview);
-        stmt.setDouble(7, price);
-        stmt.setString(8, description);
-        stmt.setString(9, webReaderLink);
+        stmt.setString(5, publisher);
+        stmt.setString(6, publishedDate);
+        stmt.setString(7, imagePreview);
+        stmt.setDouble(8, price);
+        stmt.setString(9, description);
+        stmt.setString(10, webReaderLink);
         int status = stmt.executeUpdate();
         if (status > 0) {
 //            System.out.println("Books table updated");

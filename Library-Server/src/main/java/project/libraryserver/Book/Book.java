@@ -25,6 +25,20 @@ public class Book {
     private BookCard_600_200 Controller;
 
 
+    public Book() {
+        id = null;
+        title = null;
+        authors = null;
+        publisher = null;
+        publishedDate = null;
+        description = null;
+        categories = null;
+        ISBN_10 = null;
+        ISBN_13 = null;
+        imagePreview = null;
+        webReaderLink = null;
+    }
+
     public Book(String id, String title, ArrayList<String> authors,
                 String publisher, String published_date, String description,
                 ArrayList<String> categories, String ISBN_13, String ISBN_10,

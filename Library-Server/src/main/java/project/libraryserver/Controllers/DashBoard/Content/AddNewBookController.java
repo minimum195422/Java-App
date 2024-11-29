@@ -13,12 +13,14 @@ import javafx.scene.text.Text;
 import project.libraryserver.API.GoogleBookAPI.BookAPI;
 import project.libraryserver.Book.Book;
 import project.libraryserver.Consts.SearchType;
+import project.libraryserver.Database.MySql;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -59,6 +61,7 @@ public class AddNewBookController implements Initializable {
             SelectedBookReadLink, Notification;
     @FXML
     public ImageView SelectedBookCover;
+    Book newBook = new Book();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,14 +86,9 @@ public class AddNewBookController implements Initializable {
 
         for (Book book : list) {
             DisplayListBook.getChildren().add(book.getDisplayCard());
-//            try {
-//                MySql.addNewBook(book);
-//            } catch (SQLException _) {
-//                System.out.println("Error while adding books");
-//                System.out.println(book.toString());
-//            }
             book.getDisplayCard().setOnMouseClicked(
                     _ -> {
+                        newBook = book;
                         SelectedBookId.setText(book.getId());
                         SelectedBookTitle.setText(book.getTitle());
                         SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
@@ -107,7 +105,15 @@ public class AddNewBookController implements Initializable {
     }
 
     public void AddNewBookButtonClicked() {
-
+        if (newBook.getTitle() == null) {
+            return;
+        }
+        try {
+                MySql.addNewBook(newBook);
+            } catch (SQLException _) {
+                System.out.println("Error while adding books");
+                System.out.println(newBook.toString());
+            }
     }
 
 
