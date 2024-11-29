@@ -70,7 +70,11 @@ public class MySql {
             String[] authorListInString = rs.getString(3).split(",");
             String image = rs.getString(4);
             ArrayList<String> authors = new ArrayList<>(Arrays.asList(authorListInString));
-            img = new Image(image);
+            try {
+                img = new Image(image);
+            } catch (Exception e) {
+                img = new Image(DATA.noImage);
+            }
             book = new Book(id, title, authors, img);
             bookList.add(book);
         }

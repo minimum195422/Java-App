@@ -19,7 +19,7 @@ public class SearchController {
             vbox.setSpacing(75);
             vbox.setPadding(new Insets(0, 0, 0, 30));
             for (int j = 0; j < 4; ++j) {
-                if (i * 5 + j >= list.size()) break;
+                if (i * 4 + j >= list.size()) break;
                 vbox.getChildren().add(list.get(i * 4 + j));
             }
             MainVBox.getChildren().add(vbox);

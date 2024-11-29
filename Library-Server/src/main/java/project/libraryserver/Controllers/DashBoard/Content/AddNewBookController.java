@@ -65,7 +65,7 @@ public class AddNewBookController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DisplayListBook.setSpacing(10);
+        DisplayListBook.setSpacing(100);
     }
 
     public void SearchAction() throws URISyntaxException, IOException {

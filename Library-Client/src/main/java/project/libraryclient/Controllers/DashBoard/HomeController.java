@@ -40,6 +40,7 @@ public class HomeController implements Initializable {
                 bookNameList.removeLast();
             }
             updateSearchResult();
+//            System.out.println(list.size());
         }  catch (SQLException _) {
             System.out.println("Error while initializing home page");
         }
@@ -50,10 +51,9 @@ public class HomeController implements Initializable {
             try {
                 ArrayList<Book> bookNameList = MySql.getBasicInfoOfBook(name);
                 for (Book book : bookNameList) {
-                    if (list.size() >= 16) {
+                    if (list.size() >= 8) {
                         break;
                     }
-//                    System.out.println(book.getTitle());
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
                         AnchorPane card = loader.load();
@@ -64,17 +64,16 @@ public class HomeController implements Initializable {
                         controller.setBookName(book.getTitle());
 
                         list.add(card);
-
 //                             Add listener to a book
                         card.setOnMouseClicked(event -> {
                             System.out.println(book.getId());
                         });
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        System.out.println("Error while searching books");
                     }
                 }
             } catch (SQLException e) {
-                System.out.println("Error while searching books");
+                throw new RuntimeException(e);
             }
         }
     }
@@ -88,7 +87,7 @@ public class HomeController implements Initializable {
             vbox.setSpacing(75);
             vbox.setPadding(new Insets(0, 0, 0, 30));
             for (int j = 0; j < 4; ++j) {
-                if (i * 5 + j >= list.size()) break;
+                if (i * 4 + j >= list.size()) break;
                 vbox.getChildren().add(list.get(i * 4 + j));
             }
             MainVBox.getChildren().add(vbox);

@@ -294,6 +294,9 @@ public class MySql {
         }
         title = newString.toString();
         ArrayList<String> authors = book.getAuthors();
+        if (authors.isEmpty()) {
+            authors.add("Unknown");
+        }
         String ISBN_10 = book.getISBN_10();
         if (ISBN_10.equals("Can't found isbn")) {
             ISBN_10 = "Unknown";
@@ -310,7 +313,7 @@ public class MySql {
             newString.deleteCharAt(newString.length() - 1);
         }
         publisher = newString.toString();
-        if (publisher.isEmpty()) {
+        if (publisher.equals("Can't found publisher")) {
             publisher = "Unknown";
         }
         String publishedDate = book.getPublishedDate();
@@ -325,7 +328,7 @@ public class MySql {
             imagePreview = DATA.noImage;
         }
         String description = book.getDescription();
-        if (description.isEmpty()) {
+        if (description.equals("Can't found description")) {
             description = "No description";
         }
         newString = new StringBuilder(description);
@@ -369,6 +372,7 @@ public class MySql {
         stmt.setString(8, description);
         stmt.setString(9, webReaderLink);
         int status = stmt.executeUpdate();
+        System.out.println("OSU2");
         if (status > 0) {
 //            System.out.println("Books table updated");
         }

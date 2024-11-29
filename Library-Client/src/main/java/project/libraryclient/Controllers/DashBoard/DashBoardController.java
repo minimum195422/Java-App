@@ -325,8 +325,6 @@ public class DashBoardController implements Initializable {
         HomeButton.setSelected(true);
         HomeButtonMouseClicked();
 
-        // Set content
-        LoadHomePage();
     }
 
     // Detect if a key is valid
@@ -415,7 +413,7 @@ public class DashBoardController implements Initializable {
                                 System.out.println(book.getId());
                             });
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            System.out.println("Can't get book");
                         }
                     }
                 } catch (SQLException e) {
