@@ -70,6 +70,10 @@ public class BookAPI {
 
     private static ArrayList<Book> GetListBook(JSONObject json) {
         if (json == null) return new ArrayList<>();
+        if (json.getInt("totalItems") == 0) {
+            System.out.println("No result found");
+            return new ArrayList<>();
+        }
 
         ArrayList<Book> returnList = new ArrayList<>();
 

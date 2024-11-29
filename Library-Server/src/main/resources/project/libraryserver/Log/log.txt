@@ -13,3 +13,106 @@
 2024-11-29 09:09:40 - Server stating on port 1234
 2024-11-29 09:26:28 - Server stating on port 1234
 2024-11-29 09:30:59 - Server stating on port 1234
+2024-11-29 09:34:53 - Client 127.0.0.1 connected.
+2024-11-29 09:36:12 - Server stating on port 1234
+2024-11-29 09:39:22 - Server stating on port 1234
+2024-11-29 09:39:53 - Server stating on port 1234
+2024-11-29 09:42:11 - Server stating on port 1234
+2024-11-29 09:51:02 - Server stating on port 1234
+2024-11-29 09:52:53 - Server stating on port 1234
+2024-11-29 09:53:26 - Server stating on port 1234
+2024-11-29 09:55:37 - Server stating on port 1234
+2024-11-29 09:56:00 - Client 127.0.0.1 connected.
+2024-11-29 10:12:35 - Server stating on port 1234
+2024-11-29 13:10:44 - Server stating on port 1234
+2024-11-29 13:17:34 - Client 127.0.0.1 connected.
+2024-11-29 13:17:43 - Client disconnected: 127.0.0.1
+2024-11-29 13:19:21 - Server stating on port 1234
+2024-11-29 13:22:57 - Client 127.0.0.1 connected.
+2024-11-29 13:23:31 - Server stating on port 1234
+2024-11-29 13:24:14 - Server stating on port 1234
+2024-11-29 13:27:05 - Server stating on port 1234
+2024-11-29 13:43:57 - Server stating on port 1234
+2024-11-29 13:44:04 - Server stating on port 1234
+2024-11-29 13:44:55 - Server stating on port 1234
+2024-11-29 13:45:40 - Client 127.0.0.1 connected.
+2024-11-29 13:46:07 - Server stating on port 1234
+2024-11-29 13:49:56 - Server stating on port 1234
+2024-11-29 13:51:10 - Server stating on port 1234
+2024-11-29 13:52:35 - Server stating on port 1234
+2024-11-29 13:53:51 - Server stating on port 1234
+2024-11-29 13:54:33 - Server stating on port 1234
+2024-11-29 13:55:18 - Server stating on port 1234
+2024-11-29 13:57:04 - Server stating on port 1234
+2024-11-29 14:03:54 - Server stating on port 1234
+2024-11-29 14:03:59 - Client 127.0.0.1 connected.
+2024-11-29 14:20:30 - Client disconnected: 127.0.0.1
+2024-11-29 14:20:34 - Client 127.0.0.1 connected.
+2024-11-29 14:20:54 - Client disconnected: 127.0.0.1
+2024-11-29 14:20:57 - Client 127.0.0.1 connected.
+2024-11-29 14:21:23 - Client disconnected: 127.0.0.1
+2024-11-29 14:21:27 - Client 127.0.0.1 connected.
+2024-11-29 14:22:48 - Client disconnected: 127.0.0.1
+2024-11-29 14:22:51 - Client 127.0.0.1 connected.
+2024-11-29 14:23:19 - Client disconnected: 127.0.0.1
+2024-11-29 14:23:31 - Client 127.0.0.1 connected.
+2024-11-29 14:23:42 - Client disconnected: 127.0.0.1
+2024-11-29 14:24:06 - Client 127.0.0.1 connected.
+2024-11-29 14:24:23 - Client disconnected: 127.0.0.1
+2024-11-29 14:24:24 - Client 127.0.0.1 connected.
+2024-11-29 14:25:41 - Client disconnected: 127.0.0.1
+2024-11-29 14:27:05 - Client 127.0.0.1 connected.
+2024-11-29 14:28:59 - Client disconnected: 127.0.0.1
+2024-11-29 14:29:01 - Client 127.0.0.1 connected.
+2024-11-29 14:30:44 - Client disconnected: 127.0.0.1
+2024-11-29 14:31:22 - Client 127.0.0.1 connected.
+2024-11-29 14:32:24 - Client disconnected: 127.0.0.1
+2024-11-29 14:32:28 - Client 127.0.0.1 connected.
+2024-11-29 14:33:25 - Client disconnected: 127.0.0.1
+2024-11-29 14:36:36 - Client 127.0.0.1 connected.
+2024-11-29 14:40:39 - Client disconnected: 127.0.0.1
+2024-11-29 14:40:40 - Client 127.0.0.1 connected.
+2024-11-29 14:40:57 - Client disconnected: 127.0.0.1
+2024-11-29 14:41:45 - Client 127.0.0.1 connected.
+2024-11-29 14:45:13 - Client disconnected: 127.0.0.1
+2024-11-29 14:45:15 - Client 127.0.0.1 connected.
+2024-11-29 14:45:56 - Client disconnected: 127.0.0.1
+2024-11-29 14:45:58 - Client 127.0.0.1 connected.
+2024-11-29 14:46:11 - Client disconnected: 127.0.0.1
+2024-11-29 14:46:31 - Client 127.0.0.1 connected.
+2024-11-29 14:46:56 - Client disconnected: 127.0.0.1
+2024-11-29 14:46:59 - Client 127.0.0.1 connected.
+2024-11-29 14:47:14 - Client disconnected: 127.0.0.1
+2024-11-29 14:47:37 - Client 127.0.0.1 connected.
+2024-11-29 14:59:08 - Client disconnected: 127.0.0.1
+2024-11-29 14:59:15 - Client 127.0.0.1 connected.
+2024-11-29 15:01:14 - Client disconnected: 127.0.0.1
+2024-11-29 15:01:16 - Client 127.0.0.1 connected.
+2024-11-29 15:01:30 - Client disconnected: 127.0.0.1
+2024-11-29 15:01:32 - Client 127.0.0.1 connected.
+2024-11-29 15:02:34 - Client disconnected: 127.0.0.1
+2024-11-29 15:02:36 - Client 127.0.0.1 connected.
+2024-11-29 15:03:10 - Client disconnected: 127.0.0.1
+2024-11-29 15:03:13 - Client 127.0.0.1 connected.
+2024-11-29 15:03:16 - Client disconnected: 127.0.0.1
+2024-11-29 15:03:30 - Client 127.0.0.1 connected.
+2024-11-29 15:03:33 - Client disconnected: 127.0.0.1
+2024-11-29 15:04:11 - Client 127.0.0.1 connected.
+2024-11-29 15:04:18 - Client disconnected: 127.0.0.1
+2024-11-29 15:04:34 - Client 127.0.0.1 connected.
+2024-11-29 15:04:57 - Client disconnected: 127.0.0.1
+2024-11-29 15:04:59 - Client 127.0.0.1 connected.
+2024-11-29 15:05:24 - Client disconnected: 127.0.0.1
+2024-11-29 15:05:26 - Client 127.0.0.1 connected.
+2024-11-29 15:05:58 - Client disconnected: 127.0.0.1
+2024-11-29 15:06:02 - Client 127.0.0.1 connected.
+2024-11-29 15:06:09 - Client disconnected: 127.0.0.1
+2024-11-29 15:06:12 - Client 127.0.0.1 connected.
+2024-11-29 15:06:20 - Client disconnected: 127.0.0.1
+2024-11-29 15:06:38 - Client 127.0.0.1 connected.
+2024-11-29 15:12:45 - Client disconnected: 127.0.0.1
+2024-11-29 15:12:48 - Client 127.0.0.1 connected.
+2024-11-29 15:14:20 - Client disconnected: 127.0.0.1
+2024-11-29 15:14:23 - Client 127.0.0.1 connected.
+2024-11-29 15:14:34 - Client disconnected: 127.0.0.1
+2024-11-29 15:15:19 - Client 127.0.0.1 connected.

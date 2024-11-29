@@ -86,6 +86,12 @@ public class AddNewBookController implements Initializable {
 
         for (Book book : list) {
             DisplayListBook.getChildren().add(book.getDisplayCard());
+            try {
+                MySql.addNewBook(book);
+            } catch (SQLException _) {
+                System.out.println("Error while adding books");
+                System.out.println(book.toString());
+            }
             book.getDisplayCard().setOnMouseClicked(
                     _ -> {
                         newBook = book;
@@ -109,11 +115,11 @@ public class AddNewBookController implements Initializable {
             return;
         }
         try {
-                MySql.addNewBook(newBook);
-            } catch (SQLException _) {
-                System.out.println("Error while adding books");
-                System.out.println(newBook.toString());
-            }
+            MySql.addNewBook(newBook);
+        } catch (SQLException _) {
+            System.out.println("Error while adding books");
+            System.out.println(newBook.toString());
+        }
     }
 
 

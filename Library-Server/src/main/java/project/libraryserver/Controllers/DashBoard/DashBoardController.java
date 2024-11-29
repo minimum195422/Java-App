@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +28,11 @@ public class DashBoardController implements Initializable {
     // Server Log
     @FXML
     public ToggleButton ServerLogButton;
+    public ToggleButton ExitButton;
+
+    public void ExitButtonMouseClicked() {
+        System.exit(0); // close program
+    }
 
     public void ServerLogOnClicked() {
         try {

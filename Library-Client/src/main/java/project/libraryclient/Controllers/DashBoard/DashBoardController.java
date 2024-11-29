@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class DashBoardController implements Initializable {
@@ -329,8 +326,6 @@ public class DashBoardController implements Initializable {
 
         // Set content
         LoadHomePage();
-
-        bookList = new ArrayList<>();
     }
 
     // Detect if a key is valid
@@ -339,33 +334,44 @@ public class DashBoardController implements Initializable {
                 event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE;
     }
 
+    private void updateSearchResult(String type) {
+        List<AnchorPane> list = new ArrayList<>();
+        for (String name : bookList) {
+            try {
+                ArrayList<Book> bookList = MySql.getBasicInfoOfBook(name);
+                for (Book book : bookList) {
+                    if (list.size() >= 20) {
+                        break;
+                    }
+//                    System.out.println(book.getTitle());
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
+                        AnchorPane card = loader.load();
+                        Card_235_450_Controller controller = loader.getController();
+                        controller.setBookInfo(book);
+                        list.add(card);
+//                             Add listener to a book
+                        card.setOnMouseClicked(event -> {
+                            System.out.println(book.getId());
+                        });
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("Error while searching books");
+            }
+        }
+        LoadSearchResults(list, type);
+    }
+
     ArrayList<String> bookList = new ArrayList<>();
     @FXML
     private void handleSearchBox(KeyEvent keyEvent) throws SQLException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
                 bookList = MySql.getBookBySubstring(searchBox.getText());
-                List<AnchorPane> list = new ArrayList<>();
-                for (String name : bookList) {
-                    ArrayList<Book> bookList = MySql.getBasicInfoOfBook(name);
-                    for (Book book : bookList) {
-//                        System.out.println(book.getTitle());
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-                            AnchorPane card = loader.load();
-                            Card_235_450_Controller controller = loader.getController();
-                            controller.setBookInfo(book);
-                            list.add(card);
-//                             Add listener to a book
-                            card.setOnMouseClicked(event -> {
-                                System.out.println(book.getId());
-                            });
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-                LoadSearchResults(list);
+                updateSearchResult("RESULT");
             } catch (SQLException _) {
 
             }
@@ -374,13 +380,22 @@ public class DashBoardController implements Initializable {
 
     private void LoadHomePage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
-                    Objects.requireNonNull(
-                            getClass().getResource(DATA.HOMEPAGE_LINK)));
-            ContentDisplay.setCenter(pane);
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
+            bookList = MySql.getBookBySubstring("");
+            for (int i = 1; i < bookList.size(); i++) {
+                Random rand = new Random();
+                int j = rand.nextInt(i);
+                String temp = bookList.get(i);
+                bookList.set(i, bookList.get(j));
+                bookList.set(j, temp);
+            }
+            while (bookList.size() > 10) {
+                bookList.removeLast();
+            }
+            updateSearchResult("HOME");
+        }  catch (SQLException _) {
+            System.out.println("Error while initializing home page");
         }
+
     }
 
     private void LoadNotificationPage() {
@@ -427,13 +442,28 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    private void LoadSearchResults(List<AnchorPane> list) {
+    private void LoadSearchResults(List<AnchorPane> list, String type) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
-            ScrollPane pane = loader.load();
-            SearchController searchController = loader.getController();
-            searchController.setContent(list);
-            ContentDisplay.setCenter(pane);
+            FXMLLoader loader;
+            if (type.equals("HOME")) {
+
+                loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
+                ScrollPane pane = loader.load();
+                SearchController searchController = loader.getController();
+                searchController.setContent(list);
+                ContentDisplay.setCenter(pane);
+//                loader = new FXMLLoader(getClass().getResource(DATA.HOMEPAGE_LINK));
+//                ScrollPane pane = loader.load();
+//                HomeController homeController = loader.getController();
+//                homeController.setContent(list);
+//                ContentDisplay.setCenter(pane);
+            } else {
+                loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
+                ScrollPane pane = loader.load();
+                SearchController searchController = loader.getController();
+                searchController.setContent(list);
+                ContentDisplay.setCenter(pane);
+            }
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }

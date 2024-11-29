@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
-    <VBox fx:id="MainVBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" />
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
+    <VBox fx:id="MainVBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000.0"
+          styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Results">
+           <font>
+               <Font name="System Bold" size="40.0"/>
+           </font>
+           <VBox.margin>
+               <Insets bottom="70.0" left="20.0" top="50.0"/>
+           </VBox.margin>
+        </Text>
+    </VBox>
 </ScrollPane>

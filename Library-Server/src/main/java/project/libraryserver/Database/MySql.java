@@ -7,6 +7,7 @@ import project.libraryserver.User.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MySql {
     private static MySql instance;
@@ -309,8 +310,11 @@ public class MySql {
             newString.deleteCharAt(newString.length() - 1);
         }
         publisher = newString.toString();
+        if (publisher.isEmpty()) {
+            publisher = "Unknown";
+        }
         String publishedDate = book.getPublishedDate();
-        if (publishedDate.isEmpty()) {
+        if (publishedDate.equals("Can't found time release")) {
             publishedDate = "Unknown";
         }
         ArrayList<String> categories = book.getCategories();
@@ -352,8 +356,8 @@ public class MySql {
 
         stmt =
                 connection.prepareStatement(
-                        "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, publisher, published_date, image_preview, price, description, web_reader_link) "
-                                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO books(book_id, title, ISBN_10, ISBN_13, publisher, published_date, image_preview, description, web_reader_link) "
+                                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 );
         stmt.setString(1, bookID);
         stmt.setString(2, title);
@@ -362,9 +366,8 @@ public class MySql {
         stmt.setString(5, publisher);
         stmt.setString(6, publishedDate);
         stmt.setString(7, imagePreview);
-        stmt.setDouble(8, price);
-        stmt.setString(9, description);
-        stmt.setString(10, webReaderLink);
+        stmt.setString(8, description);
+        stmt.setString(9, webReaderLink);
         int status = stmt.executeUpdate();
         if (status > 0) {
 //            System.out.println("Books table updated");
