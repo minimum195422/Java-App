@@ -43,3 +43,47 @@
 2024-11-30 13:45:58 - Client 127.0.0.1 connected.
 2024-11-30 13:46:08 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
 2024-11-30 13:46:28 - Client disconnected: 127.0.0.1
+2024-11-30 14:25:51 - Successfully added book and authors to the database.
+2024-11-30 15:10:08 - Server stating on port 1234
+2024-11-30 15:10:22 - Successfully added book and authors to the database.
+2024-11-30 15:13:01 - Server stating on port 1234
+2024-11-30 15:13:57 - Server stating on port 1234
+2024-11-30 15:14:17 - Server stating on port 1234
+2024-11-30 15:14:28 - Successfully added book and authors to the database.
+2024-11-30 15:27:20 - Server stating on port 1234
+2024-11-30 15:27:29 - Successfully added book and authors to the database.
+2024-11-30 15:28:55 - Server stating on port 1234
+2024-11-30 15:29:05 - Successfully added book and authors to the database.
+2024-11-30 15:29:33 - Server stating on port 1234
+2024-11-30 15:30:07 - Successfully added book and authors to the database.
+2024-11-30 15:37:14 - Server stating on port 1234
+2024-11-30 15:37:35 - Book already exists in the database.
+2024-11-30 15:40:29 - Client 127.0.0.1 connected.
+2024-11-30 16:19:23 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 16:19:37 - Book already exists in the database.
+2024-11-30 16:19:40 - Book already exists in the database.
+2024-11-30 16:19:51 - Successfully added book and authors to the database.
+2024-11-30 16:20:55 - Server stating on port 1234
+2024-11-30 16:30:49 - Successfully added book and authors to the database.
+2024-11-30 16:50:55 - Server stating on port 1234
+2024-11-30 16:51:25 - Successfully added book and authors to the database.
+2024-11-30 16:51:47 - Server stating on port 1234
+2024-11-30 16:51:58 - Successfully added book and authors to the database.
+2024-11-30 16:53:19 - Server stating on port 1234
+2024-11-30 16:53:37 - Successfully added book and authors to the database.
+2024-11-30 16:57:33 - Client 127.0.0.1 connected.
+2024-11-30 16:59:18 - Client disconnected: 127.0.0.1
+2024-11-30 16:59:19 - Client 127.0.0.1 connected.
+2024-11-30 16:59:24 - Book already exists in the database.
+2024-11-30 16:59:31 - Client disconnected: 127.0.0.1
+2024-11-30 16:59:37 - Server stating on port 1234
+2024-11-30 16:59:52 - Book already exists in the database.
+2024-11-30 16:59:55 - Book already exists in the database.
+2024-11-30 17:06:55 - Successfully added book and authors to the database.
+2024-11-30 17:07:09 - Book already exists in the database.
+2024-11-30 17:08:52 - Server stating on port 1234
+2024-11-30 17:09:02 - Book already exists in the database.
+2024-11-30 17:09:09 - Successfully added book and authors to the database.
+2024-11-30 17:09:11 - Book already exists in the database.
+2024-11-30 17:09:14 - Successfully added book and authors to the database.
+2024-11-30 18:42:32 - Server stating on port 1234

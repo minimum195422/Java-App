@@ -73,7 +73,7 @@ public class RegisterController {
     private void resetAll() {
         errorText.setVisible(false);
         errorText.setStyle("");
-        errorText.setStyle("-fx-fill: red;");
+        errorText.setStyle("-fx-text-fill: red;");
         email.clear();
         password.clear();
         confirmPassword.clear();
@@ -202,7 +202,7 @@ public class RegisterController {
         // kiểm tra trạng thái của status
         if (status == UserStatus.REGISTER_SUCCESS) {
             resetAll();
-            SetSuccessMessage("Registered successfully! Return to login page");
+            SetSuccessMessage();
         } else if (status == UserStatus.REGISTER_FAILED) {
             SetErrorMessage("Email already exists");
             resetPassword();
@@ -249,17 +249,17 @@ public class RegisterController {
             errorText.setVisible(true);
             errorText.setText(message);
             errorText.setStyle("");
-            errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
+            errorText.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
         });
     }
 
-    private void SetSuccessMessage(String message) {
+    private void SetSuccessMessage() {
         Platform.runLater(() -> {
             errorText.setManaged(true);
             errorText.setVisible(true);
-            errorText.setText(message);
+            errorText.setText("Registered successfully! Return to login page");
             errorText.setStyle("");
-            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
+            errorText.setStyle("-fx-text-fill: green; -fx-font-size: 12px;");
         });
     }
 }

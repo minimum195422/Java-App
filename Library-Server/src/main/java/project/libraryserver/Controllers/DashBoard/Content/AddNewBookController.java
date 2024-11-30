@@ -67,6 +67,7 @@ public class AddNewBookController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayListBook.setSpacing(10);
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
     public void SearchAction() throws URISyntaxException, IOException {
@@ -118,6 +119,7 @@ public class AddNewBookController implements Initializable {
 
         if (SelectedBook == null) {
             WarningText.setText("No data selected");
+            WarningText.setStyle("-fx-text-fill: red;");
             return;
         }
 
@@ -138,18 +140,22 @@ public class AddNewBookController implements Initializable {
             boolean result = task.getValue();
             if (result) {
                 WarningText.setText("Successfully added new book to database");
+                WarningText.setStyle("-fx-text-fill: green;");
             } else {
                 WarningText.setText("Failed to add new book to database");
+                WarningText.setStyle("-fx-text-fill: red;");
             }
         });
 
         task.setOnFailed(_ -> {
             WarningText.setText("An error occurred while adding the book.");
+            WarningText.setStyle("-fx-text-fill: red;");
         });
 
         new Thread(task).start();
 
         WarningText.setText("Adding new book to database...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
 }
