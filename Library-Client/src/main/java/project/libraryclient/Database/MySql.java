@@ -1,7 +1,7 @@
 package project.libraryclient.Database;
 
 import javafx.scene.image.Image;
-import project.libraryclient.Class.Book;
+import project.libraryclient.Book.Book;
 import project.libraryclient.Consts.DATA;
 
 import java.sql.*;

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import project.libraryclient.Class.Book;
+import project.libraryclient.Book.Book;
 
 import java.util.ArrayList;
 

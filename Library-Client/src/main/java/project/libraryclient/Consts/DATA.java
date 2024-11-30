@@ -39,7 +39,7 @@ public class DATA {
 
     // Home page link 
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
-    public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
+
     // Discover page link
     public static final String DISCOVER_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Discover.fxml";
 

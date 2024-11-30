@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.libraryclient.Class.Book;
+import project.libraryclient.Book.Book;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Controllers.Card.Card_235_450_Controller;
 import project.libraryclient.Database.MySql;
@@ -36,9 +36,6 @@ public class HomeController implements Initializable {
                 bookNameList.set(i, bookNameList.get(j));
                 bookNameList.set(j, temp);
             }
-            while (bookNameList.size() > 8) {
-                bookNameList.removeLast();
-            }
             updateSearchResult();
 //            System.out.println(list.size());
         }  catch (SQLException _) {
@@ -48,6 +45,9 @@ public class HomeController implements Initializable {
 
     private void updateSearchResult() {
         for (String name : bookNameList) {
+            if (list.size() >= 8) {
+                break;
+            }
             try {
                 ArrayList<Book> bookNameList = MySql.getBasicInfoOfBook(name);
                 for (Book book : bookNameList) {

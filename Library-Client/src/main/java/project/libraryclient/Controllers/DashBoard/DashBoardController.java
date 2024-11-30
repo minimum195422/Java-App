@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -392,10 +393,15 @@ public class DashBoardController implements Initializable {
     public void SearchFieldOnAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
+//            System.out.println("Created loader");
             ScrollPane pane = loader.load();
+//            System.out.println("Created pane");
             SearchController controller = loader.getController();
+//            System.out.println("Created controller");
             controller.setContent(getListSearch());
+//            System.out.println("Set content complete");
             ContentDisplay.setCenter(pane);
+//            System.out.println("Display pane");
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
@@ -405,8 +411,19 @@ public class DashBoardController implements Initializable {
         ArrayList<AnchorPane> returnList = new ArrayList<>();
         ArrayList<String> bookNameList;
         try {
-            bookNameList = MySql.getInstance().getBookBySubstring(searchBox.getText());
+            bookNameList = MySql.getBookBySubstring(searchBox.getText());
+//            Remove comments if you want the order of results to be random
+//            for (int i = 1; i < bookNameList.size(); i++) {
+//                Random rand = new Random();
+//                int j = rand.nextInt(i);
+//                String temp = bookNameList.get(i);
+//                bookNameList.set(i, bookNameList.get(j));
+//                bookNameList.set(j, temp);
+//            }
             for (String name : bookNameList) {
+                if (returnList.size() >= 16) {
+                    break;
+                }
                 try {
                     ArrayList<Book> bookBasicInfos = MySql.getBasicInfoOfBook(name);
                     for (Book book : bookBasicInfos) {
@@ -436,7 +453,6 @@ public class DashBoardController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
-
         return returnList;
     }
 }

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import project.libraryserver.API.GoogleBookAPI.BookAPI;
 import project.libraryserver.Book.Book;
-import project.libraryserver.ConfirmDialog.ConfirmDialog;
+import project.libraryserver.ConfirmDialog.*;
 import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Database.MySql;
 

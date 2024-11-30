@@ -10,3 +10,36 @@
 2024-11-29 03:13:30 - Client disconnected: 127.0.0.1
 2024-11-29 03:15:21 - Server stating on port 1234
 2024-11-29 03:16:08 - Server stating on port 1234
+2024-11-30 13:18:22 - Server stating on port 1234
+2024-11-30 13:18:36 - Successfully added book and authors to the database.
+2024-11-30 13:27:03 - Server stating on port 1234
+2024-11-30 13:28:50 - Client 127.0.0.1 connected.
+2024-11-30 13:29:03 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:31:03 - Client disconnected: 127.0.0.1
+2024-11-30 13:31:06 - Client 127.0.0.1 connected.
+2024-11-30 13:31:20 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:31:58 - Client disconnected: 127.0.0.1
+2024-11-30 13:32:18 - Client 127.0.0.1 connected.
+2024-11-30 13:32:33 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:33:04 - Client disconnected: 127.0.0.1
+2024-11-30 13:34:25 - Client 127.0.0.1 connected.
+2024-11-30 13:34:37 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:35:38 - Client disconnected: 127.0.0.1
+2024-11-30 13:35:41 - Client 127.0.0.1 connected.
+2024-11-30 13:35:53 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:36:34 - Client disconnected: 127.0.0.1
+2024-11-30 13:36:38 - Client 127.0.0.1 connected.
+2024-11-30 13:36:51 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:37:30 - Client disconnected: 127.0.0.1
+2024-11-30 13:37:33 - Client 127.0.0.1 connected.
+2024-11-30 13:37:46 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:38:13 - Client disconnected: 127.0.0.1
+2024-11-30 13:38:16 - Client 127.0.0.1 connected.
+2024-11-30 13:38:26 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:42:43 - Client disconnected: 127.0.0.1
+2024-11-30 13:42:46 - Client 127.0.0.1 connected.
+2024-11-30 13:42:59 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:43:27 - Client disconnected: 127.0.0.1
+2024-11-30 13:45:58 - Client 127.0.0.1 connected.
+2024-11-30 13:46:08 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-11-30 13:46:28 - Client disconnected: 127.0.0.1

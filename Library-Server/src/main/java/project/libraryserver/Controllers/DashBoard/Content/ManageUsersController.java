@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import project.libraryserver.ConfirmDialog.ConfirmDialog;
+import project.libraryserver.ConfirmDialog.*;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
 import project.libraryserver.User.UserSort;
