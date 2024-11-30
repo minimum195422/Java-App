@@ -1,18 +1,15 @@
 package project.libraryclient.Controllers.DashBoard;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import project.libraryclient.Class.Book;
+import project.libraryclient.Book.Book;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Controllers.Card.Card_235_450_Controller;
 import project.libraryclient.Database.MySql;
@@ -21,7 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 
 public class DashBoardController implements Initializable {
@@ -32,8 +31,13 @@ public class DashBoardController implements Initializable {
 
 
     // --------------- Exit button -------------- //
+    @FXML
     public ImageView ExitButton;
+
+    // --------------- Search Box -------------- //
+    @FXML
     public TextField searchBox;
+
     public void ExitButtonMouseClicked() {
         System.exit(0); // close program
     }
@@ -325,14 +329,11 @@ public class DashBoardController implements Initializable {
         HomeButton.setSelected(true);
         HomeButtonMouseClicked();
 
+        // Set content
+        LoadHomePage();
     }
 
-    // Detect if a key is valid
-    private boolean detectKeys(KeyEvent event) {
-        return event.getCode().isKeypadKey() || event.getCode().isLetterKey() || event.getCode().isDigitKey() ||
-                event.getCode() == KeyCode.SPACE || event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE;
-    }
-    
+
     private void LoadHomePage() {
         try {
             ScrollPane pane = FXMLLoader.load(
@@ -388,11 +389,23 @@ public class DashBoardController implements Initializable {
         }
     }
 
+    public void SearchFieldOnAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
+            ScrollPane pane = loader.load();
+            SearchController controller = loader.getController();
+            controller.setContent(getListSearch());
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
     public ArrayList<AnchorPane> getListSearch() {
         ArrayList<AnchorPane> returnList = new ArrayList<>();
         ArrayList<String> bookNameList;
         try {
-            bookNameList = MySql.getBookBySubstring(searchBox.getText());
+            bookNameList = MySql.getInstance().getBookBySubstring(searchBox.getText());
             for (String name : bookNameList) {
                 try {
                     ArrayList<Book> bookBasicInfos = MySql.getBasicInfoOfBook(name);
@@ -413,7 +426,7 @@ public class DashBoardController implements Initializable {
                                 System.out.println(book.getId());
                             });
                         } catch (IOException e) {
-                            System.out.println("Can't get book");
+                            throw new RuntimeException(e);
                         }
                     }
                 } catch (SQLException e) {
@@ -425,17 +438,5 @@ public class DashBoardController implements Initializable {
         }
 
         return returnList;
-    }
-
-    public void SearchFieldOnAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
-            ScrollPane pane = loader.load();
-            SearchController controller = loader.getController();
-            controller.setContent(getListSearch());
-            ContentDisplay.setCenter(pane);
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
-        }
     }
 }

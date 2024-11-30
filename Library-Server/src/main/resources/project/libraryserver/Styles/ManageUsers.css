@@ -55,3 +55,17 @@
     -fx-text-fill: rgb(28, 28, 30);
 }
 
+.sort-option {
+    -fx-background-color: rgb(229, 229, 234);
+    -fx-border-radius: 5;
+    -fx-border-color: rgb(174, 174, 178);
+    -fx-text-fill: rgb(174, 174, 178);
+}
+
+.sort-option:selected {
+    -fx-background-color: rgb(242, 242, 247);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: rgb(174, 174, 178);
+    -fx-text-fill: rgb(28, 28, 30);
+}

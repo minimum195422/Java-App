@@ -12,7 +12,6 @@ import project.libraryserver.Server.ServerLog;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ServerLogController implements Initializable {

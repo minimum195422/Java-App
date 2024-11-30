@@ -92,7 +92,7 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerResponseNormalLogin(JSONObject json) throws SQLException {
-        boolean check = MySql.getInstance().QueryCheckNormalLogin(
+        boolean check = MySql.getInstance().CheckNormalLogin(
                 json.getString("email"), json.getString("password"));
         JSONObject response;
         if (check) {
@@ -118,7 +118,7 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerResponseGoogleLogin(JSONObject json) throws SQLException {
-        boolean check = MySql.getInstance().QueryCheckGoogleLogin(
+        boolean check = MySql.getInstance().CheckGoogleLogin(
                 json.getString("id"), json.getString("email"));
         JSONObject response;
         if (check) {
@@ -147,6 +147,7 @@ public class ClientHandler implements Runnable{
         boolean check = MySql.getInstance().CreateNewNormalUser(
                 json.getString("first_name"), json.getString("last_name"),
                 json.getString("email"), json.getString("password"));
+
         JSONObject response;
         if (check) {
             // Ghi log thông báo gửi phản hồi đăng ký thành công tới người dùng

@@ -33,16 +33,4 @@ public class Card_235_450_Controller {
     public void setAuthorName(ArrayList<String> list) {
         AuthorName.setText(list.toString());
     }
-
-    //    public void setBookInfo(Book book) {
-//        String URL = book.getImagePreview();
-//        try {
-//            BookCover.setImage(new Image(URL));
-//        } catch (Exception e) {
-////            BookCover.setImage(new Image("../resources/project/libraryclient/Images/Icons/no-image.png"));
-//            BookCover.setImage(new Image("https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png"));
-//        }
-//        BookName.setText(book.getTitle());
-//        AuthorName.setText(book.getAuthorInString());
-//    }
 }

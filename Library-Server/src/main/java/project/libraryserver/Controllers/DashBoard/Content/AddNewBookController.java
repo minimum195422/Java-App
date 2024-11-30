@@ -1,5 +1,6 @@
 package project.libraryserver.Controllers.DashBoard.Content;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -7,11 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import project.libraryserver.API.GoogleBookAPI.BookAPI;
 import project.libraryserver.Book.Book;
+import project.libraryserver.ConfirmDialog.ConfirmDialog;
 import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Database.MySql;
 
@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -58,14 +57,16 @@ public class AddNewBookController implements Initializable {
     public Label SelectedBookId, SelectedBookTitle, SelectedBookAuthors,
             SelectedBookPublisher, SelectedBookPublishedDate, SelectedBookDescription,
             SelectedBookCategories, SelectedBookIsbn13, SelectedBookIsbn10,
-            SelectedBookReadLink, Notification;
+            SelectedBookReadLink, WarningText;
+
+    public Book SelectedBook;
+
     @FXML
     public ImageView SelectedBookCover;
-    Book newBook = new Book();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DisplayListBook.setSpacing(100);
+        DisplayListBook.setSpacing(10);
     }
 
     public void SearchAction() throws URISyntaxException, IOException {
@@ -86,15 +87,8 @@ public class AddNewBookController implements Initializable {
 
         for (Book book : list) {
             DisplayListBook.getChildren().add(book.getDisplayCard());
-//            try {
-//                MySql.addNewBook(book);
-//            } catch (SQLException _) {
-//                System.out.println("Error while adding books");
-//                System.out.println(book.toString());
-//            }
             book.getDisplayCard().setOnMouseClicked(
                     _ -> {
-                        newBook = book;
                         SelectedBookId.setText(book.getId());
                         SelectedBookTitle.setText(book.getTitle());
                         SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
@@ -106,22 +100,10 @@ public class AddNewBookController implements Initializable {
                         SelectedBookIsbn10.setText(book.getISBN_10());
                         SelectedBookReadLink.setText(book.getWebReaderLink());
                         SelectedBookCover.setImage(book.getImagePreview());
+                        SelectedBook = book;
                     });
         }
     }
-
-    public void AddNewBookButtonClicked() {
-        if (newBook.getTitle() == null) {
-            return;
-        }
-        try {
-            MySql.addNewBook(newBook);
-        } catch (SQLException _) {
-            System.out.println("Error while adding books");
-            System.out.println(newBook.toString());
-        }
-    }
-
 
     public void ReaderLinkClicked() {
         if (SelectedBookReadLink.getText().isEmpty()) return;
@@ -131,4 +113,43 @@ public class AddNewBookController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    public void AddNewBookButtonClicked() {
+
+        if (SelectedBook == null) {
+            WarningText.setText("No data selected");
+            return;
+        }
+
+        boolean confirmed = ConfirmDialog.show(
+                "Confirm action",
+                "Add new book to database!"
+        );
+        if (!confirmed) return;
+
+        Task<Boolean> task = new Task<>() {
+            @Override
+            protected Boolean call() {
+                return MySql.getInstance().addNewBook(SelectedBook);
+            }
+        };
+
+        task.setOnSucceeded(_ -> {
+            boolean result = task.getValue();
+            if (result) {
+                WarningText.setText("Successfully added new book to database");
+            } else {
+                WarningText.setText("Failed to add new book to database");
+            }
+        });
+
+        task.setOnFailed(_ -> {
+            WarningText.setText("An error occurred while adding the book.");
+        });
+
+        new Thread(task).start();
+
+        WarningText.setText("Adding new book to database...");
+    }
+
 }

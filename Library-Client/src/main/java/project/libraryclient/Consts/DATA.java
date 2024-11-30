@@ -52,6 +52,8 @@ public class DATA {
     // My Book page link
     public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";
 
+    // Search page link
+    public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
 // ---------------------------------------------------------------- //
 // ------------------------- Card ui link ------------------------- //
 // ---------------------------------------------------------------- //
@@ -67,7 +69,8 @@ public class DATA {
     public static final String SCENE_DASHBOARD = "DashBoardController";
     public static final String SCENE_VERIFY_PAGE = "VerifyController";
 
-// ---------------------------------------------------------------- //
+
+    // ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
     private static Image loadImage(String path) {
