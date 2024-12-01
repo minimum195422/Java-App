@@ -50,10 +50,11 @@
                <Insets left="250.0" />
             </HBox.margin>
          </Text>
-         <ToggleButton fx:id="SortById" mnemonicParsing="false" styleClass="sort-option" text="ID" />
-         <ToggleButton fx:id="SortByTitle" mnemonicParsing="false" styleClass="sort-option" text="Title" />
-         <ToggleButton fx:id="SortByRate" mnemonicParsing="false" styleClass="sort-option" text="Rate" />
-         <ToggleButton fx:id="SortByBorrowedTime" mnemonicParsing="false" styleClass="sort-option" text="Borrowed time" />
+         <ToggleButton fx:id="SortById" mnemonicParsing="false" onAction="#SortBookList" styleClass="sort-option" text="ID" />
+         <ToggleButton fx:id="SortByTitle" mnemonicParsing="false" onAction="#SortBookList" styleClass="sort-option" text="Title" />
+         <ToggleButton fx:id="SortByRate" mnemonicParsing="false" onAction="#SortBookList" styleClass="sort-option" text="Rate" />
+         <ToggleButton fx:id="SortByBorrowedTime" mnemonicParsing="false" onAction="#SortBookList" styleClass="sort-option" text="Borrowed time" />
+         <ToggleButton fx:id="SortDirection" mnemonicParsing="false" onMouseClicked="#SortDirectionClicked" styleClass="sort-option" text="ASC" />
         </HBox>
     </AnchorPane>
     <AnchorPane layoutY="100.0" prefHeight="50.0" prefWidth="1020.0">

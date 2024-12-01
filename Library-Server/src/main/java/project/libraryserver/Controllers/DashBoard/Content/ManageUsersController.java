@@ -100,6 +100,7 @@ public class ManageUsersController implements Initializable {
             }
         });
 
+
         // Default sort direction
         SortDirection.setSelected(true);
         SortByIdButton.setSelected(true);

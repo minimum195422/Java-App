@@ -12,4 +12,11 @@ public class BookSort {
         books.sort(Comparator.comparing(Book::getId).reversed());
     }
 
+    public static void SortByTitleAsc(ArrayList<Book> books) {
+        books.sort(Comparator.comparing(Book::getTitle));
+    }
+
+    public static void SortByTitleDesc(ArrayList<Book> books) {
+        books.sort(Comparator.comparing(Book::getTitle).reversed());
+    }
 }

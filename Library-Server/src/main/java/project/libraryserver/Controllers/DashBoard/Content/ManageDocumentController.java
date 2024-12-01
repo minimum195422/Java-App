@@ -9,15 +9,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import project.libraryserver.Book.Book;
+import project.libraryserver.Book.BookSort;
 import project.libraryserver.ConfirmDialog.ConfirmDialog;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Server.ServerLog;
+import project.libraryserver.User.UserSort;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +47,8 @@ public class ManageDocumentController implements Initializable{
     public Button SearchButton;
 
     @FXML
-    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime;
+    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime, SortDirection;
+    public ToggleGroup SortOption = new ToggleGroup();
 
     ArrayList<Book> BookList = new ArrayList<>();
 
@@ -58,17 +62,35 @@ public class ManageDocumentController implements Initializable{
             }
         });
 
+        // search option
         SearchById.setToggleGroup(SearchOption);
         SearchByTitle.setToggleGroup(SearchOption);
         SearchByAuthor.setToggleGroup(SearchOption);
 
         SearchById.setSelected(true);
-
         // Set button group always have one in used
         SearchOption.selectedToggleProperty().addListener(
-            (_, oldToggle, newToggle) -> {
-                if (newToggle == null) {
-                    SearchOption.selectToggle(oldToggle);
+                (_, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        SearchOption.selectToggle(oldToggle);
+                    }
+                });
+        
+        
+        // sort option
+        SortById.setToggleGroup(SortOption);
+        SortByTitle.setToggleGroup(SortOption);
+        SortByRate.setToggleGroup(SortOption);
+        SortByBorrowedTime.setToggleGroup(SortOption);
+
+        SortById.setSelected(true);
+        SortDirection.setSelected(true);
+
+        // Set button group always have one in used
+        SortOption.selectedToggleProperty().addListener(
+        (_, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                SortOption.selectToggle(oldToggle);
             }
         });
 
@@ -82,7 +104,7 @@ public class ManageDocumentController implements Initializable{
             return;
         }
 
-        ReLoadDisplayBookList();
+        SortBookList();
     }
 
     private void ReLoadDisplayBookList() {
@@ -165,7 +187,31 @@ public class ManageDocumentController implements Initializable{
         new Thread(task).start();
     }
 
-    private void SortBookList() {
+    public void SortBookList() {
+        if (SortById.isSelected()) {
+            if (SortDirection.isSelected()) {
+                BookSort.SortByIdAsc(BookList);
+            } else {
+                BookSort.SortByIdDesc(BookList);
+            }
+        }
+        if (SortByTitle.isSelected()) {
+            if (SortDirection.isSelected()) {
+                BookSort.SortByTitleAsc(BookList);
+            } else {
+                BookSort.SortByTitleDesc(BookList);
+            }
+        }
 
+        ReLoadDisplayBookList();
+    }
+
+    public void SortDirectionClicked() {
+        if (SortDirection.isSelected()) {
+            SortDirection.setText("ASC");
+        } else {
+            SortDirection.setText("DESC");
+        }
+        SortBookList();
     }
 }
