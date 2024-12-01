@@ -1,9 +1,9 @@
 module project.libraryserver {
-    requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires org.json;
     requires jbcrypt;
+    requires javafx.web;
     requires java.desktop;
 
     opens project.libraryserver to javafx.fxml;

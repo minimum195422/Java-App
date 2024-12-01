@@ -2,7 +2,6 @@ package project.libraryserver.Controllers.DashBoard.Content;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -110,7 +109,7 @@ public class ManageUsersController implements Initializable {
 
     private void LoadUserList() {
         try {
-            UserList = MySql.getInstance().GetUserList();
+            UserList = MySql.getInstance().GetAllUser();
             if (UserList.isEmpty()) {
                 System.out.println("fail to load user");
                 return;

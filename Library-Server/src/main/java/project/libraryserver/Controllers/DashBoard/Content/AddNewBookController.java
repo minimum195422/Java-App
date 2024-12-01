@@ -9,11 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import project.libraryserver.API.GoogleBookAPI.BookAPI;
 import project.libraryserver.Book.Book;
-import project.libraryserver.ConfirmDialog.*;
+import project.libraryserver.ConfirmDialog.ConfirmDialog;
 import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Database.MySql;
+import project.libraryserver.Server.ServerLog;
 
 import java.awt.*;
 import java.io.IOException;
@@ -68,6 +70,11 @@ public class AddNewBookController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         DisplayListBook.setSpacing(10);
         WarningText.setStyle("-fx-text-fill: red;");
+
+        // Display text when mouse on choosing
+        Tooltip tooltip = new Tooltip("Open in Browser");
+        tooltip.setShowDelay(Duration.millis(100));
+        Tooltip.install(SelectedBookReadLink, tooltip);
     }
 
     public void SearchAction() throws URISyntaxException, IOException {
@@ -87,8 +94,8 @@ public class AddNewBookController implements Initializable {
         if (!DisplayListBook.getChildren().isEmpty()) DisplayListBook.getChildren().clear();
 
         for (Book book : list) {
-            DisplayListBook.getChildren().add(book.getDisplayCard());
-            book.getDisplayCard().setOnMouseClicked(
+            DisplayListBook.getChildren().add(book.GetDisplayCardForGoogleSearch());
+            book.GetDisplayCardForGoogleSearch().setOnMouseClicked(
                     _ -> {
                         SelectedBookId.setText(book.getId());
                         SelectedBookTitle.setText(book.getTitle());
@@ -132,7 +139,7 @@ public class AddNewBookController implements Initializable {
         Task<Boolean> task = new Task<>() {
             @Override
             protected Boolean call() {
-                return MySql.getInstance().addNewBook(SelectedBook);
+                return MySql.getInstance().AddNewBook(SelectedBook);
             }
         };
 
@@ -141,6 +148,7 @@ public class AddNewBookController implements Initializable {
             if (result) {
                 WarningText.setText("Successfully added new book to database");
                 WarningText.setStyle("-fx-text-fill: green;");
+                ServerLog.getInstance().writeLog("Action: Add new book " + SelectedBook.getId() + " to database.");
             } else {
                 WarningText.setText("Failed to add new book to database");
                 WarningText.setStyle("-fx-text-fill: red;");

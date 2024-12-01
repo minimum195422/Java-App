@@ -15,8 +15,9 @@ public class DATA {
     public static final String MANAGE_DOCUMENT_LINK = "/project/libraryserver/FXML/DashBoard/ManageDocument.fxml";
     public static final String ADD_NEW_BOOK_LINK = "/project/libraryserver/FXML/DashBoard/AddNewBook.fxml";
     public static final String USER_DISPLAY_CARD_LINK = "/project/libraryserver/FXML/Cards/UserCard.fxml";
-    public static final String BOOK_DISPLAY_CARD_LINK = "/project/libraryserver/FXML/Cards/BookCard_600_200.fxml";
-
+    public static final String BOOK_DISPLAY_CARD_600_200_LINK = "/project/libraryserver/FXML/Cards/BookCard_600_200.fxml";
+    public static final String BOOK_DISPLAY_CARD_1020_50_LINK = "/project/libraryserver/FXML/Cards/BookCard_1020_50.fxml";
+    public static final String VIEW_DOCUMENT_LINK = "/project/libraryserver/FXML/DashBoard/ViewDocument.fxml";
 // ---------------------------------------------------------------- //
 // -------------------------- Scene name -------------------------- //
 // ---------------------------------------------------------------- //
@@ -24,7 +25,8 @@ public class DATA {
     public static final String SERVER_LOG_FILE = "src/main/resources/project/libraryserver/Log/log.txt";
 
 
-// ---------------------------------------------------------------- //
+
+    // ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
 

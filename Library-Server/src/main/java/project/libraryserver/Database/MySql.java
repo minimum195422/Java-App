@@ -1,13 +1,14 @@
 package project.libraryserver.Database;
 
+import javafx.scene.image.Image;
 import project.libraryserver.Book.Book;
 import project.libraryserver.Consts.DATA;
+import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Server.ServerLog;
 import project.libraryserver.User.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MySql {
     private static MySql instance;
@@ -212,7 +213,7 @@ public class MySql {
         return false;
     }
 
-    public ArrayList<User> GetUserList() throws SQLException {
+    public ArrayList<User> GetAllUser() throws SQLException {
         ArrayList<User> list = new ArrayList<>();
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
@@ -297,36 +298,35 @@ public class MySql {
             String new_email,
             String new_password,
             String new_status
-    ) throws SQLException{
+    ) throws SQLException {
 
         // update bảng passwords trước
-        PreparedStatement preparedStatement =
+        PreparedStatement updatePasswordStatement =
                 connection.prepareStatement(
                         "UPDATE passwords SET password = ? WHERE user_id = ?;"
                 );
-        preparedStatement.setString(1, new_password);
-        preparedStatement.setInt(2, user_id);
+        updatePasswordStatement.setString(1, new_password);
+        updatePasswordStatement.setInt(2, user_id);
 
-        if(preparedStatement.executeUpdate() == 0) {
+        if(updatePasswordStatement.executeUpdate() == 0) {
             ServerLog.getInstance().writeLog("Error: Fail to update password table");
             return;
         }
 
         // sau khi update trên passwords
         // tiến hành update trên user
-        preparedStatement.clearBatch();
-        preparedStatement = connection.prepareStatement(
+        PreparedStatement updateUserStatement = connection.prepareStatement(
                 "UPDATE user "
                         + "SET first_name = ?, last_name = ?, email = ?, status = ? "
                         + "WHERE id = ?;"
         );
-        preparedStatement.setString(1, new_firstName);
-        preparedStatement.setString(2, new_lastName);
-        preparedStatement.setString(3, new_email);
-        preparedStatement.setString(4, new_status);
-        preparedStatement.setInt(5, user_id);
+        updateUserStatement.setString(1, new_firstName);
+        updateUserStatement.setString(2, new_lastName);
+        updateUserStatement.setString(3, new_email);
+        updateUserStatement.setString(4, new_status);
+        updateUserStatement.setInt(5, user_id);
 
-        if (preparedStatement.executeUpdate() == 0) {
+        if (updateUserStatement.executeUpdate() == 0) {
             ServerLog.getInstance().writeLog("Error: Fail to update user password table");
         }
     }
@@ -348,11 +348,13 @@ public class MySql {
             throw new SQLException("Can not delete from table user");
     }
 
-    public boolean addNewBook(Book book) {
+    public boolean AddNewBook(Book book) {
         String bookID = book.getId();
         String title = truncateString(book.getTitle(), 150);
         ArrayList<String> authors = book.getAuthors().isEmpty() ?
                 new ArrayList<>(List.of("Unknown")) : book.getAuthors();
+        ArrayList<String> categories = book.getCategories().isEmpty() ?
+                new ArrayList<>(List.of("Unknown")) : book.getCategories();
         String ISBN_10 = book.getISBN_10().equals("Can't found isbn")
                 ? "Unknown" : book.getISBN_10();
         String ISBN_13 = book.getISBN_13().equals("Can't found isbn")
@@ -371,7 +373,7 @@ public class MySql {
 
         try (PreparedStatement checkBookStmt = connection.prepareStatement(
                 "SELECT COUNT(*) FROM books WHERE book_id = ?")) {
-            // Kiểm tra sách đã có trong database chưa
+            // Check if book exits
             checkBookStmt.setString(1, bookID);
             try (ResultSet rs = checkBookStmt.executeQuery()) {
                 if (rs.next() && rs.getInt(1) > 0) {
@@ -395,66 +397,268 @@ public class MySql {
                 insertBookStmt.setString(9, webReaderLink);
                 int bookInsertStatus = insertBookStmt.executeUpdate();
                 if (bookInsertStatus <= 0) {
-                    ServerLog.getInstance().writeLog("Failed to insert book into books table.");
                     return false;
                 }
             }
 
-            // Thêm tác giả và liên kết sách-tác giả
-            for (String author : authors) {
-                author = truncateString(author, 100);
-                int authorID;
+            // Thêm author
+            AddAuthors(authors, bookID);
 
-                // Kiểm tra hoặc thêm tác giả
-                try (PreparedStatement checkAuthorStmt = connection.prepareStatement(
-                        "SELECT author_id FROM authors WHERE name = ?")) {
-                    checkAuthorStmt.setString(1, author);
-                    try (ResultSet rs = checkAuthorStmt.executeQuery()) {
-                        if (rs.next()) {
-                            authorID = rs.getInt(1);
-                        } else {
-                            try (PreparedStatement insertAuthorStmt = connection.prepareStatement(
-                                    "INSERT INTO authors(name) VALUES(?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
-                                insertAuthorStmt.setString(1, author);
-                                insertAuthorStmt.executeUpdate();
-                                try (ResultSet generatedKeys = insertAuthorStmt.getGeneratedKeys()) {
-                                    if (generatedKeys.next()) {
-                                        authorID = generatedKeys.getInt(1);
-                                    } else {
-                                        throw new SQLException("Failed to retrieve author ID.");
-                                    }
+            // Thêm category
+            AddCategories(categories, bookID);
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            return false;
+        }
+    }
+
+    // limit string with number of character
+    private static String truncateString(String str, int maxLength) {
+        return (str.length() > maxLength) ? str.substring(0, maxLength) : str;
+    }
+
+    public boolean UpdateBookInformation(Book book) throws SQLException {
+        // change book information
+        try (PreparedStatement updateBookStmt = connection.prepareStatement(
+                "UPDATE books SET title = ?, publisher = ?, published_date = ?, description = ?, " +
+                        "ISBN_10 = ?, ISBN_13 = ?, image_preview = ?, web_reader_link = ? WHERE book_id = ?")) {
+            updateBookStmt.setString(1, book.getTitle());
+            updateBookStmt.setString(2, book.getPublisher());
+            updateBookStmt.setString(3, book.getPublishedDate());
+            updateBookStmt.setString(4, book.getDescription());
+            updateBookStmt.setString(5, book.getISBN_10());
+            updateBookStmt.setString(6, book.getISBN_13());
+            updateBookStmt.setString(7, book.getImagePreview().getUrl());
+            updateBookStmt.setString(8, book.getWebReaderLink());
+            updateBookStmt.setString(9, book.getId());
+            updateBookStmt.executeUpdate();
+        }
+
+        // ---- update author related to this book ----
+        // delete old author-book link
+        try (PreparedStatement deleteAuthorsStmt = connection.prepareStatement(
+                "DELETE FROM book_authors WHERE book_id = ?")) {
+            deleteAuthorsStmt.setString(1, book.getId());
+            deleteAuthorsStmt.executeUpdate();
+        }
+        // update author
+        AddAuthors(book.getAuthors(), book.getId());
+
+        // ---- update category related to this book ----
+        // delete old category-book link
+        try (PreparedStatement deleteCategoryStmt = connection.prepareStatement(
+                "DELETE FROM book_categories WHERE book_id = ?")) {
+            deleteCategoryStmt.setString(1, book.getId());
+            deleteCategoryStmt.executeUpdate();
+        }
+        // update category
+        AddCategories(book.getCategories(), book.getId());
+
+        return true;
+    }
+
+    private void AddAuthors(ArrayList<String> authors, String bookID) throws SQLException {
+        // add author and link author-book
+        for (String author : authors) {
+            int authorID;
+
+            // add new author (not exits)
+            try (PreparedStatement checkAuthorStmt = connection.prepareStatement(
+                    "SELECT author_id FROM authors WHERE name = ?")) {
+                checkAuthorStmt.setString(1, truncateString(author, 100));
+                try (ResultSet rs = checkAuthorStmt.executeQuery()) {
+                    if (rs.next()) {
+                        authorID = rs.getInt(1);
+                    } else {
+                        try (PreparedStatement insertAuthorStmt = connection.prepareStatement(
+                                "INSERT INTO authors(name) VALUES(?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+                            insertAuthorStmt.setString(1, author);
+                            insertAuthorStmt.executeUpdate();
+                            try (ResultSet generatedKeys = insertAuthorStmt.getGeneratedKeys()) {
+                                if (generatedKeys.next()) {
+                                    authorID = generatedKeys.getInt(1);
+                                } else {
+                                    throw new SQLException("Failed to retrieve author ID.");
                                 }
                             }
                         }
                     }
                 }
-
-                // Thêm liên kết vào bảng `book_authors`
-                try (PreparedStatement insertBookAuthorStmt = connection.prepareStatement(
-                        "INSERT INTO book_authors(author_id, book_id) VALUES(?, ?)")) {
-                    insertBookAuthorStmt.setInt(1, authorID);
-                    insertBookAuthorStmt.setString(2, bookID);
-                    insertBookAuthorStmt.executeUpdate();
-                }
             }
 
-            ServerLog.getInstance().writeLog("Successfully added book and authors to the database.");
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-            ServerLog.getInstance().writeLog("Database error: " + e.getMessage());
-            return false;
+            // Add new link to `book_authors`
+            try (PreparedStatement insertBookAuthorStmt = connection.prepareStatement(
+                    "INSERT INTO book_authors(author_id, book_id) VALUES(?, ?)")) {
+                insertBookAuthorStmt.setInt(1, authorID);
+                insertBookAuthorStmt.setString(2, bookID);
+                insertBookAuthorStmt.executeUpdate();
+            }
         }
     }
 
-    private static String truncateString(String str, int maxLength) {
-        return (str.length() > maxLength) ? str.substring(0, maxLength) : str;
+    private void AddCategories(ArrayList<String> categories, String bookID) throws SQLException {
+        // add category and link category-book
+        for (String category : categories) {
+            int categoryId;
+
+            // add new category (not exits)
+            try (PreparedStatement checkCategoryStmt = connection.prepareStatement(
+                    "SELECT category_id FROM categories WHERE category = ?")) {
+                checkCategoryStmt.setString(1, truncateString(category, 100));
+                try (ResultSet rs = checkCategoryStmt.executeQuery()) {
+                    if (rs.next()) {
+                        categoryId = rs.getInt(1);
+                    } else {
+                        try (PreparedStatement insertAuthorStmt = connection.prepareStatement(
+                                "INSERT INTO categories(category) VALUES(?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+                            insertAuthorStmt.setString(1, category);
+                            insertAuthorStmt.executeUpdate();
+                            try (ResultSet generatedKeys = insertAuthorStmt.getGeneratedKeys()) {
+                                if (generatedKeys.next()) {
+                                    categoryId = generatedKeys.getInt(1);
+                                } else {
+                                    throw new SQLException("Failed to retrieve category ID.");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add new link to 'book_categories`
+            try (PreparedStatement insertBookAuthorStmt = connection.prepareStatement(
+                    "INSERT INTO book_categories(category_id, book_id) VALUES(?, ?)")) {
+                insertBookAuthorStmt.setInt(1, categoryId);
+                insertBookAuthorStmt.setString(2, bookID);
+                insertBookAuthorStmt.executeUpdate();
+            }
+        }
     }
 
-    public static ArrayList<Book> GetAllDocument() {
+    public void DeleteBook(String bookID) throws SQLException {
+        try (PreparedStatement deleteAuthorsStmt = connection.prepareStatement(
+                "DELETE FROM book_authors WHERE book_id = ?;")) {
+            deleteAuthorsStmt.setString(1, bookID);
+            deleteAuthorsStmt.executeUpdate();
+        }
+
+        try (PreparedStatement deleteAuthorsStmt = connection.prepareStatement(
+                "DELETE FROM book_categories WHERE book_id = ?;")) {
+            deleteAuthorsStmt.setString(1, bookID);
+            deleteAuthorsStmt.executeUpdate();
+        }
+
+        try (PreparedStatement deleteAuthorsStmt = connection.prepareStatement(
+                "DELETE FROM books WHERE book_id = ?;")) {
+            deleteAuthorsStmt.setString(1, bookID);
+            deleteAuthorsStmt.executeUpdate();
+        }
+    }
+
+    public ArrayList<Book> GetAllDocument() {
         ArrayList<Book> returnList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "SELECT " +
+                            "b.book_id, " +
+                            "b.title, " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "b.publisher, " +
+                            "b.published_date, " +
+                            "b.description, " +
+                            "group_concat(DISTINCT c.category) as 'category_list', " +
+                            "b.ISBN_13, " +
+                            "b.ISBN_10, " +
+                            "b.image_preview, " +
+                            "b.web_reader_link " +
+                        "FROM " +
+                            "books b " +
+                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                            "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                        "GROUP BY " +
+                            "b.book_id"
+            );
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                returnList.add(new Book(
+                        rs.getString(1), // book id
+                        rs.getString(2), // title
+                        new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
+                        rs.getString(4), // publisher
+                        rs.getString(5), // published date
+                        rs.getString(6), // description
+                        new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
+                        rs.getString(8), // ISBN 13
+                        rs.getString(9), // ISBN 10
+                        GetImageByLink(rs.getString(10)), // Image preview
+                        rs.getString(11) // web reader link
+                ));
+            }
+        } catch (SQLException e) {
+            return returnList;
+        }
 
         return returnList;
+    }
+
+    private Image GetImageByLink(String link) {
+        try {
+            return new Image(link);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ArrayList<Book> GetSearchBookList(String query, SearchType option) {
+        ArrayList<Book> returnList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(getPrepareQuery(query, option));
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                returnList.add(new Book(
+                        rs.getString(1), // book id
+                        rs.getString(2), // title
+                        new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
+                        rs.getString(4), // publisher
+                        rs.getString(5), // published date
+                        rs.getString(6), // description
+                        new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
+                        rs.getString(8), // ISBN 13
+                        rs.getString(9), // ISBN 10
+                        GetImageByLink(rs.getString(10)), // Image preview
+                        rs.getString(11) // web reader link
+                ));
+            }
+        } catch (SQLException e) {
+            return returnList;
+        }
+
+        return returnList;
+    }
+
+    private static String getPrepareQuery(String query, SearchType option) {
+        String setOption = "";
+        switch (option) {
+            case INID -> setOption = String.format("b.book_id LIKE '%%%s%%'", query);
+            case INTITLE -> setOption = String.format("b.title LIKE '%%%s%%'", query);
+            case INAUTHOR -> setOption = String.format("a.name LIKE '%%%s%%'", query);
+        }
+        return String.format("SELECT b.book_id, b.title, group_concat(DISTINCT a.name) as 'author_list', " +
+                "b.publisher, b.published_date, b.description, group_concat(DISTINCT c.category) as 'category_list', " +
+                "b.ISBN_13, b.ISBN_10, b.image_preview, b.web_reader_link FROM books b " +
+                "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                "WHERE " + " %s " +
+                "GROUP BY b.book_id", setOption);
     }
 }

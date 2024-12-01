@@ -5,5 +5,6 @@ public enum SearchType {
     INTITLE,
     INPUBLISHER,
     INISBN,
-    INSUBJECT
+    INSUBJECT,
+    INID
 }
