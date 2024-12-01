@@ -69,7 +69,7 @@ public class Book {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_600_200_LINK));
             DisplayCardForGoogleSearch = loader.load();
             Book_600_200_Controller = loader.getController();
-            Book_600_200_Controller.setInfor(
+            Book_600_200_Controller.setInfo(
                     imagePreview,
                     title,
                     publisher,
@@ -84,7 +84,7 @@ public class Book {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_1020_50_LINK));
             DisplayCardForManage = loader.load();
             Book_1020_50_Controller = loader.getController();
-            Book_1020_50_Controller.setInfor(
+            Book_1020_50_Controller.setInfo(
                     id,
                     title,
                     String.join(", ", authors),

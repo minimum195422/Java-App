@@ -79,10 +79,10 @@ public class ManageDocumentController implements Initializable{
             return;
         }
 
-        ReLoadDisplayBookList();
+        ReloadDisplayBookList();
     }
 
-    private void ReLoadDisplayBookList() {
+    private void ReloadDisplayBookList() {
         if (!DisplayBookList.getChildren().isEmpty()) DisplayBookList.getChildren().clear();
 
         for (Book book : BookList) {
@@ -118,20 +118,20 @@ public class ManageDocumentController implements Initializable{
             );
 
             book.GetBook_1020_50_Controller().ViewButton.setOnMouseClicked(
-                    _ -> {
-                        HiddenPane.setVisible(true);
-                        HiddenPane.setDisable(false);
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
-                            AnchorPane pane = loader.load();
-                            ViewDocumentController controller = loader.getController();
-                            controller.setInfor(book);
-                            HiddenPane.setCenter(pane);
-                        } catch (IOException e) {
-                            e.printStackTrace(System.out);
-                            ServerLog.getInstance().writeLog("Error: Fail to load view document page!");
-                        }
+                _ -> {
+                    HiddenPane.setVisible(true);
+                    HiddenPane.setDisable(false);
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
+                        AnchorPane pane = loader.load();
+                        ViewDocumentController controller = loader.getController();
+                        controller.setInfo(book);
+                        HiddenPane.setCenter(pane);
+                    } catch (IOException e) {
+                        e.printStackTrace(System.out);
+                        ServerLog.getInstance().writeLog("Error: Fail to load view document page!");
                     }
+                }
             );
 
         }
@@ -150,7 +150,7 @@ public class ManageDocumentController implements Initializable{
                 BookList = MySql.getInstance().GetSearchBookList(SearchBox.getText(), searchOption);
 
                 Platform.runLater(() -> {
-                    ReLoadDisplayBookList();
+                    ReloadDisplayBookList();
                 });
 
                 return null;

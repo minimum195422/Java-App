@@ -12,7 +12,7 @@ public class BookCard_1020_50 {
     public Button DeleteButton;
     public Button ViewButton;
 
-    public void setInfor(
+    public void setInfo(
             String id,
             String title,
             String author,

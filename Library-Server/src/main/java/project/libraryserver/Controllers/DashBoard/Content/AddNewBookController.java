@@ -95,21 +95,23 @@ public class AddNewBookController implements Initializable {
 
         for (Book book : list) {
             DisplayListBook.getChildren().add(book.GetDisplayCardForGoogleSearch());
+//            MySql.getInstance().AddNewBook(book);
             book.GetDisplayCardForGoogleSearch().setOnMouseClicked(
-                    _ -> {
-                        SelectedBookId.setText(book.getId());
-                        SelectedBookTitle.setText(book.getTitle());
-                        SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
-                        SelectedBookPublisher.setText(book.getPublisher());
-                        SelectedBookPublishedDate.setText(book.getPublishedDate());
-                        SelectedBookDescription.setText(book.getDescription());
-                        SelectedBookCategories.setText(String.join(", ", book.getCategories()));
-                        SelectedBookIsbn13.setText(book.getISBN_13());
-                        SelectedBookIsbn10.setText(book.getISBN_10());
-                        SelectedBookReadLink.setText(book.getWebReaderLink());
-                        SelectedBookCover.setImage(book.getImagePreview());
-                        SelectedBook = book;
-                    });
+                _ -> {
+                    SelectedBookId.setText(book.getId());
+                    SelectedBookTitle.setText(book.getTitle());
+                    SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
+                    SelectedBookPublisher.setText(book.getPublisher());
+                    SelectedBookPublishedDate.setText(book.getPublishedDate());
+                    SelectedBookDescription.setText(book.getDescription());
+                    SelectedBookCategories.setText(String.join(", ", book.getCategories()));
+                    SelectedBookIsbn13.setText(book.getISBN_13());
+                    SelectedBookIsbn10.setText(book.getISBN_10());
+                    SelectedBookReadLink.setText(book.getWebReaderLink());
+                    SelectedBookCover.setImage(book.getImagePreview());
+                    SelectedBook = book;
+
+                });
         }
     }
 

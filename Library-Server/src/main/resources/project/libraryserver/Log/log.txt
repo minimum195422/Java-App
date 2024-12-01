@@ -54,3 +54,33 @@
 2024-11-30 05:28:55 - Server stating on port 1234
 2024-11-30 05:29:45 - Server stating on port 1234
 2024-11-30 05:33:55 - Server stating on port 1234
+2024-12-01 19:33:09 - Server stating on port 1234
+2024-12-01 19:34:45 - Server stating on port 1234
+2024-12-01 19:35:06 - Action: Add new book Iu58KMk5PJEC to database.
+2024-12-01 19:45:08 - Action: Add new book CDBoAAAAcAAJ to database.
+2024-12-01 19:49:27 - Server stating on port 1234
+2024-12-01 21:17:43 - Server stating on port 1234
+2024-12-01 21:18:02 - Action: Change information of book CDBoAAAAcAAJ
+2024-12-01 21:22:39 - Server stating on port 1234
+2024-12-01 21:22:52 - Action: Change information of book CDBoAAAAcAAJ
+2024-12-01 21:27:54 - Server stating on port 1234
+2024-12-01 21:28:29 - Server stating on port 1234
+2024-12-01 21:37:04 - Server stating on port 1234
+2024-12-01 21:38:52 - Action: Change information of book CDBoAAAAcAAJ
+2024-12-01 21:38:57 - Action: Delete book with id = [CDBoAAAAcAAJ]
+2024-12-01 21:39:01 - Action: Delete book with id = [CDBoAAAAcAAJ]
+2024-12-01 21:41:11 - Action: Add new book CDBoAAAAcAAJ to database.
+2024-12-01 21:41:13 - Action: Add new book -ON_W1ubAmoC to database.
+2024-12-01 21:41:15 - Book already exists in the database.
+2024-12-01 21:41:17 - Action: Add new book uTtDAAAAQBAJ to database.
+2024-12-01 21:41:23 - Action: Delete book with id = [-ON_W1ubAmoC]
+2024-12-01 21:41:27 - Action: Delete book with id = [CDBoAAAAcAAJ]
+2024-12-01 21:41:28 - Action: Delete book with id = [uTtDAAAAQBAJ]
+2024-12-01 21:44:52 - Server stating on port 1234
+2024-12-01 21:55:54 - Server stating on port 1234
+2024-12-01 21:56:26 - Server stating on port 1234
+2024-12-01 22:10:37 - Server stating on port 1234
+2024-12-01 22:11:16 - Action: Delete book with id = [-ON_W1ubAmoC]
+2024-12-01 22:11:43 - Action: Change information of book 00cVEQAAQBAJ
+2024-12-01 22:11:52 - Action: Change information of book 00cVEQAAQBAJ
+2024-12-01 22:11:57 - Action: Change information of book 00cVEQAAQBAJ
