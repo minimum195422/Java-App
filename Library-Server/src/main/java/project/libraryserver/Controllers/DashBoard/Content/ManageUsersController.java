@@ -122,7 +122,7 @@ public class ManageUsersController implements Initializable {
         }
     }
 
-    public void DeleteButtonClicked() throws SQLException {
+    public void DeleteButtonClicked() {
         if (SelectedUser == null) {
             WarningText.setText("No data selected");
             return;

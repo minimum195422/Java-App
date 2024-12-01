@@ -11,17 +11,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Book {
-    private final String id;
-    private final String title;
-    private final ArrayList<String> authors;
-    private final String publisher;
-    private final String publishedDate;
-    private final String description;
-    private final ArrayList<String> categories;
-    private final String ISBN_13;
-    private final String ISBN_10;
-    private final Image imagePreview;
-    private final String webReaderLink;
+    private String id;
+    private String title;
+    private ArrayList<String> authors;
+    private String publisher;
+    private String publishedDate;
+    private String description;
+    private ArrayList<String> categories;
+    private String ISBN_13;
+    private String ISBN_10;
+    private Image imagePreview;
+    private String webReaderLink;
+    private String rate;
+    private String borrowed_time;
 
     // for display google search book
     private AnchorPane DisplayCardForGoogleSearch;
@@ -31,6 +33,29 @@ public class Book {
     private AnchorPane DisplayCardForManage;
     private BookCard_1020_50 Book_1020_50_Controller;
 
+
+    public Book(String id, Image image_preview, String title,
+                String publisher, ArrayList<String> categories,
+                String published_date, ArrayList<String> authors) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.publisher = publisher;
+        this.publishedDate = published_date;
+        this.categories = categories;
+        this.imagePreview = image_preview;
+        LoadDisplayCardForGoogleSearch();
+    }
+
+    public Book(String id, String title, ArrayList<String> authors,
+                String rate, String borrowed_time) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.rate = rate;
+        this.borrowed_time = borrowed_time;
+        LoadDisplayCardForManage();
+    }
 
     public Book(String id, String title, ArrayList<String> authors,
                 String publisher, String published_date, String description,
@@ -47,10 +72,11 @@ public class Book {
         this.ISBN_10 = ISBN_10;
         this.imagePreview = image_preview;
         this.webReaderLink = web_reader_link;
-        LoadDisplayCard();
+        LoadDisplayCardForGoogleSearch();
+        LoadDisplayCardForManage();
     }
 
-    private void LoadDisplayCard() {
+    private void LoadDisplayCardForGoogleSearch() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_600_200_LINK));
             DisplayCardForGoogleSearch = loader.load();
@@ -65,7 +91,9 @@ public class Book {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    private void LoadDisplayCardForManage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_1020_50_LINK));
             DisplayCardForManage = loader.load();

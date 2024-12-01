@@ -558,53 +558,104 @@ public class MySql {
         }
     }
 
-    public ArrayList<Book> GetAllDocument() {
+    public ArrayList<Book> GetAllDocumentForManage() {
         ArrayList<Book> returnList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
                     "SELECT " +
                             "b.book_id, " +
                             "b.title, " +
-                            "group_concat(DISTINCT a.name) as 'author_list', " +
-                            "b.publisher, " +
-                            "b.published_date, " +
-                            "b.description, " +
-                            "group_concat(DISTINCT c.category) as 'category_list', " +
-                            "b.ISBN_13, " +
-                            "b.ISBN_10, " +
-                            "b.image_preview, " +
-                            "b.web_reader_link " +
+                            "group_concat(DISTINCT a.name) as 'author_list' " +
                         "FROM " +
                             "books b " +
                             "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
                             "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                            "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
-                            "LEFT JOIN categories c ON bc.category_id = c.category_id " +
                         "GROUP BY " +
                             "b.book_id"
             );
-            ResultSet rs = preparedStatement.executeQuery();
+            rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 returnList.add(new Book(
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        rs.getString(4), // publisher
-                        rs.getString(5), // published date
-                        rs.getString(6), // description
-                        new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
-                        rs.getString(8), // ISBN 13
-                        rs.getString(9), // ISBN 10
-                        GetImageByLink(rs.getString(10)), // Image preview
-                        rs.getString(11) // web reader link
+                        "0.0", // rate
+                        "100" // borrow times
                 ));
             }
         } catch (SQLException e) {
             return returnList;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
         }
-
         return returnList;
+    }
+
+    public Book GetBookById(String bookId) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+            "SELECT " +
+                    "b.book_id, " +
+                    "b.title, " +
+                    "group_concat(DISTINCT a.name) as 'author_list', " +
+                    "b.publisher, " +
+                    "b.published_date, " +
+                    "b.description, " +
+                    "group_concat(DISTINCT c.category) as 'category_list', " +
+                    "b.ISBN_13, " +
+                    "b.ISBN_10, " +
+                    "b.image_preview, " +
+                    "b.web_reader_link " +
+                "FROM " +
+                    "books b " +
+                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                    "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                    "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                    "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                "WHERE b.book_id = ? " +
+                "GROUP BY b.book_id"
+            );
+            preparedStatement.setString(1, bookId);
+            rs = preparedStatement.executeQuery();
+
+            if (!rs.next()) {
+                System.err.println("No book found with ID: " + bookId);
+                return null;
+            }
+
+            return new Book(
+                    rs.getString(1), // book id
+                    rs.getString(2), // title
+                    new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
+                    rs.getString(4), // publisher
+                    rs.getString(5), // published date
+                    rs.getString(6), // description
+                    new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
+                    rs.getString(8), // ISBN 13
+                    rs.getString(9), // ISBN 10
+                    GetImageByLink(rs.getString(10)), // Image preview
+                    rs.getString(11) // web reader link
+            );
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            return null;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
+        }
     }
 
     private Image GetImageByLink(String link) {
@@ -627,38 +678,25 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        rs.getString(4), // publisher
-                        rs.getString(5), // published date
-                        rs.getString(6), // description
-                        new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
-                        rs.getString(8), // ISBN 13
-                        rs.getString(9), // ISBN 10
-                        GetImageByLink(rs.getString(10)), // Image preview
-                        rs.getString(11) // web reader link
+                        "0.0",
+                        "100"
                 ));
             }
         } catch (SQLException e) {
             return returnList;
         }
-
         return returnList;
     }
 
     private static String getPrepareQuery(String query, SearchType option) {
         String setOption = "";
         switch (option) {
-            case INID -> setOption = String.format("b.book_id LIKE '%%%s%%'", query);
-            case INTITLE -> setOption = String.format("b.title LIKE '%%%s%%'", query);
-            case INAUTHOR -> setOption = String.format("a.name LIKE '%%%s%%'", query);
+            case INID -> setOption = String.format("WHERE b.book_id LIKE '%%%s%%'", query);
+            case INTITLE -> setOption = String.format("WHERE b.title LIKE '%%%s%%'", query);
+            case INAUTHOR -> setOption = String.format("WHERE a.name LIKE '%%%s%%'", query);
         }
-        return String.format("SELECT b.book_id, b.title, group_concat(DISTINCT a.name) as 'author_list', " +
-                "b.publisher, b.published_date, b.description, group_concat(DISTINCT c.category) as 'category_list', " +
-                "b.ISBN_13, b.ISBN_10, b.image_preview, b.web_reader_link FROM books b " +
-                "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
-                "LEFT JOIN categories c ON bc.category_id = c.category_id " +
-                "WHERE " + " %s " +
-                "GROUP BY b.book_id", setOption);
+        return String.format("SELECT b.book_id, b.title, group_concat(DISTINCT a.name) as 'author_list' " +
+                "FROM books b JOIN book_authors ba ON b.book_id = ba.book_id LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                "%s GROUP BY b.book_id", setOption);
     }
 }

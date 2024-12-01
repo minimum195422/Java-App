@@ -43,13 +43,16 @@ public class ManageDocumentController implements Initializable{
     @FXML
     public Button SearchButton;
 
+    @FXML
+    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime;
+
     ArrayList<Book> BookList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         HiddenPane.setVisible(false);
         HiddenPane.setDisable(true);
-        HiddenPane.visibleProperty().addListener((observable, oldValue, newValue) -> {
+        HiddenPane.visibleProperty().addListener((_, oldValue, _) -> {
             if (oldValue) {
                 LoadBookList();
             }
@@ -73,7 +76,7 @@ public class ManageDocumentController implements Initializable{
     }
 
     private void LoadBookList() {
-        BookList = MySql.getInstance().GetAllDocument();
+        BookList = MySql.getInstance().GetAllDocumentForManage();
         if (BookList.isEmpty()) {
             System.out.println("Failed to load book list");
             return;
@@ -119,13 +122,15 @@ public class ManageDocumentController implements Initializable{
 
             book.GetBook_1020_50_Controller().ViewButton.setOnMouseClicked(
                     _ -> {
+                        Book fullBook = MySql.getInstance().GetBookById(book.getId());
+                        if (fullBook == null) return;
                         HiddenPane.setVisible(true);
                         HiddenPane.setDisable(false);
                         try {
                             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
                             AnchorPane pane = loader.load();
                             ViewDocumentController controller = loader.getController();
-                            controller.setInfor(book);
+                            controller.setInfor(fullBook);
                             HiddenPane.setCenter(pane);
                         } catch (IOException e) {
                             e.printStackTrace(System.out);
@@ -160,6 +165,7 @@ public class ManageDocumentController implements Initializable{
         new Thread(task).start();
     }
 
+    private void SortBookList() {
 
-
+    }
 }

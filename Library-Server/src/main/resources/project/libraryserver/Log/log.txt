@@ -170,3 +170,41 @@
 2024-12-01 12:17:53 - Server stating on port 1234
 2024-12-01 12:19:49 - Server stating on port 1234
 2024-12-01 12:20:36 - Server stating on port 1234
+2024-12-01 19:48:10 - Server stating on port 1234
+2024-12-01 21:37:52 - Server stating on port 1234
+2024-12-01 21:39:54 - Server stating on port 1234
+2024-12-01 21:40:08 - Action: Delete book with id = [-ON_W1ubAmoC]
+2024-12-01 21:40:40 - Action: Delete book with id = [1VNhR53sAB0C]
+2024-12-01 21:40:54 - Action: Delete book with id = [5I_q52-HJCYC]
+2024-12-01 22:02:46 - Server stating on port 1234
+2024-12-01 22:10:27 - Server stating on port 1234
+2024-12-01 22:18:51 - Server stating on port 1234
+2024-12-01 22:20:03 - Server stating on port 1234
+2024-12-01 22:20:21 - Action: Add new book Nntu7Zd1KR4C to database.
+2024-12-01 22:20:23 - Action: Add new book pGkvAAAAYAAJ to database.
+2024-12-01 22:20:26 - Action: Add new book UYw-DwAAQBAJ to database.
+2024-12-01 22:20:30 - Action: Add new book ZLLTCQAAQBAJ to database.
+2024-12-01 22:20:32 - Action: Add new book W9BJAAAAYAAJ to database.
+2024-12-01 22:20:35 - Action: Add new book CMPx-jksa6IC to database.
+2024-12-01 22:20:38 - Action: Add new book gX9oRcT9kSgC to database.
+2024-12-01 22:20:41 - Action: Add new book XgGstruOFt4C to database.
+2024-12-01 22:20:43 - Action: Add new book 3bRK7BvaVB8C to database.
+2024-12-01 22:20:47 - Action: Add new book fjdgEAAAQBAJ to database.
+2024-12-01 22:20:57 - Action: Add new book h6AWAAAAYAAJ to database.
+2024-12-01 22:20:59 - Action: Add new book G4kIAAAAQAAJ to database.
+2024-12-01 22:21:03 - Action: Add new book jTIYAAAAYAAJ to database.
+2024-12-01 22:21:06 - Action: Add new book aixBEAAAQBAJ to database.
+2024-12-01 22:21:08 - Action: Add new book eGCcPxO4y14C to database.
+2024-12-01 22:21:11 - Action: Add new book eHgvr3KZJFwC to database.
+2024-12-01 22:21:13 - Action: Add new book C4Cr8dHupVsC to database.
+2024-12-01 22:21:16 - Action: Add new book 2G35r-0lNlQC to database.
+2024-12-01 22:21:18 - Action: Add new book iq7RDwAAQBAJ to database.
+2024-12-01 22:21:21 - Action: Add new book gL2qDwAAQBAJ to database.
+2024-12-01 22:27:53 - Server stating on port 1234
+2024-12-01 22:32:55 - Server stating on port 1234
+2024-12-01 22:49:01 - Server stating on port 1234
+2024-12-01 22:50:19 - Server stating on port 1234
+2024-12-01 22:52:08 - Server stating on port 1234
+2024-12-01 22:55:17 - Server stating on port 1234
+2024-12-01 22:55:55 - Action: Change information of book 8uOQD-z5vJYC
+2024-12-01 22:57:35 - Server stating on port 1234
