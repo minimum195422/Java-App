@@ -8,60 +8,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="50.0" prefWidth="1020.0" stylesheets="@../../Styles/Card.css"
-            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="project.libraryserver.Controllers.Card.BookCard_1020_50">
+<AnchorPane prefHeight="50.0" prefWidth="1020.0" stylesheets="@../../Styles/Card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.BookCard_1020_50">
    <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1020.0" spacing="5.0">
       <padding>
-         <Insets left="10.0"/>
+         <Insets left="10.0" />
       </padding>
       <Label fx:id="DisplayId" prefWidth="100.0" text="ID">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
       <Label fx:id="DisplayTitle" prefWidth="300.0" text="Title">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
       <Label fx:id="DisplayAuthors" prefWidth="250.0" text="Authors">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
       <Label fx:id="DisplayRate" prefWidth="50.0" text="Rate">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
       <Label fx:id="DisplayBorrowedTime" prefWidth="120.0" text="Borrowed times">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </Label>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
-      <Button fx:id="DeleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0"
-              styleClass="delete-button" text="Delete">
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
+      <Button fx:id="DeleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="delete-button" text="Delete">
          <padding>
-            <Insets left="5.0" right="5.0"/>
+            <Insets left="5.0" right="5.0" />
          </padding>
       </Button>
-      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                 orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0"/>
-      <Button fx:id="ViewButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0"
-              styleClass="view-button" text="View"/>
+      <Button fx:id="ViewButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="view-button" text="View" />
    </HBox>
 </AnchorPane>

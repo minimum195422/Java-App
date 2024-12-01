@@ -43,13 +43,16 @@ public class ManageDocumentController implements Initializable{
     @FXML
     public Button SearchButton;
 
+    @FXML
+    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime;
+
     ArrayList<Book> BookList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         HiddenPane.setVisible(false);
         HiddenPane.setDisable(true);
-        HiddenPane.visibleProperty().addListener((observable, oldValue, newValue) -> {
+        HiddenPane.visibleProperty().addListener((_, oldValue, _) -> {
             if (oldValue) {
                 LoadBookList();
             }
@@ -63,31 +66,31 @@ public class ManageDocumentController implements Initializable{
 
         // Set button group always have one in used
         SearchOption.selectedToggleProperty().addListener(
-            (_, oldToggle, newToggle) -> {
-                if (newToggle == null) {
-                    SearchOption.selectToggle(oldToggle);
-            }
-        });
+                (_, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        SearchOption.selectToggle(oldToggle);
+                    }
+                });
 
         LoadBookList();
     }
 
     private void LoadBookList() {
-        BookList = MySql.getInstance().GetAllDocument();
+        BookList = MySql.getInstance().GetAllDocumentForManage();
         if (BookList.isEmpty()) {
             System.out.println("Failed to load book list");
             return;
         }
 
-        ReloadDisplayBookList();
+        ReLoadDisplayBookList();
     }
 
-    private void ReloadDisplayBookList() {
+    private void ReLoadDisplayBookList() {
         if (!DisplayBookList.getChildren().isEmpty()) DisplayBookList.getChildren().clear();
 
         for (Book book : BookList) {
             DisplayBookList.getChildren().add(
-                book.GetDisplayCardForManage()
+                    book.GetDisplayCardForManage()
             );
 
             book.GetBook_1020_50_Controller().DeleteButton.setOnMouseClicked(
@@ -118,20 +121,22 @@ public class ManageDocumentController implements Initializable{
             );
 
             book.GetBook_1020_50_Controller().ViewButton.setOnMouseClicked(
-                _ -> {
-                    HiddenPane.setVisible(true);
-                    HiddenPane.setDisable(false);
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
-                        AnchorPane pane = loader.load();
-                        ViewDocumentController controller = loader.getController();
-                        controller.setInfo(book);
-                        HiddenPane.setCenter(pane);
-                    } catch (IOException e) {
-                        e.printStackTrace(System.out);
-                        ServerLog.getInstance().writeLog("Error: Fail to load view document page!");
+                    _ -> {
+                        Book fullBook = MySql.getInstance().GetBookById(book.getId());
+                        if (fullBook == null) return;
+                        HiddenPane.setVisible(true);
+                        HiddenPane.setDisable(false);
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
+                            AnchorPane pane = loader.load();
+                            ViewDocumentController controller = loader.getController();
+                            controller.setInfor(fullBook);
+                            HiddenPane.setCenter(pane);
+                        } catch (IOException e) {
+                            e.printStackTrace(System.out);
+                            ServerLog.getInstance().writeLog("Error: Fail to load view document page!");
+                        }
                     }
-                }
             );
 
         }
@@ -150,7 +155,7 @@ public class ManageDocumentController implements Initializable{
                 BookList = MySql.getInstance().GetSearchBookList(SearchBox.getText(), searchOption);
 
                 Platform.runLater(() -> {
-                    ReloadDisplayBookList();
+                    ReLoadDisplayBookList();
                 });
 
                 return null;
@@ -160,6 +165,7 @@ public class ManageDocumentController implements Initializable{
         new Thread(task).start();
     }
 
+    private void SortBookList() {
 
-
+    }
 }
