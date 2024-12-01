@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import project.libraryserver.Consts.DATA;
+import project.libraryserver.Controllers.Card.BookCard_1020_50;
 import project.libraryserver.Controllers.Card.BookCard_600_200;
 
 import java.io.IOException;
@@ -21,8 +22,14 @@ public class Book {
     private final String ISBN_10;
     private final Image imagePreview;
     private final String webReaderLink;
-    private AnchorPane DisplayCard;
-    private BookCard_600_200 Controller;
+
+    // for display google search book
+    private AnchorPane DisplayCardForGoogleSearch;
+    private BookCard_600_200 Book_600_200_Controller;
+
+    // for display manage book
+    private AnchorPane DisplayCardForManage;
+    private BookCard_1020_50 Book_1020_50_Controller;
 
 
     public Book(String id, String title, ArrayList<String> authors,
@@ -45,10 +52,10 @@ public class Book {
 
     private void LoadDisplayCard() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_LINK));
-            DisplayCard = loader.load();
-            Controller = loader.getController();
-            Controller.setInfor(
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_600_200_LINK));
+            DisplayCardForGoogleSearch = loader.load();
+            Book_600_200_Controller = loader.getController();
+            Book_600_200_Controller.setInfor(
                     imagePreview,
                     title,
                     publisher,
@@ -58,10 +65,21 @@ public class Book {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    public void setController(BookCard_600_200 controller) {
-        Controller = controller;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_1020_50_LINK));
+            DisplayCardForManage = loader.load();
+            Book_1020_50_Controller = loader.getController();
+            Book_1020_50_Controller.setInfor(
+                    id,
+                    title,
+                    String.join(", ", authors),
+                    "0.0",
+                    "100"
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getId() {
@@ -109,12 +127,20 @@ public class Book {
         return categories;
     }
 
-    public AnchorPane getDisplayCard() {
-        return DisplayCard;
+    public AnchorPane GetDisplayCardForGoogleSearch() {
+        return DisplayCardForGoogleSearch;
     }
 
-    public BookCard_600_200 getController() {
-        return Controller;
+    public AnchorPane GetDisplayCardForManage() {
+        return DisplayCardForManage;
+    }
+
+    public BookCard_1020_50 GetBook_1020_50_Controller() {
+        return Book_1020_50_Controller;
+    }
+
+    public BookCard_600_200 GetBook_600_200_Controller() {
+        return Book_600_200_Controller;
     }
 
     public String toString() {
