@@ -1,0 +1,12 @@
+.back-color {
+    -fx-background-color: rgb(229, 229, 234);
+    -fx-background-radius: 8;
+}
+
+.back-color:hover {
+    -fx-background-color: rgb(229, 229, 234);
+    -fx-background-radius: 8;
+    -fx-border-color: rgb(0, 122, 255);
+    -fx-border-radius: 8;
+    -fx-border-weight: 2px;
+}

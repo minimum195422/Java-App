@@ -1,17 +1,19 @@
 package project.libraryclient.Controllers.DashBoard;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import project.libraryclient.Book.Book;
 import project.libraryclient.Consts.DATA;
-import project.libraryclient.Controllers.Card.Card_235_450_Controller;
+import project.libraryclient.Controllers.Card.Card_180_320_Controller;
 import project.libraryclient.Database.MySql;
 
 import java.io.IOException;
@@ -30,29 +32,48 @@ public class DashBoardController implements Initializable {
     public BorderPane ContentDisplay;
 
 
-    // --------------- Exit button -------------- //
-    @FXML
-    public ImageView ExitButton;
-
     // --------------- Search Box -------------- //
     @FXML
     public TextField searchBox;
 
-    public void ExitButtonMouseClicked() {
+    @FXML
+    public Button SearchButton;
+
+
+    // ---------- Toggle Button Group ---------- //
+    ToggleGroup function_button_toggle_group = new ToggleGroup();
+
+
+    // --------------- Exit button -------------- //
+    @FXML
+    public ToggleButton ExitButton;
+
+    @FXML
+    public ImageView ExitButtonIcon;
+
+    @FXML
+    public Text ExitButtonText;
+
+
+    public void ExitButtonMouseClicked(MouseEvent event) {
         System.exit(0); // close program
     }
 
     public void ExitButtonMouseEntered() {
-        ExitButton.setImage(DATA.EXIT_WHITE_ICON);
+        if (!ExitButton.isSelected()) {
+            ExitButtonIcon.setImage(DATA.EXIT_BLACK_ICON);
+            ExitButtonText.setStyle("-fx-fill: #000000;");
+        }
     }
 
     public void ExitButtonMouseExited() {
-        ExitButton.setImage(DATA.EXIT_GRAY_ICON);
+        if (!ExitButton.isSelected()) {
+            ExitButtonIcon.setImage(DATA.EXIT_GRAY_ICON);
+            ExitButtonText.setStyle("-fx-fill: #adb5bd;");
+        }
     }
 
-    
-    // ---------- Toggle Button Group ---------- //
-    ToggleGroup function_button_toggle_group = new ToggleGroup();
+
 
 
     // ---------- Home Button ---------- //
@@ -66,8 +87,8 @@ public class DashBoardController implements Initializable {
     public void HomeButtonMouseClicked() {
 
         // Home Button
-        HomeButtonIcon.setImage(DATA.HOME_WHITE_ICON);
-        HomeButtonText.setStyle("-fx-fill: #ffffff;");
+        HomeButtonIcon.setImage(DATA.HOME_BLACK_ICON);
+        HomeButtonText.setStyle("-fx-fill: #000000;");
 
         // Notification Button
         NotificationButtonIcon.setImage(DATA.NOTIFICATION_GRAY_ICON);
@@ -90,8 +111,8 @@ public class DashBoardController implements Initializable {
 
     public void HomeButtonMouseEntered() {
         if (!HomeButton.isSelected()) {
-            HomeButtonIcon.setImage(DATA.HOME_WHITE_ICON);
-            HomeButtonText.setStyle("-fx-fill: #ffffff;");
+            HomeButtonIcon.setImage(DATA.HOME_BLACK_ICON);
+            HomeButtonText.setStyle("-fx-fill: #000000;");
         }
     }
 
@@ -118,8 +139,8 @@ public class DashBoardController implements Initializable {
         HomeButtonText.setStyle("-fx-fill: #adb5bd;");
 
         // Notification Button
-        NotificationButtonIcon.setImage(DATA.NOTIFICATION_WHITE_ICON);
-        NotificationButtonText.setStyle("-fx-fill: #ffffff;");
+        NotificationButtonIcon.setImage(DATA.NOTIFICATION_BLACK_ICON);
+        NotificationButtonText.setStyle("-fx-fill: #000000;");
 
         // Discover Button
         DiscoverButtonIcon.setImage(DATA.DISCOVER_GRAY_ICON);
@@ -138,8 +159,8 @@ public class DashBoardController implements Initializable {
 
     public void NotificationButtonMouseEntered() {
         if (!NotificationButton.isSelected()) {
-            NotificationButtonIcon.setImage(DATA.NOTIFICATION_WHITE_ICON);
-            NotificationButtonText.setStyle("-fx-fill: #ffffff;");
+            NotificationButtonIcon.setImage(DATA.NOTIFICATION_BLACK_ICON);
+            NotificationButtonText.setStyle("-fx-fill: #000000;");
         }
     }
 
@@ -170,8 +191,8 @@ public class DashBoardController implements Initializable {
         NotificationButtonText.setStyle("-fx-fill: #adb5bd;");
 
         // Discover Button
-        DiscoverButtonIcon.setImage(DATA.DISCOVER_WHITE_ICON);
-        DiscoverButtonText.setStyle("-fx-fill: #ffffff;");
+        DiscoverButtonIcon.setImage(DATA.DISCOVER_BLACK_ICON);
+        DiscoverButtonText.setStyle("-fx-fill: #000000;");
 
         // MyBook Button
         MyBookButtonIcon.setImage(DATA.MYBOOK_GRAY_ICON);
@@ -186,8 +207,8 @@ public class DashBoardController implements Initializable {
 
     public void DiscoverButtonMouseEntered() {
         if (!DiscoverButton.isSelected()) {
-            DiscoverButtonIcon.setImage(DATA.DISCOVER_WHITE_ICON);
-            DiscoverButtonText.setStyle("-fx-fill: #ffffff;");
+            DiscoverButtonIcon.setImage(DATA.DISCOVER_BLACK_ICON);
+            DiscoverButtonText.setStyle("-fx-fill: #000000;");
         }
     }
 
@@ -222,8 +243,8 @@ public class DashBoardController implements Initializable {
         DiscoverButtonText.setStyle("-fx-fill: #adb5bd;");
 
         // MyBook Button
-        MyBookButtonIcon.setImage(DATA.MYBOOK_WHITE_ICON);
-        MyBookButtonText.setStyle("-fx-fill: #ffffff;");
+        MyBookButtonIcon.setImage(DATA.MYBOOK_BLACK_ICON);
+        MyBookButtonText.setStyle("-fx-fill: #000000;");
 
         // Setting Button
         SettingButtonIcon.setImage(DATA.SETTING_GRAY_ICON);
@@ -234,8 +255,8 @@ public class DashBoardController implements Initializable {
 
     public void MyBookButtonMouseEntered() {
         if (!MyBookButton.isSelected()) {
-            MyBookButtonIcon.setImage(DATA.MYBOOK_WHITE_ICON);
-            MyBookButtonText.setStyle("-fx-fill: #ffffff;");
+            MyBookButtonIcon.setImage(DATA.MYBOOK_BLACK_ICON);
+            MyBookButtonText.setStyle("-fx-fill: #000000;");
         }
     }
 
@@ -273,16 +294,16 @@ public class DashBoardController implements Initializable {
         MyBookButtonText.setStyle("-fx-fill: #adb5bd;");
 
         // Setting Button
-        SettingButtonIcon.setImage(DATA.SETTING_WHITE_ICON);
-        SettingButtonText.setStyle("-fx-fill: #ffffff;");
+        SettingButtonIcon.setImage(DATA.SETTING_BLACK_ICON);
+        SettingButtonText.setStyle("-fx-fill: #000000;");
 
         LoadSettingPage();
     }
 
     public void SettingButtonMouseEntered() {
         if (!SettingButton.isSelected()) {
-            SettingButtonIcon.setImage(DATA.SETTING_WHITE_ICON);
-            SettingButtonText.setStyle("-fx-fill: #ffffff;");
+            SettingButtonIcon.setImage(DATA.SETTING_BLACK_ICON);
+            SettingButtonText.setStyle("-fx-fill: #000000;");
         }
     }
 
@@ -297,12 +318,6 @@ public class DashBoardController implements Initializable {
     // ---------- VersionInformation Icon ---------- //
 
     public ImageView VersionInformationIcon;
-
-    public void VersionInformationIconMouseEntered() {
-    }
-
-    public void VersionInformationIconMouseExited() {
-    }
 
 
     // -------------------- initialize -------------------- //
@@ -319,7 +334,15 @@ public class DashBoardController implements Initializable {
         DiscoverButton.setToggleGroup(function_button_toggle_group);
         MyBookButton.setToggleGroup(function_button_toggle_group);
         SettingButton.setToggleGroup(function_button_toggle_group);
+        ExitButton.setToggleGroup(function_button_toggle_group);
 
+        // Set button group always have one in used
+        function_button_toggle_group.selectedToggleProperty().addListener(
+            (_, oldToggle, newToggle) -> {
+                if (newToggle == null) {
+                    function_button_toggle_group.selectToggle(oldToggle);
+                }
+        });
         // Tooltip
         Tooltip version = new Tooltip(DATA.APP_VERSION);
         Tooltip.install(VersionInformationIcon, version);
@@ -328,15 +351,12 @@ public class DashBoardController implements Initializable {
 
         HomeButton.setSelected(true);
         HomeButtonMouseClicked();
-
-        // Set content
-        LoadHomePage();
     }
 
 
     private void LoadHomePage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
+            AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.HOMEPAGE_LINK)));
             ContentDisplay.setCenter(pane);
@@ -389,54 +409,16 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    public void SearchFieldOnAction() {
+    public void SearchAction() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.SEARCHPAGE_LINK));
-            ScrollPane pane = loader.load();
+            AnchorPane pane = loader.load();
             SearchController controller = loader.getController();
-            controller.setContent(getListSearch());
+            controller.setContent(MySql.getInstance().GetSearchBookList(searchBox.getText()));
             ContentDisplay.setCenter(pane);
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
     }
 
-    public ArrayList<AnchorPane> getListSearch() {
-        ArrayList<AnchorPane> returnList = new ArrayList<>();
-        ArrayList<String> bookNameList;
-        try {
-            bookNameList = MySql.getInstance().getBookBySubstring(searchBox.getText());
-            for (String name : bookNameList) {
-                try {
-                    ArrayList<Book> bookBasicInfos = MySql.getBasicInfoOfBook(name);
-                    for (Book book : bookBasicInfos) {
-                        if (returnList.size() >= 16) {
-                            break;
-                        }
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-                            AnchorPane card = loader.load();
-                            Card_235_450_Controller controller = loader.getController();
-                            controller.setBookName(book.getTitle());
-                            controller.setAuthorName(book.getAuthors());
-                            controller.setBookCover(book.getImagePreview());
-                            returnList.add(card);
-//                             Add listener to a book
-                            card.setOnMouseClicked(_ -> {
-                                System.out.println(book.getId());
-                            });
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                } catch (SQLException e) {
-                    System.out.println("Error while searching books");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
-
-        return returnList;
-    }
 }

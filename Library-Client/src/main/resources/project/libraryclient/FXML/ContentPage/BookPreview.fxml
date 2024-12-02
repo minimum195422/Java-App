@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="MainPane" prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/BookView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
+   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1000.0">
+      <children>
+          <Button fx:id="ReturnButton" mnemonicParsing="false" onMouseClicked="#ExitClicked" prefWidth="80.0" styleClass="function-button" text="Return" />
+      </children>
+      <padding>
+         <Insets left="10.0" />
+      </padding>
+   </HBox>
+</AnchorPane>

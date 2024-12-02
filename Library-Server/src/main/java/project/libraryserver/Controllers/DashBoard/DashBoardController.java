@@ -3,7 +3,6 @@ package project.libraryserver.Controllers.DashBoard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -23,10 +22,20 @@ public class DashBoardController implements Initializable {
     @FXML
     public BorderPane ContentDisplay;
 
+    // Close Server
+    @FXML
+    public ToggleButton CloseServerButton;
+
+    public void CloseButtonClicked() {
+        System.exit(0);
+    }
+
+
 
     // Server Log
     @FXML
     public ToggleButton ServerLogButton;
+
 
     public void ServerLogOnClicked() {
         try {
@@ -98,6 +107,8 @@ public class DashBoardController implements Initializable {
         AddNewBookButton.setToggleGroup(function_button_toggle_group);
         ManageUsersButton.setToggleGroup(function_button_toggle_group);
         ManageDocumentButton.setToggleGroup(function_button_toggle_group);
+        CloseServerButton.setToggleGroup(function_button_toggle_group);
+
 
         function_button_toggle_group.selectedToggleProperty().addListener(
             (_, oldToggle, newToggle) -> {

@@ -26,6 +26,7 @@ module project.libraryclient {
     opens project.libraryclient.Controllers.Register to javafx.fxml;
     opens project.libraryclient.Controllers.Card to javafx.fxml;
     opens project.libraryclient.API.GoogleAPI to javafx.fxml;
+    opens project.libraryclient.Book to javafx.fxml;
 
     exports project.libraryclient;
     exports project.libraryclient.Controllers.DashBoard;
@@ -33,4 +34,5 @@ module project.libraryclient {
     exports project.libraryclient.Controllers.Register;
     exports project.libraryclient.Controllers.Card;
     exports project.libraryclient.API.GoogleAPI;
+    exports project.libraryclient.Book;
 }

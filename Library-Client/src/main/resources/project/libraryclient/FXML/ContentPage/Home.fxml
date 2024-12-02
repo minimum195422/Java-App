@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.HomeController">
-    <VBox fx:id="MainVBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css">
-        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0">
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" spacing="20.0" />
-        </HBox>
-    </VBox>
-</ScrollPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.HomeController">
+   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" vbarPolicy="NEVER">
+      <VBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="1000.0">
+         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1000.0" spacing="10.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Recently add"/>
+         </HBox>
+         <HBox fx:id="DisplayRecentlyAddBook" prefHeight="100.0" prefWidth="200.0" spacing="10.0"/>
+         <padding>
+            <Insets left="10.0"/>
+         </padding>
+      </VBox>
+   </ScrollPane>
+   <BorderPane fx:id="HiddenPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: black;" visible="false" />
+</AnchorPane>

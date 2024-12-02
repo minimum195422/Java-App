@@ -1,54 +1,57 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import project.libraryclient.Book.Book;
+import project.libraryclient.Consts.DATA;
+import project.libraryclient.Database.MySql;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-    @FXML
-    public VBox MainVBox;
 
     @FXML
-    public MediaView MediaContent1;
+    public HBox DisplayRecentlyAddBook;
+
+    @FXML
+    public BorderPane HiddenPane;
+
+    public ArrayList<Book> RecentlyAddBookList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        String videoUri = getClass().getResource("/project/libraryclient/Videos/Benefits_Of_Reading.mp4").toExternalForm();
-//        MediaPlayer mediaPlayer = new MediaPlayer(new Media(videoUri));
-//        MediaContent1.setMediaPlayer(mediaPlayer);
-//        mediaPlayer.setAutoPlay(true);
-
-//        for (int i = 0; i < 3; ++i) {
-//            HBox list = new HBox();
-//            list.setSpacing(25);
-//            for (int j = 0; j < 5; ++j) {
-//                try {
-//                    FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-//                    AnchorPane card = loader.load();
-//                    Card_235_450_Controller controller = loader.getController();
-//
-//                    controller.setBookCover(loadImage("/project/libraryclient/Images/Icons/settinggray.png"));
-//                    controller.setAuthorName("author name");
-//                    controller.setBookName("book name");
-//                    list.getChildren().add(card);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//
-//            MainVBox.getChildren().add(list);
-//        }
-
+        HiddenPane.setVisible(false);
+        HiddenPane.setDisable(true);
+        LoadBookList();
     }
 
-//    private Image loadImage(String path) {
-//        return new Image(Objects.requireNonNull(HomeController.class.getResourceAsStream(path)));
-//    }
+    public void LoadBookList() {
+        RecentlyAddBookList = MySql.getInstance().QueryForBookCard();
+        for (Book book : RecentlyAddBookList) {
+            DisplayRecentlyAddBook.getChildren().add(
+                    book.getBookCard()
+            );
 
+            book.getBookCard().setOnMouseClicked(_ -> {
+                HiddenPane.setVisible(true);
+                HiddenPane.setDisable(false);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.PREVIEW_BOOK_LINK));
+                    AnchorPane pane = loader.load();
+                    BookPreviewController controller = loader.getController();
+                    controller.setInfor(book);
+                    HiddenPane.setCenter(pane);
+                } catch (IOException e) {
+                    e.printStackTrace(System.out);
+                }
+            });
+        }
+    }
 }

@@ -145,7 +145,7 @@ public class AddNewBookController implements Initializable {
             boolean result = task.getValue();
             if (result) {
                 WarningText.setText("Successfully added new book to database");
-                ServerLog.getInstance().writeLog("Action: Add new book " + SelectedBook.getId() + " to database.");
+                ServerLog.getInstance().writeLog("Action: Add new book ID=[" + SelectedBook.getId() + "] to database.");
             } else {
                 WarningText.setText("Failed to add new book to database");
             }

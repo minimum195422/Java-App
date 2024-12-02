@@ -528,7 +528,7 @@ public class MySql {
                 }
             }
 
-            // Add new link to 'book_categories`
+            // Add new link to book_categories
             try (PreparedStatement insertBookAuthorStmt = connection.prepareStatement(
                     "INSERT INTO book_categories(category_id, book_id) VALUES(?, ?)")) {
                 insertBookAuthorStmt.setInt(1, categoryId);
@@ -668,7 +668,7 @@ public class MySql {
 
     public ArrayList<Book> GetSearchBookList(String query, SearchType option) {
         ArrayList<Book> returnList = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(getPrepareQuery(query, option));
 
