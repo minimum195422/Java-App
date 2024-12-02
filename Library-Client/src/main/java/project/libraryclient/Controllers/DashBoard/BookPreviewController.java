@@ -1,11 +1,15 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import project.libraryclient.Book.Book;
 import project.libraryclient.ConfirmDialog.ConfirmDialog;
 import project.libraryclient.Consts.DATA;
@@ -35,6 +39,8 @@ public class BookPreviewController {
     @FXML
     public Button RateButton;
 
+    private Book SelectedBook;
+
     public void setInfor(Book book) {
         BookCover.setImage(book.getImagePreview());
         DisplayTitle.setText(book.getTitle());
@@ -45,6 +51,7 @@ public class BookPreviewController {
         DisplayAuthors.setText(String.join(", ", book.getAuthors()));
         DisplayCategory.setText(String.join(", ", book.getCategories()));
         DisplayDescription.setText(book.getDescription());
+        SelectedBook = book;
     }
 
     public void ExitClicked() {
@@ -104,6 +111,24 @@ public class BookPreviewController {
         );
         if (!confirmed) return;
 
+    }
 
+    public void ReadButtonClicked() {
+        boolean confirmed = ConfirmDialog.show(
+                "Confirm action",
+                "You will read this book in another window!"
+        );
+        if (!confirmed) return;
+        Stage webViewStage = new Stage();
+        webViewStage.setTitle("WebView Window");
+        WebView webView = new WebView();
+        webView.getEngine().executeScript("document.body.style.zoom = '80%'");
+        webView.getEngine().setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+        webView.getEngine().load(SelectedBook.getWebReaderLink());
+        StackPane webViewRoot = new StackPane(webView);
+        Scene webViewScene = new Scene(webViewRoot, 800, 600);
+        webViewStage.setResizable(true);
+        webViewStage.setScene(webViewScene);
+        webViewStage.show();
     }
 }

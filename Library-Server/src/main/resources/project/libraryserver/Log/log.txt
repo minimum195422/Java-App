@@ -285,3 +285,4 @@
 2024-12-03 03:35:55 - Server stating on port 1234
 2024-12-03 03:36:09 - Client 127.0.0.1 connected.
 2024-12-03 03:36:36 - Server successfully create new user. Sent response to user
+2024-12-03 03:49:48 - Server stating on port 1234

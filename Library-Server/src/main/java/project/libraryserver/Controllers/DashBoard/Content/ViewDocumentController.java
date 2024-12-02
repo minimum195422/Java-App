@@ -59,11 +59,10 @@ public class ViewDocumentController {
         SelectedBookReadLink.setText(book.getWebReaderLink());
 
 
-        PreviewBook.setZoom(0.8);
-        PreviewBook.getEngine().load(book.getWebReaderLink());
+        PreviewBook.getEngine().executeScript("document.body.style.zoom = '80%'");
+        PreviewBook.getEngine().setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
         PreviewBook.getEngine().setJavaScriptEnabled(true);
-        PreviewBook.getEngine().setUserAgent("Mozilla/5.0");
-
+        PreviewBook.getEngine().load(book.getWebReaderLink());
         SelectedBook = book;
     }
 
