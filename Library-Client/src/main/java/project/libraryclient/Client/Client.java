@@ -7,6 +7,8 @@ import project.libraryclient.Consts.UserStatus;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client {
 
@@ -15,6 +17,11 @@ public class Client {
     private final PrintWriter out;
     private final BufferedReader in;
     private UserStatus status;
+
+
+    private String userId;
+    private String userMail;
+    private String userName;
 
     private Client(String host, int port) throws IOException {
         this.socket = new Socket(host, port);
@@ -61,7 +68,7 @@ public class Client {
                 while ((response = in.readLine()) != null) {
                     // xử lý response từ server gửi về
                     handleServerResponse(response);
-                    System.out.println(response);
+                    // System.out.println(response);
                 }
             } catch (IOException e) {
                 System.err.println("Error while reading server response: " + e.getMessage());
@@ -71,11 +78,19 @@ public class Client {
 
     private void handleServerResponse(String response) {
         JSONObject json = new JSONObject(response);
+//        System.out.println(json);
         JsonType type = JsonType.valueOf(json.getString("type"));
 
         switch (type) {
             case LOGIN_RESPONSE -> {
                 if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
+                    synchronized (this) {
+                        this.userId = json.optString("id", null);
+                        this.userName = json.optString("first_name", "") + " " + json.optString("last_name", "");
+                        this.userMail = json.optString("email", null);
+                        notifyListeners();
+                        notify();
+                    }
                     SetStatus(UserStatus.LOGGED_IN);
                 }
                 if (Message.valueOf(json.getString("message")) == Message.FAILED) {
@@ -109,5 +124,30 @@ public class Client {
             wait(); // Chờ đến khi có thông báo
         }
         return status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public synchronized String getUserMail() {
+        return userMail;
+    }
+
+    public synchronized String getUserName() {
+        return userName;
+    }
+
+    // listener
+    private List<ClientListener> listeners = new ArrayList<>();
+
+    public void addListener(ClientListener listener) {
+        listeners.add(listener);
+    }
+
+    private void notifyListeners() {
+        for (ClientListener listener : listeners) {
+            listener.onUserInfoUpdated(userId, userName, userMail);
+        }
     }
 }

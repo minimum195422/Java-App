@@ -1,11 +1,11 @@
-package project.libraryserver.API.GoogleBookAPI;
+package project.libraryclient.API.GoogleBookAPI;
 
 import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import project.libraryserver.Book.Book;
-import project.libraryserver.Consts.SearchType;
+import project.libraryclient.Book.Book;
+import project.libraryclient.Consts.SearchType;
 
 import java.io.BufferedReader;
 import java.io.IOException;

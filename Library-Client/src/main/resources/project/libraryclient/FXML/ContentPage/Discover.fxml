@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.VBox?>
-
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" styleClass="dark-mode-background-color" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.DiscoverController">
-    <VBox fx:id="MainVBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000.0" styleClass="dark-mode-background-color" stylesheets="@../../Styles/Content/HomeStyleSheet.css" />
-</ScrollPane>

@@ -38,12 +38,12 @@
                         <Image url="@../Images/Avatars/avatar.jpg" />
                      </ImageView>
                      <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+                        <Text fx:id="DisplayUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
                            <font>
                               <Font name="Poppins SemiBold" size="10.0" />
                            </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User mail">
+                        <Text fx:id="DisplayUserMail" strokeType="OUTSIDE" strokeWidth="0.0" text="User mail">
                            <font>
                               <Font name="Poppins Light" size="8.0" />
                            </font>
@@ -92,26 +92,6 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="DiscoverButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#DiscoverButtonMouseClicked" onMouseEntered="#DiscoverButtonMouseEntered" onMouseExited="#DiscoverButtonMouseExited" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                     <ImageView fx:id="DiscoverButtonIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../Images/Icons/compassgray.png" />
-                     </ImageView>
-                     <Text fx:id="DiscoverButtonText" fill="#adb5bd" strokeType="OUTSIDE" strokeWidth="0.0" text="Discover">
-                        <font>
-                           <Font name="Poppins Regular" size="14.0" />
-                        </font>
-                     </Text>
-                  </HBox>
-               </graphic>
             </ToggleButton>
             <ToggleButton fx:id="MyBookButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#MyBookButtonMouseClicked" onMouseEntered="#MyBookButtonMouseEntered" onMouseExited="#MyBookButtonMouseExited" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
                <VBox.margin>

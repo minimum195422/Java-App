@@ -178,26 +178,26 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT " +
-                            "b.book_id, " +
-                            "b.title, " +
-                            "group_concat(DISTINCT a.name) as 'author_list', " +
-                            "b.publisher, " +
-                            "b.published_date, " +
-                            "b.description, " +
-                            "group_concat(DISTINCT c.category) as 'category_list', " +
-                            "b.ISBN_13, " +
-                            "b.ISBN_10, " +
-                            "b.image_preview, " +
-                            "b.web_reader_link " +
-                            "FROM " +
-                            "books b " +
-                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                            "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
-                            "LEFT JOIN categories c ON bc.category_id = c.category_id " +
-                            "WHERE b.book_id = ? " +
-                            "GROUP BY b.book_id"
+            "SELECT " +
+                    "b.book_id, " +
+                    "b.title, " +
+                    "group_concat(DISTINCT a.name) as 'author_list', " +
+                    "b.publisher, " +
+                    "b.published_date, " +
+                    "b.description, " +
+                    "group_concat(DISTINCT c.category) as 'category_list', " +
+                    "b.ISBN_13, " +
+                    "b.ISBN_10, " +
+                    "b.image_preview, " +
+                    "b.web_reader_link " +
+                "FROM " +
+                    "books b " +
+                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                    "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                    "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                    "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                "WHERE b.book_id = ? " +
+                "GROUP BY b.book_id"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();

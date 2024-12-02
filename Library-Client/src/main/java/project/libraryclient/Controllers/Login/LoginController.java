@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
-import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
+import project.libraryclient.API.GoogleOauthAPI.GoogleAuthenticator;
 import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
@@ -54,11 +54,7 @@ public class LoginController implements Initializable {
         errorText.setVisible(false);
         email.clear();
         password.clear();
-    };
-
-    private void resetPassword() {
-        password.clear();
-    };
+    }
 
 //  //----// Handling Function //----//  //
 
@@ -99,7 +95,6 @@ public class LoginController implements Initializable {
         } else if (status == UserStatus.LOGIN_FAILED) {
             SetErrorMessage("Incorrect login information");
         }
-
     }
 
     //  Create New Account Link
@@ -124,7 +119,7 @@ public class LoginController implements Initializable {
 
         // Lấy json trả về từ google
         JSONObject json = authenticator.GetUserInformation();
-        System.out.println("from login" + json);
+//        System.out.println("from login" + json);
         if (json != null) {
             // Reset trạng thái của client
             Client.getInstance().ResetStatus();

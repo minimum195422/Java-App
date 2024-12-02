@@ -1,4 +1,4 @@
-package project.libraryclient.API.GoogleAPI;
+package project.libraryclient.API.GoogleOauthAPI;
 
 import org.json.JSONObject;
 import project.libraryclient.Consts.DATA;

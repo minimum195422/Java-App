@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable{
     private final Socket clientSocket;
@@ -87,6 +88,7 @@ public class ClientHandler implements Runnable{
             case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
             case NORMAL_REGISTER -> ServerResponseNormalRegister(json);
             case GOOGLE_REGISTER -> ServerResponseGoogleRegister(json);
+            case RATING_BOOK -> ServerAddNewRating(json);
             default -> throw new IllegalArgumentException("Unsupported JSON type");
         }
     }
@@ -103,7 +105,16 @@ public class ClientHandler implements Runnable{
                     + ",type:normal] to logging in application.");
 
             // Trả về json chấp nhận yêu cầu đăng nhập
-            response = GenerateJson.ResponseLoginSuccess();
+            ArrayList<String> information = MySql
+                    .getInstance()
+                    .GetNormalUserBasicInformation(json.getString("email"));
+
+            response = GenerateJson.ResponseLoginSuccess(
+                    information.get(0),
+                    information.get(1),
+                    information.get(2),
+                    information.get(3)
+            );
         } else {
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
@@ -128,8 +139,16 @@ public class ClientHandler implements Runnable{
                     + json.getString("email")
                     + ",type:google] to logging in application.");
 
+            ArrayList<String> information = MySql
+                    .getInstance()
+                    .GetGoogleUserBasicInformation(json.getString("email"));
             // Trả về json chấp nhận yêu cầu đăng nhập
-            response = GenerateJson.ResponseLoginSuccess();
+            response = GenerateJson.ResponseLoginSuccess(
+                    information.get(0),
+                    information.get(1),
+                    information.get(2),
+                    information.get(3)
+            );
         } else {
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
@@ -144,9 +163,7 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerResponseNormalRegister(JSONObject json) throws SQLException {
-        boolean check = MySql.getInstance().CreateNewNormalUser(
-                json.getString("first_name"), json.getString("last_name"),
-                json.getString("email"), json.getString("password"));
+        boolean check = MySql.getInstance().CreateNewNormalUser(json);
 
         JSONObject response;
         if (check) {
@@ -169,16 +186,11 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerResponseGoogleRegister(JSONObject json) throws SQLException {
-        boolean check = MySql.getInstance().CreateNewGoogleUser(
-                json.getString("id"),
-                json.getString("given_name"),
-                json.getString("family_name"),
-                json.getString("email"),
-                json.getString("picture_link")
-        );
+        boolean check1 = MySql.getInstance().CreateNewGoogleUser(json);
+        boolean check2 = MySql.getInstance().CreateUserLinkGoogle(json);
 
         JSONObject response;
-        if (check) {
+        if (check1 && check2) {
             // Ghi log thông báo gửi phản hồi đăng ký thành công tới người dùng
             ServerLog.getInstance().writeLog("Server successfully create new user. " +
                     "Sent response to user");
@@ -194,5 +206,9 @@ public class ClientHandler implements Runnable{
             response = GenerateJson.ResponseRegisterFailed();
         }
         SendMessage(response);
+    }
+
+    private void ServerAddNewRating(JSONObject json) {
+
     }
 }

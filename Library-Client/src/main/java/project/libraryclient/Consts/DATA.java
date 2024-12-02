@@ -18,18 +18,18 @@ public class DATA {
     public static final Image HOME_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/home_gray.png");
     public static final Image NOTIFICATION_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/notificationblack.png");
     public static final Image NOTIFICATION_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/notification-bell-gray.png");
-    public static final Image DISCOVER_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/compassblack.png");
-    public static final Image DISCOVER_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/compassgray.png");
     public static final Image MYBOOK_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/libraryblack.png");
     public static final Image MYBOOK_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/librarygray.png");
     public static final Image SETTING_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/settingblack.png");
     public static final Image SETTING_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/settinggray.png");
     public static final Image EXIT_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/xblack.png");
     public static final Image EXIT_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/x-button.png");
+    public static final Image STAR_BLANK_ICON = loadImage("/project/libraryclient/Images/Icons/star.png");
+    public static final Image STAR_YELLOW_ICON = loadImage("/project/libraryclient/Images/Icons/staryellow.png");
+
 
     // Page link
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
-    public static final String DISCOVER_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Discover.fxml";
     public static final String SETTING_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Setting.fxml";
     public static final String NOTIFICATION_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Notification.fxml";
     public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";

@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     @FXML
-    public HBox DisplayRecentlyAddBook;
+    public HBox DisplayNewBook;
 
     @FXML
     public BorderPane HiddenPane;
@@ -35,7 +35,7 @@ public class HomeController implements Initializable {
     public void LoadBookList() {
         RecentlyAddBookList = MySql.getInstance().QueryForBookCard();
         for (Book book : RecentlyAddBookList) {
-            DisplayRecentlyAddBook.getChildren().add(
+            DisplayNewBook.getChildren().add(
                     book.getBookCard()
             );
 
@@ -46,7 +46,8 @@ public class HomeController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.PREVIEW_BOOK_LINK));
                     AnchorPane pane = loader.load();
                     BookPreviewController controller = loader.getController();
-                    controller.setInfor(book);
+                    Book fullBook = MySql.getInstance().GetBookById(book.getId());
+                    controller.setInfor(fullBook);
                     HiddenPane.setCenter(pane);
                 } catch (IOException e) {
                     e.printStackTrace(System.out);

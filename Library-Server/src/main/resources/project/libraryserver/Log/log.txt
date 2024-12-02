@@ -221,3 +221,67 @@
 2024-12-02 01:08:06 - Server stating on port 1234
 2024-12-02 02:20:40 - Server stating on port 1234
 2024-12-02 20:37:11 - Server stating on port 1234
+2024-12-02 22:59:13 - Server stating on port 1234
+2024-12-02 23:03:28 - Server stating on port 1234
+2024-12-02 23:04:28 - Server stating on port 1234
+2024-12-02 23:05:26 - Server stating on port 1234
+2024-12-02 23:06:11 - Server stating on port 1234
+2024-12-02 23:29:20 - Server stating on port 1234
+2024-12-02 23:29:27 - Server stating on port 1234
+2024-12-02 23:30:59 - Client 127.0.0.1 connected.
+2024-12-02 23:30:59 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-02 23:33:28 - Client 127.0.0.1 connected.
+2024-12-02 23:33:28 - Server accept user [henry.moore@gmail.com,type:normal] to logging in application.
+2024-12-02 23:35:03 - Server stating on port 1234
+2024-12-02 23:35:53 - Client 127.0.0.1 connected.
+2024-12-02 23:35:53 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:37:33 - Server stating on port 1234
+2024-12-02 23:38:27 - Server stating on port 1234
+2024-12-02 23:38:55 - Client 127.0.0.1 connected.
+2024-12-02 23:38:55 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:39:53 - Server stating on port 1234
+2024-12-02 23:40:51 - Client 127.0.0.1 connected.
+2024-12-02 23:40:51 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:41:29 - Client disconnected: 127.0.0.1
+2024-12-02 23:43:57 - Client 127.0.0.1 connected.
+2024-12-02 23:43:57 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-02 23:45:00 - Server stating on port 1234
+2024-12-02 23:45:31 - Client 127.0.0.1 connected.
+2024-12-02 23:45:32 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-02 23:45:39 - Client disconnected: 127.0.0.1
+2024-12-02 23:51:20 - Server stating on port 1234
+2024-12-02 23:51:32 - Client 127.0.0.1 connected.
+2024-12-02 23:51:46 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:52:14 - Client disconnected: 127.0.0.1
+2024-12-02 23:52:41 - Client 127.0.0.1 connected.
+2024-12-02 23:52:51 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:55:23 - Client disconnected: 127.0.0.1
+2024-12-02 23:55:44 - Client 127.0.0.1 connected.
+2024-12-02 23:56:00 - Client disconnected: 127.0.0.1
+2024-12-02 23:56:11 - Client 127.0.0.1 connected.
+2024-12-02 23:56:15 - Client disconnected: 127.0.0.1
+2024-12-02 23:57:00 - Client 127.0.0.1 connected.
+2024-12-02 23:57:10 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:58:00 - Client disconnected: 127.0.0.1
+2024-12-02 23:58:16 - Client 127.0.0.1 connected.
+2024-12-02 23:58:16 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:58:50 - Client disconnected: 127.0.0.1
+2024-12-02 23:58:56 - Client 127.0.0.1 connected.
+2024-12-02 23:59:09 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-02 23:59:14 - Client disconnected: 127.0.0.1
+2024-12-03 00:02:30 - Client 127.0.0.1 connected.
+2024-12-03 00:02:43 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-03 00:06:34 - Client disconnected: 127.0.0.1
+2024-12-03 00:07:07 - Client 127.0.0.1 connected.
+2024-12-03 00:07:22 - Server accept user [white@gmail.com,type:normal] to logging in application.
+2024-12-03 03:08:03 - Server stating on port 1234
+2024-12-03 03:23:38 - Server stating on port 1234
+2024-12-03 03:23:43 - Server stating on port 1234
+2024-12-03 03:24:16 - Client 127.0.0.1 connected.
+2024-12-03 03:29:14 - Server stating on port 1234
+2024-12-03 03:29:30 - Client 127.0.0.1 connected.
+2024-12-03 03:32:35 - Server stating on port 1234
+2024-12-03 03:32:42 - Client 127.0.0.1 connected.
+2024-12-03 03:35:55 - Server stating on port 1234
+2024-12-03 03:36:09 - Client 127.0.0.1 connected.
+2024-12-03 03:36:36 - Server successfully create new user. Sent response to user

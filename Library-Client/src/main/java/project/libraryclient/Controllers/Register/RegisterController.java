@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
-import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
+import project.libraryclient.API.GoogleOauthAPI.GoogleAuthenticator;
 import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLException;
 
 public class RegisterController {
     @SuppressWarnings("unused")

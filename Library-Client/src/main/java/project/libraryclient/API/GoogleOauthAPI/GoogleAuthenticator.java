@@ -1,4 +1,4 @@
-package project.libraryclient.API.GoogleAPI;
+package project.libraryclient.API.GoogleOauthAPI;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +49,7 @@ public class GoogleAuthenticator extends OAuthAuthenticator {
         webEngine.load(webURL);
 
         webEngine.locationProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Navigated to: " + newValue);
+            // System.out.println("Navigated to: " + newValue); // use this to check web link
             if (newValue.startsWith(DATA.GetGoogleRedirectLink())) {
                 // Trích xuất mã ủy quyền từ URL
                 String authorizationCode = extractAuthorizationCode(newValue);
