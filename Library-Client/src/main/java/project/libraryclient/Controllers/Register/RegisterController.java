@@ -128,7 +128,6 @@ public class RegisterController {
             if (status == UserStatus.REGISTER_SUCCESS) {
                 SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
                 Client.getInstance().SetStatus(UserStatus.LOGGED_IN);
-                SetErrorMessage("Registered successfully! Return to login page");
             } else if (status == UserStatus.REGISTER_FAILED) {
                 SetErrorMessage("Email already exists");
             }
@@ -218,7 +217,7 @@ public class RegisterController {
 
             JSONObject myResponse = new JSONObject(response.toString());
             System.out.println(myResponse);
-            // deliverability nghĩa là mail còn hoạt động và có thể sử dụng bình thường
+            // deliverability nghĩa là mail còn hoạt động và có thể sử dụng
             if (myResponse.getString("deliverability").equals("DELIVERABLE")) {
                 return true;
             } else if (myResponse.getString("deliverability").equals("UNDELIVERABLE")) {

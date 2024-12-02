@@ -112,7 +112,7 @@ public class ManageUsersController implements Initializable {
         try {
             UserList = MySql.getInstance().GetAllUser();
             if (UserList.isEmpty()) {
-                System.out.println("fail to load user");
+                System.out.println("user list is empty");
                 return;
             }
 

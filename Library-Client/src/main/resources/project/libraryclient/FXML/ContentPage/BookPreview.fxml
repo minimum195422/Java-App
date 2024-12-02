@@ -28,7 +28,6 @@
          <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <Button fx:id="LikeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Like" />
             <Button fx:id="BorrowButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Borrow" />
-            <Button fx:id="ReadBookButton" mnemonicParsing="false" onMouseClicked="#ReadButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Read" />
          </HBox>
       </VBox>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="680.0" vbarPolicy="NEVER">

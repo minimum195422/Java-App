@@ -286,3 +286,40 @@
 2024-12-03 03:36:09 - Client 127.0.0.1 connected.
 2024-12-03 03:36:36 - Server successfully create new user. Sent response to user
 2024-12-03 03:49:48 - Server stating on port 1234
+2024-12-03 05:08:05 - Server stating on port 1234
+2024-12-03 05:09:11 - Server stating on port 1234
+2024-12-03 05:09:27 - Client 127.0.0.1 connected.
+2024-12-03 05:10:02 - Server successfully create new user. Sent response to user
+2024-12-03 05:10:13 - Client disconnected: 127.0.0.1
+2024-12-03 05:10:44 - Client 127.0.0.1 connected.
+2024-12-03 05:11:38 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-03 05:12:47 - Client disconnected: 127.0.0.1
+2024-12-03 05:15:42 - Server stating on port 1234
+2024-12-03 05:16:19 - Client 127.0.0.1 connected.
+2024-12-03 05:16:49 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-03 05:18:18 - Server stating on port 1234
+2024-12-03 05:19:04 - Client 127.0.0.1 connected.
+2024-12-03 05:19:23 - Server decline user [unknow.id.23@gmail.com,type:normal] to logging in application.
+2024-12-03 05:19:50 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-03 05:22:25 - Client disconnected: 127.0.0.1
+2024-12-03 05:24:40 - Server stating on port 1234
+2024-12-03 05:26:41 - Client 127.0.0.1 connected.
+2024-12-03 05:27:14 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-03 05:29:49 - Client disconnected: 127.0.0.1
+2024-12-03 05:30:12 - Server stating on port 1234
+2024-12-03 05:30:20 - Client 127.0.0.1 connected.
+2024-12-03 05:31:07 - Server accept user [unknow.id.23@gmail.com,type:google] to logging in application.
+2024-12-03 05:32:54 - Server stating on port 1234
+2024-12-03 05:33:18 - Server stating on port 1234
+2024-12-03 05:33:45 - Client 127.0.0.1 connected.
+2024-12-03 05:34:04 - Server accept user [unknow.id.23@gmail.com,type:normal] to logging in application.
+2024-12-03 05:34:55 - Server stating on port 1234
+2024-12-03 05:35:00 - Client 127.0.0.1 connected.
+2024-12-03 05:35:18 - Server accept user [unknow.id.23@gmail.com,type:normal] to logging in application.
+2024-12-03 05:42:02 - Client disconnected: 127.0.0.1
+2024-12-03 05:42:13 - Server stating on port 1234
+2024-12-03 05:42:27 - Client 127.0.0.1 connected.
+2024-12-03 05:42:42 - Server accept user [unknow.id.23@gmail.com,type:normal] to logging in application.
+2024-12-03 05:44:06 - Client disconnected: 127.0.0.1
+2024-12-03 05:50:18 - Client 127.0.0.1 connected.
+2024-12-03 05:50:23 - Client disconnected: 127.0.0.1

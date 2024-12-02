@@ -785,16 +785,15 @@ public class MySql {
                 "%s GROUP BY b.book_id", setOption);
     }
 
-    public void AddNewRate(String userId, String bookId, int rate) {
+    public void AddNewRate(JSONObject json) {
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
                     "insert into rating(user_id, book_id, rate) values (?, ?, ?);");
-            preparedStatement.setInt(1, Integer.parseInt(userId));
-            preparedStatement.setString(2, bookId);
-            preparedStatement.setInt(3, rate);
-            rs = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, json.getInt("user_id"));
+            preparedStatement.setString(2, json.getString("book_id"));
+            preparedStatement.setInt(3, json.getInt("rate"));
 
             int status = preparedStatement.executeUpdate();
             if (status == 0) {

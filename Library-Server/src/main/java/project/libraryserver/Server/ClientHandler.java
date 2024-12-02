@@ -82,7 +82,7 @@ public class ClientHandler implements Runnable{
     // bắt json request từ client
     private void HandlerUserRequest(JSONObject json) throws SQLException {
         JsonType type = JsonType.valueOf(json.getString("type"));
-
+        System.out.println(json);
         switch (type) {
             case NORMAL_LOGIN -> ServerResponseNormalLogin(json);
             case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
@@ -141,7 +141,7 @@ public class ClientHandler implements Runnable{
 
             ArrayList<String> information = MySql
                     .getInstance()
-                    .GetGoogleUserBasicInformation(json.getString("email"));
+                    .GetNormalUserBasicInformation(json.getString("email"));
             // Trả về json chấp nhận yêu cầu đăng nhập
             response = GenerateJson.ResponseLoginSuccess(
                     information.get(0),
@@ -209,6 +209,6 @@ public class ClientHandler implements Runnable{
     }
 
     private void ServerAddNewRating(JSONObject json) {
-
+        MySql.getInstance().AddNewRate(json);
     }
 }
