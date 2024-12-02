@@ -5,6 +5,8 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import project.libraryserver.ConfirmDialog.*;
@@ -254,31 +256,24 @@ public class ManageUsersController implements Initializable {
     }
 
     public void SortUserList() {
-        if (SortByIdButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByIdAsc(UserList);
-            } else {
-                UserSort.SortByIdDesc(UserList);
-            }
+        if(!SortDirection.isSelected()) {
+            SortDirection.setSelected(true);
+            if (SortDirection.getText().equals("ASC")) SortDirection.setText("DESC");
+            else SortDirection.setText("ASC");
         }
-        if (SortByNameButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByNameAsc(UserList);
-            } else {
-                UserSort.SortByNameDesc(UserList);
-            }
+        if (SortDirection.getText().equals("ASC")) {
+            if (SortByIdButton.isSelected()) UserSort.SortByIdAsc(UserList);
+            if (SortByNameButton.isSelected()) UserSort.SortByNameAsc(UserList);
+            if (SortByEmailButton.isSelected()) UserSort.SortByEmailAsc(UserList);
+        } else {
+            if (SortByIdButton.isSelected()) UserSort.SortByIdDesc(UserList);
+            if (SortByNameButton.isSelected()) UserSort.SortByNameDesc(UserList);
+            if (SortByEmailButton.isSelected()) UserSort.SortByEmailDesc(UserList);
         }
-        if (SortByEmailButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByEmailAsc(UserList);
-            } else {
-                UserSort.SortByEmailDesc(UserList);
-            }
-        }
-        reloadDisplayList();
+        ReloadDisplayList();
     }
 
-    private void reloadDisplayList() {
+    private void ReloadDisplayList() {
         if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
         for (User u : UserList) {
             DisplayUserList.getChildren().add(

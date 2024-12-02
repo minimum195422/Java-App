@@ -9,10 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import project.libraryserver.Book.Book;
+import project.libraryserver.Book.BookSort;
 import project.libraryserver.ConfirmDialog.ConfirmDialog;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
@@ -39,12 +42,13 @@ public class ManageDocumentController implements Initializable{
     @FXML
     public ToggleButton SearchById, SearchByTitle, SearchByAuthor;
     public ToggleGroup SearchOption = new ToggleGroup();
+    public ToggleGroup SortOption = new ToggleGroup();
 
     @FXML
     public Button SearchButton;
 
     @FXML
-    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime;
+    public ToggleButton SortById, SortByTitle, SortByRating, SortByBorrowedTime, SortDirection;
 
     ArrayList<Book> BookList = new ArrayList<>();
 
@@ -64,6 +68,13 @@ public class ManageDocumentController implements Initializable{
 
         SearchById.setSelected(true);
 
+        SortById.setToggleGroup(SortOption);
+        SortByTitle.setToggleGroup(SortOption);
+        SortByRating.setToggleGroup(SortOption);
+        SortByBorrowedTime.setToggleGroup(SortOption);
+
+        SortById.setSelected(true);
+        SortDirection.setSelected(true);
         // Set button group always have one in used
         SearchOption.selectedToggleProperty().addListener(
                 (_, oldToggle, newToggle) -> {
@@ -72,6 +83,12 @@ public class ManageDocumentController implements Initializable{
                     }
                 });
 
+        SortOption.selectedToggleProperty().addListener(
+                (_, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        SortOption.selectToggle(oldToggle);
+                    }
+                });
         LoadBookList();
     }
 
@@ -82,10 +99,10 @@ public class ManageDocumentController implements Initializable{
             return;
         }
 
-        ReLoadDisplayBookList();
+        ReloadDisplayBookList();
     }
 
-    private void ReLoadDisplayBookList() {
+    private void ReloadDisplayBookList() {
         if (!DisplayBookList.getChildren().isEmpty()) DisplayBookList.getChildren().clear();
 
         for (Book book : BookList) {
@@ -130,7 +147,7 @@ public class ManageDocumentController implements Initializable{
                             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
                             AnchorPane pane = loader.load();
                             ViewDocumentController controller = loader.getController();
-                            controller.setInfor(fullBook);
+                            controller.setInfo(fullBook);
                             HiddenPane.setCenter(pane);
                         } catch (IOException e) {
                             e.printStackTrace(System.out);
@@ -155,7 +172,7 @@ public class ManageDocumentController implements Initializable{
                 BookList = MySql.getInstance().GetSearchBookList(SearchBox.getText(), searchOption);
 
                 Platform.runLater(() -> {
-                    ReLoadDisplayBookList();
+                    ReloadDisplayBookList();
                 });
 
                 return null;
@@ -165,7 +182,23 @@ public class ManageDocumentController implements Initializable{
         new Thread(task).start();
     }
 
-    private void SortBookList() {
-
+    public void SortBookList() {
+        if(!SortDirection.isSelected()) {
+            SortDirection.setSelected(true);
+            if (SortDirection.getText().equals("ASC")) SortDirection.setText("DESC");
+            else SortDirection.setText("ASC");
+        }
+        if (SortDirection.getText().equals("ASC")){
+            if (SortById.isSelected()) BookSort.SortByIdAsc(BookList);
+            if (SortByTitle.isSelected()) BookSort.SortByTitleAsc(BookList);
+            if (SortByRating.isSelected()) BookSort.SortByRatingAsc(BookList);
+            if (SortByBorrowedTime.isSelected()) BookSort.SortByBorrowedTimeAsc(BookList);
+        } else {
+            if (SortById.isSelected()) BookSort.SortByIdDesc(BookList);
+            if (SortByTitle.isSelected()) BookSort.SortByTitleDesc(BookList);
+            if (SortByRating.isSelected()) BookSort.SortByRatingDesc(BookList);
+            if (SortByBorrowedTime.isSelected()) BookSort.SortByBorrowedTimeDesc(BookList);
+        }
+        ReloadDisplayBookList();
     }
 }

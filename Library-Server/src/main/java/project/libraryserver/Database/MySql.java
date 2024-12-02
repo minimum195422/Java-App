@@ -581,8 +581,8 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        "0.0", // rate
-                        "100" // borrow times
+                        0.0, // rate
+                        100 // borrow times
                 ));
             }
         } catch (SQLException e) {
@@ -678,8 +678,8 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        "0.0",
-                        "100"
+                        0.0,
+                        100
                 ));
             }
         } catch (SQLException e) {

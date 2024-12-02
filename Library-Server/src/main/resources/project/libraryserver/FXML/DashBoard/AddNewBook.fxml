@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" stylesheets="@../../Styles/AddNewBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.AddNewBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" stylesheets="@../../Styles/AddNewBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.Content.AddNewBookController">
    <HBox prefHeight="680.0" prefWidth="1020.0">
       <VBox prefHeight="680.0" prefWidth="530.0">
          <AnchorPane prefHeight="50.0" prefWidth="530.0" styleClass="back-color">

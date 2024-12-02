@@ -94,7 +94,7 @@ public class BookAPI {
             volumeInfo = json.getJSONObject("volumeInfo");
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("can not find volumeInfo");
+            System.out.println("Can not find volumeInfo");
         }
 
         return new Book(
@@ -145,7 +145,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load author json array");
+            System.out.println("Fail to load author json array");
         }
         return new ArrayList<>();
     }
@@ -157,7 +157,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load publisher");
+            System.out.println("Fail to load publisher");
         }
         return "Can't found publisher";
     }
@@ -169,7 +169,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load publish date");
+            System.out.println("Fail to load publish date");
         }
         return "Can't found time release";
     }
@@ -181,7 +181,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load description");
+            System.out.println("Fail to load description");
         }
         return "Can't found description";
     }
@@ -194,7 +194,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load categories");
+            System.out.println("Fail to load categories");
         }
         return new ArrayList<>();
     }
@@ -219,7 +219,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load isbn");
+            System.out.println("Fail to load isbn");
         }
         ArrayList<String> returnArray = new ArrayList<>();
         returnArray.add(isbn13);
@@ -259,7 +259,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("fail to load description");
+            System.out.println("Fail to load description");
         }
         return "Can't found reader link";
     }
