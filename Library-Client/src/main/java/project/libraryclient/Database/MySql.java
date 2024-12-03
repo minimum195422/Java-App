@@ -111,6 +111,7 @@ public class MySql {
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
                         GetImageByLink(rs.getString(4)) // cover image
                 ));
+                if (returnList.size() == 16) break;
             }
         } catch (SQLException e) {
             e.printStackTrace(System.out);

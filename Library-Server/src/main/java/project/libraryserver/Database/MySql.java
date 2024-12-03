@@ -804,7 +804,6 @@ public class MySql {
             e.printStackTrace(System.err);
         } finally {
             try {
-                if (rs != null) rs.close();
                 if (preparedStatement != null) preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace(System.err);
