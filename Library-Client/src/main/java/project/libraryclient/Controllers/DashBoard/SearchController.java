@@ -1,7 +1,6 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -34,7 +33,7 @@ public class SearchController {
         if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         if (SearchList.isEmpty()) {
-            Label label = new Label("Can't found any book, please try with another word");
+            Label label = new Label("Can't found any book, please try with another prompt");
             label.setStyle("-fx-font-size: 24px;");
             MainVbox.getChildren().add(label);
             return;
@@ -59,7 +58,7 @@ public class SearchController {
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.PREVIEW_BOOK_LINK));
                                 AnchorPane pane = loader.load();
                                 BookPreviewController controller = loader.getController();
-                                controller.setInfor(book);
+                                controller.setInfo(book);
                                 HiddenPane.setCenter(pane);
                             } catch (IOException e) {
                                 e.printStackTrace(System.out);

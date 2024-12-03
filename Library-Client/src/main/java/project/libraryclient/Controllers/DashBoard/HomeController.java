@@ -47,7 +47,7 @@ public class HomeController implements Initializable {
                     AnchorPane pane = loader.load();
                     BookPreviewController controller = loader.getController();
                     Book fullBook = MySql.getInstance().GetBookById(book.getId());
-                    controller.setInfor(fullBook);
+                    controller.setInfo(fullBook);
                     HiddenPane.setCenter(pane);
                 } catch (IOException e) {
                     e.printStackTrace(System.out);

@@ -41,7 +41,7 @@ public class BookPreviewController {
 
     private Book SelectedBook;
 
-    public void setInfor(Book book) {
+    public void setInfo(Book book) {
         BookCover.setImage(book.getImagePreview());
         DisplayTitle.setText(book.getTitle());
         DisplayISBN10.setText(book.getISBN_10());
@@ -116,11 +116,11 @@ public class BookPreviewController {
         if (!confirmed) return;
 
         if (rate == 0) {
-            boolean nonvalue = ConfirmDialog.show(
+            boolean nonValue = ConfirmDialog.show(
                     "You haven't choose rate",
                     "Please choose point to rate!"
             );
-            if (nonvalue) return;
+            if (nonValue) return;
         }
 
         Client.getInstance().SendMessage(

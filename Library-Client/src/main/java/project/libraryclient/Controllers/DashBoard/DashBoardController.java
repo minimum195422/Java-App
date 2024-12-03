@@ -1,6 +1,5 @@
 package project.libraryclient.Controllers.DashBoard;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
 
