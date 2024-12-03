@@ -131,31 +131,31 @@ public class ManageUsersController implements Initializable {
 
         // Popup confirm delete user action
         boolean confirmed = ConfirmDialog.show(
-            "Confirm delete",
-            "Confirm delete user from list!"
+                "Confirm delete",
+                "Confirm delete user from list!"
         );
         if (!confirmed) return;
 
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-            try {
-                MySql.getInstance().DeleteUser(
-                    Integer.parseInt(DisplayUserId.getText())
-                );
+                try {
+                    MySql.getInstance().DeleteUser(
+                            Integer.parseInt(DisplayUserId.getText())
+                    );
 
-                // After the update, load the user list
-                Platform.runLater(() -> {
-                    LoadUserList();
-                    WarningText.setText("Delete user successfully");
-                    WarningText.setStyle("-fx-text-fill: green;");
-                });
-            } catch (NumberFormatException e) {
-                Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
-                WarningText.setStyle("-fx-text-fill: red;");
-                System.err.println("ID không hợp lệ: " + e.getMessage());
-            }
-            return null;
+                    // After the update, load the user list
+                    Platform.runLater(() -> {
+                        LoadUserList();
+                        WarningText.setText("Delete user successfully");
+                        WarningText.setStyle("-fx-text-fill: green;");
+                    });
+                } catch (NumberFormatException e) {
+                    Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
+                    WarningText.setStyle("-fx-text-fill: red;");
+                    System.err.println("ID không hợp lệ: " + e.getMessage());
+                }
+                return null;
             }
         };
 
@@ -182,33 +182,33 @@ public class ManageUsersController implements Initializable {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-            try {
-                MySql.getInstance().UpdateUser(
-                    Integer.parseInt(DisplayUserId.getText()),
-                    DisplayFirstName.getText(),
-                    DisplayLastName.getText(),
-                    DisplayEmail.getText(),
-                    DisplayPassword.getText(),
-                    (ActiveButton.isSelected() && !InactiveButton.isSelected()) ?
-                            "active" : "inactive"
-                );
+                try {
+                    MySql.getInstance().UpdateUser(
+                            Integer.parseInt(DisplayUserId.getText()),
+                            DisplayFirstName.getText(),
+                            DisplayLastName.getText(),
+                            DisplayEmail.getText(),
+                            DisplayPassword.getText(),
+                            (ActiveButton.isSelected() && !InactiveButton.isSelected()) ?
+                                    "active" : "inactive"
+                    );
 
-                // After the update, load the user list on the UI thread
-                Platform.runLater(() -> {
-                    LoadUserList();
-                    WarningText.setText("User information updated successfully");
-                    WarningText.setStyle("-fx-text-fill: green;");
-                });
-            } catch (NumberFormatException e) {
-                Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
-                WarningText.setStyle("-fx-text-fill: red;");
-                System.err.println("ID không hợp lệ: " + e.getMessage());
-            } catch (SQLException e) {
-                Platform.runLater(() -> WarningText.setText("Lỗi mysql: " + e.getMessage()));
-                WarningText.setStyle("-fx-text-fill: red;");
-                System.out.println("Lỗi mysql: " + e.getMessage());
-            }
-            return null;
+                    // After the update, load the user list on the UI thread
+                    Platform.runLater(() -> {
+                        LoadUserList();
+                        WarningText.setText("User information updated successfully");
+                        WarningText.setStyle("-fx-text-fill: green;");
+                    });
+                } catch (NumberFormatException e) {
+                    Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
+                    WarningText.setStyle("-fx-text-fill: red;");
+                    System.err.println("ID không hợp lệ: " + e.getMessage());
+                } catch (SQLException e) {
+                    Platform.runLater(() -> WarningText.setText("Lỗi mysql: " + e.getMessage()));
+                    WarningText.setStyle("-fx-text-fill: red;");
+                    System.out.println("Lỗi mysql: " + e.getMessage());
+                }
+                return null;
             }
         };
 
@@ -223,33 +223,33 @@ public class ManageUsersController implements Initializable {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws SQLException {
-            UserList = MySql.getInstance().GetSearchUserList(SearchBox.getText());
+                UserList = MySql.getInstance().GetSearchUserList(SearchBox.getText());
 
-            Platform.runLater(() -> {
-                if (UserList.isEmpty()) return;
+                Platform.runLater(() -> {
+                    if (UserList.isEmpty()) return;
 
-                for (User u : UserList) {
-                    DisplayUserList.getChildren().add(
-                        u.getDisplayCard()
-                    );
-                    u.getDisplayCard().setOnMouseClicked(
-                        _ -> {
-                            DisplayUserId.setText(String.valueOf(u.getId()));
-                            DisplayFirstName.setText(u.getFirst_name());
-                            DisplayLastName.setText(u.getLast_name());
-                            DisplayEmail.setText(u.getEmail());
-                            DisplayPassword.setText(u.getPassword());
-                            if (u.getStatus().equals("active")) {
-                                ActiveButton.setSelected(true);
-                            } else {
-                                InactiveButton.setSelected(true);
-                            }
-                            SelectedUser = u;
-                        }
-                    );
-                }
-            });
-            return null;
+                    for (User u : UserList) {
+                        DisplayUserList.getChildren().add(
+                                u.getDisplayCard()
+                        );
+                        u.getDisplayCard().setOnMouseClicked(
+                                _ -> {
+                                    DisplayUserId.setText(String.valueOf(u.getId()));
+                                    DisplayFirstName.setText(u.getFirst_name());
+                                    DisplayLastName.setText(u.getLast_name());
+                                    DisplayEmail.setText(u.getEmail());
+                                    DisplayPassword.setText(u.getPassword());
+                                    if (u.getStatus().equals("active")) {
+                                        ActiveButton.setSelected(true);
+                                    } else {
+                                        InactiveButton.setSelected(true);
+                                    }
+                                    SelectedUser = u;
+                                }
+                        );
+                    }
+                });
+                return null;
             }
         };
         new Thread(task).start();
@@ -277,22 +277,22 @@ public class ManageUsersController implements Initializable {
         if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
         for (User u : UserList) {
             DisplayUserList.getChildren().add(
-                u.getDisplayCard()
+                    u.getDisplayCard()
             );
             u.getDisplayCard().setOnMouseClicked(
-                _ -> {
-                    DisplayUserId.setText(String.valueOf(u.getId()));
-                    DisplayFirstName.setText(u.getFirst_name());
-                    DisplayLastName.setText(u.getLast_name());
-                    DisplayEmail.setText(u.getEmail());
-                    DisplayPassword.setText(u.getPassword());
-                    if (u.getStatus().equals("active")) {
-                        ActiveButton.setSelected(true);
-                    } else {
-                        InactiveButton.setSelected(true);
+                    _ -> {
+                        DisplayUserId.setText(String.valueOf(u.getId()));
+                        DisplayFirstName.setText(u.getFirst_name());
+                        DisplayLastName.setText(u.getLast_name());
+                        DisplayEmail.setText(u.getEmail());
+                        DisplayPassword.setText(u.getPassword());
+                        if (u.getStatus().equals("active")) {
+                            ActiveButton.setSelected(true);
+                        } else {
+                            InactiveButton.setSelected(true);
+                        }
+                        SelectedUser = u;
                     }
-                    SelectedUser = u;
-                }
             );
         }
     }

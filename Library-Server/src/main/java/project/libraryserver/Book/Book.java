@@ -10,6 +10,7 @@ import project.libraryserver.Controllers.Card.BookCard_600_200;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class Book {
     private String id;
     private String title;

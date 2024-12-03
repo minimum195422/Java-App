@@ -13,52 +13,37 @@ public class DATA {
     // Application version
     public static final String APP_VERSION = "Library Client Version 1.0.0";
 
-    // Home button items
-    public static final Image HOME_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/homewhite.png");
+    // Icons
+    public static final Image HOME_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/homeblack.png");
     public static final Image HOME_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/home_gray.png");
-
-    // Notification button items
-    public static final Image NOTIFICATION_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/notification-bell-white.png");
+    public static final Image NOTIFICATION_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/notificationblack.png");
     public static final Image NOTIFICATION_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/notification-bell-gray.png");
-
-    // Discover button items
-    public static final Image DISCOVER_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/compasswhite.png");
-    public static final Image DISCOVER_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/compassgray.png");
-
-    // Mybook button items
-    public static final Image MYBOOK_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/librarywhite.png");
+    public static final Image MYBOOK_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/libraryblack.png");
     public static final Image MYBOOK_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/librarygray.png");
-
-    // Setting button items
-    public static final Image SETTING_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/settingwhite.png");;
-    public static final Image SETTING_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/settinggray.png");;
-
-    // Exit button items
-    public static final Image EXIT_WHITE_ICON = loadImage("/project/libraryclient/Images/Icons/x-button_white.png");
+    public static final Image SETTING_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/settingblack.png");
+    public static final Image SETTING_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/settinggray.png");
+    public static final Image EXIT_BLACK_ICON = loadImage("/project/libraryclient/Images/Icons/xblack.png");
     public static final Image EXIT_GRAY_ICON = loadImage("/project/libraryclient/Images/Icons/x-button.png");
+    public static final Image STAR_BLANK_ICON = loadImage("/project/libraryclient/Images/Icons/star.png");
+    public static final Image STAR_YELLOW_ICON = loadImage("/project/libraryclient/Images/Icons/staryellow.png");
 
-    // Home page link 
+
+    // Page link
     public static final String HOMEPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Home.fxml";
-
-    // Discover page link
-    public static final String DISCOVER_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Discover.fxml";
-
-    // Setting page link
     public static final String SETTING_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Setting.fxml";
-
-    // Notification page link
     public static final String NOTIFICATION_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Notification.fxml";
-
-    // My Book page link
     public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";
-
-    // Search page link
     public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
-// ---------------------------------------------------------------- //
+    public static final String BOOK_READ_LINK = "/project/libraryclient/FXML/ContentPage/BookReading.fxml";
+    public static final String PREVIEW_BOOK_LINK = "/project/libraryclient/FXML/ContentPage/BookPreview.fxml";
+
+
+
+    // ---------------------------------------------------------------- //
 // ------------------------- Card ui link ------------------------- //
 // ---------------------------------------------------------------- //
     // Book card size 235 x 450
-    public static final String CARD_235_450 = "/project/libraryclient/FXML/Card/BookCard_180_450.fxml";
+    public static final String CARD_180_320 = "/project/libraryclient/FXML/Card/BookCard_180_320.fxml";
 
 // ---------------------------------------------------------------- //
 // -------------------------- Scene name -------------------------- //
@@ -70,7 +55,7 @@ public class DATA {
     public static final String SCENE_VERIFY_PAGE = "VerifyController";
 
 
-    // ---------------------------------------------------------------- //
+// ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
     private static Image loadImage(String path) {

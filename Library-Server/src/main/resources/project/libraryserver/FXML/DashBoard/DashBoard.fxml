@@ -87,29 +87,27 @@
                         <Insets />
                     </VBox.margin>
                 </ToggleButton>
-            <ToggleButton fx:id="ExitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ExitButtonMouseClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
-               <graphic>
-                  <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                     <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" />
-                        <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Exit">
-                           <font>
-                              <Font name="Poppins Regular" size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
-               </graphic>
-            </ToggleButton>
+                <ToggleButton fx:id="CloseServerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#CloseButtonClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+                    <graphic>
+                        <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity"
+                              minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
+                            <padding>
+                                <Insets left="15.0"/>
+                            </padding>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1"
+                                       scaleY="1.1"/>
+                            <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0"
+                                  styleClass="button-text" text="Close Server">
+                                <font>
+                                    <Font name="Poppins Regular" size="14.0"/>
+                                </font>
+                            </Text>
+                        </HBox>
+                    </graphic>
+                </ToggleButton>
 
             </VBox>
         </AnchorPane>
-        <BorderPane fx:id="ContentDisplay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" styleClass="back-color">
-         <top>
-         </top>
-        </BorderPane>
+        <BorderPane fx:id="ContentDisplay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1020.0" styleClass="back-color" />
     </HBox>
 </AnchorPane>

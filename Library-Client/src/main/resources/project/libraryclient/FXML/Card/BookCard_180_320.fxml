@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="180.0" styleClass="back-color" stylesheets="@../../Styles/Card/CardStyles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.Card.Card_180_320_Controller">
+   <VBox alignment="TOP_CENTER" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="180.0" spacing="5.0">
+      <ImageView fx:id="BookCover" fitHeight="240.0" fitWidth="178.0" pickOnBounds="true" />
+      <Label fx:id="BookName" prefHeight="40.0" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+      </Label>
+      <Label fx:id="AuthorsName" prefHeight="20.0" wrapText="true">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin></Label>
+   </VBox>
+</AnchorPane>

@@ -1,9 +1,16 @@
 package project.libraryclient.Book;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import project.libraryclient.Consts.DATA;
+import project.libraryclient.Controllers.Card.Card_180_320_Controller;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class Book {
     private String id;
     private String title;
@@ -16,11 +23,21 @@ public class Book {
     private String ISBN_10;
     private Image imagePreview;
     private String webReaderLink;
+    private AnchorPane bookCard;
+    private Card_180_320_Controller controller;
+
+    public Book(String id, String title, ArrayList<String> authors, Image imagePreview) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.imagePreview = imagePreview;
+        LoadDisplayCard();
+    }
 
     public Book(String id, String title, ArrayList<String> authors,
                 String publisher, String published_date, String description,
                 ArrayList<String> categories, String ISBN_13, String ISBN_10,
-                javafx.scene.image.Image image_preview, String web_reader_link) {
+                Image image_preview, String web_reader_link) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -34,13 +51,27 @@ public class Book {
         this.webReaderLink = web_reader_link;
     }
 
-    public Book(String prevId, String prevTitle, ArrayList<String> prevAuthor, Image prevImage) {
-        this.id = prevId;
-        this.title = prevTitle;
-        this.authors = prevAuthor;
-        this.imagePreview = prevImage;
+
+
+    public void LoadDisplayCard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_180_320));
+            bookCard = loader.load();
+            controller = loader.getController();
+            controller.setInfo(this);
+        } catch (IOException e) {
+            System.out.println("Can't load display card");
+            throw new RuntimeException(e);
+        }
     }
 
+    public AnchorPane getBookCard() {
+        return bookCard;
+    }
+
+    public Card_180_320_Controller getController() {
+        return controller;
+    }
 
     public String getId() {
         return id;

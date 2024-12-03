@@ -1,12 +1,11 @@
-package project.libraryserver.API.GoogleBookAPI;
+package project.libraryclient.API.GoogleBookAPI;
 
 import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import project.libraryserver.Book.Book;
-import project.libraryserver.Consts.DATA;
-import project.libraryserver.Consts.SearchType;
+import project.libraryclient.Book.Book;
+import project.libraryclient.Consts.SearchType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,10 +69,6 @@ public class BookAPI {
 
     private static ArrayList<Book> GetListBook(JSONObject json) {
         if (json == null) return new ArrayList<>();
-        if (json.getInt("totalItems") == 0) {
-            System.out.println("No result found");
-            return new ArrayList<>();
-        }
 
         ArrayList<Book> returnList = new ArrayList<>();
 
@@ -93,7 +88,7 @@ public class BookAPI {
             volumeInfo = json.getJSONObject("volumeInfo");
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Can not find volumeInfo");
+            System.out.println("can not find volumeInfo");
         }
 
         return new Book(
@@ -144,7 +139,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load author json array");
+            System.out.println("fail to load author json array");
         }
         return new ArrayList<>();
     }
@@ -156,7 +151,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load publisher");
+            System.out.println("fail to load publisher");
         }
         return "Can't found publisher";
     }
@@ -168,7 +163,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load publish date");
+            System.out.println("fail to load publish date");
         }
         return "Can't found time release";
     }
@@ -180,7 +175,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load description");
+            System.out.println("fail to load description");
         }
         return "Can't found description";
     }
@@ -193,7 +188,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load categories");
+            System.out.println("fail to load categories");
         }
         return new ArrayList<>();
     }
@@ -218,7 +213,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load isbn");
+            System.out.println("fail to load isbn");
         }
         ArrayList<String> returnArray = new ArrayList<>();
         returnArray.add(isbn13);
@@ -240,15 +235,14 @@ public class BookAPI {
                         tempImage = new Image(url.toString());
 
                     } catch (URISyntaxException | MalformedURLException e) {
-                        tempImage = new Image(DATA.noImage);
-                        System.out.println("No image found");
+                        throw new RuntimeException(e);
                     }
                     return tempImage;
                 }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
         }
-        return new Image(DATA.noImage);
+        return null;
     }
 
     public static String getBookWebReadLink(JSONObject accessInfo) {
@@ -258,7 +252,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load description");
+            System.out.println("fail to load description");
         }
         return "Can't found reader link";
     }

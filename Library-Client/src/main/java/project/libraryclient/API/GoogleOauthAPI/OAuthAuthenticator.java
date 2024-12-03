@@ -1,4 +1,4 @@
-package project.libraryclient.API.GoogleAPI;
+package project.libraryclient.API.GoogleOauthAPI;
 
 import org.json.JSONObject;
 import project.libraryclient.Consts.DATA;
@@ -57,12 +57,12 @@ public abstract class OAuthAuthenticator {
                 // Code = 200, phản hổi thành công, đọc token được trả về
                 String response = new BufferedReader(new InputStreamReader(connection.getInputStream()))
                         .lines().collect(Collectors.joining("\n"));
-                System.out.println("Response: " + response);
+                // System.out.println("Response: " + response);
 
                 // Nhận access token được trả về và đổi thành json
                 JSONObject jsonResponse = new JSONObject(response);
                 ACCESS_TOKEN = jsonResponse.getString("access_token");
-                System.out.println("Access Token: " + ACCESS_TOKEN);
+                // System.out.println("Access Token: " + ACCESS_TOKEN);
             } else {
                 // Thông báo lỗi
                 System.out.println("Error getting access token! Response code: " + responseCode);

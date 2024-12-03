@@ -1,6 +1,7 @@
 package project.libraryserver.Database;
 
 import javafx.scene.image.Image;
+import org.json.JSONObject;
 import project.libraryserver.Book.Book;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
@@ -30,6 +31,55 @@ public class MySql {
             instance = new MySql();
         }
         return instance;
+    }
+
+    public ArrayList<String> GetNormalUserBasicInformation(String email) {
+        ArrayList<String> returnList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            "SELECT id, first_name, last_name, email FROM user WHERE email = ?;"
+                    );
+            preparedStatement.setString(1, email);
+
+            // query action
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                returnList.add(rs.getString(1));
+                returnList.add(rs.getString(2));
+                returnList.add(rs.getString(3));
+                returnList.add(rs.getString(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        System.out.println(returnList);
+        return returnList;
+    }
+
+    public ArrayList<String> GetGoogleUserBasicInformation(String email) {
+        ArrayList<String> returnList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            "SELECT id, given_name, family_name, email FROM google WHERE email = ?;"
+                    );
+            preparedStatement.setString(1, email);
+
+            // query action
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                returnList.add(rs.getString(1));
+                returnList.add(rs.getString(2));
+                returnList.add(rs.getString(3));
+                returnList.add(rs.getString(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return returnList;
     }
 
     public boolean CheckNormalLogin(String email, String password) throws SQLException {
@@ -89,26 +139,21 @@ public class MySql {
         }
     }
 
-    public boolean CreateNewNormalUser(
-            String firstName,
-            String lastName,
-            String email,
-            String password) throws SQLException {
+    public boolean CreateNewNormalUser(JSONObject json) throws SQLException {
 
-        if (CheckExistEmailOnNormalUser(email)) {
+        if (CheckExistEmailOnNormalUser(json.getString("email"))) {
             System.out.println("Email already exists");
             return false;
         }
-
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO user(first_name, last_name, email, status) "
                                 + "VALUES(?, ?, ?, ?)"
                 );
-        preparedStatement.setString(1, firstName);
-        preparedStatement.setString(2, lastName);
-        preparedStatement.setString(3, email);
+        preparedStatement.setString(1, json.getString("first_name"));
+        preparedStatement.setString(2, json.getString("last_name"));
+        preparedStatement.setString(3, json.getString("email"));
         preparedStatement.setString(4, "active");
         int status = preparedStatement.executeUpdate();
         if (status == 0) {
@@ -121,7 +166,7 @@ public class MySql {
                         "FROM user " +
                         "WHERE email = ?"
         );
-        preparedStatement.setString(1, email);
+        preparedStatement.setString(1, json.getString("email"));
         ResultSet rs = preparedStatement.executeQuery();
 
         if (rs.next()) {
@@ -131,7 +176,7 @@ public class MySql {
                             "VALUES(?, ?)"
             );
             preparedStatement.setInt(1, user_id);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, json.getString("password"));
             status = preparedStatement.executeUpdate();
             if (status == 0) {
                 System.out.println("Error while inserting password");
@@ -141,16 +186,8 @@ public class MySql {
         return true;
     }
 
-    public boolean CreateNewGoogleUser(
-            String google_id,
-            String given_name,
-            String family_name,
-            String email,
-            String picture) throws SQLException {
-
-        if (CheckExistEmailOnGoogleUser(
-                google_id, given_name, family_name, email, picture
-        )) {
+    public boolean CreateNewGoogleUser(JSONObject json) throws SQLException {
+        if (CheckExistEmailOnGoogleUser(json)) {
             System.out.println("Email already exists");
             return false;
         }
@@ -161,12 +198,11 @@ public class MySql {
                                 + "VALUES(?, ?, ?, ?, ?)"
                 );
 
-        preparedStatement.setString(1, google_id);
-        preparedStatement.setString(2, given_name);
-        preparedStatement.setString(3, family_name);
-        preparedStatement.setString(4, email);
-        preparedStatement.setString(5, picture);
-
+        preparedStatement.setString(1, json.getString("id"));
+        preparedStatement.setString(2, json.getString("given_name"));
+        preparedStatement.setString(3, json.getString("family_name"));
+        preparedStatement.setString(4, json.getString("email"));
+        preparedStatement.setString(5, json.getString("picture_link"));
         int status = preparedStatement.executeUpdate();
         if (status == 0) {
             System.out.println("Error while inserting user");
@@ -175,7 +211,62 @@ public class MySql {
         return true;
     }
 
-    public static boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
+    public boolean CreateUserLinkGoogle(JSONObject json) {
+        JSONObject remake = new JSONObject();
+        remake.put("first_name", json.getString("given_name"));
+        remake.put("last_name", json.getString("family_name"));
+        remake.put("email", json.getString("email"));
+        remake.put("password", json.getString("id"));
+        System.out.println(remake);
+
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            boolean check = CreateNewNormalUser(remake);
+            if (!check) {
+                System.out.println("failed at create link google-user");
+                return false;
+            }
+
+            // get user id
+            preparedStatement = connection.prepareStatement("SELECT id FROM user where email = ?");
+            preparedStatement.setString(1, json.getString("email"));
+            rs = preparedStatement.executeQuery();
+            int userID = 0;
+            if (rs.next()) {
+                userID = rs.getInt(1);
+            } else {
+                System.out.println("Can't found user id");
+                return false;
+            }
+
+            // create link
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO user_link_google(user_id, google_id) VALUES (?,?);");
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setString(2, json.getString("id"));
+            int status = preparedStatement.executeUpdate();
+            if (status == 0) {
+                System.out.println("Error while inserting user");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
+        }
+
+        return true;
+    }
+
+
+    private boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
         String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
         PreparedStatement stmt = connection.prepareStatement(SQL);
         stmt.setString(1, email);
@@ -187,24 +278,18 @@ public class MySql {
         return existed;
     }
 
-    public static boolean CheckExistEmailOnGoogleUser(
-            String google_id,
-            String given_name,
-            String family_name,
-            String email,
-            String picture) throws SQLException {
-
+    private boolean CheckExistEmailOnGoogleUser(JSONObject json) throws SQLException {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT COUNT(*) FROM google "
                                 + "WHERE id = ? AND given_name = ? "
                                 + "AND family_name = ? AND email = ? and picture_link = ?"
                 );
-        preparedStatement.setString(1, google_id);
-        preparedStatement.setString(2, given_name);
-        preparedStatement.setString(3, family_name);
-        preparedStatement.setString(4, email);
-        preparedStatement.setString(5, picture);
+        preparedStatement.setString(1, json.getString("id"));
+        preparedStatement.setString(2, json.getString("given_name"));
+        preparedStatement.setString(3, json.getString("family_name"));
+        preparedStatement.setString(4, json.getString("email"));
+        preparedStatement.setString(5, json.getString("picture_link"));
         ResultSet rs = preparedStatement.executeQuery();
 
         while (rs.next()) {
@@ -528,7 +613,7 @@ public class MySql {
                 }
             }
 
-            // Add new link to 'book_categories`
+            // Add new link to book_categories
             try (PreparedStatement insertBookAuthorStmt = connection.prepareStatement(
                     "INSERT INTO book_categories(category_id, book_id) VALUES(?, ?)")) {
                 insertBookAuthorStmt.setInt(1, categoryId);
@@ -568,11 +653,11 @@ public class MySql {
                             "b.book_id, " +
                             "b.title, " +
                             "group_concat(DISTINCT a.name) as 'author_list' " +
-                        "FROM " +
+                            "FROM " +
                             "books b " +
                             "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
                             "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                        "GROUP BY " +
+                            "GROUP BY " +
                             "b.book_id"
             );
             rs = preparedStatement.executeQuery();
@@ -581,7 +666,7 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        0.0, // rate
+                        0, // rate
                         100 // borrow times
                 ));
             }
@@ -603,26 +688,26 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-            "SELECT " +
-                    "b.book_id, " +
-                    "b.title, " +
-                    "group_concat(DISTINCT a.name) as 'author_list', " +
-                    "b.publisher, " +
-                    "b.published_date, " +
-                    "b.description, " +
-                    "group_concat(DISTINCT c.category) as 'category_list', " +
-                    "b.ISBN_13, " +
-                    "b.ISBN_10, " +
-                    "b.image_preview, " +
-                    "b.web_reader_link " +
-                "FROM " +
-                    "books b " +
-                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                    "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                    "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
-                    "LEFT JOIN categories c ON bc.category_id = c.category_id " +
-                "WHERE b.book_id = ? " +
-                "GROUP BY b.book_id"
+                    "SELECT " +
+                            "b.book_id, " +
+                            "b.title, " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "b.publisher, " +
+                            "b.published_date, " +
+                            "b.description, " +
+                            "group_concat(DISTINCT c.category) as 'category_list', " +
+                            "b.ISBN_13, " +
+                            "b.ISBN_10, " +
+                            "b.image_preview, " +
+                            "b.web_reader_link " +
+                            "FROM " +
+                            "books b " +
+                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                            "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                            "WHERE b.book_id = ? " +
+                            "GROUP BY b.book_id"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();
@@ -668,7 +753,7 @@ public class MySql {
 
     public ArrayList<Book> GetSearchBookList(String query, SearchType option) {
         ArrayList<Book> returnList = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(getPrepareQuery(query, option));
 
@@ -678,7 +763,7 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        0.0,
+                        0,
                         100
                 ));
             }
@@ -688,7 +773,7 @@ public class MySql {
         return returnList;
     }
 
-    private static String getPrepareQuery(String query, SearchType option) {
+    private String getPrepareQuery(String query, SearchType option) {
         String setOption = "";
         switch (option) {
             case INID -> setOption = String.format("WHERE b.book_id LIKE '%%%s%%'", query);
@@ -698,5 +783,32 @@ public class MySql {
         return String.format("SELECT b.book_id, b.title, group_concat(DISTINCT a.name) as 'author_list' " +
                 "FROM books b JOIN book_authors ba ON b.book_id = ba.book_id LEFT JOIN authors a ON ba.author_id = a.author_id " +
                 "%s GROUP BY b.book_id", setOption);
+    }
+
+    public void AddNewRate(JSONObject json) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "insert into rating(user_id, book_id, rate) values (?, ?, ?);");
+            preparedStatement.setInt(1, json.getInt("user_id"));
+            preparedStatement.setString(2, json.getString("book_id"));
+            preparedStatement.setInt(3, json.getInt("rate"));
+
+            int status = preparedStatement.executeUpdate();
+            if (status == 0) {
+                System.out.println("Error while inserting user");
+                throw new RuntimeException("Fail to update rate");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
+        }
     }
 }

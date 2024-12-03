@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
-import project.libraryclient.API.GoogleAPI.GoogleAuthenticator;
+import project.libraryclient.API.GoogleOauthAPI.GoogleAuthenticator;
 import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLException;
 
 public class RegisterController {
     @SuppressWarnings("unused")
@@ -134,7 +133,6 @@ public class RegisterController {
             if (status == UserStatus.REGISTER_SUCCESS) {
                 SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_DASHBOARD);
                 Client.getInstance().SetStatus(UserStatus.LOGGED_IN);
-                SetErrorMessage("Registered successfully! Return to login page");
             } else if (status == UserStatus.REGISTER_FAILED) {
                 SetErrorMessage("Email already exists");
             }
@@ -232,7 +230,7 @@ public class RegisterController {
 
             JSONObject myResponse = new JSONObject(response.toString());
             System.out.println(myResponse);
-            // deliverability nghĩa là mail còn hoạt động và có thể sử dụng bình thường
+            // deliverability nghĩa là mail còn hoạt động và có thể sử dụng
             if (myResponse.getString("deliverability").equals("DELIVERABLE")) {
                 return true;
             } else if (myResponse.getString("deliverability").equals("UNDELIVERABLE")) {
