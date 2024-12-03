@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Consts.Message;
 import project.libraryclient.Consts.UserStatus;
+import project.libraryclient.Database.MySql;
 
 import java.io.*;
 import java.net.Socket;
@@ -85,7 +86,7 @@ public class Client {
             case LOGIN_RESPONSE -> {
                 if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
                     synchronized (this) {
-                        this.userId = json.optString("id", null);
+                        this.userId = json.optString("id", "null");
                         this.userName = json.optString("first_name", "") + " " + json.optString("last_name", "");
                         this.userMail = json.optString("email", null);
                         notifyListeners();

@@ -54,7 +54,7 @@ public class MySql {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        System.out.println(returnList);
+//        System.out.println(returnList);
         return returnList;
     }
 

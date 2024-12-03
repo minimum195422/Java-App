@@ -209,3 +209,21 @@
 2024-12-01 22:55:55 - Action: Change information of book 8uOQD-z5vJYC
 2024-12-01 22:57:35 - Server stating on port 1234
 2024-12-03 13:14:40 - Server stating on port 1234
+2024-12-03 16:27:18 - Client 127.0.0.1 connected.
+2024-12-03 16:29:28 - Client disconnected: 127.0.0.1
+2024-12-03 17:10:40 - Client 127.0.0.1 connected.
+2024-12-03 17:41:35 - Client disconnected: 127.0.0.1
+2024-12-03 17:41:40 - Client 127.0.0.1 connected.
+2024-12-03 17:41:46 - Client disconnected: 127.0.0.1
+2024-12-03 17:42:03 - Client 127.0.0.1 connected.
+2024-12-03 17:42:15 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-03 18:18:48 - Client disconnected: 127.0.0.1
+2024-12-03 18:18:52 - Client 127.0.0.1 connected.
+2024-12-03 18:20:26 - Server stating on port 1234
+2024-12-03 18:20:33 - Client 127.0.0.1 connected.
+2024-12-03 18:20:40 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-03 18:21:41 - Server stating on port 1234
+2024-12-03 18:22:03 - Client 127.0.0.1 connected.
+2024-12-03 18:22:37 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-03 18:27:52 - Server stating on port 1234
+2024-12-03 20:37:05 - Server stating on port 1234

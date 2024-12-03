@@ -3,7 +3,6 @@ package project.libraryclient.Controllers.DashBoard;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -30,7 +29,7 @@ public class SearchController {
         HiddenPane.setVisible(false);
         HiddenPane.setDisable(true);
 
-        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
+//        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         if (SearchList.isEmpty()) {
             Label label = new Label("Can't find any book, please try with another prompt");
@@ -42,7 +41,6 @@ public class SearchController {
             int row = (SearchList.size() + 4) / 5;
 
             Platform.runLater(() -> {
-                List<HBox> hboxList = new ArrayList<>();
                 for (int i = 0; i < row; ++i) {
                     HBox hbox = new HBox();
                     hbox.setSpacing(20);
@@ -64,9 +62,8 @@ public class SearchController {
                             }
                         });
                     }
-                    hboxList.add(hbox);
+                    MainVbox.getChildren().add(hbox);
                 }
-                MainVbox.getChildren().setAll(hboxList);
             });
         }).start();
     }

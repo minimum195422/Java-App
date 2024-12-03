@@ -13,14 +13,20 @@
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" vbarPolicy="NEVER">
         <VBox fx:id="MainVbox" prefHeight="600.0" prefWidth="1000.0">
             <padding>
-                <Insets left="10.0"/>
+                <Insets left="10.0" />
             </padding>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.4" prefWidth="988.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.4" prefWidth="988.0">
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Results">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
                 </Text>
+            <VBox.margin>
+               <Insets bottom="28.0" />
+            </VBox.margin>
             </HBox>
         </VBox>
     </ScrollPane>

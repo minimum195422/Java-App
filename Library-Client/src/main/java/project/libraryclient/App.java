@@ -44,7 +44,7 @@ public class App extends Application {
         VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
 
         // Set popup scene when open app
-        sceneHandler.SetScene(DATA.SCENE_DASHBOARD);
+        sceneHandler.SetScene(DATA.SCENE_LOGIN_PAGE);
 
         stage.initStyle(StageStyle.TRANSPARENT);
 
