@@ -431,13 +431,7 @@ public class DashBoardController implements Initializable {
                             break;
                         }
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.CARD_235_450));
-                            AnchorPane card = loader.load();
-                            Card_235_450_Controller controller = loader.getController();
-                            controller.setBookName(book.getTitle());
-                            controller.setAuthorName(book.getAuthors());
-                            controller.setBookCover(book.getImagePreview());
-                            returnList.add(card);
+                            returnList.add(book.getBookCard());
 //                             Add listener to a book
                             card.setOnMouseClicked(_ -> {
                                 System.out.println(book.getId());
