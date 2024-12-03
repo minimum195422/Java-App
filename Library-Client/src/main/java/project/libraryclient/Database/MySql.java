@@ -101,7 +101,7 @@ public class MySql {
                             "b.title LIKE ? "  +
                             "GROUP BY " +
                             "b.book_id " +
-                            "LIMIT 16"
+                            "LIMIT 15"
             );
             preparedStatement.setString(1, "%" + query + "%");
             rs = preparedStatement.executeQuery();

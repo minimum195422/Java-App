@@ -33,25 +33,24 @@ public class SearchController {
         if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         if (SearchList.isEmpty()) {
-            Label label = new Label("Can't found any book, please try with another prompt");
+            Label label = new Label("Can't find any book, please try with another prompt");
             label.setStyle("-fx-font-size: 24px;");
             MainVbox.getChildren().add(label);
             return;
         }
         new Thread(() -> {
-            int row = (SearchList.size() + 3) / 4;
+            int row = (SearchList.size() + 4) / 5;
 
             Platform.runLater(() -> {
                 List<HBox> hboxList = new ArrayList<>();
                 for (int i = 0; i < row; ++i) {
                     HBox hbox = new HBox();
-                    hbox.setSpacing(75);
-                    hbox.setPadding(new Insets(0, 0, 0, 30));
-                    for (int j = 0; j < 4; ++j) {
-                        if (i * 4 + j >= SearchList.size()) break;
-                        hbox.getChildren().add(SearchList.get(i * 4 + j).getBookCard());
-                        Book book = MySql.getInstance().GetBookById(SearchList.get(i * 4 + j).getId());
-                        SearchList.get(i * 4 + j).getBookCard().setOnMouseClicked(_ -> {
+                    hbox.setSpacing(20);
+                    for (int j = 0; j < 5; ++j) {
+                        if (i * 5 + j >= SearchList.size()) break;
+                        hbox.getChildren().add(SearchList.get(i * 5 + j).getBookCard());
+                        Book book = MySql.getInstance().GetBookById(SearchList.get(i * 5 + j).getId());
+                        SearchList.get(i * 5 + j).getBookCard().setOnMouseClicked(_ -> {
                             HiddenPane.setVisible(true);
                             HiddenPane.setDisable(false);
                             try {
