@@ -74,6 +74,46 @@ public class MySql {
         return returnList;
     }
 
+    public Book QueryForBookCardById(String book_id) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "SELECT " +
+                            "b.book_id, " +
+                            "b.title, " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "b.image_preview " +
+                            "FROM " +
+                            "books b " +
+                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                        "WHERE " +
+                            "b.book_id = ?"
+            );
+            preparedStatement.setString(1, book_id);
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return new Book(
+                        rs.getString(1), // book id
+                        rs.getString(2), // title
+                        new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
+                        GetImageByLink(rs.getString(4)) // cover image
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
+        }
+        return null;
+    }
+
     private Image GetImageByLink(String link) {
         try {
             return new Image(link);
@@ -141,8 +181,7 @@ public class MySql {
                     "group_concat(DISTINCT c.category) as 'category_list', " +
                     "b.ISBN_13, " +
                     "b.ISBN_10, " +
-                    "b.image_preview, " +
-                    "b.web_reader_link " +
+                    "b.image_preview " +
                 "FROM " +
                     "books b " +
                     "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
@@ -170,8 +209,7 @@ public class MySql {
                     new ArrayList<>(Arrays.asList(rs.getString(7).split(","))), // categories
                     rs.getString(8), // ISBN 13
                     rs.getString(9), // ISBN 10
-                    GetImageByLink(rs.getString(10)), // Image preview
-                    rs.getString(11) // web reader link
+                    GetImageByLink(rs.getString(10)) // Image preview
             );
         } catch (SQLException e) {
             e.printStackTrace(System.err);

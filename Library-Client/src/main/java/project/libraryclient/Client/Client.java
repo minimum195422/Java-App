@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Consts.Message;
 import project.libraryclient.Consts.UserStatus;
+import project.libraryclient.Models.JsonFileHandler;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,8 +19,7 @@ public class Client {
     private final BufferedReader in;
     private UserStatus status;
 
-
-    private String userId;
+    private int userId;
     private String userMail;
     private String userName;
 
@@ -85,7 +85,7 @@ public class Client {
             case LOGIN_RESPONSE -> {
                 if (Message.valueOf(json.getString("message")) == Message.SUCCESS) {
                     synchronized (this) {
-                        this.userId = json.optString("id", null);
+                        this.userId = json.optInt("id", -1);
                         this.userName = json.optString("first_name", "") + " " + json.optString("last_name", "");
                         this.userMail = json.optString("email", null);
                         notifyListeners();
@@ -103,6 +103,23 @@ public class Client {
                 }
                 if (Message.valueOf(json.getString("message")) == Message.FAILED) {
                     SetStatus(UserStatus.REGISTER_FAILED);
+                }
+            }
+            case BORROW_BOOK -> {
+                if (json.getInt("user_id") == userId) {
+                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_ACCEPTED) {
+                        JsonFileHandler.getInstance().replaceJsonObject(json);
+                    }
+                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_DECLINED) {
+                        JsonFileHandler.getInstance().removeJsonObject(
+                                json.getInt("user_id"), json.getString("book_id")
+                        );
+                    }
+                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_RECALL) {
+                        JsonFileHandler.getInstance().removeJsonObject(
+                                json.getInt("user_id"), json.getString("book_id")
+                        );
+                    }
                 }
             }
             default -> throw new RuntimeException("Invalid json file");
@@ -126,7 +143,7 @@ public class Client {
         return status;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 

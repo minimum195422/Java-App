@@ -1,15 +1,20 @@
 package project.libraryserver.Server;
 
+import javafx.application.Platform;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.JsonType;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Models.GenerateJson;
+import project.libraryserver.Models.JsonFileHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.file.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,6 +22,7 @@ public class ClientHandler implements Runnable{
     private final Socket clientSocket;
     private final PrintWriter out;
     private final BufferedReader in;
+    private WatchService watchService;
 
     // Constructor
     public ClientHandler(Socket socket) throws IOException {
@@ -27,10 +33,21 @@ public class ClientHandler implements Runnable{
 
         // get the inputstream of client
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+        try {
+            watchService = FileSystems.getDefault().newWatchService();
+            Paths.get(DATA.SERVER_LOG_FILE).getParent().register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+
+            // Tạo một thread để theo dõi sự thay đổi của file log
+            Thread watchThread = new Thread(this::watchBorrowJsonFile);
+            watchThread.setDaemon(true);
+            watchThread.start();
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
     }
 
     public void run() {
-
         try {
             String line;
             while ((line = in.readLine()) != null) {
@@ -89,6 +106,8 @@ public class ClientHandler implements Runnable{
             case NORMAL_REGISTER -> ServerResponseNormalRegister(json);
             case GOOGLE_REGISTER -> ServerResponseGoogleRegister(json);
             case RATING_BOOK -> ServerAddNewRating(json);
+            case BORROW_BOOK -> ServerAddNewBorrowBookRequest(json);
+            case CHANGE_PASSWORD -> ServerChangeUserPassword(json);
             default -> throw new IllegalArgumentException("Unsupported JSON type");
         }
     }
@@ -210,5 +229,56 @@ public class ClientHandler implements Runnable{
 
     private void ServerAddNewRating(JSONObject json) {
         MySql.getInstance().AddNewRate(json);
+    }
+
+
+
+    private void ServerAddNewBorrowBookRequest(JSONObject json) {
+        JsonFileHandler.getInstance().addJsonObject(json);
+    }
+
+    private void watchBorrowJsonFile() {
+        try {
+            while (true) {
+                WatchKey key = watchService.take();
+                for (WatchEvent<?> event : key.pollEvents()) {
+                    if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+                        // Kiểm tra xem file log có thay đổi
+                        if (event.context().toString().equals(
+                                Paths.get(DATA.SERVER_BORROW_JSON_FILE).getFileName().toString())) {
+                            // cật nhật giao diện
+                            Platform.runLater(this::SendBorrowFeedback);
+                        }
+                    }
+                }
+                key.reset();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    private void SendBorrowFeedback() {
+        JSONArray jsonArray = JsonFileHandler.getInstance().readJsonArray();
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            JsonType status = JsonType.valueOf(jsonArray.getJSONObject(i).getString("status"));
+            switch (status) {
+                case BORROW_ACCEPTED -> SendMessage(jsonArray.getJSONObject(i));
+                case BORROW_DECLINED, BORROW_RECALL -> {
+                    SendMessage(jsonArray.getJSONObject(i));
+                    JsonFileHandler.getInstance().removeJsonObject(jsonArray.getJSONObject(i));
+                }
+            }
+        }
+    }
+
+    private void ServerChangeUserPassword(JSONObject json) {
+        boolean check = MySql.getInstance().QueryChangePassword(
+                json.getInt("user_id"), json.getString("new_password"));
+        if (check) {
+            SendMessage(GenerateJson.ResponseChangePasswordSuccess(json.getInt("user_id")));
+        } else {
+            SendMessage(GenerateJson.ResponseChangePasswordFailed(json.getInt("user_id")));
+        }
     }
 }

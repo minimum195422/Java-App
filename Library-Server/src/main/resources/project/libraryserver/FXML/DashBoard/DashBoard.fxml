@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,17 +11,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="680.0" prefWidth="1280.0" stylesheets="@../../Styles/DashBoard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.DashBoardController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="680.0" prefWidth="1280.0" stylesheets="@../../Styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.DashBoard.DashBoardController">
     <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0">
         <AnchorPane prefHeight="680.0" prefWidth="260.0" styleClass="back-color">
             <VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="260.0" spacing="10.0">
-                <ToggleButton fx:id="ServerLogButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ServerLogOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+                <ToggleButton fx:id="ServerLogButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ServerLogOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
                     <graphic>
                         <HBox id="ServerLogButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
                             <padding>
                                 <Insets left="15.0" />
                             </padding>
-                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="0.9" scaleY="0.8">
+                                <Image url="@../../Images/Icons/server.png" />
+                            </ImageView>
                             <Text id="ManageUsersButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Server Log">
                                 <font>
                                     <Font name="Poppins Regular" size="14.0" />
@@ -32,7 +35,7 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </ToggleButton>
-                <ToggleButton fx:id="ManageUsersButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ManageUsersOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+                <ToggleButton fx:id="ManageUsersButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ManageUsersOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
@@ -41,7 +44,9 @@
                             <padding>
                                 <Insets left="15.0" />
                             </padding>
-                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../Images/Icons/group.png" />
+                            </ImageView>
                             <Text id="ManageUsersButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Manage Users">
                                 <font>
                                     <Font name="Poppins Regular" size="14.0" />
@@ -50,14 +55,16 @@
                         </HBox>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton fx:id="ManageDocumentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ManageDocumentOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+                <ToggleButton fx:id="ManageDocumentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#ManageDocumentOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
                     <graphic>
                         <HBox id="ManageDocumentButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
                             <padding>
                                 <Insets left="15.0" />
                             </padding>
-                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" />
-                            <Text id="ManageDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Manage document">
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../Images/Icons/project.png" />
+                            </ImageView>
+                            <Text id="ManageDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Manage Document">
                                 <font>
                                     <Font name="Poppins Regular" size="14.0" />
                                 </font>
@@ -69,14 +76,16 @@
 
                     </VBox.margin>
                 </ToggleButton>
-                <ToggleButton fx:id="AddNewBookButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddNewBookOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+                <ToggleButton fx:id="AddNewBookButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddNewBookOnClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
                     <graphic>
                         <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
                             <padding>
                                 <Insets left="15.0" />
                             </padding>
-                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" />
-                            <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Add new book">
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../Images/Icons/add-post.png" />
+                            </ImageView>
+                            <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Add New Book">
                                 <font>
                                     <Font name="Poppins Regular" size="14.0" />
                                 </font>
@@ -87,19 +96,35 @@
                         <Insets />
                     </VBox.margin>
                 </ToggleButton>
-            <ToggleButton fx:id="CloseServerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#CloseButtonClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button">
+            <ToggleButton fx:id="BookBorrowManage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#BookBorrowManageClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
                <graphic>
-                   <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity"
-                         minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
+                   <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
                        <padding>
-                           <Insets left="15.0"/>
+                           <Insets left="15.0" />
                        </padding>
-                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1"
-                                  scaleY="1.1"/>
-                       <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0"
-                             styleClass="button-text" text="Close Server">
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../Images/Icons/books.png" />
+                       </ImageView>
+                       <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Book Borrow Manage">
                           <font>
-                              <Font name="Poppins Regular" size="14.0"/>
+                              <Font name="Poppins Regular" size="14.0" />
+                          </font>
+                       </Text>
+                   </HBox>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton fx:id="CloseServerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#CloseButtonClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
+               <graphic>
+                   <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
+                       <padding>
+                           <Insets left="15.0" />
+                       </padding>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                           <Image url="@../../Images/Icons/xblack.png" />
+                       </ImageView>
+                       <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Close Server">
+                          <font>
+                              <Font name="Poppins Regular" size="14.0" />
                           </font>
                        </Text>
                    </HBox>

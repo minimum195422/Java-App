@@ -258,15 +258,16 @@ public class DashBoardController implements Initializable {
     // -------------------- initialize -------------------- //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        try {
-//            Client.getInstance().addListener((_, name, mail) ->
-//                Platform.runLater(() -> {
-//                    DisplayUserName.setText(name);
-//                    DisplayUserMail.setText(mail);
-//            }));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Client.getInstance().addListener((_, name, mail) ->
+                Platform.runLater(() -> {
+                    DisplayUserName.setText(name);
+                    DisplayUserMail.setText(mail);
+            }));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         setDefault();
     }
@@ -322,7 +323,7 @@ public class DashBoardController implements Initializable {
 
     private void LoadSettingPage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
+            AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.SETTING_PAGE_LINK)));
             ContentDisplay.setCenter(pane);
@@ -333,7 +334,7 @@ public class DashBoardController implements Initializable {
 
     private void LoadMyBookPage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
+            AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.MYBOOK_PAGE_LINK)));
             ContentDisplay.setCenter(pane);

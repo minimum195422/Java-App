@@ -17,7 +17,6 @@ import java.util.Arrays;
 public class BookAPI {
 
     public static ArrayList<Book> SearchBook(String query, ArrayList<SearchType> types) throws URISyntaxException, IOException {
-
         if (query.isEmpty()) return new ArrayList<>();
         query = query.trim().replaceAll("\\s+", "+");
         JSONObject json;
@@ -45,13 +44,18 @@ public class BookAPI {
         URI uri = new URI(String.format("https://www.googleapis.com/books/v1/volumes?q=%s%s", query, types));
         URL url = uri.toURL();
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // set request to "GET"
         connection.setRequestMethod("GET");
+
+        // receive response
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
             System.out.println("Can not connect to google book api");
             return null;
         }
 
+        // open read file
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(connection.getInputStream())
         );
@@ -62,6 +66,7 @@ public class BookAPI {
             response.append(inputLine);
             // System.out.println(inputLine);
         }
+
         in.close();
 
         return new JSONObject(response.toString());

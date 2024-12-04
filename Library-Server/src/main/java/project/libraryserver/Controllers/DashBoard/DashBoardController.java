@@ -6,8 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
 
 import java.io.IOException;
@@ -22,21 +25,17 @@ public class DashBoardController implements Initializable {
     @FXML
     public BorderPane ContentDisplay;
 
-    // Close Server
     @FXML
-    public ToggleButton CloseServerButton;
+    public ToggleButton CloseServerButton, BookBorrowManage,
+            ServerLogButton , AddNewBookButton,
+            ManageUsersButton, ManageDocumentButton;
 
+    // Close Server
     public void CloseButtonClicked() {
         System.exit(0);
     }
 
-
-
     // Server Log
-    @FXML
-    public ToggleButton ServerLogButton;
-
-
     public void ServerLogOnClicked() {
         try {
             ScrollPane pane = FXMLLoader.load(
@@ -51,9 +50,6 @@ public class DashBoardController implements Initializable {
 
 
     // Add New Book
-    @FXML
-    public ToggleButton AddNewBookButton;
-
     public void AddNewBookOnClicked() {
         try {
             AnchorPane pane = FXMLLoader.load(
@@ -68,8 +64,6 @@ public class DashBoardController implements Initializable {
 
 
     // Manage User
-    @FXML
-    public ToggleButton ManageUsersButton;
 
     public void ManageUsersOnClicked() {
         try {
@@ -85,14 +79,25 @@ public class DashBoardController implements Initializable {
 
 
     // Manage Document
-    @FXML
-    public ToggleButton ManageDocumentButton;
-
     public void ManageDocumentOnClicked() {
         try {
             AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.MANAGE_DOCUMENT_LINK))
+            );
+            ContentDisplay.setCenter(pane);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+
+    // Book Borrow Manage
+    public void BookBorrowManageClicked() {
+        try {
+            AnchorPane pane = FXMLLoader.load(
+                    Objects.requireNonNull(
+                            getClass().getResource(DATA.BOOK_BORROW_MANAGE_LINK))
             );
             ContentDisplay.setCenter(pane);
         } catch (IOException e) {
@@ -108,7 +113,7 @@ public class DashBoardController implements Initializable {
         ManageUsersButton.setToggleGroup(function_button_toggle_group);
         ManageDocumentButton.setToggleGroup(function_button_toggle_group);
         CloseServerButton.setToggleGroup(function_button_toggle_group);
-
+        BookBorrowManage.setToggleGroup(function_button_toggle_group);
 
         function_button_toggle_group.selectedToggleProperty().addListener(
             (_, oldToggle, newToggle) -> {

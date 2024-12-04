@@ -18,6 +18,7 @@ module project.libraryclient {
     requires java.sql;
     requires javafx.media;
     requires java.desktop;
+    requires commons.logging;
 
     opens project.libraryclient to javafx.fxml;
     opens project.libraryclient.Controllers to javafx.fxml;
