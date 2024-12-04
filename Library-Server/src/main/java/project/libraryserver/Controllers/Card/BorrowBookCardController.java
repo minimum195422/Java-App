@@ -58,6 +58,7 @@ public class BorrowBookCardController {
                 localJson.getInt("user_id"),
                 localJson.getString("book_id"),
                 MySql.getInstance().QueryGetReadLinkByBookId(localJson.getString("book_id"))));
+        MySql.getInstance().IncreaseBorrowTimes(DisplayBookId.getText());
     }
 
     public void DeclinedButtonClicked() {

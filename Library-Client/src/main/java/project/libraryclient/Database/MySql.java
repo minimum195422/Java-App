@@ -257,7 +257,7 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "select count(book_id) from borrow where book_id = ?;"
+                    "select times from borrow where book_id = ?;"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();

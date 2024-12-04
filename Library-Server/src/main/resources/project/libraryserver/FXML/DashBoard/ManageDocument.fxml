@@ -80,7 +80,7 @@
                 </font>
             </Label>
             <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" style="-fx-background-color: black;" />
-            <Label prefWidth="50.0" text="Rate">
+            <Label prefWidth="50.0" text="Rating">
                 <font>
                     <Font size="14.0" />
                 </font>

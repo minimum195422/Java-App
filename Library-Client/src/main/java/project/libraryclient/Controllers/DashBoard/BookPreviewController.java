@@ -115,7 +115,7 @@ public class BookPreviewController {
     }
 
     public void RateButtonClicked() throws IOException {
-        System.out.println(Client.getInstance().getUserId());
+//        System.out.println(Client.getInstance().getUserId());
         boolean confirmed = ConfirmDialog.show(
                 "Confirm action",
                 "Rate this book!"

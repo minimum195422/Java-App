@@ -135,7 +135,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_Button_Clicked" prefHeight="30.0" prefWidth="240.0" text="Logging in" textAlignment="CENTER">
+            <Button fx:id="LoginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Login_Button_Clicked" prefHeight="30.0" prefWidth="240.0" text="Login" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

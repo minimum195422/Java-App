@@ -652,11 +652,15 @@ public class MySql {
                     "SELECT " +
                             "b.book_id, " +
                             "b.title, " +
-                            "group_concat(DISTINCT a.name) as 'author_list' " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "AVG(r.rate) as rating, " +
+                            "times " +
                             "FROM " +
                             "books b " +
                             "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
                             "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "LEFT JOIN rating r ON r.book_id = b.book_id " +
+                            "LEFT JOIN borrow br ON b.book_id = br.book_id " +
                             "GROUP BY " +
                             "b.book_id"
             );
@@ -666,8 +670,8 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        0, // rate
-                        100 // borrow times
+                        rs.getDouble(4), // rating
+                        rs.getInt(5) // borrow times
                 ));
             }
         } catch (SQLException e) {
@@ -856,5 +860,66 @@ public class MySql {
         }
 
         return true;
+    }
+
+    public void IncreaseBorrowTimes(String book_id) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs;
+        int result;
+        try {
+            preparedStatement = connection.prepareStatement(
+                "SELECT COUNT(*) FROM borrow WHERE book_id = ?"
+            );
+            preparedStatement.setString(1, book_id);
+            rs = preparedStatement.executeQuery();
+            if (!rs.next()) {
+                throw new RuntimeException("Error while checking if a book existed in borrow table");
+            }
+            int existed = rs.getInt(1);
+            if (existed == 0) { // This book haven't been borrowed yet
+                preparedStatement.close();
+                preparedStatement = connection.prepareStatement(
+                        "INSERT INTO borrow(book_id, times) VALUES(?, 1)"
+                );
+                result = preparedStatement.executeUpdate();
+                if (result == 0) {
+                    throw new RuntimeException("Error while adding a new book into borrow table");
+                }
+                preparedStatement.close();
+                return;
+            }
+//            This book have been borrowed at least once
+            preparedStatement.close();
+            preparedStatement = connection.prepareStatement(
+                    "SELECT times FROM borrow WHERE book_id = ?"
+            );
+            preparedStatement.setString(1, book_id);
+            rs = preparedStatement.executeQuery();
+            if (!rs.next()) {
+                throw new RuntimeException("Error while getting borrow times");
+            }
+            int times = rs.getInt(1);
+            preparedStatement.close();
+            preparedStatement = connection.prepareStatement(
+                    "UPDATE borrow " +
+                            "SET times = ? " +
+                            "WHERE book_id = ?"
+            );
+            preparedStatement.setInt(1, times + 1);
+            preparedStatement.setString(2, book_id);
+            result = preparedStatement.executeUpdate();
+            if (result == 0) {
+                throw new RuntimeException("Error while updating book's data in borrow table");
+            }
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println("Error while increasing borrow times");
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                System.out.println("Error while closing prepareStatement");
+            }
+        }
     }
 }

@@ -103,8 +103,8 @@ public class Book {
                     id,
                     title,
                     String.join(", ", authors),
-                    "0.0",
-                    "100"
+                    String.valueOf((double) Math.round(rating * 10) / 10),
+                    String.valueOf(borrowed_time)
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
