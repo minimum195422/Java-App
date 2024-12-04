@@ -3,6 +3,7 @@ package project.libraryclient.Controllers.DashBoard;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +45,7 @@ public class SearchController {
                 for (int i = 0; i < row; ++i) {
                     HBox hbox = new HBox();
                     hbox.setSpacing(20);
+                    hbox.setPadding(new Insets(0, 0, 20, 0));
                     for (int j = 0; j < 5; ++j) {
                         if (i * 5 + j >= SearchList.size()) break;
                         hbox.getChildren().add(SearchList.get(i * 5 + j).getBookCard());

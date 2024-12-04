@@ -81,3 +81,31 @@
 2024-12-05 00:42:03 - Client disconnected: 127.0.0.1
 2024-12-05 00:42:07 - Client 127.0.0.1 connected.
 2024-12-05 00:42:15 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 00:44:35 - Action: Add new book EMqVEAAAQBAJ to database.
+2024-12-05 00:44:40 - Action: Add new book 5axuDwAAQBAJ to database.
+2024-12-05 00:44:43 - Action: Add new book 24HaEAAAQBAJ to database.
+2024-12-05 00:44:51 - Action: Add new book IHEaywEACAAJ to database.
+2024-12-05 00:44:55 - Action: Add new book o24VEQAAQBAJ to database.
+2024-12-05 00:44:57 - Action: Add new book x68OEQAAQBAJ to database.
+2024-12-05 00:45:11 - Action: Add new book erqeEAAAQBAJ to database.
+2024-12-05 00:45:44 - Action: Add new book uLhA8GL57FMC to database.
+2024-12-05 00:45:48 - Action: Add new book N1gsEAAAQBAJ to database.
+2024-12-05 00:46:26 - Action: Add new book r2j1EAAAQBAJ to database.
+2024-12-05 00:46:28 - Book already exists in the database.
+2024-12-05 00:46:31 - Action: Add new book u8Jh0AEACAAJ to database.
+2024-12-05 00:47:22 - Server stating on port 1234
+2024-12-05 00:48:24 - Client 127.0.0.1 connected.
+2024-12-05 00:48:36 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 00:50:33 - Client disconnected: 127.0.0.1
+2024-12-05 00:50:38 - Client 127.0.0.1 connected.
+2024-12-05 00:50:52 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 01:03:02 - Client disconnected: 127.0.0.1
+2024-12-05 01:03:04 - Client 127.0.0.1 connected.
+2024-12-05 01:03:16 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 01:03:50 - Client disconnected: 127.0.0.1
+2024-12-05 01:03:54 - Client 127.0.0.1 connected.
+2024-12-05 01:04:03 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 01:07:09 - Client disconnected: 127.0.0.1
+2024-12-05 01:07:12 - Client 127.0.0.1 connected.
+2024-12-05 01:07:24 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 01:07:41 - Client disconnected: 127.0.0.1

@@ -29,7 +29,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException{
 
-        // start cl ient - trong client đã chạy trên thread riêng
+        // start client - trong client đã chạy trên thread riêng
         client = Client.getInstance();
 
         // Kết nối database trên một thread riêng

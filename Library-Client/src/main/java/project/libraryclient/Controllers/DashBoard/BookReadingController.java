@@ -15,6 +15,6 @@ public class BookReadingController {
 
     public void CloseButtonClicked() {
         readingPane.getParent().setVisible(false);
-//        readingPane.getParent().setDisable(true);
+        readingPane.getParent().setDisable(true);
     }
 }
