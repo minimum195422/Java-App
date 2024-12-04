@@ -12,5 +12,12 @@
         "type": "BORROW_BOOK",
         "url": "http://play.google.com/books/reader?id=0ud-EAAAQBAJ&hl=&source=gbs_api",
         "status": "BORROW_ACCEPTED"
+    },
+    {
+        "user_id": 17,
+        "book_id": "CDBoAAAAcAAJ",
+        "type": "BORROW_BOOK",
+        "url": "http://play.google.com/books/reader?id=CDBoAAAAcAAJ&hl=&source=gbs_api",
+        "status": "BORROW_ACCEPTED"
     }
 ]

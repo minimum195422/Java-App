@@ -78,3 +78,6 @@
 2024-12-05 00:34:03 - Server stating on port 1234
 2024-12-05 00:34:28 - Client 127.0.0.1 connected.
 2024-12-05 00:34:41 - Server accept user [howosu@gmail.com,type:normal] to logging in application.
+2024-12-05 00:42:03 - Client disconnected: 127.0.0.1
+2024-12-05 00:42:07 - Client 127.0.0.1 connected.
+2024-12-05 00:42:15 - Server accept user [howosu@gmail.com,type:normal] to logging in application.

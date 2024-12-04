@@ -140,7 +140,8 @@ public class MySql {
                 "WHERE " +
                     "b.title LIKE ? "  +
                 "GROUP BY " +
-                    "b.book_id "
+                    "b.book_id " +
+                "LIMIT 15"
             );
             preparedStatement.setString(1, "%" + query + "%");
             rs = preparedStatement.executeQuery();
