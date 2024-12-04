@@ -224,7 +224,7 @@ public class MySql {
         try {
             boolean check = CreateNewNormalUser(remake);
             if (!check) {
-                System.out.println("failed at create link google-user");
+                System.out.println("Failed at create link google-user");
                 return false;
             }
 

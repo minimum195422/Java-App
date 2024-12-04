@@ -1,1 +1,22 @@
-==== New Log File Created ====
+==== New Log File Created ====2024-12-04 20:05:27 - Server stating on port 1234
+2024-12-04 20:06:59 - Server stating on port 1234
+2024-12-04 20:07:04 - Client 127.0.0.1 connected.
+2024-12-04 20:07:15 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-04 20:12:57 - Client disconnected: 127.0.0.1
+2024-12-04 20:13:00 - Client 127.0.0.1 connected.
+2024-12-04 20:13:22 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-04 20:32:49 - Server stating on port 1234
+2024-12-04 20:33:07 - Server stating on port 1234
+2024-12-04 20:34:26 - Server stating on port 1234
+2024-12-04 20:35:08 - Server stating on port 1234
+2024-12-04 20:35:32 - Client 127.0.0.1 connected.
+2024-12-04 20:35:41 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-04 20:36:38 - Server stating on port 1234
+2024-12-04 20:37:18 - Client 127.0.0.1 connected.
+2024-12-04 20:37:25 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-04 20:39:26 - Server stating on port 1234
+2024-12-04 20:43:07 - Client 127.0.0.1 connected.
+2024-12-04 20:43:15 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.
+2024-12-04 21:15:37 - Client disconnected: 127.0.0.1
+2024-12-04 21:15:39 - Client 127.0.0.1 connected.
+2024-12-04 21:15:49 - Server accept user [Kawaii@gmail.com,type:normal] to logging in application.

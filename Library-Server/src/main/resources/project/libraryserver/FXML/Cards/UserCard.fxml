@@ -14,7 +14,7 @@
       <Line endY="15.0" />
         <Label fx:id="UserId" prefWidth="50.0" text="UserId" />
       <Line endY="15.0" />
-        <Label fx:id="Name" prefWidth="180.0" text="UserName" />
+        <Label fx:id="Name" prefWidth="180.0" text="Username" />
       <Line endY="15.0" />
         <Label fx:id="Email" prefWidth="150.0" text="Email" />
       <padding>

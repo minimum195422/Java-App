@@ -48,7 +48,7 @@ public class MyBookController implements Initializable {
         LoadBookList();
 
         if (myListBook.isEmpty()) {
-            Label label = new Label("You have not borrowed any book");
+            Label label = new Label("You haven't borrowed any book");
             label.setStyle("-fx-font-size: 20px;");
             MainVbox.getChildren().add(label);
             return;
@@ -67,7 +67,7 @@ public class MyBookController implements Initializable {
                     AnchorPane pane = loader.load();
                     BookPreviewController controller = loader.getController();
                     Book fullBook = MySql.getInstance().GetBookById(book.getId());
-                    controller.setInfor(fullBook);
+                    controller.setInfo(fullBook);
                     HiddenPane.setCenter(pane);
                 } catch (IOException e) {
                     e.printStackTrace(System.out);

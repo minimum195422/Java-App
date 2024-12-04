@@ -2,7 +2,6 @@ package project.libraryserver.Consts;
 
 import javafx.scene.image.Image;
 
-import java.net.URI;
 import java.util.Objects;
 
 public class DATA {
@@ -19,7 +18,7 @@ public class DATA {
     public static final String BOOK_DISPLAY_CARD_600_200_LINK = "/project/libraryserver/FXML/Cards/BookCard_600_200.fxml";
     public static final String BOOK_DISPLAY_CARD_1020_50_LINK = "/project/libraryserver/FXML/Cards/BookCard_1020_50.fxml";
     public static final String VIEW_DOCUMENT_LINK = "/project/libraryserver/FXML/DashBoard/ViewDocument.fxml";
-    public static final String BOOK_BORROW_MANAGE_LINK = "/project/libraryserver/FXML/DashBoard/BorrowManage.fxml";
+    public static final String BOOK_BORROW_MANAGE_LINK = "/project/libraryserver/FXML/DashBoard/BorrowManagement.fxml";
     public static final String BORROW_BOOK_CARD = "/project/libraryserver/FXML/Cards/BorrowBookCard.fxml";
 
 

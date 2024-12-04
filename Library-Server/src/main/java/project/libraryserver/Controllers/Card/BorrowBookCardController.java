@@ -22,7 +22,7 @@ public class BorrowBookCardController {
 
     private JSONObject localJson;
 
-    public void setInfor(JSONObject json) {
+    public void setInfo(JSONObject json) {
         this.localJson = json;
 
         DisplayUserId.setText("" + localJson.getInt("user_id"));
