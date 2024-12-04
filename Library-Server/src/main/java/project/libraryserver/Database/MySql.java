@@ -881,6 +881,7 @@ public class MySql {
                 preparedStatement = connection.prepareStatement(
                         "INSERT INTO borrow(book_id, times) VALUES(?, 1)"
                 );
+                preparedStatement.setString(1, book_id);
                 result = preparedStatement.executeUpdate();
                 if (result == 0) {
                     throw new RuntimeException("Error while adding a new book into borrow table");

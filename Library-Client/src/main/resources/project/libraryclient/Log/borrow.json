@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "user_id": 17,
+        "book_id": "00cVEQAAQBAJ",
+        "type": "BORROW_BOOK",
+        "url": "http://play.google.com/books/reader?id=00cVEQAAQBAJ&hl=&source=gbs_api",
+        "status": "BORROW_ACCEPTED"
+    },
+    {
+        "user_id": 17,
+        "book_id": "0ud-EAAAQBAJ",
+        "type": "BORROW_BOOK",
+        "url": "http://play.google.com/books/reader?id=0ud-EAAAQBAJ&hl=&source=gbs_api",
+        "status": "BORROW_ACCEPTED"
+    }
+]
