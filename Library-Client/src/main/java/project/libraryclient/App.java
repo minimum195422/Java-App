@@ -7,6 +7,7 @@ import javafx.stage.StageStyle;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
+import project.libraryclient.Models.NotificationHandler;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
@@ -27,8 +28,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
+
         // start client - trong client đã chạy trên thread riêng
-//        client = Client.getInstance();
+        client = Client.getInstance();
 
         // Kết nối database trên một thread riêng
         new Thread(() -> mysql = MySql.getInstance()).start();

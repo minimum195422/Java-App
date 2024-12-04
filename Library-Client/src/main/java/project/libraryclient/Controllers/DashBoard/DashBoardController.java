@@ -282,11 +282,11 @@ public class DashBoardController implements Initializable {
 
         // Set button group always have one in used
         function_button_toggle_group.selectedToggleProperty().addListener(
-                (_, oldToggle, newToggle) -> {
-                    if (newToggle == null) {
-                        function_button_toggle_group.selectToggle(oldToggle);
-                    }
-                });
+            (_, oldToggle, newToggle) -> {
+                if (newToggle == null) {
+                    function_button_toggle_group.selectToggle(oldToggle);
+                }
+        });
         // Tooltip
         Tooltip version = new Tooltip(DATA.APP_VERSION);
         Tooltip.install(VersionInformationIcon, version);
@@ -322,7 +322,7 @@ public class DashBoardController implements Initializable {
 
     private void LoadSettingPage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
+            AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.SETTING_PAGE_LINK)));
             ContentDisplay.setCenter(pane);
@@ -333,7 +333,7 @@ public class DashBoardController implements Initializable {
 
     private void LoadMyBookPage() {
         try {
-            ScrollPane pane = FXMLLoader.load(
+            AnchorPane pane = FXMLLoader.load(
                     Objects.requireNonNull(
                             getClass().getResource(DATA.MYBOOK_PAGE_LINK)));
             ContentDisplay.setCenter(pane);

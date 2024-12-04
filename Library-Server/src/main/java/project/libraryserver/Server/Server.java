@@ -15,7 +15,6 @@ public class Server {
         this.running = true;
     }
 
-    // Phương thức singleton để lấy instance của Server
     public static synchronized Server getInstance() throws IOException {
         if (instance == null) {
             instance = new Server();

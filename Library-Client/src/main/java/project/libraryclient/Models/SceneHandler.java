@@ -22,7 +22,7 @@ public class SceneHandler {
 
     private final HashMap<String, Scene> scenes = new HashMap<>();
 
-    public SceneHandler(Class<?> app, Stage stage) {
+    private SceneHandler(Class<?> app, Stage stage) {
         MainStage = stage;
         MainApp = app;
     }

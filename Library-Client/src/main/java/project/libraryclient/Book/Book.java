@@ -22,7 +22,6 @@ public class Book {
     private String ISBN_13;
     private String ISBN_10;
     private Image imagePreview;
-    private String webReaderLink;
     private AnchorPane bookCard;
     private Card_180_320_Controller controller;
 
@@ -37,7 +36,7 @@ public class Book {
     public Book(String id, String title, ArrayList<String> authors,
                 String publisher, String published_date, String description,
                 ArrayList<String> categories, String ISBN_13, String ISBN_10,
-                Image image_preview, String web_reader_link) {
+                Image image_preview) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -48,7 +47,6 @@ public class Book {
         this.ISBN_13 = ISBN_13;
         this.ISBN_10 = ISBN_10;
         this.imagePreview = image_preview;
-        this.webReaderLink = web_reader_link;
     }
 
 
@@ -110,27 +108,22 @@ public class Book {
         return imagePreview;
     }
 
-    public String getWebReaderLink() {
-        return webReaderLink;
-    }
-
     public ArrayList<String> getCategories() {
         return categories;
     }
 
     public String toString() {
         return "Book{" +
-                "id=<" + id + ">\n" +
-                "title=<" + title + ">\n" +
-                "author=<" + authors + ">\n" +
-                "publisher=<" + publisher + ">\n" +
-                "publishedDate=<" + publishedDate + ">\n" +
-                "description=<" + description + ">\n" +
-                "categories=<" + categories + ">\n" +
-                "ISBN_13=<" + ISBN_13 + ">\n" +
-                "ISBN_10=<" + ISBN_10 + ">\n" +
-                "imagePreview=<" + imagePreview + ">\n" +
-                "webReaderLink=<" + webReaderLink + ">\n" +
+                "id=" + id + "\n" +
+                "title=" + title + "\n" +
+                "author=" + authors + "\n" +
+                "publisher=" + publisher + "\n" +
+                "publishedDate=" + publishedDate + "\n" +
+                "description=" + description + "\n" +
+                "categories=" + categories + "\n" +
+                "ISBN_13=" + ISBN_13 + "\n" +
+                "ISBN_10=" + ISBN_10 + "\n" +
+                "imagePreview=" + imagePreview + "\n" +
                 '}';
     }
 }

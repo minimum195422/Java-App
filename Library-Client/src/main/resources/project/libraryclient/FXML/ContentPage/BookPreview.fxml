@@ -25,10 +25,11 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <ImageView fx:id="BookCover" fitHeight="450.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
-         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-            <Button fx:id="LikeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Like" />
-            <Button fx:id="BorrowButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Borrow" />
+         <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="300.0" spacing="20.0">
+            <Button fx:id="ReadButton" mnemonicParsing="false" onMouseClicked="#ReadButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Read" />
+            <Button fx:id="BorrowButton" mnemonicParsing="false" onMouseClicked="#BorrowButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Borrow" />
          </HBox>
+         <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="300.0" spacing="20.0" />
       </VBox>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="680.0" vbarPolicy="NEVER">
          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="680.0" spacing="10.0" styleClass="back-color">

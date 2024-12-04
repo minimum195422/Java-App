@@ -810,4 +810,51 @@ public class MySql {
             }
         }
     }
+
+    public String QueryGetReadLinkByBookId(String bookId) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "SELECT web_reader_link FROM books WHERE book_id = ? "
+            );
+            preparedStatement.setString(1, bookId);
+            rs = preparedStatement.executeQuery();
+
+            if (!rs.next()) {
+                System.err.println("No book found with ID: " + bookId);
+                return null;
+            }
+
+            return rs.getString(1);
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            return null;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace(System.err);
+            }
+        }
+    }
+
+    public boolean QueryChangePassword(int user_id, String password) {
+        // change password
+        try (PreparedStatement updateBookStmt = connection.prepareStatement(
+                "UPDATE passwords SET password = ? WHERE user_id = ?")) {
+            updateBookStmt.setString(1, password);
+            updateBookStmt.setInt(2, user_id);
+            int check = updateBookStmt.executeUpdate();
+            if (check == 0) {
+                ServerLog.getInstance().writeLog("Can't change user password");
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
+    }
 }

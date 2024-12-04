@@ -1,16 +1,24 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import project.libraryclient.Book.Book;
 import project.libraryclient.Client.Client;
 import project.libraryclient.ConfirmDialog.ConfirmDialog;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Database.MySql;
 import project.libraryclient.Models.GenerateJson;
+import project.libraryclient.Models.JsonFileHandler;
 
 import java.io.IOException;
 
@@ -19,7 +27,7 @@ public class BookPreviewController {
     public AnchorPane MainPane;
 
     @FXML
-    public Button ReturnButton, LikeButton, BorrowButton;
+    public Button ReturnButton, ReadButton, BorrowButton;
 
     @FXML
     public ImageView BookCover;
@@ -29,8 +37,6 @@ public class BookPreviewController {
         DisplayAuthors, DisplayCategory, DisplayDescription,
         DisplayISBN10, DisplayISBN13;
 
-//    @FXML
-//    public Button ReadBookButton;
 
     @FXML
     public ImageView Rate1Star, Rate2Star, Rate3Star, Rate4Star, Rate5Star;
@@ -109,6 +115,7 @@ public class BookPreviewController {
     }
 
     public void RateButtonClicked() throws IOException {
+        System.out.println(Client.getInstance().getUserId());
         boolean confirmed = ConfirmDialog.show(
                 "Confirm action",
                 "Rate this book!"
@@ -125,25 +132,72 @@ public class BookPreviewController {
 
         Client.getInstance().SendMessage(
                 GenerateJson.CreateRatingRequest(
-                        Client.getInstance().getUserId(), SelectedBook.getId(), rate));
+                        Client.getInstance().getUserId()
+                        , SelectedBook.getId(), rate));
     }
 
-//    public void ReadButtonClicked() {
-//        boolean confirmed = ConfirmDialog.show(
-//                "Confirm action",
-//                "You will read this book in another window!"
-//        );
-//        if (!confirmed) return;
-//        Stage webViewStage = new Stage();
-//        webViewStage.setTitle("WebView Window");
-//        WebView webView = new WebView();
-//        webView.getEngine().executeScript("document.body.style.zoom = '80%'");
-//        webView.getEngine().setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
-//        webView.getEngine().load(SelectedBook.getWebReaderLink());
-//        StackPane webViewRoot = new StackPane(webView);
-//        Scene webViewScene = new Scene(webViewRoot, 800, 600);
-//        webViewStage.setResizable(true);
-//        webViewStage.setScene(webViewScene);
-//        webViewStage.show();
-//    }
+    public void BorrowButtonClicked() throws IOException {
+        boolean confirmed = ConfirmDialog.show(
+                "You want to borrow this book",
+                "Send request now"
+        );
+        if (!confirmed) return;
+
+        JSONObject json = GenerateJson.CreateBorrowBookRequest(
+                Client.getInstance().getUserId(),
+                SelectedBook.getId()
+        );
+
+        if (JsonFileHandler.getInstance().IsDuplicateJsonObject(json)) {
+            ConfirmDialog.show("Duplicate borrow book request",
+                    "You have sent borrow request for this book");
+            return;
+        }
+
+        Client.getInstance().SendMessage(json);
+
+        JsonFileHandler.getInstance().addJsonObject(json);
+
+        ConfirmDialog.show(
+                "Sent request success",
+                "Check your book at 'My Book'"
+        );
+    }
+
+    public void ReadButtonClicked() throws IOException {
+        boolean confirmed = ConfirmDialog.show(
+                "Confirm action",
+                "You will read this book in another window!"
+        );
+        if (!confirmed) return;
+
+        JSONObject json = JsonFileHandler.getInstance().getJsonBy(
+                Client.getInstance().getUserId(), SelectedBook.getId());
+
+        if (json == null) {
+            ConfirmDialog.show(
+                    "You haven't borrow this book yet",
+                    "Send borrow request to get the book"
+            );
+            return;
+        }
+        JsonType status = JsonType.valueOf(json.getString("status"));
+        switch (status) {
+            case PENDING -> ConfirmDialog.show("This book haven't accept yet",
+                    "Please choose another book");
+            case BORROW_ACCEPTED -> {
+                Stage webViewStage = new Stage();
+                webViewStage.setTitle("WebView Window");
+                WebView webView = new WebView();
+                webView.getEngine().executeScript("document.body.style.zoom = '80%'");
+                webView.getEngine().setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+                webView.getEngine().load(json.getString("url"));
+                StackPane webViewRoot = new StackPane(webView);
+                Scene webViewScene = new Scene(webViewRoot, 800, 600);
+                webViewStage.setResizable(true);
+                webViewStage.setScene(webViewScene);
+                webViewStage.show();
+            }
+        }
+    }
 }

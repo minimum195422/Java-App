@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="50.0" prefWidth="1020.0" stylesheets="@../../Styles/Card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.BookCard_1020_50">
+<AnchorPane prefHeight="50.0" prefWidth="1020.0" stylesheets="@../../Styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.BookCard_1020_50">
    <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1020.0" spacing="5.0">
       <padding>
          <Insets left="10.0" />
@@ -43,11 +43,11 @@
          </font>
       </Label>
       <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="2.0" />
-      <Button fx:id="DeleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="delete-button" text="Delete">
+      <Button fx:id="DeleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="red-button" text="Delete">
          <padding>
             <Insets left="5.0" right="5.0" />
          </padding>
       </Button>
-      <Button fx:id="ViewButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="view-button" text="View" />
+      <Button fx:id="ViewButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="green-button" text="View" />
    </HBox>
 </AnchorPane>

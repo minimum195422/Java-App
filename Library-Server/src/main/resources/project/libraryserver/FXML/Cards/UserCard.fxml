@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" styleClass="main-pane" stylesheets="@../../Styles/UserCard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.UserCardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" stylesheets="@../../Styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.UserCardController">
     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0">
-      <Circle fx:id="status_dot" fill="DODGERBLUE" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="status_dot" fill="DODGERBLUE" radius="5.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle-glow-green" />
       <Label fx:id="Status" prefWidth="60.0" text="Status" />
       <Line endY="15.0" />
         <Label fx:id="UserId" prefWidth="50.0" text="UserId" />

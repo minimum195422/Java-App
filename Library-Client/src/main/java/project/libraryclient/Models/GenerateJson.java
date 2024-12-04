@@ -45,12 +45,30 @@ public class GenerateJson {
         return json;
     }
     
-    public static JSONObject CreateRatingRequest(String user_id, String book_id, int rate) {
+    public static JSONObject CreateRatingRequest(
+            int user_id, String book_id, int rate) {
         JSONObject json = new JSONObject();
         json.put("type", JsonType.RATING_BOOK);
-        json.put("user_id", Integer.parseInt(user_id));
+        json.put("user_id", user_id);
         json.put("book_id", book_id);
         json.put("rate", rate);
+        return json;
+    }
+
+    public static JSONObject CreateBorrowBookRequest(int user_id, String book_id) {
+        JSONObject json = new JSONObject();
+        json.put("type", JsonType.BORROW_BOOK);
+        json.put("user_id", user_id);
+        json.put("book_id", book_id);
+        json.put("status", JsonType.PENDING);
+        return json;
+    }
+
+    public static JSONObject CreateChangePasswordRequest(int user_id, String new_password) {
+        JSONObject json = new JSONObject();
+        json.put("type", JsonType.CHANGE_PASSWORD);
+        json.put("user_id", user_id);
+        json.put("new_password", new_password);
         return json;
     }
 }

@@ -1,5 +1,5 @@
 package project.libraryclient.Client;
 
 public interface ClientListener {
-    void onUserInfoUpdated(String userId, String userName, String userMail);
+    void onUserInfoUpdated(int userId, String userName, String userMail);
 }

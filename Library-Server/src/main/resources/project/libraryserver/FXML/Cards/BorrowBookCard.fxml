@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="60.0" prefWidth="1020.0" stylesheets="@../../Styles/Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryserver.Controllers.Card.BorrowBookCardController">
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1020.0" spacing="10.0">
+        <padding>
+            <Insets left="10.0" right="10.0" />
+        </padding>
+        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="55.0" text="User Id:">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="DisplayUserId" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" underline="true">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" text="Book Id:">
+            <font>
+                <Font size="16.0" />
+            </font>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Label>
+        <Label fx:id="DisplayBookId" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" underline="true">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Button fx:id="AcceptedButton" mnemonicParsing="false" onMouseClicked="#AcceptedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="green-button" text="Accepted">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Button>
+        <Button fx:id="DeclinedButton" mnemonicParsing="false" onMouseClicked="#DeclinedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="red-button" text="Declined">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Button>
+      <Button fx:id="RecallButton" mnemonicParsing="false" onMouseClicked="#RecallButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="yellow-button" text="Recall" />
+    </HBox>
+</AnchorPane>

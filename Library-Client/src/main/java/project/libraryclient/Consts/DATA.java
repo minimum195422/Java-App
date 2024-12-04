@@ -2,6 +2,7 @@ package project.libraryclient.Consts;
 
 import javafx.scene.image.Image;
 
+import java.net.URI;
 import java.util.Objects;
 
 public class DATA {
@@ -36,7 +37,8 @@ public class DATA {
     public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
     public static final String BOOK_READ_LINK = "/project/libraryclient/FXML/ContentPage/BookReading.fxml";
     public static final String PREVIEW_BOOK_LINK = "/project/libraryclient/FXML/ContentPage/BookPreview.fxml";
-
+    public static final String CLIENT_BORROW_JSON_FILE = "src/main/resources/project/libraryclient/Log/borrow.json";
+    public static final String NOTIFICATION_FILE = "src/main/resources/project/libraryclient/Log/notification.txt";
 
 
     // ---------------------------------------------------------------- //
@@ -55,7 +57,8 @@ public class DATA {
     public static final String SCENE_VERIFY_PAGE = "VerifyController";
 
 
-// ---------------------------------------------------------------- //
+
+    // ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
     private static Image loadImage(String path) {
