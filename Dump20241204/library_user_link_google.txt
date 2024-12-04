@@ -1,0 +1,12 @@
+
+
+DROP TABLE IF EXISTS `user_link_google`;
+
+CREATE TABLE `user_link_google` (
+  `user_id` int NOT NULL,
+  `google_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`,`google_id`),
+  KEY `fk_google_id_idx` (`google_id`),
+  CONSTRAINT `fk_google_id` FOREIGN KEY (`google_id`) REFERENCES `google` (`id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+)

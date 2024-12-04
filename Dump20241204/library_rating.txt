@@ -1,0 +1,13 @@
+
+--
+
+DROP TABLE IF EXISTS `rating`;
+CREATE TABLE `rating` (
+  `user_id` int NOT NULL,
+  `book_id` varchar(45) NOT NULL,
+  `rate` int NOT NULL,
+  KEY `fk_rating_user_idx` (`user_id`),
+  KEY `fk_rating_book_idx` (`book_id`),
+  CONSTRAINT `fk_rating_book` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`),
+  CONSTRAINT `fk_rating_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+)
