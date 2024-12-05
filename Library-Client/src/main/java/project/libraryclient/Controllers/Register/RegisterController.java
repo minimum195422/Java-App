@@ -73,7 +73,7 @@ public class RegisterController {
     private void resetAll() {
         errorText.setVisible(false);
         errorText.setStyle("");
-        errorText.setStyle("-fx-text-fill: red;");
+        errorText.setStyle("-fx-fill: red;");
         email.clear();
         password.clear();
         confirmPassword.clear();
@@ -210,7 +210,7 @@ public class RegisterController {
 
     private boolean ValidateEmail(String email) throws IOException {
         // url dẫn tới api kiểm tra sự tồn tại của mail
-        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=9f45f093bc3a4e5fbacb69d6d7a5bd1a&email=%s", email);
+        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=73174805d0c044ec8534c31f3e5ed14b&email=%s", email);
 //        System.out.println(url);
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -248,7 +248,7 @@ public class RegisterController {
             errorText.setVisible(true);
             errorText.setText(message);
             errorText.setStyle("");
-            errorText.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
+            errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
         });
     }
 
@@ -258,7 +258,7 @@ public class RegisterController {
             errorText.setVisible(true);
             errorText.setText("Registered successfully! Return to login page");
             errorText.setStyle("");
-            errorText.setStyle("-fx-text-fill: green; -fx-font-size: 12px;");
+            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
         });
     }
 }
