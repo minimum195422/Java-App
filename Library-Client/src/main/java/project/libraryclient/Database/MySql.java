@@ -49,7 +49,7 @@ public class MySql {
                             "LEFT JOIN authors a ON ba.author_id = a.author_id " +
                         "GROUP BY " +
                             "b.book_id " +
-                        "LIMIT 3"
+                        "LIMIT 10"
             );
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -231,7 +231,7 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-                "select avg(rate) from rating where book_id = ?;"
+                "SELECT avg(rate) FROM rating WHERE book_id = ?;"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();
@@ -258,7 +258,7 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "select times from borrow where book_id = ?;"
+                    "SELECT count(*) FROM borrow WHERE book_id = ?"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();

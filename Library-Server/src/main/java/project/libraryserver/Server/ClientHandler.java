@@ -268,7 +268,7 @@ public class ClientHandler implements Runnable{
     }
 
     private void SendBorrowFeedback() {
-        JSONArray jsonArray = JsonFileHandler.getInstance().readJsonArray();
+        JSONArray jsonArray = JsonFileHandler.getInstance().ReadJsonArray();
         for (int i = 0; i < jsonArray.length(); ++i) {
             JsonType status = JsonType.valueOf(jsonArray.getJSONObject(i).getString("status"));
             switch (status) {

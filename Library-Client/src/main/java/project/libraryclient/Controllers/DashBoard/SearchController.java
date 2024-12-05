@@ -25,12 +25,11 @@ public class SearchController {
     @FXML
     public VBox MainVbox;
 
-
     public void setContent(ArrayList<Book> SearchList) {
         HiddenPane.setVisible(false);
         HiddenPane.setDisable(true);
 
-//        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
+        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         if (SearchList.isEmpty()) {
             Label label = new Label("Can't find any book, please try with another prompt");
@@ -38,6 +37,7 @@ public class SearchController {
             MainVbox.getChildren().add(label);
             return;
         }
+
         new Thread(() -> {
             int row = (SearchList.size() + 4) / 5;
 

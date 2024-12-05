@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
+<AnchorPane fx:id="MainPane" prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1000.0">
       <padding>
          <Insets left="10.0" />
       </padding>
-      <Button fx:id="ReturnButton" mnemonicParsing="false" onMouseClicked="#ExitClicked" prefWidth="80.0" styleClass="function-button" text="Return" />
+      <Button fx:id="ReturnButton" mnemonicParsing="false" onMouseClicked="#ReturnButtonClicked" prefWidth="80.0" styleClass="function-button" text="Return" />
    </HBox>
    <HBox layoutY="40.0" prefHeight="560.0" prefWidth="1000.0">
       <VBox prefHeight="560.0" prefWidth="320.0" spacing="10.0">

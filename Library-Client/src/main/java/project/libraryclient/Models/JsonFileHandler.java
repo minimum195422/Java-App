@@ -120,6 +120,10 @@ public class JsonFileHandler {
                         + jsonArray.getJSONObject(i).getString("book_id")
                         + " overdue and Recalled");
                 jsonArray.remove(i);
+            } else if(JsonType.valueOf(jsonArray.getJSONObject(i).getString("status")) == JsonType.BORROW_ACCEPTED) {
+                NotificationHandler.getInstance().writeFile("Book with id "
+                        + jsonArray.getJSONObject(i).getString("book_id")
+                        + " is accepted for loan by the system");
             }
         }
         writeJsonArray(jsonArray);

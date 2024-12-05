@@ -21,7 +21,6 @@ import project.libraryclient.Models.JsonFileHandler;
 import project.libraryclient.Models.NotificationHandler;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class BookPreviewController {
     @FXML
@@ -61,7 +60,7 @@ public class BookPreviewController {
         SelectedBook = book;
     }
 
-    public void ExitClicked() {
+    public void ReturnButtonClicked() {
         MainPane.getParent().setVisible(false);
         MainPane.getParent().setDisable(true);
     }

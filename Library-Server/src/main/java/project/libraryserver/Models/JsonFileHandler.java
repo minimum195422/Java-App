@@ -3,11 +3,13 @@ package project.libraryserver.Models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
+import project.libraryserver.Consts.JsonType;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class JsonFileHandler {
     private static JsonFileHandler instance;
@@ -21,7 +23,7 @@ public class JsonFileHandler {
         return instance;
     }
 
-    public synchronized JSONArray readJsonArray() {
+    public synchronized JSONArray ReadJsonArray() {
         Path path = Paths.get(DATA.SERVER_BORROW_JSON_FILE);
 
         if (!Files.exists(path)) {
@@ -55,24 +57,14 @@ public class JsonFileHandler {
     }
 
     public synchronized void addJsonObject(JSONObject jsonObject) {
-        JSONArray jsonArray = readJsonArray();
+        JSONArray jsonArray = ReadJsonArray();
         jsonArray.put(jsonObject);
         writeJsonArray(jsonArray);
     }
 
-    public synchronized void removeJsonObject(int user_id, String book_id) {
-        JSONArray jsonArray = readJsonArray();
-        for (int i = 0; i < jsonArray.length(); ++i) {
-            if (jsonArray.getJSONObject(i).getInt("user_id") == user_id
-                && jsonArray.getJSONObject(i).getString("book_id").equals(book_id)) {
-                jsonArray.remove(i);
-            }
-        }
-        writeJsonArray(jsonArray);
-    }
 
     public synchronized void removeJsonObject(JSONObject jsonObject) {
-        JSONArray jsonArray = readJsonArray();
+        JSONArray jsonArray = ReadJsonArray();
         for (int i = 0; i < jsonArray.length(); ++i) {
             if (jsonArray.getJSONObject(i).similar(jsonObject)) {
                 jsonArray.remove(i);
@@ -81,14 +73,4 @@ public class JsonFileHandler {
         writeJsonArray(jsonArray);
     }
 
-    public synchronized JSONArray getJsonArrayBy(int userId) {
-        JSONArray jsonArray = readJsonArray();
-        JSONArray returnArray = new JSONArray();
-        for (int i = 0; i < jsonArray.length(); ++i) {
-            if (jsonArray.getJSONObject(i).getInt("user_id") == userId) {
-                returnArray.put(jsonArray.getJSONObject(i));
-            }
-        }
-        return returnArray;
-    }
 }

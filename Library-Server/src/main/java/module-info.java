@@ -5,6 +5,7 @@ module project.libraryserver {
     requires jbcrypt;
     requires javafx.web;
     requires java.desktop;
+    requires mysql.connector.j;
 
     opens project.libraryserver to javafx.fxml;
     opens project.libraryserver.Controllers.Card to javafx.fxml;

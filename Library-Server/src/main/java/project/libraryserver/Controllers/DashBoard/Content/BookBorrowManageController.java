@@ -44,7 +44,7 @@ public class BookBorrowManageController implements Initializable {
     private void LoadDisplayListBorrow() {
         if (!jsonDisplay.getChildren().isEmpty()) jsonDisplay.getChildren().clear();
 
-        JSONArray jsonArray = JsonFileHandler.getInstance().readJsonArray();
+        JSONArray jsonArray = JsonFileHandler.getInstance().ReadJsonArray();
 
         if (jsonArray.isEmpty()) return;
 

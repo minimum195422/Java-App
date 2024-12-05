@@ -69,7 +69,6 @@ public class MyBookController implements Initializable {
             return;
         }
 
-
         if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         Platform.runLater(() -> {

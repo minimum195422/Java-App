@@ -14,6 +14,9 @@ import java.io.IOException;
 
 public class App extends Application {
 
+    // Book borrow manager
+    BookBorrowManager bookBorrowManager;
+
     // Server log
     ServerLog serverLog;
 
@@ -45,6 +48,9 @@ public class App extends Application {
 
         // Kết nối database trên một thread riêng
         new Thread(() -> mysql = MySql.getInstance()).start();
+
+        // Book borrow manager
+        bookBorrowManager = BookBorrowManager.getInstance();
 
         // SceneHandler initialize
         sceneHandler = SceneHandler.getInstance(App.class, stage);

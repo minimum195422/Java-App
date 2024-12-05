@@ -624,20 +624,20 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "SELECT " +
-                            "b.book_id, " +
-                            "b.title, " +
-                            "group_concat(DISTINCT a.name) as 'author_list', " +
-                            "AVG(r.rate) as rating, " +
-                            "times " +
-                            "FROM " +
-                            "books b " +
-                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                            "LEFT JOIN rating r ON r.book_id = b.book_id " +
-                            "LEFT JOIN borrow br ON b.book_id = br.book_id " +
-                            "GROUP BY " +
-                            "b.book_id"
+            "SELECT " +
+                    "b.book_id, " +
+                    "b.title, " +
+                    "group_concat(DISTINCT a.name) as 'author_list', " +
+                    "AVG(r.rate) as rating, " +
+                    "count(br.book_id) as 'borrowTimes' " +
+                "FROM " +
+                    "books b " +
+                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                    "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                    "LEFT JOIN rating r ON r.book_id = b.book_id " +
+                    "LEFT JOIN borrow br ON b.book_id = br.book_id " +
+                "GROUP BY " +
+                    "b.book_id"
             );
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -650,6 +650,7 @@ public class MySql {
                 ));
             }
         } catch (SQLException e) {
+            e.printStackTrace(System.out);
             return returnList;
         } finally {
             try {
@@ -836,59 +837,24 @@ public class MySql {
         return true;
     }
 
-    public void IncreaseBorrowTimes(String book_id) {
+    public void AddNewBorrow(int user_id, String book_id) {
         PreparedStatement preparedStatement = null;
         ResultSet rs;
         int result;
         try {
             preparedStatement = connection.prepareStatement(
-                "SELECT COUNT(*) FROM borrow WHERE book_id = ?"
+                "INSERT INTO borrow (user_id, book_id) " +
+                        "VALUES (?, ?);"
             );
-            preparedStatement.setString(1, book_id);
-            rs = preparedStatement.executeQuery();
-            if (!rs.next()) {
-                throw new RuntimeException("Error while checking if a book existed in borrow table");
-            }
-            int existed = rs.getInt(1);
-            if (existed == 0) { // This book haven't been borrowed yet
-                preparedStatement.close();
-                preparedStatement = connection.prepareStatement(
-                        "INSERT INTO borrow(book_id, times) VALUES(?, 1)"
-                );
-                preparedStatement.setString(1, book_id);
-                result = preparedStatement.executeUpdate();
-                if (result == 0) {
-                    throw new RuntimeException("Error while adding a new book into borrow table");
-                }
-                preparedStatement.close();
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setString(2, book_id);
+            int check = preparedStatement.executeUpdate();
+            if (check == 0) {
+                System.out.println("failed to add new borrow action to database");
                 return;
             }
-//            This book have been borrowed at least once
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "SELECT times FROM borrow WHERE book_id = ?"
-            );
-            preparedStatement.setString(1, book_id);
-            rs = preparedStatement.executeQuery();
-            if (!rs.next()) {
-                throw new RuntimeException("Error while getting borrow times");
-            }
-            int times = rs.getInt(1);
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "UPDATE borrow " +
-                            "SET times = ? " +
-                            "WHERE book_id = ?"
-            );
-            preparedStatement.setInt(1, times + 1);
-            preparedStatement.setString(2, book_id);
-            result = preparedStatement.executeUpdate();
-            if (result == 0) {
-                throw new RuntimeException("Error while updating book's data in borrow table");
-            }
-            preparedStatement.close();
         } catch (SQLException e) {
-            System.out.println("Error while increasing borrow times");
+            e.printStackTrace(System.out);
         } finally {
             try {
                 if (preparedStatement != null) preparedStatement.close();

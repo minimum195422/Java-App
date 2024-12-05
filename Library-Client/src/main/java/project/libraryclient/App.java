@@ -14,6 +14,8 @@ import java.io.IOException;
 
 public class App extends Application {
 
+    JsonFileHandler jsonFileHandler;
+
     // Client
     Client client;
 
@@ -28,7 +30,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
-        JsonFileHandler.getInstance().Clear();
+
+        jsonFileHandler = JsonFileHandler.getInstance();
+        jsonFileHandler.Clear();
 
         // start client - trong client đã chạy trên thread riêng
         client = Client.getInstance();

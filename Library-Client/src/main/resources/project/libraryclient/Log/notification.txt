@@ -13,3 +13,31 @@ You have submitted a book loan request with the code 0-tqDwAAQBAJ
 Books 0-tqDwAAQBAJ overdue and Recalled
 Request to borrow book BO8-DwAAQBAJ denied
 Request to borrow book cEjPEAAAQBAJ denied
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+You have submitted a book loan request with the code 92uVEAAAQBAJ
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+Books 0-tqDwAAQBAJ overdue and Recalled
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+You have submitted a book loan request with the code 8e9vEAAAQBAJ
+You have submitted a book loan request with the code 92uVEAAAQBAJ
+Book with id 92uVEAAAQBAJ is accepted for loan by the system
+Book with id 92uVEAAAQBAJ is accepted for loan by the system
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+You have submitted a book loan request with the code 8e9vEAAAQBAJ
+You have submitted a book loan request with the code 92uVEAAAQBAJ
+Book with id 92uVEAAAQBAJ is accepted for loan by the system
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+Books 0-tqDwAAQBAJ overdue and Recalled
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Request to borrow book 0-tqDwAAQBAJ denied
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+You have submitted a book loan request with the code 8e9vEAAAQBAJ
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system
+Book with id 0-tqDwAAQBAJ is accepted for loan by the system

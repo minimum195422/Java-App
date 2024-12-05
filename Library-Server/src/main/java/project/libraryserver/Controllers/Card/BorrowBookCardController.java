@@ -55,7 +55,10 @@ public class BorrowBookCardController {
                 localJson.getInt("user_id"),
                 localJson.getString("book_id"),
                 MySql.getInstance().QueryGetReadLinkByBookId(localJson.getString("book_id"))));
-        MySql.getInstance().IncreaseBorrowTimes(DisplayBookId.getText());
+        MySql.getInstance().AddNewBorrow(localJson.getInt("user_id"), localJson.getString("book_id"));
+        ConfirmDialog.show(
+                "Allow users to borrow books successfully",
+                "Users can now access the book reading link");
     }
 
     public void DeclinedButtonClicked() {
@@ -68,6 +71,9 @@ public class BorrowBookCardController {
                 GenerateJson.ResponseDeclineBorrowBook(
                         localJson.getInt("user_id"),
                         localJson.getString("book_id")));
+        ConfirmDialog.show(
+                "Reject users from borrowing books",
+                "Users cannot access the data of this book");
     }
 
     public void RecallButtonClicked() {
@@ -80,5 +86,8 @@ public class BorrowBookCardController {
                 GenerateJson.ResponseBookRecall(
                         localJson.getInt("user_id"),
                         localJson.getString("book_id")));
+        ConfirmDialog.show(
+                "Book recall successful",
+                "Back to your work");
     }
 }
