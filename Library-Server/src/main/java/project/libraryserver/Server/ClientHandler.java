@@ -120,8 +120,8 @@ public class ClientHandler implements Runnable{
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
                     "Server accept user ["
-                    + json.getString("email")
-                    + ",type:normal] to logging in application.");
+                            + json.getString("email")
+                            + ",type:normal] to logging in application.");
 
             // Trả về json chấp nhận yêu cầu đăng nhập
             ArrayList<String> information = MySql
@@ -138,8 +138,8 @@ public class ClientHandler implements Runnable{
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
                     "Server decline user ["
-                    + json.getString("email")
-                    + ",type:normal] to logging in application.");
+                            + json.getString("email")
+                            + ",type:normal] to logging in application.");
 
             // Trả về json từ chối yêu cầu đăng nhập.
             response = GenerateJson.ResponseLoginFailed();
@@ -155,8 +155,8 @@ public class ClientHandler implements Runnable{
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
                     "Server accept user ["
-                    + json.getString("email")
-                    + ",type:google] to logging in application.");
+                            + json.getString("email")
+                            + ",type:google] to logging in application.");
 
             ArrayList<String> information = MySql
                     .getInstance()
@@ -172,8 +172,8 @@ public class ClientHandler implements Runnable{
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
                     "Server decline user ["
-                    + json.getString("email")
-                    + ",type:google] to logging in application.");
+                            + json.getString("email")
+                            + ",type:google] to logging in application.");
 
             // Trả về json từ chối yêu cầu đăng nhập.
             response = GenerateJson.ResponseLoginFailed();
