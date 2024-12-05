@@ -23,6 +23,7 @@ public class ClientHandler implements Runnable{
     private final PrintWriter out;
     private final BufferedReader in;
     private WatchService watchService;
+    private long lastModifiedTime = 0;
 
     // Constructor
     public ClientHandler(Socket socket) throws IOException {
@@ -92,6 +93,7 @@ public class ClientHandler implements Runnable{
     }
 
     private void SendMessage(JSONObject json) {
+        System.out.println(json);
         out.println(json);
         out.flush();
     }
@@ -99,7 +101,7 @@ public class ClientHandler implements Runnable{
     // bắt json request từ client
     private void HandlerUserRequest(JSONObject json) throws SQLException {
         JsonType type = JsonType.valueOf(json.getString("type"));
-        System.out.println(json);
+//        System.out.println(json);
         switch (type) {
             case NORMAL_LOGIN -> ServerResponseNormalLogin(json);
             case GOOGLE_LOGIN -> ServerResponseGoogleLogin(json);
@@ -129,11 +131,14 @@ public class ClientHandler implements Runnable{
                     .GetNormalUserBasicInformation(json.getString("email"));
 
             response = GenerateJson.ResponseLoginSuccess(
-                    information.get(0),
+                    Integer.parseInt(information.get(0)),
                     information.get(1),
                     information.get(2),
                     information.get(3)
             );
+
+
+
         } else {
             // Ghi log thông báo phản hồi yêu cầu đăng nhập từ người dùng
             ServerLog.getInstance().writeLog(
@@ -163,7 +168,7 @@ public class ClientHandler implements Runnable{
                     .GetNormalUserBasicInformation(json.getString("email"));
             // Trả về json chấp nhận yêu cầu đăng nhập
             response = GenerateJson.ResponseLoginSuccess(
-                    information.get(0),
+                    Integer.parseInt(information.get(0)),
                     information.get(1),
                     information.get(2),
                     information.get(3)
@@ -247,7 +252,11 @@ public class ClientHandler implements Runnable{
                         if (event.context().toString().equals(
                                 Paths.get(DATA.SERVER_BORROW_JSON_FILE).getFileName().toString())) {
                             // cật nhật giao diện
-                            Platform.runLater(this::SendBorrowFeedback);
+                            long currentTime = System.currentTimeMillis();
+                            if (currentTime - lastModifiedTime > 500) {
+                                lastModifiedTime = currentTime;
+                                Platform.runLater(this::SendBorrowFeedback);
+                            }
                         }
                     }
                 }

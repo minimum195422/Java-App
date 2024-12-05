@@ -58,30 +58,6 @@ public class MySql {
         return returnList;
     }
 
-    public ArrayList<String> GetGoogleUserBasicInformation(String email) {
-        ArrayList<String> returnList = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement(
-                            "SELECT id, given_name, family_name, email FROM google WHERE email = ?;"
-                    );
-            preparedStatement.setString(1, email);
-
-            // query action
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                returnList.add(rs.getString(1));
-                returnList.add(rs.getString(2));
-                returnList.add(rs.getString(3));
-                returnList.add(rs.getString(4));
-            }
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return returnList;
-    }
-
     public boolean CheckNormalLogin(String email, String password) throws SQLException {
         // Return false if email or password is empty
         if (email.isEmpty() || password.isEmpty()) {
@@ -264,7 +240,6 @@ public class MySql {
 
         return true;
     }
-
 
     private boolean CheckExistEmailOnNormalUser(String email) throws SQLException {
         String SQL = "SELECT COUNT(*) FROM user WHERE email = ?";
@@ -655,8 +630,8 @@ public class MySql {
                             "group_concat(DISTINCT a.name) as 'author_list' " +
                         "FROM " +
                             "books b " +
-                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "JOIN authors a ON ba.author_id = a.author_id " +
                         "GROUP BY " +
                             "b.book_id"
             );

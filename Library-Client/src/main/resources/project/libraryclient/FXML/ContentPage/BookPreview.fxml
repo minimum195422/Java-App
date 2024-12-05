@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainPane" prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/BookView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1000.0">
       <padding>
          <Insets left="10.0" />

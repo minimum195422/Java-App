@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
-   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" vbarPolicy="NEVER">
-      <VBox fx:id="MainVbox" prefHeight="600.0" prefWidth="1000.0" spacing="20.0">
+<AnchorPane fx:id="MainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="content" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.SearchController">
+   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" styleClass="content" vbarPolicy="NEVER">
+      <VBox fx:id="MainVbox" prefHeight="600.0" prefWidth="1000.0" spacing="20.0" styleClass="content">
          <padding>
             <Insets left="10.0" right="10.0" top="10.0" />
          </padding></VBox>
    </ScrollPane>
-   <BorderPane fx:id="HiddenPane" prefHeight="600.0" prefWidth="1000.0" visible="false" />
+   <BorderPane fx:id="HiddenPane" prefHeight="600.0" prefWidth="1000.0" styleClass="content" visible="false" />
 </AnchorPane>

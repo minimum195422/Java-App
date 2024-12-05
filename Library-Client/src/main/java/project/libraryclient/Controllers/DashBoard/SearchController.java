@@ -1,7 +1,6 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -14,6 +13,7 @@ import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class SearchController {
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.PREVIEW_BOOK_LINK));
                                 AnchorPane pane = loader.load();
                                 BookPreviewController controller = loader.getController();
-                                controller.setInfor(book);
+                                controller.setInfo(book);
                                 HiddenPane.setCenter(pane);
                             } catch (IOException e) {
                                 e.printStackTrace(System.out);
