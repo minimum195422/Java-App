@@ -21,7 +21,6 @@ module project.libraryclient {
     requires commons.logging;
 
     opens project.libraryclient to javafx.fxml;
-    opens project.libraryclient.Controllers to javafx.fxml;
     opens project.libraryclient.Controllers.DashBoard to javafx.fxml;
     opens project.libraryclient.Controllers.Login to javafx.fxml;
     opens project.libraryclient.Controllers.Register to javafx.fxml;

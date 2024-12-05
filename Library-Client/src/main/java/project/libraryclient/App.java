@@ -24,7 +24,7 @@ public class App extends Application {
     SceneHandler sceneHandler;
 
     // List of scene in app
-    Scene LoginPage, RegisterPage, BeingDev, HomePage, VerifyPage;
+    Scene LoginPage, RegisterPage, BeingDev, HomePage;
 
     @Override
     public void start(Stage stage) throws IOException{
