@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.JsonType;
 import project.libraryserver.Controllers.Card.BorrowBookCardController;

@@ -6,11 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
 
 import java.io.IOException;

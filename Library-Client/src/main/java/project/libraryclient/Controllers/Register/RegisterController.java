@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLException;
 
 public class RegisterController {
     @SuppressWarnings("unused")
@@ -150,7 +149,7 @@ public class RegisterController {
 
     // Handling create new account
     @FXML
-    private void RegisterButtonOnclick() throws SQLException, IOException, InterruptedException {
+    private void RegisterButtonOnclick() throws IOException, InterruptedException {
         if (email.getText().isEmpty()) {
 //             System.out.println("Email is empty");
             SetErrorMessage("Email is empty");
@@ -222,7 +221,7 @@ public class RegisterController {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }

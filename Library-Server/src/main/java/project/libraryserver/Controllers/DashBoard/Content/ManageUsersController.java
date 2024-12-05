@@ -5,10 +5,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import project.libraryserver.ConfirmDialog.*;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
@@ -187,7 +184,7 @@ public class ManageUsersController implements Initializable {
 
         Task<Void> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try {
                     MySql.getInstance().UpdateUser(
                             Integer.parseInt(DisplayUserId.getText()),

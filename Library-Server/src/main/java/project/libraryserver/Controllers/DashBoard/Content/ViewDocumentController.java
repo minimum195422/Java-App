@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import project.libraryserver.Book.Book;
 import project.libraryserver.ConfirmDialog.ConfirmDialog;

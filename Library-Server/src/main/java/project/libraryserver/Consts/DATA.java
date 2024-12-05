@@ -1,9 +1,5 @@
 package project.libraryserver.Consts;
 
-import javafx.scene.image.Image;
-
-import java.util.Objects;
-
 public class DATA {
 
 // ---------------------------------------------------------------- //
@@ -28,14 +24,6 @@ public class DATA {
     public final static String SCENE_DASHBOARD_PAGE = "DashBoard Controller";
     public static final String SERVER_LOG_FILE = "src/main/resources/project/libraryserver/Log/log.txt";
     public static final String SERVER_BORROW_JSON_FILE = "src/main/resources/project/libraryserver/Log/borrow.json";
-
-    // ---------------------------------------------------------------- //
-// --------------------- Load image from link --------------------- //
-// ---------------------------------------------------------------- //
-
-    private static Image loadImage(String path) {
-        return new Image(Objects.requireNonNull(DATA.class.getResourceAsStream(path)));
-    }
 
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //

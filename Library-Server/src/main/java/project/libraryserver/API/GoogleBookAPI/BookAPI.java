@@ -92,15 +92,6 @@ public class BookAPI {
     }
 
     private static Book JsonToBook(JSONObject json) {
-
-        try {
-            JSONObject volumeInfo = new JSONObject();
-            volumeInfo = json.getJSONObject("volumeInfo");
-        } catch (JSONException e) {
-            e.printStackTrace(System.out);
-            System.out.println("Can not find volumeInfo");
-        }
-
         return new Book(
                 getBookId(json),
                 getBookTitle(json.getJSONObject("volumeInfo")),
@@ -212,12 +203,8 @@ public class BookAPI {
                 for (int i = 0; i < temp.length(); ++i) {
                     JSONObject isbn = temp.getJSONObject(i);
                     switch (isbn.getString("type")) {
-                        case "ISBN_13" -> {
-                            isbn13 = isbn.getString("identifier");
-                        }
-                        case "ISBN_10" -> {
-                            isbn10 = isbn.getString("identifier");
-                        }
+                        case "ISBN_13" -> isbn13 = isbn.getString("identifier");
+                        case "ISBN_10" -> isbn10 = isbn.getString("identifier");
                     }
                 }
             }
@@ -232,8 +219,7 @@ public class BookAPI {
     }
 
     public static Image getBookCover(JSONObject volumeInfo) {
-        Image tempImage = null;
-
+        Image tempImage;
         try {
             if (volumeInfo.has("imageLinks"))
                 if (volumeInfo.getJSONObject("imageLinks").has("thumbnail")) {

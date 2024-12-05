@@ -2,7 +2,6 @@ package project.libraryclient.Consts;
 
 import javafx.scene.image.Image;
 
-import java.net.URI;
 import java.util.Objects;
 
 public class DATA {

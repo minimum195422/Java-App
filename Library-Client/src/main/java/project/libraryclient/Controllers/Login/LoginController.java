@@ -14,7 +14,6 @@ import project.libraryclient.App;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Consts.UserStatus;
-import project.libraryclient.Database.MySql;
 import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.SceneHandler;
 

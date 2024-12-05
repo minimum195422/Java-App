@@ -7,7 +7,6 @@ import javafx.stage.StageStyle;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
-import project.libraryclient.Models.NotificationHandler;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;

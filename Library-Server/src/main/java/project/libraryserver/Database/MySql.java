@@ -232,7 +232,7 @@ public class MySql {
             preparedStatement = connection.prepareStatement("SELECT id FROM user where email = ?");
             preparedStatement.setString(1, json.getString("email"));
             rs = preparedStatement.executeQuery();
-            int userID = 0;
+            int userID;
             if (rs.next()) {
                 userID = rs.getInt(1);
             } else {
@@ -589,7 +589,7 @@ public class MySql {
         for (String category : categories) {
             int categoryId;
 
-            // add new category (not exits)
+            // add new category (not exist)
             try (PreparedStatement checkCategoryStmt = connection.prepareStatement(
                     "SELECT category_id FROM categories WHERE category = ?")) {
                 checkCategoryStmt.setString(1, truncateString(category, 100));
@@ -791,7 +791,6 @@ public class MySql {
 
     public void AddNewRate(JSONObject json) {
         PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
                     "insert into rating(user_id, book_id, rate) values (?, ?, ?);");

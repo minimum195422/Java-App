@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import project.libraryclient.Book.Book;
 import project.libraryclient.Client.Client;

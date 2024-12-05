@@ -3,7 +3,6 @@ package project.libraryserver.Controllers.Card;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import org.json.JSONObject;
 import project.libraryserver.ConfirmDialog.ConfirmDialog;
 import project.libraryserver.Consts.JsonType;
@@ -30,9 +29,7 @@ public class BorrowBookCardController {
 
         JsonType status = JsonType.valueOf(localJson.getString("status"));
         switch (status) {
-            case PENDING -> {
-                RecallButton.setDisable(true);
-            }
+            case PENDING -> RecallButton.setDisable(true);
             case BORROW_ACCEPTED -> {
                 RecallButton.setDisable(false);
 
