@@ -96,40 +96,40 @@
                         <Insets />
                     </VBox.margin>
                 </ToggleButton>
-            <ToggleButton fx:id="BookBorrowManage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#BookBorrowManageClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
-               <graphic>
-                   <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
-                       <padding>
-                           <Insets left="15.0" />
-                       </padding>
-                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@../../Images/Icons/books.png" />
-                       </ImageView>
-                       <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Book Borrow Manage">
-                          <font>
-                              <Font name="Poppins Regular" size="14.0" />
-                          </font>
-                       </Text>
-                   </HBox>
-               </graphic>
-            </ToggleButton>
-            <ToggleButton fx:id="CloseServerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#CloseButtonClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
-               <graphic>
-                   <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
-                       <padding>
-                           <Insets left="15.0" />
-                       </padding>
-                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
-                           <Image url="@../../Images/Icons/xblack.png" />
-                       </ImageView>
-                       <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Close Server">
-                          <font>
-                              <Font name="Poppins Regular" size="14.0" />
-                          </font>
-                       </Text>
-                   </HBox>
-               </graphic>
-            </ToggleButton>
+                <ToggleButton fx:id="BookBorrowManage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#BookBorrowManageClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
+                    <graphic>
+                        <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../../Images/Icons/books.png" />
+                            </ImageView>
+                            <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Book Borrow Management">
+                                <font>
+                                    <Font name="Poppins Regular" size="14.0" />
+                                </font>
+                            </Text>
+                        </HBox>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="CloseServerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#CloseButtonClicked" prefHeight="34.0" prefWidth="220.0" styleClass="function-button-1">
+                    <graphic>
+                        <HBox id="AddNewBookButton" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="220.0" spacing="10.0">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
+                                <Image url="@../../Images/Icons/xblack.png" />
+                            </ImageView>
+                            <Text id="BorrowReturnDocumentButton" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="button-text" text="Close Server">
+                                <font>
+                                    <Font name="Poppins Regular" size="14.0" />
+                                </font>
+                            </Text>
+                        </HBox>
+                    </graphic>
+                </ToggleButton>
 
             </VBox>
         </AnchorPane>

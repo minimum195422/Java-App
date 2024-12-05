@@ -69,6 +69,7 @@ public class AddNewBookController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayListBook.setSpacing(10);
+        WarningText.setStyle("-fx-text-fill: red;");
 
         // Display text when mouse on choosing
         Tooltip tooltip = new Tooltip("Open in Browser");
@@ -94,21 +95,23 @@ public class AddNewBookController implements Initializable {
 
         for (Book book : list) {
             DisplayListBook.getChildren().add(book.GetDisplayCardForGoogleSearch());
+//            MySql.getInstance().AddNewBook(book);
             book.GetDisplayCardForGoogleSearch().setOnMouseClicked(
-                _ -> {
-                    SelectedBookId.setText(book.getId());
-                    SelectedBookTitle.setText(book.getTitle());
-                    SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
-                    SelectedBookPublisher.setText(book.getPublisher());
-                    SelectedBookPublishedDate.setText(book.getPublishedDate());
-                    SelectedBookDescription.setText(book.getDescription());
-                    SelectedBookCategories.setText(String.join(", ", book.getCategories()));
-                    SelectedBookIsbn13.setText(book.getISBN_13());
-                    SelectedBookIsbn10.setText(book.getISBN_10());
-                    SelectedBookReadLink.setText(book.getWebReaderLink());
-                    SelectedBookCover.setImage(book.getImagePreview());
-                    SelectedBook = book;
-            });
+                    _ -> {
+                        SelectedBookId.setText(book.getId());
+                        SelectedBookTitle.setText(book.getTitle());
+                        SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
+                        SelectedBookPublisher.setText(book.getPublisher());
+                        SelectedBookPublishedDate.setText(book.getPublishedDate());
+                        SelectedBookDescription.setText(book.getDescription());
+                        SelectedBookCategories.setText(String.join(", ", book.getCategories()));
+                        SelectedBookIsbn13.setText(book.getISBN_13());
+                        SelectedBookIsbn10.setText(book.getISBN_10());
+                        SelectedBookReadLink.setText(book.getWebReaderLink());
+                        SelectedBookCover.setImage(book.getImagePreview());
+                        SelectedBook = book;
+
+                    });
         }
     }
 
@@ -125,6 +128,7 @@ public class AddNewBookController implements Initializable {
 
         if (SelectedBook == null) {
             WarningText.setText("No data selected");
+            WarningText.setStyle("-fx-text-fill: red;");
             return;
         }
 
@@ -145,17 +149,23 @@ public class AddNewBookController implements Initializable {
             boolean result = task.getValue();
             if (result) {
                 WarningText.setText("Successfully added new book to database");
-                ServerLog.getInstance().writeLog("Action: Add new book ID=[" + SelectedBook.getId() + "] to database.");
+                WarningText.setStyle("-fx-text-fill: green;");
+                ServerLog.getInstance().writeLog("Action: Add new book " + SelectedBook.getId() + " to database.");
             } else {
                 WarningText.setText("Failed to add new book to database");
+                WarningText.setStyle("-fx-text-fill: red;");
             }
         });
 
-        task.setOnFailed(_ -> WarningText.setText("An error occurred while adding the book."));
+        task.setOnFailed(_ -> {
+            WarningText.setText("An error occurred while adding the book.");
+            WarningText.setStyle("-fx-text-fill: red;");
+        });
 
         new Thread(task).start();
 
         WarningText.setText("Adding new book to database...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
 }

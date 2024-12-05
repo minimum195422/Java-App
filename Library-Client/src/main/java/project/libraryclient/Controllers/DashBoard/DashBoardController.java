@@ -274,7 +274,6 @@ public class DashBoardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-
         setDefault();
     }
 

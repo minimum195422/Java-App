@@ -6,11 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
 
 import java.io.IOException;
@@ -116,11 +113,11 @@ public class DashBoardController implements Initializable {
         BookBorrowManage.setToggleGroup(function_button_toggle_group);
 
         function_button_toggle_group.selectedToggleProperty().addListener(
-            (_, oldToggle, newToggle) -> {
-                if (newToggle == null) {
-                    function_button_toggle_group.selectToggle(oldToggle);
-                }
-        });
+                (_, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        function_button_toggle_group.selectToggle(oldToggle);
+                    }
+                });
 
         // default selected button when load page
         ServerLogButton.setSelected(true);

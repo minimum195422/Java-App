@@ -38,12 +38,12 @@
                         <Image url="@../Images/Avatars/avatar.jpg" />
                      </ImageView>
                      <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0">
-                        <Text fx:id="DisplayUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+                        <Text fx:id="DisplayUserName" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
                            <font>
                               <Font name="Poppins SemiBold" size="10.0" />
                            </font>
                         </Text>
-                        <Text fx:id="DisplayUserMail" strokeType="OUTSIDE" strokeWidth="0.0" text="User mail">
+                        <Text fx:id="DisplayUserMail" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
                            <font>
                               <Font name="Poppins Light" size="8.0" />
                            </font>

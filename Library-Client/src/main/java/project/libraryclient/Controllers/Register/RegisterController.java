@@ -63,6 +63,12 @@ public class RegisterController {
     private TextField email, password, confirmPassword;
 
     @FXML
+    private void resetPassword() {
+        password.clear();
+        confirmPassword.clear();
+    }
+
+    @FXML
     private void resetAll() {
         errorText.setVisible(false);
         errorText.setStyle("");
@@ -84,8 +90,7 @@ public class RegisterController {
 
     //  Register button
     public void Register_RegisterButton_MouseClicked() {
-        SceneHandler.getInstance(App.class, null).SetScene(DATA.SCENE_REGISTER_PAGE);
-        resetAll();
+
     }
 
     //  Return to login page link
@@ -103,7 +108,7 @@ public class RegisterController {
         // chờ cho tới khi đăng nhập hoàn tất
         authenticator.waitForCompletion();
 
-        // Lấy json trả về từ google
+        // Lấy json trả về từ googleS
         JSONObject json = authenticator.GetUserInformation();
         System.out.println("from login" + json);
         if (json != null) {
@@ -146,31 +151,36 @@ public class RegisterController {
     @FXML
     private void RegisterButtonOnclick() throws IOException, InterruptedException {
         if (email.getText().isEmpty()) {
-            // System.out.println("Email is empty");
+//             System.out.println("Email is empty");
             SetErrorMessage("Email is empty");
+            resetPassword();
             return;
         }
 
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
             // System.out.println("Name can't be empty");
             SetErrorMessage("Name can't be empty");
+            resetPassword();
             return;
         }
 
         if (password.getText().isEmpty()) {
             // System.out.println("Password is empty");
             SetErrorMessage("Password is empty");
+            resetPassword();
             return;
         }
 
         if (!password.getText().equals(confirmPassword.getText())) {
             // System.out.println("Passwords does not match");
             SetErrorMessage("Passwords does not match");
+            resetPassword();
             return;
         }
 
         if (!ValidateEmail(email.getText())) {
             SetErrorMessage("Invalid email");
+            resetPassword();
             return;
         }
 
@@ -189,15 +199,18 @@ public class RegisterController {
 
         // kiểm tra trạng thái của status
         if (status == UserStatus.REGISTER_SUCCESS) {
-            SetErrorMessage("Registered successfully! Return to login page");
+            resetAll();
+            SetSuccessMessage();
         } else if (status == UserStatus.REGISTER_FAILED) {
             SetErrorMessage("Email already exists");
+            resetPassword();
         }
     }
 
     private boolean ValidateEmail(String email) throws IOException {
         // url dẫn tới api kiểm tra sự tồn tại của mail
-        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=b91a7211b29440e2b46becbc68bb6e27&email=%s", email);
+        String url = String.format("https://emailvalidation.abstractapi.com/v1/?api_key=73174805d0c044ec8534c31f3e5ed14b&email=%s", email);
+//        System.out.println(url);
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
@@ -208,7 +221,7 @@ public class RegisterController {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -235,6 +248,16 @@ public class RegisterController {
             errorText.setText(message);
             errorText.setStyle("");
             errorText.setStyle("-fx-fill: red; -fx-font-size: 12px;");
+        });
+    }
+
+    private void SetSuccessMessage() {
+        Platform.runLater(() -> {
+            errorText.setManaged(true);
+            errorText.setVisible(true);
+            errorText.setText("Registered successfully! Return to login page");
+            errorText.setStyle("");
+            errorText.setStyle("-fx-fill: green; -fx-font-size: 12px;");
         });
     }
 }

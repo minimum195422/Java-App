@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -56,22 +57,23 @@ public class MyBookController implements Initializable {
         }
     }
 
+
     public void LoadDisplayBookList() throws IOException {
         LoadBookList();
 
+        LoadBookList();
         if (myListBook.isEmpty()) {
-            Label label = new Label("You have not borrowed any book");
+            Label label = new Label("You haven't borrowed any book");
             label.setStyle("-fx-font-size: 20px;");
             MainVbox.getChildren().add(label);
             return;
         }
 
+
         if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
-
-        int row = (myListBook.size() + 4) / 5;
-
         Platform.runLater(() -> {
+            int row = (myListBook.size() + 4) / 5;
             List<HBox> hboxList = new ArrayList<>();
             for (int i = 0; i < row; ++i) {
                 HBox hbox = new HBox();
@@ -87,6 +89,7 @@ public class MyBookController implements Initializable {
                             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.PREVIEW_BOOK_LINK));
                             AnchorPane pane = loader.load();
                             BookPreviewController controller = loader.getController();
+
                             controller.setInfo(book);
                             HiddenPane.setCenter(pane);
                         } catch (IOException e) {
@@ -98,6 +101,5 @@ public class MyBookController implements Initializable {
             }
             MainVbox.getChildren().setAll(hboxList);
         });
-
     }
 }

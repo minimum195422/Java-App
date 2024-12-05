@@ -45,7 +45,7 @@ public class ManageDocumentController implements Initializable{
     public Button SearchButton;
 
     @FXML
-    public ToggleButton SortById, SortByTitle, SortByRate, SortByBorrowedTime, SortDirection;
+    public ToggleButton SortById, SortByTitle, SortByRating, SortByBorrowedTime, SortDirection;
     public ToggleGroup SortOption = new ToggleGroup();
 
     ArrayList<Book> BookList = new ArrayList<>();
@@ -73,12 +73,12 @@ public class ManageDocumentController implements Initializable{
                         SearchOption.selectToggle(oldToggle);
                     }
                 });
-        
-        
+
+
         // sort option
         SortById.setToggleGroup(SortOption);
         SortByTitle.setToggleGroup(SortOption);
-        SortByRate.setToggleGroup(SortOption);
+        SortByRating.setToggleGroup(SortOption);
         SortByBorrowedTime.setToggleGroup(SortOption);
 
         SortById.setSelected(true);
@@ -86,13 +86,14 @@ public class ManageDocumentController implements Initializable{
 
         // Set button group always have one in used
         SortOption.selectedToggleProperty().addListener(
-        (_, oldToggle, newToggle) -> {
-            if (newToggle == null) {
-                SortOption.selectToggle(oldToggle);
-            }
-        });
+                (_, oldToggle, newToggle) -> {
+                    if (newToggle == null) {
+                        SortOption.selectToggle(oldToggle);
+                    }
+                });
 
         LoadBookList();
+        SortBookList();
     }
 
     private void LoadBookList() {
@@ -105,12 +106,12 @@ public class ManageDocumentController implements Initializable{
         SortBookList();
     }
 
-    private void ReLoadDisplayBookList() {
+    private void ReloadDisplayBookList() {
         if (!DisplayBookList.getChildren().isEmpty()) DisplayBookList.getChildren().clear();
 
         for (Book book : BookList) {
             DisplayBookList.getChildren().add(
-                book.GetDisplayCardForManage()
+                    book.GetDisplayCardForManage()
             );
 
             book.GetBook_1020_50_Controller().DeleteButton.setOnMouseClicked(
@@ -150,7 +151,7 @@ public class ManageDocumentController implements Initializable{
                             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.VIEW_DOCUMENT_LINK));
                             AnchorPane pane = loader.load();
                             ViewDocumentController controller = loader.getController();
-                            controller.setInfor(fullBook);
+                            controller.setInfo(fullBook);
                             HiddenPane.setCenter(pane);
                         } catch (IOException e) {
                             e.printStackTrace(System.out);
@@ -174,9 +175,7 @@ public class ManageDocumentController implements Initializable{
 
                 BookList = MySql.getInstance().GetSearchBookList(SearchBox.getText(), searchOption);
 
-                Platform.runLater(() -> {
-                    ReLoadDisplayBookList();
-                });
+                Platform.runLater(() -> ReloadDisplayBookList());
 
                 return null;
             }
@@ -186,30 +185,22 @@ public class ManageDocumentController implements Initializable{
     }
 
     public void SortBookList() {
-        if (SortById.isSelected()) {
-            if (SortDirection.isSelected()) {
-                BookSort.SortByIdAsc(BookList);
-            } else {
-                BookSort.SortByIdDesc(BookList);
-            }
+        if(!SortDirection.isSelected()) {
+            SortDirection.setSelected(true);
+            if (SortDirection.getText().equals("ASC")) SortDirection.setText("DESC");
+            else SortDirection.setText("ASC");
         }
-        if (SortByTitle.isSelected()) {
-            if (SortDirection.isSelected()) {
-                BookSort.SortByTitleAsc(BookList);
-            } else {
-                BookSort.SortByTitleDesc(BookList);
-            }
-        }
-
-        ReLoadDisplayBookList();
-    }
-
-    public void SortDirectionClicked() {
-        if (SortDirection.isSelected()) {
-            SortDirection.setText("ASC");
+        if (SortDirection.getText().equals("ASC")){
+            if (SortById.isSelected()) BookSort.SortByIdAsc(BookList);
+            if (SortByTitle.isSelected()) BookSort.SortByTitleAsc(BookList);
+            if (SortByRating.isSelected()) BookSort.SortByRatingAsc(BookList);
+            if (SortByBorrowedTime.isSelected()) BookSort.SortByBorrowedTimeAsc(BookList);
         } else {
-            SortDirection.setText("DESC");
+            if (SortById.isSelected()) BookSort.SortByIdDesc(BookList);
+            if (SortByTitle.isSelected()) BookSort.SortByTitleDesc(BookList);
+            if (SortByRating.isSelected()) BookSort.SortByRatingDesc(BookList);
+            if (SortByBorrowedTime.isSelected()) BookSort.SortByBorrowedTimeDesc(BookList);
         }
-        SortBookList();
+        ReloadDisplayBookList();
     }
 }

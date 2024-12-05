@@ -73,6 +73,14 @@ public class DATA {
     }
 
 
+// ---------------------------------------------------------------- //
+// -------------------------- JDBC data --------------------------- //
+// ---------------------------------------------------------------- //
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/library_database";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "amogus69420";
+
+
 
 
 
@@ -104,5 +112,8 @@ public class DATA {
     public static String GetGoogleClientSecret() { return CLIENT_SECRET;}
     public static String GetGoogleRedirectLink() { return REDIRECT_LINK;}
     public static String GetGoogleAPIScope() { return SCOPE;}
-    
+
+
+    public static String noImage = "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg";
+
 }

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
+dding></VBox>
+=======
 <ScrollPane fx:id="MainPane" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1000.0" styleClass="content" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.NotificationController">
    <VBox fx:id="DisplayNotification" prefHeight="600.0" prefWidth="1000.0" spacing="20.0" styleClass="content">
       <padding>

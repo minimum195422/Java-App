@@ -58,7 +58,7 @@
                <padding>
                   <Insets right="5.0" />
                </padding>
-               <Label fx:id="WarningText" minHeight="-Infinity" textFill="RED" wrapText="true">
+               <Label fx:id="WarningText" textFill="RED">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -127,7 +127,7 @@
                </padding>
             </HBox>
             <HBox prefWidth="475.0" spacing="5.0">
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:">
                   <font>
                      <Font name="System Bold" size="14.0" />
                   </font>
@@ -155,7 +155,7 @@
                </padding>
             </HBox>
             <HBox prefWidth="475.0" spacing="5.0">
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descriptions">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descriptions:">
                   <font>
                      <Font name="System Bold" size="14.0" />
                   </font>
@@ -169,7 +169,7 @@
                </padding>
             </HBox>
             <HBox prefWidth="475.0" spacing="5.0">
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-13:">
                   <font>
                      <Font name="System Bold" size="14.0" />
                   </font>
@@ -183,7 +183,7 @@
                </padding>
             </HBox>
             <HBox prefWidth="475.0" spacing="5.0">
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10">
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN-10:">
                   <font>
                      <Font name="System Bold" size="14.0" />
                   </font>

@@ -3,6 +3,7 @@ package project.libraryclient.Controllers.DashBoard;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -15,7 +16,6 @@ import project.libraryclient.Database.MySql;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchController {
 
@@ -30,10 +30,10 @@ public class SearchController {
         HiddenPane.setVisible(false);
         HiddenPane.setDisable(true);
 
-        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
+//        if (!MainVbox.getChildren().isEmpty()) MainVbox.getChildren().clear();
 
         if (SearchList.isEmpty()) {
-            Label label = new Label("Can't found any book, please try with another word");
+            Label label = new Label("Can't find any book, please try with another prompt");
             label.setStyle("-fx-font-size: 24px;");
             MainVbox.getChildren().add(label);
             return;
@@ -42,10 +42,10 @@ public class SearchController {
             int row = (SearchList.size() + 4) / 5;
 
             Platform.runLater(() -> {
-                List<HBox> hboxList = new ArrayList<>();
                 for (int i = 0; i < row; ++i) {
                     HBox hbox = new HBox();
                     hbox.setSpacing(20);
+                    hbox.setPadding(new Insets(0, 0, 20, 0));
                     for (int j = 0; j < 5; ++j) {
                         if (i * 5 + j >= SearchList.size()) break;
                         hbox.getChildren().add(SearchList.get(i * 5 + j).getBookCard());
@@ -64,9 +64,8 @@ public class SearchController {
                             }
                         });
                     }
-                    hboxList.add(hbox);
+                    MainVbox.getChildren().add(hbox);
                 }
-                MainVbox.getChildren().setAll(hboxList);
             });
         }).start();
     }

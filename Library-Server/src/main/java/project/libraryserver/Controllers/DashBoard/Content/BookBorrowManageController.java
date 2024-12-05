@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.JsonType;
 import project.libraryserver.Controllers.Card.BorrowBookCardController;
@@ -56,7 +55,7 @@ public class BookBorrowManageController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BORROW_BOOK_CARD));
                     AnchorPane pane = loader.load();
                     BorrowBookCardController controller = loader.getController();
-                    controller.setInfor(jsonArray.getJSONObject(i));
+                    controller.setInfo(jsonArray.getJSONObject(i));
                     jsonDisplay.getChildren().add(pane);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -74,7 +73,7 @@ public class BookBorrowManageController implements Initializable {
                         // Kiểm tra xem file log có thay đổi
                         if (event.context().toString().equals(
                                 Paths.get(DATA.SERVER_BORROW_JSON_FILE).getFileName().toString())) {
-                            // cật nhật giao diện
+                            // cập nhật giao diện
                             Platform.runLater(this::LoadDisplayListBorrow);
                         }
                     }

@@ -54,7 +54,7 @@ public class MySql {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        System.out.println(returnList);
+//        System.out.println(returnList);
         return returnList;
     }
 
@@ -68,8 +68,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT p.password " +
-                            "FROM user u join passwords p on u.id = p.user_id " +
-                            "WHERE u.email = ? and status = 'active';"
+                                "FROM user u join passwords p on u.id = p.user_id " +
+                                "WHERE u.email = ? and status = 'active';"
                 );
         preparedStatement.setString(1, email);
 
@@ -98,8 +98,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT count(*) " +
-                            "FROM google " +
-                            "WHERE id = ? and email = ?"
+                                "FROM google " +
+                                "WHERE id = ? and email = ?"
                 );
         preparedStatement.setString(1, google_id);
         preparedStatement.setString(2, email);
@@ -125,7 +125,7 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "INSERT INTO user(first_name, last_name, email, status) "
-                            + "VALUES(?, ?, ?, ?)"
+                                + "VALUES(?, ?, ?, ?)"
                 );
         preparedStatement.setString(1, json.getString("first_name"));
         preparedStatement.setString(2, json.getString("last_name"));
@@ -200,7 +200,7 @@ public class MySql {
         try {
             boolean check = CreateNewNormalUser(remake);
             if (!check) {
-                System.out.println("failed at create link google-user");
+                System.out.println("Failed at create link google-user");
                 return false;
             }
 
@@ -208,7 +208,7 @@ public class MySql {
             preparedStatement = connection.prepareStatement("SELECT id FROM user where email = ?");
             preparedStatement.setString(1, json.getString("email"));
             rs = preparedStatement.executeQuery();
-            int userID = 0;
+            int userID;
             if (rs.next()) {
                 userID = rs.getInt(1);
             } else {
@@ -257,8 +257,8 @@ public class MySql {
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
                         "SELECT COUNT(*) FROM google "
-                            + "WHERE id = ? AND given_name = ? "
-                            + "AND family_name = ? AND email = ? and picture_link = ?"
+                                + "WHERE id = ? AND given_name = ? "
+                                + "AND family_name = ? AND email = ? and picture_link = ?"
                 );
         preparedStatement.setString(1, json.getString("id"));
         preparedStatement.setString(2, json.getString("given_name"));
@@ -284,7 +284,7 @@ public class MySql {
                                 "u.email, " +
                                 "u.status, " +
                                 "p.password " +
-                            "FROM " +
+                                "FROM " +
                                 "user u " +
                                 "JOIN passwords p ON u.id = p.user_id;"
                 );
@@ -308,21 +308,21 @@ public class MySql {
         ArrayList<User> list = new ArrayList<>();
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
-                "SELECT " +
-                        "u.id, " +
-                        "u.first_name, " +
-                        "u.last_name, " +
-                        "u.email, " +
-                        "u.status, " +
-                        "p.password " +
-                    "FROM " +
-                        "user u " +
-                        "JOIN passwords p ON u.id = p.user_id " +
-                    "WHERE " +
-                        "u.id = ? " +
-                        "OR u.first_name LIKE ? " +
-                        "OR u.last_name LIKE ? " +
-                        "OR u.email LIKE ?;"
+                        "SELECT " +
+                                "u.id, " +
+                                "u.first_name, " +
+                                "u.last_name, " +
+                                "u.email, " +
+                                "u.status, " +
+                                "p.password " +
+                                "FROM " +
+                                "user u " +
+                                "JOIN passwords p ON u.id = p.user_id " +
+                                "WHERE " +
+                                "u.id = ? " +
+                                "OR u.first_name LIKE ? " +
+                                "OR u.last_name LIKE ? " +
+                                "OR u.email LIKE ?;"
                 );
         try {
             // Nếu string có thể chuyển thành số
@@ -377,8 +377,8 @@ public class MySql {
         // tiến hành update trên user
         PreparedStatement updateUserStatement = connection.prepareStatement(
                 "UPDATE user "
-                + "SET first_name = ?, last_name = ?, email = ?, status = ? "
-                + "WHERE id = ?;"
+                        + "SET first_name = ?, last_name = ?, email = ?, status = ? "
+                        + "WHERE id = ?;"
         );
         updateUserStatement.setString(1, new_firstName);
         updateUserStatement.setString(2, new_lastName);
@@ -564,7 +564,7 @@ public class MySql {
         for (String category : categories) {
             int categoryId;
 
-            // add new category (not exits)
+            // add new category (not exist)
             try (PreparedStatement checkCategoryStmt = connection.prepareStatement(
                     "SELECT category_id FROM categories WHERE category = ?")) {
                 checkCategoryStmt.setString(1, truncateString(category, 100));
@@ -627,12 +627,16 @@ public class MySql {
                     "SELECT " +
                             "b.book_id, " +
                             "b.title, " +
-                            "group_concat(DISTINCT a.name) as 'author_list' " +
-                        "FROM " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "AVG(r.rate) as rating, " +
+                            "times " +
+                            "FROM " +
                             "books b " +
-                            "JOIN book_authors ba ON b.book_id = ba.book_id " +
-                            "JOIN authors a ON ba.author_id = a.author_id " +
-                        "GROUP BY " +
+                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "LEFT JOIN rating r ON r.book_id = b.book_id " +
+                            "LEFT JOIN borrow br ON b.book_id = br.book_id " +
+                            "GROUP BY " +
                             "b.book_id"
             );
             rs = preparedStatement.executeQuery();
@@ -641,8 +645,8 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        "0.0", // rate
-                        "100" // borrow times
+                        rs.getDouble(4), // rating
+                        rs.getInt(5) // borrow times
                 ));
             }
         } catch (SQLException e) {
@@ -663,26 +667,26 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-            "SELECT " +
-                    "b.book_id, " +
-                    "b.title, " +
-                    "group_concat(DISTINCT a.name) as 'author_list', " +
-                    "b.publisher, " +
-                    "b.published_date, " +
-                    "b.description, " +
-                    "group_concat(DISTINCT c.category) as 'category_list', " +
-                    "b.ISBN_13, " +
-                    "b.ISBN_10, " +
-                    "b.image_preview, " +
-                    "b.web_reader_link " +
-                "FROM " +
-                    "books b " +
-                    "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
-                    "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                    "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
-                    "LEFT JOIN categories c ON bc.category_id = c.category_id " +
-                "WHERE b.book_id = ? " +
-                "GROUP BY b.book_id"
+                    "SELECT " +
+                            "b.book_id, " +
+                            "b.title, " +
+                            "group_concat(DISTINCT a.name) as 'author_list', " +
+                            "b.publisher, " +
+                            "b.published_date, " +
+                            "b.description, " +
+                            "group_concat(DISTINCT c.category) as 'category_list', " +
+                            "b.ISBN_13, " +
+                            "b.ISBN_10, " +
+                            "b.image_preview, " +
+                            "b.web_reader_link " +
+                            "FROM " +
+                            "books b " +
+                            "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
+                            "LEFT JOIN authors a ON ba.author_id = a.author_id " +
+                            "LEFT JOIN book_categories bc ON b.book_id = bc.book_id " +
+                            "LEFT JOIN categories c ON bc.category_id = c.category_id " +
+                            "WHERE b.book_id = ? " +
+                            "GROUP BY b.book_id"
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();
@@ -738,8 +742,8 @@ public class MySql {
                         rs.getString(1), // book id
                         rs.getString(2), // title
                         new ArrayList<>(Arrays.asList(rs.getString(3).split(","))), // authors
-                        "0.0",
-                        "100"
+                        0,
+                        100
                 ));
             }
         } catch (SQLException e) {
@@ -764,7 +768,7 @@ public class MySql {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(
-                    "INSERT INTO rating(user_id, book_id, rate) values (?, ?, ?);");
+                    "insert into rating(user_id, book_id, rate) values (?, ?, ?);");
             preparedStatement.setInt(1, json.getInt("user_id"));
             preparedStatement.setString(2, json.getString("book_id"));
             preparedStatement.setInt(3, json.getInt("rate"));
@@ -790,7 +794,7 @@ public class MySql {
         ResultSet rs = null;
         try {
             preparedStatement = connection.prepareStatement(
-            "SELECT web_reader_link FROM books WHERE book_id = ? "
+                    "SELECT web_reader_link FROM books WHERE book_id = ? "
             );
             preparedStatement.setString(1, bookId);
             rs = preparedStatement.executeQuery();
@@ -830,5 +834,67 @@ public class MySql {
         }
 
         return true;
+    }
+
+    public void IncreaseBorrowTimes(String book_id) {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs;
+        int result;
+        try {
+            preparedStatement = connection.prepareStatement(
+                "SELECT COUNT(*) FROM borrow WHERE book_id = ?"
+            );
+            preparedStatement.setString(1, book_id);
+            rs = preparedStatement.executeQuery();
+            if (!rs.next()) {
+                throw new RuntimeException("Error while checking if a book existed in borrow table");
+            }
+            int existed = rs.getInt(1);
+            if (existed == 0) { // This book haven't been borrowed yet
+                preparedStatement.close();
+                preparedStatement = connection.prepareStatement(
+                        "INSERT INTO borrow(book_id, times) VALUES(?, 1)"
+                );
+                preparedStatement.setString(1, book_id);
+                result = preparedStatement.executeUpdate();
+                if (result == 0) {
+                    throw new RuntimeException("Error while adding a new book into borrow table");
+                }
+                preparedStatement.close();
+                return;
+            }
+//            This book have been borrowed at least once
+            preparedStatement.close();
+            preparedStatement = connection.prepareStatement(
+                    "SELECT times FROM borrow WHERE book_id = ?"
+            );
+            preparedStatement.setString(1, book_id);
+            rs = preparedStatement.executeQuery();
+            if (!rs.next()) {
+                throw new RuntimeException("Error while getting borrow times");
+            }
+            int times = rs.getInt(1);
+            preparedStatement.close();
+            preparedStatement = connection.prepareStatement(
+                    "UPDATE borrow " +
+                            "SET times = ? " +
+                            "WHERE book_id = ?"
+            );
+            preparedStatement.setInt(1, times + 1);
+            preparedStatement.setString(2, book_id);
+            result = preparedStatement.executeUpdate();
+            if (result == 0) {
+                throw new RuntimeException("Error while updating book's data in borrow table");
+            }
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println("Error while increasing borrow times");
+        } finally {
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException e) {
+                System.out.println("Error while closing prepareStatement");
+            }
+        }
     }
 }

@@ -88,7 +88,7 @@ public class MySql {
                             "books b " +
                             "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +
                             "LEFT JOIN authors a ON ba.author_id = a.author_id " +
-                        "WHERE " +
+                            "WHERE " +
                             "b.book_id = ?"
             );
             preparedStatement.setString(1, book_id);
@@ -182,7 +182,8 @@ public class MySql {
                     "group_concat(DISTINCT c.category) as 'category_list', " +
                     "b.ISBN_13, " +
                     "b.ISBN_10, " +
-                    "b.image_preview " +
+                    "b.image_preview, " +
+                    "b.web_reader_link " +
                 "FROM " +
                     "books b " +
                     "LEFT JOIN book_authors ba ON b.book_id = ba.book_id " +

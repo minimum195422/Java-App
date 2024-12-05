@@ -35,12 +35,12 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <Button fx:id="AcceptedButton" mnemonicParsing="false" onMouseClicked="#AcceptedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="green-button" text="Accepted">
+        <Button fx:id="AcceptedButton" mnemonicParsing="false" onMouseClicked="#AcceptedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="green-button" text="Accept">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Button>
-        <Button fx:id="DeclinedButton" mnemonicParsing="false" onMouseClicked="#DeclinedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="red-button" text="Declined">
+        <Button fx:id="DeclinedButton" mnemonicParsing="false" onMouseClicked="#DeclinedButtonClicked" prefHeight="30.0" prefWidth="80.0" styleClass="red-button" text="Decline">
          <HBox.margin>
             <Insets />
          </HBox.margin></Button>

@@ -4,10 +4,10 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import project.libraryserver.Book.Book;
 import project.libraryserver.ConfirmDialog.ConfirmDialog;
@@ -27,7 +27,7 @@ public class ViewDocumentController {
     public Button ReturnButton, SaveButton, DeleteButton;
 
     @FXML
-    public Text WarningText;
+    public Label WarningText;
 
     @FXML
     public ImageView SelectedCover;
@@ -45,7 +45,7 @@ public class ViewDocumentController {
 
     private Book SelectedBook;
 
-    public void setInfor(Book book) {
+    public void setInfo(Book book) {
         SelectedBookId.setText(book.getId());
         SelectedBookTitle.setText(book.getTitle());
         SelectedBookAuthors.setText(String.join(", ", book.getAuthors()));
@@ -97,18 +97,24 @@ public class ViewDocumentController {
             boolean result = task.getValue();
             if (result) {
                 WarningText.setText("Successfully change book information.");
+                WarningText.setStyle("-fx-text-fill: green;");
                 ServerLog.getInstance().writeLog("Action: Change information of book " + SelectedBook.getId());
-                setInfor(SelectedBook);
+                setInfo(SelectedBook);
             } else {
                 WarningText.setText("Failed to change information, please try again!");
+                WarningText.setStyle("-fx-text-fill: red;");
             }
         });
 
-        task.setOnFailed(_ -> WarningText.setText("An error occurred while changing the book."));
+        task.setOnFailed(_ -> {
+            WarningText.setText("An error occurred while changing the book.");
+            WarningText.setStyle("-fx-text-fill: red;");
+        });
 
         new Thread(task).start();
 
         WarningText.setText("Update book...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
     public void DeleteButtonClicked() {
@@ -140,11 +146,15 @@ public class ViewDocumentController {
             }
         });
 
-        task.setOnFailed(_ -> WarningText.setText("An error occurred while deleting the book."));
+        task.setOnFailed(_ -> {
+            WarningText.setText("An error occurred while deleting the book.");
+            WarningText.setStyle("-fx-text-fill: red;");
+        });
 
         new Thread(task).start();
 
         WarningText.setText("Delete book...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
     public void ReturnClicked() {

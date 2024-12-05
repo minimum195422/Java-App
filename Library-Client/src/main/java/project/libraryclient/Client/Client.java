@@ -21,6 +21,7 @@ public class Client {
     private final BufferedReader in;
     private UserStatus status;
 
+
     private int userId;
     private String userMail;
     private String userName;

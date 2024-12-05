@@ -112,7 +112,7 @@ public class BookPreviewController {
     }
 
     public void RateButtonClicked() throws IOException {
-        System.out.println(Client.getInstance().getUserId());
+//        System.out.println(Client.getInstance().getUserId());
         boolean confirmed = ConfirmDialog.show(
                 "Confirm action",
                 "Rate this book!"
@@ -120,11 +120,11 @@ public class BookPreviewController {
         if (!confirmed) return;
 
         if (rate == 0) {
-            boolean nonvalue = ConfirmDialog.show(
-                    "You haven't choose rate",
+            boolean nonValue = ConfirmDialog.show(
+                    "You haven't rate the book",
                     "Please choose point to rate!"
             );
-            if (nonvalue) return;
+            if (nonValue) return;
         }
 
         Client.getInstance().SendMessage(
@@ -135,7 +135,7 @@ public class BookPreviewController {
 
     public void BorrowButtonClicked() throws IOException {
         boolean confirmed = ConfirmDialog.show(
-                "You want to borrow this book",
+                "You want to borrow this book?",
                 "Send request now"
         );
         if (!confirmed) return;
@@ -158,7 +158,7 @@ public class BookPreviewController {
         NotificationHandler.getInstance().writeFile("You have submitted a book loan request with the code " + SelectedBook.getId());
 
         ConfirmDialog.show(
-                "Sent request success",
+                "Sent request successful",
                 "Check your book at 'My Book'"
         );
     }
@@ -175,14 +175,14 @@ public class BookPreviewController {
 
         if (json == null) {
             ConfirmDialog.show(
-                    "You haven't borrow this book yet",
-                    "Send borrow request to get the book"
+                    "You haven't borrowed this book yet",
+                    "Send borrow request to get access to the book"
             );
             return;
         }
         JsonType status = JsonType.valueOf(json.getString("status"));
         switch (status) {
-            case PENDING -> ConfirmDialog.show("This book haven't accept yet",
+            case PENDING -> ConfirmDialog.show("This book haven't been accepted yet",
                     "Please choose another book");
             case BORROW_ACCEPTED -> {
                 Stage webViewStage = new Stage();

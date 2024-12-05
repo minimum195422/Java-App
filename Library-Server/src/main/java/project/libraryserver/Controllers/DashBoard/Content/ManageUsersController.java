@@ -6,8 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import project.libraryserver.ConfirmDialog.ConfirmDialog;
+import project.libraryserver.ConfirmDialog.*;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.User.User;
 import project.libraryserver.User.UserSort;
@@ -31,8 +30,9 @@ public class ManageUsersController implements Initializable {
     public ToggleGroup DisplayStatus = new ToggleGroup();
     public ToggleGroup SortUserGroup = new ToggleGroup();
 
+
     @FXML
-    public Text WarningText;
+    public Label WarningText;
 
     @SuppressWarnings("FieldCanBeLocal")
     private ArrayList<User> UserList = new ArrayList<>();
@@ -44,10 +44,9 @@ public class ManageUsersController implements Initializable {
 
         ActiveButton.setToggleGroup(DisplayStatus);
         InactiveButton.setToggleGroup(DisplayStatus);
-
+        WarningText.setStyle("-fx-text-fill: red;");
         // Set button group always have one in used
-        DisplayStatus.selectedToggleProperty().addListener(
-                (_, oldToggle, newToggle) -> {
+        DisplayStatus.selectedToggleProperty().addListener((_, oldToggle, newToggle) -> {
             if (newToggle == null) {
                 DisplayStatus.selectToggle(oldToggle);
             }
@@ -58,13 +57,11 @@ public class ManageUsersController implements Initializable {
         SortByNameButton.setToggleGroup(SortUserGroup);
 
         // Set button group always have one in used
-        SortUserGroup.selectedToggleProperty().addListener(
-            (_, oldToggle, newToggle) -> {
-                if (newToggle == null) {
-                    SortUserGroup.selectToggle(oldToggle);
+        SortUserGroup.selectedToggleProperty().addListener((_, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                SortUserGroup.selectToggle(oldToggle);
             }
         });
-
 
         // Default sort direction
         SortDirection.setSelected(true);
@@ -77,13 +74,13 @@ public class ManageUsersController implements Initializable {
         try {
             UserList = MySql.getInstance().GetAllUser();
             if (UserList.isEmpty()) {
-                System.out.println("user list is empty");
+                System.out.println("Fail to load user");
                 return;
             }
 
             SortUserList();
         } catch (SQLException e) {
-            System.out.println("fail at sql");
+            System.out.println("Fail at sql");
             e.printStackTrace(System.out);
         }
     }
@@ -91,6 +88,7 @@ public class ManageUsersController implements Initializable {
     public void DeleteButtonClicked() {
         if (SelectedUser == null) {
             WarningText.setText("No data selected");
+            WarningText.setStyle("-fx-text-fill: red;");
             return;
         }
 
@@ -113,9 +111,17 @@ public class ManageUsersController implements Initializable {
                     Platform.runLater(() -> {
                         LoadUserList();
                         WarningText.setText("Delete user successfully");
+                        WarningText.setStyle("-fx-text-fill: green;");
+                        DisplayUserId.clear();
+                        DisplayFirstName.clear();
+                        DisplayLastName.clear();
+                        DisplayEmail.clear();
+                        DisplayPassword.clear();
+                        SelectedUser = null;
                     });
                 } catch (NumberFormatException e) {
                     Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
+                    WarningText.setStyle("-fx-text-fill: red;");
                     System.err.println("ID không hợp lệ: " + e.getMessage());
                 }
                 return null;
@@ -125,11 +131,13 @@ public class ManageUsersController implements Initializable {
         new Thread(task).start();
 
         WarningText.setText("Delete user ...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
     public void ChangeButtonClicked() {
         if (SelectedUser == null) {
             WarningText.setText("No data selected");
+            WarningText.setStyle("-fx-text-fill: red;");
             return;
         }
 
@@ -142,7 +150,7 @@ public class ManageUsersController implements Initializable {
 
         Task<Void> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try {
                     MySql.getInstance().UpdateUser(
                             Integer.parseInt(DisplayUserId.getText()),
@@ -158,12 +166,15 @@ public class ManageUsersController implements Initializable {
                     Platform.runLater(() -> {
                         LoadUserList();
                         WarningText.setText("User information updated successfully");
+                        WarningText.setStyle("-fx-text-fill: green;");
                     });
                 } catch (NumberFormatException e) {
                     Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));
+                    WarningText.setStyle("-fx-text-fill: red;");
                     System.err.println("ID không hợp lệ: " + e.getMessage());
                 } catch (SQLException e) {
                     Platform.runLater(() -> WarningText.setText("Lỗi mysql: " + e.getMessage()));
+                    WarningText.setStyle("-fx-text-fill: red;");
                     System.out.println("Lỗi mysql: " + e.getMessage());
                 }
                 return null;
@@ -173,6 +184,7 @@ public class ManageUsersController implements Initializable {
         new Thread(task).start();
 
         WarningText.setText("Updating user information...");
+        WarningText.setStyle("-fx-text-fill: red;");
     }
 
     public void SearchBoxOnAction() {
@@ -206,40 +218,31 @@ public class ManageUsersController implements Initializable {
                         );
                     }
                 });
-
                 return null;
             }
         };
-
         new Thread(task).start();
     }
 
     public void SortUserList() {
-        if (SortByIdButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByIdAsc(UserList);
-            } else {
-                UserSort.SortByIdDesc(UserList);
-            }
+        if(!SortDirection.isSelected()) {
+            SortDirection.setSelected(true);
+            if (SortDirection.getText().equals("ASC")) SortDirection.setText("DESC");
+            else SortDirection.setText("ASC");
         }
-        if (SortByNameButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByNameAsc(UserList);
-            } else {
-                UserSort.SortByNameDesc(UserList);
-            }
+        if (SortDirection.getText().equals("ASC")) {
+            if (SortByIdButton.isSelected()) UserSort.SortByIdAsc(UserList);
+            if (SortByNameButton.isSelected()) UserSort.SortByNameAsc(UserList);
+            if (SortByEmailButton.isSelected()) UserSort.SortByEmailAsc(UserList);
+        } else {
+            if (SortByIdButton.isSelected()) UserSort.SortByIdDesc(UserList);
+            if (SortByNameButton.isSelected()) UserSort.SortByNameDesc(UserList);
+            if (SortByEmailButton.isSelected()) UserSort.SortByEmailDesc(UserList);
         }
-        if (SortByEmailButton.isSelected()) {
-            if (SortDirection.isSelected()) {
-                UserSort.SortByEmailAsc(UserList);
-            } else {
-                UserSort.SortByEmailDesc(UserList);
-            }
-        }
-        reloadDisplayList();
+        ReloadDisplayList();
     }
 
-    private void reloadDisplayList() {
+    private void ReloadDisplayList() {
         if (!DisplayUserList.getChildren().isEmpty()) DisplayUserList.getChildren().clear();
         for (User u : UserList) {
             DisplayUserList.getChildren().add(

@@ -23,8 +23,8 @@ public class Book {
     private String ISBN_10;
     private Image imagePreview;
     private String webReaderLink;
-    private String rate;
-    private String borrowed_time;
+    private double rating;
+    private int borrowed_time;
 
     // for display google search book
     private AnchorPane DisplayCardForGoogleSearch;
@@ -49,11 +49,11 @@ public class Book {
     }
 
     public Book(String id, String title, ArrayList<String> authors,
-                String rate, String borrowed_time) {
+                double rating, int borrowed_time) {
         this.id = id;
         this.title = title;
         this.authors = authors;
-        this.rate = rate;
+        this.rating = rating;
         this.borrowed_time = borrowed_time;
         LoadDisplayCardForManage();
     }
@@ -82,7 +82,7 @@ public class Book {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_600_200_LINK));
             DisplayCardForGoogleSearch = loader.load();
             Book_600_200_Controller = loader.getController();
-            Book_600_200_Controller.setInfor(
+            Book_600_200_Controller.setInfo(
                     imagePreview,
                     title,
                     publisher,
@@ -99,12 +99,12 @@ public class Book {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_1020_50_LINK));
             DisplayCardForManage = loader.load();
             Book_1020_50_Controller = loader.getController();
-            Book_1020_50_Controller.setInfor(
+            Book_1020_50_Controller.setInfo(
                     id,
                     title,
                     String.join(", ", authors),
-                    "0.0",
-                    "100"
+                    String.valueOf((double) Math.round(rating * 10) / 10),
+                    String.valueOf(borrowed_time)
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -156,6 +156,13 @@ public class Book {
         return categories;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public int getBorrowed_time() {
+        return borrowed_time;
+    }
     public AnchorPane GetDisplayCardForGoogleSearch() {
         return DisplayCardForGoogleSearch;
     }
