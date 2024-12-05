@@ -1,12 +1,9 @@
 package project.libraryserver;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import project.libraryserver.Consts.DATA;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Models.SceneHandler;
@@ -14,7 +11,6 @@ import project.libraryserver.Server.Server;
 import project.libraryserver.Server.ServerLog;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class App extends Application {
 

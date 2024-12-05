@@ -12,6 +12,7 @@ import project.libraryclient.Database.MySql;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -24,6 +25,7 @@ public class HomeController implements Initializable {
     public BorderPane HiddenPane;
 
     public ArrayList<Book> RecentlyAddBookList = new ArrayList<>();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,7 +49,7 @@ public class HomeController implements Initializable {
                     AnchorPane pane = loader.load();
                     BookPreviewController controller = loader.getController();
                     Book fullBook = MySql.getInstance().GetBookById(book.getId());
-                    controller.setInfor(fullBook);
+                    controller.setInfo(fullBook);
                     HiddenPane.setCenter(pane);
                 } catch (IOException e) {
                     e.printStackTrace(System.out);

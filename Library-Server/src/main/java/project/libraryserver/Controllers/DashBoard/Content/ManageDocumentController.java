@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -20,7 +19,6 @@ import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
 import project.libraryserver.Database.MySql;
 import project.libraryserver.Server.ServerLog;
-import project.libraryserver.User.UserSort;
 
 import java.io.IOException;
 import java.net.URL;

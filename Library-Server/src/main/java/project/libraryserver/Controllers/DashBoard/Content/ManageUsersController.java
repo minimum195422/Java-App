@@ -22,52 +22,17 @@ public class ManageUsersController implements Initializable {
     public VBox DisplayUserList;
 
     @FXML
-    public TextField DisplayUserId;
-
+    public TextField DisplayUserId, DisplayFirstName, DisplayLastName, DisplayEmail,
+            DisplayPassword, SearchBox;
     @FXML
-    public TextField DisplayFirstName;
-
-    @FXML
-    public TextField DisplayLastName;
-
-    @FXML
-    public TextField DisplayEmail;
-
-    @FXML
-    public ToggleButton ActiveButton;
-
-    @FXML
-    public ToggleButton InactiveButton;
-
-    @FXML
-    public TextField DisplayPassword;
+    public ToggleButton ActiveButton, InactiveButton, DeleteAccountButton, ChangeButton,
+            SortByIdButton, SortByEmailButton, SortByNameButton, SortDirection;
 
     public ToggleGroup DisplayStatus = new ToggleGroup();
     public ToggleGroup SortUserGroup = new ToggleGroup();
 
     @FXML
-    public ToggleButton DeleteAccountButton;
-
-    @FXML
-    public ToggleButton ChangeButton;
-
-    @FXML
-    public ToggleButton SortByIdButton;
-
-    @FXML
-    public ToggleButton SortByEmailButton;
-
-    @FXML
-    public ToggleButton SortByNameButton;
-
-    @FXML
-    public ToggleButton SortDirection;
-
-    @FXML
     public Text WarningText;
-
-    @FXML
-    public TextField SearchBox;
 
     @SuppressWarnings("FieldCanBeLocal")
     private ArrayList<User> UserList = new ArrayList<>();

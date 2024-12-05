@@ -20,6 +20,7 @@ public class ServerLogController implements Initializable {
     public VBox ListLog;
 
     private WatchService watchService;
+    private long lastModifiedTime = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,8 +57,13 @@ public class ServerLogController implements Initializable {
                         // Kiểm tra xem file log có thay đổi
                         if (event.context().toString().equals(
                                 Paths.get(DATA.SERVER_LOG_FILE).getFileName().toString())) {
-                            Platform.runLater(this::LoadDisplayListLog);
+                            long currentTime = System.currentTimeMillis();
+                            if (currentTime - lastModifiedTime > 500) {
+                                lastModifiedTime = currentTime;
+                                Platform.runLater(this::LoadDisplayListLog);
+                            }
                         }
+
                     }
                 }
                 key.reset();

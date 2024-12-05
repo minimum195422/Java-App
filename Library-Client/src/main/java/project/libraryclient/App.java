@@ -7,7 +7,7 @@ import javafx.stage.StageStyle;
 import project.libraryclient.Client.Client;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Database.MySql;
-import project.libraryclient.Models.NotificationHandler;
+import project.libraryclient.Models.JsonFileHandler;
 import project.libraryclient.Models.SceneHandler;
 
 import java.io.IOException;
@@ -28,6 +28,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
+        JsonFileHandler.getInstance().Clear();
 
         // start client - trong client đã chạy trên thread riêng
         client = Client.getInstance();
@@ -43,8 +44,7 @@ public class App extends Application {
         RegisterPage = sceneHandler.AddScene(DATA.SCENE_REGISTER_PAGE, "FXML/Register.fxml");
         BeingDev = sceneHandler.AddScene(DATA.SCENE_BEING_DEVELOPMENT, "FXML/BeingDevelop.fxml");
         HomePage = sceneHandler.AddScene(DATA.SCENE_DASHBOARD, "FXML/DashBoard.fxml");
-        VerifyPage = sceneHandler.AddScene(DATA.SCENE_VERIFY_PAGE, "FXML/Verify.fxml");
-
+        
         // Set popup scene when open app
         sceneHandler.SetScene(DATA.SCENE_LOGIN_PAGE);
 
