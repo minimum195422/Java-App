@@ -149,6 +149,12 @@ public class ManageUsersController implements Initializable {
                         LoadUserList();
                         WarningText.setText("Delete user successfully");
                         WarningText.setStyle("-fx-text-fill: green;");
+                        DisplayUserId.clear();
+                        DisplayFirstName.clear();
+                        DisplayLastName.clear();
+                        DisplayEmail.clear();
+                        DisplayPassword.clear();
+                        SelectedUser = null;
                     });
                 } catch (NumberFormatException e) {
                     Platform.runLater(() -> WarningText.setText("ID không hợp lệ"));

@@ -127,3 +127,5 @@
 2024-12-05 21:41:16 - Client 127.0.0.1 connected.
 2024-12-05 21:41:48 - Server successfully create new user. Sent response to user
 2024-12-05 21:41:54 - Client disconnected: 127.0.0.1
+2024-12-05 21:50:56 - Server stating on port 1234
+2024-12-05 21:52:49 - Server stating on port 1234
