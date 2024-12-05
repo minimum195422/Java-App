@@ -1,0 +1,12 @@
+
+
+DROP TABLE IF EXISTS `book_authors`;
+
+CREATE TABLE `book_authors` (
+  `book_id` varchar(45) DEFAULT NULL,
+  `author_id` int DEFAULT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `author_id` (`author_id`),
+  CONSTRAINT `book_authors_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`),
+  CONSTRAINT `book_authors_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`)
+)

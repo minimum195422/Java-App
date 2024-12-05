@@ -1,0 +1,15 @@
+
+
+DROP TABLE IF EXISTS `books`;
+CREATE TABLE `books` (
+  `book_id` varchar(45) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `ISBN_13` varchar(45) DEFAULT NULL,
+  `published_date` varchar(15) DEFAULT NULL,
+  `image_preview` varchar(255) NOT NULL,
+  `description` varchar(600) DEFAULT NULL,
+  `ISBN_10` varchar(10) DEFAULT NULL,
+  `web_reader_link` varchar(200) DEFAULT NULL,
+  `publisher` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`book_id`)
+) 

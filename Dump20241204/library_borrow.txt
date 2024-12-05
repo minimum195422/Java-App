@@ -1,0 +1,10 @@
+
+DROP TABLE IF EXISTS `borrow`;
+CREATE TABLE `borrow` (
+  `user_id` int NOT NULL,
+  `book_id` varchar(45) NOT NULL,
+  KEY `fk_user_idx` (`user_id`),
+  KEY `fk_book_idx` (`book_id`),
+  CONSTRAINT `fk_book` FOREIGN KEY (`book_id`) REFERENCES `books` (`book_id`),
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+)
