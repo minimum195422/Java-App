@@ -170,7 +170,7 @@
                      <Insets left="10.0" />
                   </padding>
                </HBox>
-               <Button fx:id="SearchButton" mnemonicParsing="false" onAction="#SearchAction" prefHeight="30.0" prefWidth="80.0" styleClass="search-button" text="Search" />
+               <Button fx:id="SearchButton" mnemonicParsing="false" onAction="#SearchAction" prefHeight="30.0" prefWidth="80.0" styleClass="function-button" text="Search" />
                <ImageView fx:id="VersionInformationIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" scaleX="0.85" scaleY="0.85">
                   <Image url="@../Images/Icons/information_gray.png" />
                </ImageView>
