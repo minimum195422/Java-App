@@ -18,8 +18,10 @@ import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Database.MySql;
 import project.libraryclient.Models.GenerateJson;
 import project.libraryclient.Models.JsonFileHandler;
+import project.libraryclient.Models.NotificationHandler;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class BookPreviewController {
     @FXML
@@ -51,12 +53,8 @@ public class BookPreviewController {
         DisplayTitle.setText(book.getTitle());
         DisplayISBN10.setText(book.getISBN_10());
         DisplayISBN13.setText(book.getISBN_13());
-        DisplayRating.setText(
-                MySql.getInstance().QueryGetAvgRating(book.getId())
-        );
-        DisplayBorrowTime.setText(
-                MySql.getInstance().QueryGetBorrowTime(book.getId())
-        );
+        DisplayRating.setText(MySql.getInstance().QueryGetAvgRating(book.getId()));
+        DisplayBorrowTime.setText(MySql.getInstance().QueryGetBorrowTime(book.getId()));
         DisplayAuthors.setText(String.join(", ", book.getAuthors()));
         DisplayCategory.setText(String.join(", ", book.getCategories()));
         DisplayDescription.setText(book.getDescription());
@@ -156,6 +154,8 @@ public class BookPreviewController {
         Client.getInstance().SendMessage(json);
 
         JsonFileHandler.getInstance().addJsonObject(json);
+
+        NotificationHandler.getInstance().writeFile("You have submitted a book loan request with the code " + SelectedBook.getId());
 
         ConfirmDialog.show(
                 "Sent request successful",

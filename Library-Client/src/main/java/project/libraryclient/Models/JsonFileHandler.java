@@ -3,15 +3,16 @@ package project.libraryclient.Models;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import project.libraryclient.Consts.DATA;
+import project.libraryclient.Consts.JsonType;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 public class JsonFileHandler {
     private static JsonFileHandler instance;
+
     private JsonFileHandler() {}
 
     public static synchronized JsonFileHandler getInstance() {
@@ -60,16 +61,6 @@ public class JsonFileHandler {
         writeJsonArray(jsonArray);
     }
 
-    public synchronized void removeJsonObject(int user_id, String book_id) {
-        JSONArray jsonArray = readJsonArray();
-        for (int i = 0; i < jsonArray.length(); ++i) {
-            if (jsonArray.getJSONObject(i).getInt("user_id") == user_id
-                && jsonArray.getJSONObject(i).getString("book_id").equals(book_id)) {
-                jsonArray.remove(i);
-            }
-        }
-        writeJsonArray(jsonArray);
-    }
 
     public synchronized void removeJsonObject(JSONObject json) {
         JSONArray jsonArray = readJsonArray();
@@ -114,5 +105,28 @@ public class JsonFileHandler {
             }
         }
         return false;
+    }
+
+    public synchronized void FilterJsonArray() {
+        JSONArray jsonArray = readJsonArray();
+        for (int i = 0; i < jsonArray.length(); ++i) {
+            if (JsonType.valueOf(jsonArray.getJSONObject(i).getString("status")) == JsonType.BORROW_DECLINED) {
+                NotificationHandler.getInstance().writeFile("Request to borrow book "
+                        + jsonArray.getJSONObject(i).getString("book_id")
+                        + " denied");
+                jsonArray.remove(i);
+            } else if(JsonType.valueOf(jsonArray.getJSONObject(i).getString("status")) == JsonType.BORROW_RECALL) {
+                NotificationHandler.getInstance().writeFile("Books "
+                        + jsonArray.getJSONObject(i).getString("book_id")
+                        + " overdue and Recalled");
+                jsonArray.remove(i);
+            }
+        }
+        writeJsonArray(jsonArray);
+    }
+
+    public void Clear() {
+        JSONArray jsonArray = new JSONArray();
+        writeJsonArray(jsonArray);
     }
 }

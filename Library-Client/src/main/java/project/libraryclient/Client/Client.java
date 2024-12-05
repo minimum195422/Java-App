@@ -1,10 +1,12 @@
 package project.libraryclient.Client;
 
+import javafx.application.Platform;
 import org.json.JSONObject;
 import project.libraryclient.Consts.JsonType;
 import project.libraryclient.Consts.Message;
 import project.libraryclient.Consts.UserStatus;
 import project.libraryclient.Models.JsonFileHandler;
+import project.libraryclient.Models.NotificationHandler;
 
 import java.io.*;
 import java.net.Socket;
@@ -108,24 +110,20 @@ public class Client {
             }
             case BORROW_BOOK -> {
                 if (json.getInt("user_id") == userId) {
-                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_ACCEPTED) {
+                    Platform.runLater(() -> {
                         JsonFileHandler.getInstance().replaceJsonObject(json);
-                    }
-                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_DECLINED) {
-                        JsonFileHandler.getInstance().removeJsonObject(
-                                json.getInt("user_id"), json.getString("book_id")
-                        );
-                    }
-                    if (JsonType.valueOf(json.getString("status")) == JsonType.BORROW_RECALL) {
-                        JsonFileHandler.getInstance().removeJsonObject(
-                                json.getInt("user_id"), json.getString("book_id")
-                        );
-                    }
+                        JsonFileHandler.getInstance().FilterJsonArray();
+                    });
+                }
+            }
+            case CHANGE_PASSWORD_RESPONSE -> {
+                switch (Message.valueOf(json.getString("message"))) {
+                    case SUCCESS -> NotificationHandler.getInstance().writeFile("System confirms successful password change");
+                    case FAILED -> NotificationHandler.getInstance().writeFile("Password change confirmation system failed");
                 }
             }
             default -> throw new RuntimeException("Invalid json file");
         }
-
     }
 
     public synchronized void ResetStatus() {
@@ -157,7 +155,7 @@ public class Client {
     }
 
     // listener
-    private List<ClientListener> listeners = new ArrayList<>();
+    private final List<ClientListener> listeners = new ArrayList<>();
 
     public void addListener(ClientListener listener) {
         listeners.add(listener);

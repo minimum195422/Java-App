@@ -1,1 +1,15 @@
 All notifications will be displayed here, please check notifications regularly.
+System confirms successful password changeYou have submitted a book loan request with the code 0-tqDwAAQBAJ
+You have submitted a book loan request with the code BO8-DwAAQBAJ
+You have submitted a book loan request with the code cEjPEAAAQBAJ
+You have submitted a book loan request with the code cEjPEAAAQBAJ
+You have submitted a book loan request with the code BO8-DwAAQBAJ
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Books 0-tqDwAAQBAJ overdue and Recalled
+Request to borrow book BO8-DwAAQBAJ denied
+You have submitted a book loan request with the code cEjPEAAAQBAJ
+You have submitted a book loan request with the code BO8-DwAAQBAJ
+You have submitted a book loan request with the code 0-tqDwAAQBAJ
+Books 0-tqDwAAQBAJ overdue and Recalled
+Request to borrow book BO8-DwAAQBAJ denied
+Request to borrow book cEjPEAAAQBAJ denied

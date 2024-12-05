@@ -34,17 +34,23 @@ public class DATA {
     public static final String NOTIFICATION_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/Notification.fxml";
     public static final String MYBOOK_PAGE_LINK = "/project/libraryclient/FXML/ContentPage/MyBook.fxml";
     public static final String SEARCHPAGE_LINK = "/project/libraryclient/FXML/ContentPage/Search.fxml";
-    public static final String BOOK_READ_LINK = "/project/libraryclient/FXML/ContentPage/BookReading.fxml";
     public static final String PREVIEW_BOOK_LINK = "/project/libraryclient/FXML/ContentPage/BookPreview.fxml";
     public static final String CLIENT_BORROW_JSON_FILE = "src/main/resources/project/libraryclient/Log/borrow.json";
     public static final String NOTIFICATION_FILE = "src/main/resources/project/libraryclient/Log/notification.txt";
 
 
-    // ---------------------------------------------------------------- //
+
+
+
+// ---------------------------------------------------------------- //
 // ------------------------- Card ui link ------------------------- //
 // ---------------------------------------------------------------- //
     // Book card size 235 x 450
     public static final String CARD_180_320 = "/project/libraryclient/FXML/Card/BookCard_180_320.fxml";
+
+
+
+
 
 // ---------------------------------------------------------------- //
 // -------------------------- Scene name -------------------------- //
@@ -53,16 +59,19 @@ public class DATA {
     public static final String SCENE_REGISTER_PAGE = "RegisterController";
     public static final String SCENE_BEING_DEVELOPMENT = "BeingDevelopment";
     public static final String SCENE_DASHBOARD = "DashBoardController";
-    public static final String SCENE_VERIFY_PAGE = "VerifyController";
 
 
 
-    // ---------------------------------------------------------------- //
+
+
+
+// ---------------------------------------------------------------- //
 // --------------------- Load image from link --------------------- //
 // ---------------------------------------------------------------- //
     private static Image loadImage(String path) {
         return new Image(Objects.requireNonNull(DATA.class.getResourceAsStream(path)));
     }
+
 
 // ---------------------------------------------------------------- //
 // -------------------------- JDBC data --------------------------- //
@@ -71,11 +80,25 @@ public class DATA {
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "amogus69420";
 
+
+
+
+
+
+// ---------------------------------------------------------------- //
+// -------------------------- JDBC data --------------------------- //
+// ---------------------------------------------------------------- //
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/library";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "Humhayha12#";
+
     public static String GetJdbcUrl() { return JDBC_URL; }
-
     public static String GetJdbcUser() { return JDBC_USER; }
-
     public static String GetJdbcPassword() { return JDBC_PASSWORD; }
+
+
+
+
 
 // ---------------------------------------------------------------- //
 // ---------------------- Google API data ------------------------- //

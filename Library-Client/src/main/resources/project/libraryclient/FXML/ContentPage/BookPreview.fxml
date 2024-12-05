@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainPane" prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/BookView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="back-color" stylesheets="@../../Styles/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryclient.Controllers.DashBoard.BookPreviewController">
    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1000.0">
       <padding>
          <Insets left="10.0" />
@@ -55,7 +55,7 @@
                <ImageView fx:id="Rate5Star" fitHeight="25.0" fitWidth="25.0" onMouseClicked="#Rate5Clicked" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../../Images/Icons/star.png" />
                </ImageView>
-               <Button fx:id="RateButton" mnemonicParsing="false" onMouseClicked="#RateButtonClicked" styleClass="function-button" text="Rating" />
+               <Button fx:id="RateButton" mnemonicParsing="false" onMouseClicked="#RateButtonClicked" styleClass="function-button" text="Rate" />
             </HBox>
             <HBox>
                <Label text="Rate the book according to your feelings">
@@ -65,7 +65,7 @@
                </Label>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
-               <Label text="Average Rate:">
+               <Label text="Average Rating:">
                   <font>
                      <Font size="16.0" />
                   </font>

@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public class JsonFileHandler {
     private static JsonFileHandler instance;
+
     private JsonFileHandler() {}
 
     public static synchronized JsonFileHandler getInstance() {
@@ -80,14 +81,14 @@ public class JsonFileHandler {
         writeJsonArray(jsonArray);
     }
 
-    public synchronized JSONObject getJsonBy(int userId, String bookId) {
+    public synchronized JSONArray getJsonArrayBy(int userId) {
         JSONArray jsonArray = readJsonArray();
+        JSONArray returnArray = new JSONArray();
         for (int i = 0; i < jsonArray.length(); ++i) {
-            if (jsonArray.getJSONObject(i).getInt("user_id") == userId
-                    && jsonArray.getJSONObject(i).getString("book_id").equals(bookId)) {
-                return jsonArray.getJSONObject(i);
+            if (jsonArray.getJSONObject(i).getInt("user_id") == userId) {
+                returnArray.put(jsonArray.getJSONObject(i));
             }
         }
-        return null;
+        return returnArray;
     }
 }

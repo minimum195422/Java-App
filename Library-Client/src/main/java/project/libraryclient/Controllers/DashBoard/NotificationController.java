@@ -1,12 +1,12 @@
 package project.libraryclient.Controllers.DashBoard;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import project.libraryclient.Consts.DATA;
 import project.libraryclient.Models.NotificationHandler;
 
@@ -17,13 +17,16 @@ import java.util.ResourceBundle;
 
 public class NotificationController implements Initializable {
 
-    private static final Log log = LogFactory.getLog(NotificationController.class);
+    @FXML
     public VBox DisplayNotification;
 
     private WatchService watchService;
 
+    private long lastModifiedTime = 0;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         LoadDisplayNotification();
 
         try {
@@ -61,7 +64,11 @@ public class NotificationController implements Initializable {
                         // Kiểm tra xem file log có thay đổi
                         if (event.context().toString().equals(
                                 Paths.get(DATA.NOTIFICATION_FILE).getFileName().toString())) {
-                            Platform.runLater(this::LoadDisplayNotification);
+                            long currentTime = System.currentTimeMillis();
+                            if (currentTime - lastModifiedTime > 500) {
+                                lastModifiedTime = currentTime;
+                                Platform.runLater(this::LoadDisplayNotification);
+                            }
                         }
                     }
                 }

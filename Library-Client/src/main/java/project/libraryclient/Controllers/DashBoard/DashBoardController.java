@@ -17,6 +17,7 @@ import project.libraryclient.Database.MySql;
 import java.io.IOException;
 import java.net.URL;
 
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -25,6 +26,9 @@ public class DashBoardController implements Initializable {
 
 
     // ---------- Content display pane ---------- //
+    @FXML
+    public AnchorPane MainPane;
+
     @FXML
     public BorderPane ContentDisplay;
 
@@ -38,6 +42,7 @@ public class DashBoardController implements Initializable {
 
     @FXML
     public Button SearchButton;
+
 
 
     // ---------- Toggle Button Group ---------- //
@@ -258,6 +263,7 @@ public class DashBoardController implements Initializable {
     // -------------------- initialize -------------------- //
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         try {
             Client.getInstance().addListener((_, name, mail) ->
                 Platform.runLater(() -> {
