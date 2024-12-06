@@ -5,7 +5,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import project.libraryserver.Book.Book;
-import project.libraryserver.Consts.DATA;
 import project.libraryserver.Consts.SearchType;
 
 import java.io.BufferedReader;
@@ -42,7 +41,7 @@ public class BookAPI {
     }
 
     private static JSONObject requestJson(String query, String types) throws URISyntaxException, IOException {
-        URI uri = new URI(String.format("https://www.googleapis.com/books/v1/volumes?q=%s%s", query, types));
+        URI uri = new URI(String.format("https://www.googleapis.com/books/v1/volumes?q=%s%s&key=AIzaSyAgYj9XiKni2OuHpm6IMWkzaLJhPGhQV-8", query, types));
         URL url = uri.toURL();
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -75,10 +74,6 @@ public class BookAPI {
 
     private static ArrayList<Book> GetListBook(JSONObject json) {
         if (json == null) return new ArrayList<>();
-        if (json.getInt("totalItems") == 0) {
-            System.out.println("No result found");
-            return new ArrayList<>();
-        }
 
         ArrayList<Book> returnList = new ArrayList<>();
 
@@ -92,6 +87,15 @@ public class BookAPI {
     }
 
     private static Book JsonToBook(JSONObject json) {
+
+        try {
+            JSONObject volumeInfo = new JSONObject();
+            volumeInfo = json.getJSONObject("volumeInfo");
+        } catch (JSONException e) {
+            e.printStackTrace(System.out);
+            System.out.println("can not find volumeInfo");
+        }
+
         return new Book(
                 getBookId(json),
                 getBookTitle(json.getJSONObject("volumeInfo")),
@@ -140,7 +144,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load author json array");
+            System.out.println("fail to load author json array");
         }
         return new ArrayList<>();
     }
@@ -152,7 +156,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load publisher");
+            System.out.println("fail to load publisher");
         }
         return "Can't found publisher";
     }
@@ -164,7 +168,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load publish date");
+            System.out.println("fail to load publish date");
         }
         return "Can't found time release";
     }
@@ -176,7 +180,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load description");
+            System.out.println("fail to load description");
         }
         return "Can't found description";
     }
@@ -189,7 +193,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load categories");
+            System.out.println("fail to load categories");
         }
         return new ArrayList<>();
     }
@@ -203,14 +207,18 @@ public class BookAPI {
                 for (int i = 0; i < temp.length(); ++i) {
                     JSONObject isbn = temp.getJSONObject(i);
                     switch (isbn.getString("type")) {
-                        case "ISBN_13" -> isbn13 = isbn.getString("identifier");
-                        case "ISBN_10" -> isbn10 = isbn.getString("identifier");
+                        case "ISBN_13" -> {
+                            isbn13 = isbn.getString("identifier");
+                        }
+                        case "ISBN_10" -> {
+                            isbn10 = isbn.getString("identifier");
+                        }
                     }
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load isbn");
+            System.out.println("fail to load isbn");
         }
         ArrayList<String> returnArray = new ArrayList<>();
         returnArray.add(isbn13);
@@ -219,7 +227,8 @@ public class BookAPI {
     }
 
     public static Image getBookCover(JSONObject volumeInfo) {
-        Image tempImage;
+        Image tempImage = null;
+
         try {
             if (volumeInfo.has("imageLinks"))
                 if (volumeInfo.getJSONObject("imageLinks").has("thumbnail")) {
@@ -231,15 +240,14 @@ public class BookAPI {
                         tempImage = new Image(url.toString());
 
                     } catch (URISyntaxException | MalformedURLException e) {
-                        tempImage = new Image(DATA.noImage);
-                        System.out.println("No image found");
+                        throw new RuntimeException(e);
                     }
                     return tempImage;
                 }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
         }
-        return new Image(DATA.noImage);
+        return null;
     }
 
     public static String getBookWebReadLink(JSONObject accessInfo) {
@@ -249,7 +257,7 @@ public class BookAPI {
             }
         } catch (JSONException e) {
             e.printStackTrace(System.out);
-            System.out.println("Fail to load description");
+            System.out.println("fail to load description");
         }
         return "Can't found reader link";
     }

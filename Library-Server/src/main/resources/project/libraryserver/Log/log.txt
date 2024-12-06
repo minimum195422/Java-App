@@ -91,3 +91,18 @@
 2024-12-06 03:37:52 - Server stating on port 1234
 2024-12-06 03:38:05 - Client 127.0.0.1 connected.
 2024-12-06 03:38:24 - Server accept user [1,type:normal] to logging in application.
+2024-12-06 12:13:14 - Server stating on port 1234
+2024-12-06 12:15:33 - Server stating on port 1234
+2024-12-06 12:16:35 - Server stating on port 1234
+2024-12-06 12:23:48 - Server stating on port 1234
+2024-12-06 12:23:56 - Server stating on port 1234
+2024-12-06 12:26:10 - Server stating on port 1234
+2024-12-06 12:29:34 - Server stating on port 1234
+2024-12-06 12:29:49 - Client 127.0.0.1 connected.
+2024-12-06 12:30:25 - Server successfully create new user. Sent response to user
+2024-12-06 12:30:29 - Client disconnected: 127.0.0.1
+2024-12-06 12:30:37 - Client 127.0.0.1 connected.
+2024-12-06 12:32:22 - Client disconnected: 127.0.0.1
+2024-12-06 12:40:21 - Server stating on port 1234
+2024-12-06 12:41:21 - Server stating on port 1234
+2024-12-06 12:49:44 - Server stating on port 1234

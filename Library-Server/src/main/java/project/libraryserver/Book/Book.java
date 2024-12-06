@@ -28,7 +28,6 @@ public class Book {
 
     // for display google search book
     private AnchorPane DisplayCardForGoogleSearch;
-    private BookCard_600_200 Book_600_200_Controller;
 
     // for display manage book
     private AnchorPane DisplayCardForManage;
@@ -81,8 +80,8 @@ public class Book {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DATA.BOOK_DISPLAY_CARD_600_200_LINK));
             DisplayCardForGoogleSearch = loader.load();
-            Book_600_200_Controller = loader.getController();
-            Book_600_200_Controller.setInfo(
+            BookCard_600_200 book_600_200_Controller = loader.getController();
+            book_600_200_Controller.setInfo(
                     imagePreview,
                     title,
                     publisher,
@@ -173,10 +172,6 @@ public class Book {
 
     public BookCard_1020_50 GetBook_1020_50_Controller() {
         return Book_1020_50_Controller;
-    }
-
-    public BookCard_600_200 GetBook_600_200_Controller() {
-        return Book_600_200_Controller;
     }
 
     public String toString() {
